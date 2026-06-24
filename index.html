@@ -145,16 +145,21 @@
 
       <section id="selfhost" class="section section-soft">
         <h2>Self-host in 2 minutes</h2>
-        <p class="sub">Everything ships as containers. Clone, bring the stack up, open the app.</p>
-        <pre class="code"><code>git clone https://github.com/quizdock/quiz-dock.git
-cd quiz-dock
-docker compose up -d
+        <p class="sub">
+          One image on Docker Hub —
+          <a href="https://hub.docker.com/r/fchaussin/quizdock"><code>fchaussin/quizdock</code></a>
+          (multi-arch amd64/arm64). Pull it and bring the stack up.
+        </p>
+        <pre class="code"><code>docker pull fchaussin/quizdock:latest
+curl -O https://raw.githubusercontent.com/quizdock/quiz-dock/main/docker-compose.prod.yml
+docker compose -f docker-compose.prod.yml up -d
 
 # then open the app in your browser
-open http://localhost:18081</code></pre>
+open http://localhost:18080</code></pre>
         <p class="sub">
-          Rebrand and pick a language without rebuilding: set <code>APP_NAME</code> and
-          <code>APP_LANG</code>, and drop a logo + CSS into the <code>branding/</code> volume.
+          Prefer building from source? <code>git clone</code> the repo and run the same compose with
+          <code>--build</code>. Rebrand and pick a language without rebuilding via
+          <code>APP_NAME</code> / <code>APP_LANG</code> and a mounted <code>branding/</code> folder.
         </p>
         <div class="langs" aria-label="Available interface languages">
           <span>🇬🇧 English</span>
