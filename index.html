@@ -156,9 +156,16 @@
       <section id="selfhost" class="section section-soft">
         <h2>Self-host in 2 minutes</h2>
         <p class="sub">
-          One image on Docker Hub —
+          Easiest — <strong>one container</strong> (app + database bundled), ideal on Docker Desktop:
+        </p>
+        <pre class="code"><code>docker run -p 18080:3000 -v quizdock:/data fchaussin/quizdock:standalone
+
+# then open the app in your browser
+open http://localhost:18080</code></pre>
+        <p class="sub">
+          Or, for production, the
           <a href="https://hub.docker.com/r/fchaussin/quizdock"><code>fchaussin/quizdock</code></a>
-          (multi-arch amd64/arm64). Pull it and bring the stack up.
+          app image with your own Postgres / Redis via compose:
         </p>
         <pre class="code"><code>docker pull fchaussin/quizdock:latest
 curl -O https://raw.githubusercontent.com/quizdock/quiz-dock/main/docker-compose.prod.yml
