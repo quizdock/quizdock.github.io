@@ -6,25 +6,30 @@
     <title>QuizDock — Open-source self-hosted live quiz</title>
     <meta
       name="description"
-      content="QuizDock is an open-source, self-hosted live quiz platform. Real-time multiplayer, join by PIN or QR, no player accounts — your data stays on your servers."
+      content="QuizDock is an open-source, self-hosted live quiz platform. Real-time multiplayer, projector-ready screens, answer capture, session history & CSV export — players join by PIN or QR, your data stays on your servers."
     />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="styles.css" />
     <meta property="og:title" content="QuizDock — Open-source self-hosted live quiz" />
     <meta
       property="og:description"
-      content="Real-time multiplayer quiz you actually own. Self-hosted, no player accounts, white-label."
+      content="Real-time multiplayer quiz you actually own. Projector-ready, self-hosted, white-label, multilingual."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://quizdock.github.io" />
   </head>
   <body>
+    <!--
+      Logo : placeholder vectoriel thémé (boîte indigo « ? » + mot QuizDock).
+      À remplacer par l'asset fourni — déposer le fichier (ex. assets/logo-site.svg)
+      et remplacer les deux blocs <svg class="brand-mark"> par <img src="…">.
+    -->
     <header class="nav">
       <a class="brand" href="#top" aria-label="QuizDock home">
-        <svg class="brand-mark" viewBox="0 0 160 32" role="img" aria-label="QuizDock">
-          <rect x="1" y="6" width="20" height="20" rx="5" fill="currentColor" />
-          <text x="11" y="21" text-anchor="middle" font-size="13" font-weight="700" fill="#0b1120">?</text>
-          <text x="30" y="22" font-size="17" font-weight="700" fill="currentColor">QuizDock</text>
+        <svg class="brand-mark" viewBox="0 0 170 32" role="img" aria-label="QuizDock">
+          <rect class="box" x="1" y="6" width="20" height="20" rx="5" />
+          <text x="11" y="21" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">?</text>
+          <text class="word" x="30" y="22" font-size="17" font-weight="700">QuizDock</text>
         </svg>
       </a>
       <nav class="nav-links">
@@ -38,41 +43,42 @@
     <main id="top">
       <section class="hero">
         <span class="pill">Open source · self-hosted · pre-1.0</span>
-        <h1>Live quizzes you actually <span class="grad">own</span>.</h1>
+        <h1>Live quizzes you actually <span class="accent">own</span>.</h1>
         <p class="lede">
-          QuizDock is an open-source, self-hosted live quiz platform — real-time multiplayer,
-          players join by <strong>PIN or QR</strong> with no account, and your data never leaves
-          your servers.
+          QuizDock is an open-source, self-hosted live quiz platform with bright,
+          <strong>projector-ready</strong> screens. Players join by <strong>PIN or QR</strong> with
+          no account, and your data never leaves your servers.
         </p>
         <div class="cta">
           <a class="btn btn-primary" href="https://github.com/quizdock/quiz-dock">View on GitHub</a>
           <a class="btn btn-ghost" href="#selfhost">Self-host in 2 minutes</a>
         </div>
-        <ul class="badges">
-          <li>🐳 Docker-native</li>
-          <li>🙈 No tracking, no ads</li>
-          <li>🎨 White-label</li>
-          <li>🔌 Bring your own OIDC</li>
-        </ul>
+        <div class="quad" aria-hidden="true">
+          <span class="q1">▲</span>
+          <span class="q2">◆</span>
+          <span class="q3">●</span>
+          <span class="q4">■</span>
+        </div>
       </section>
 
       <section id="features" class="section">
         <h2>Everything for a live game, on your infra</h2>
+        <p class="sub">From the quiz builder to the projector, the leaderboard and the data export.</p>
         <div class="grid">
           <article class="card">
             <div class="ic">⚡</div>
             <h3>Real-time multiplayer</h3>
             <p>
               Socket.IO game engine with authoritative server timing. Players join a session by
-              6-digit PIN or QR code — built for groups from a handful to a few hundred.
+              6-digit PIN or QR code — from a handful to a few hundred.
             </p>
           </article>
           <article class="card">
-            <div class="ic">🏠</div>
-            <h3>Self-hosted &amp; sovereign</h3>
+            <div class="ic">🖥️</div>
+            <h3>Projector-ready</h3>
             <p>
-              Runs entirely on your own infrastructure with Docker. No SaaS, no third party — the
-              questions, the answers and the results stay on your servers.
+              Bright, high-contrast light screens designed for the big screen. Separate projection
+              and control windows, full-screen lobby, question, leaderboard and podium.
             </p>
           </article>
           <article class="card">
@@ -80,49 +86,87 @@
             <h3>Quiz builder</h3>
             <p>
               Seven question types — single/multi choice, true-false, text, numeric, reorder and
-              poll — with media support and reusable quizzes.
+              poll — with image &amp; audio media and reusable quizzes.
             </p>
           </article>
           <article class="card">
             <div class="ic">🏆</div>
-            <h3>Live leaderboard &amp; podium</h3>
+            <h3>Live scoring &amp; podium</h3>
             <p>
-              Time-weighted scoring with streak bonuses, a leaderboard between questions and a
-              final podium projected on the big screen.
+              Time-weighted points with streak bonuses, a leaderboard between questions and a final
+              podium. Manual or automatic pacing, pause &amp; resume.
+            </p>
+          </article>
+          <article class="card">
+            <div class="ic">💾</div>
+            <h3>Answer capture</h3>
+            <p>
+              Optionally record every player's individual answers — for audit, certification or
+              individual follow-up. Players are told when a session is recorded.
+            </p>
+          </article>
+          <article class="card">
+            <div class="ic">🔎</div>
+            <h3>History &amp; exploration</h3>
+            <p>
+              Browse archived sessions: per-question success rates, average times, and drill down
+              into each player's score, streak and answer sheet.
+            </p>
+          </article>
+          <article class="card">
+            <div class="ic">📤</div>
+            <h3>CSV export</h3>
+            <p>
+              Export overall session results and per-player answer sheets to CSV — ready for your
+              spreadsheets, gradebooks or reporting.
+            </p>
+          </article>
+          <article class="card">
+            <div class="ic">🌍</div>
+            <h3>Multilingual</h3>
+            <p>
+              Interface available in English, French, Spanish and Simplified Chinese. One language
+              per instance, set in your configuration.
+            </p>
+          </article>
+          <article class="card">
+            <div class="ic">🏠</div>
+            <h3>Self-hosted &amp; private</h3>
+            <p>
+              Runs entirely on your own infrastructure with Docker. No SaaS, no third party, no ads.
+              Players need no account; hosts can plug in OIDC when needed.
             </p>
           </article>
           <article class="card">
             <div class="ic">🎨</div>
-            <h3>White-label at runtime</h3>
+            <h3>White-label</h3>
             <p>
-              Rebrand name, logo and CSS through an env var and a mounted folder — no rebuild. Make
-              every instance look like yours.
-            </p>
-          </article>
-          <article class="card">
-            <div class="ic">🎟️</div>
-            <h3>No player accounts</h3>
-            <p>
-              Players are in with a tap — just a PIN or QR. No signup, no email, no profile to
-              manage. Hosts can plug in OIDC when they need it.
+              Rebrand the name, logo and CSS through an env var and a mounted folder — no rebuild.
+              Make every instance look like yours.
             </p>
           </article>
         </div>
       </section>
 
-      <section id="selfhost" class="section section-alt">
+      <section id="selfhost" class="section section-soft">
         <h2>Self-host in 2 minutes</h2>
-        <p class="muted">Everything ships as containers. Clone, bring the stack up, open the app.</p>
+        <p class="sub">Everything ships as containers. Clone, bring the stack up, open the app.</p>
         <pre class="code"><code>git clone https://github.com/quizdock/quiz-dock.git
 cd quiz-dock
 docker compose up -d
 
 # then open the app in your browser
 open http://localhost:18081</code></pre>
-        <p class="muted small">
-          Rebrand without rebuilding: set <code>APP_NAME</code> and drop a logo + CSS into the
-          <code>branding/</code> volume. See the repository README for production and OIDC setup.
+        <p class="sub">
+          Rebrand and pick a language without rebuilding: set <code>APP_NAME</code> and
+          <code>APP_LANG</code>, and drop a logo + CSS into the <code>branding/</code> volume.
         </p>
+        <div class="langs" aria-label="Available interface languages">
+          <span>🇬🇧 English</span>
+          <span>🇫🇷 Français</span>
+          <span>🇪🇸 Español</span>
+          <span>🇨🇳 简体中文</span>
+        </div>
       </section>
 
       <section id="how" class="section">
@@ -140,15 +184,15 @@ open http://localhost:18081</code></pre>
           </li>
           <li>
             <span class="num">3</span>
-            <h3>Play, score, celebrate</h3>
-            <p>Answer in real time, watch the leaderboard move, and crown the podium at the end.</p>
+            <h3>Play, score, review</h3>
+            <p>Answer in real time, crown the podium, then explore results and export to CSV.</p>
           </li>
         </ol>
       </section>
 
       <section class="section section-cta">
-        <h2>Own your next quiz night.</h2>
-        <p class="muted">Clone the repo, star it, and run it where your data belongs.</p>
+        <h2>Own your next quiz.</h2>
+        <p class="sub">Clone the repo, star it, and run it where your data belongs.</p>
         <div class="cta">
           <a class="btn btn-primary" href="https://github.com/quizdock/quiz-dock">Get QuizDock on GitHub</a>
         </div>
@@ -156,19 +200,17 @@ open http://localhost:18081</code></pre>
     </main>
 
     <footer class="footer">
-      <div class="brand">
-        <svg class="brand-mark" viewBox="0 0 160 32" role="img" aria-label="QuizDock">
-          <rect x="1" y="6" width="20" height="20" rx="5" fill="currentColor" />
-          <text x="11" y="21" text-anchor="middle" font-size="13" font-weight="700" fill="#0b1120">?</text>
-          <text x="30" y="22" font-size="17" font-weight="700" fill="currentColor">QuizDock</text>
-        </svg>
-      </div>
+      <svg class="brand-mark" viewBox="0 0 170 32" role="img" aria-label="QuizDock">
+        <rect class="box" x="1" y="6" width="20" height="20" rx="5" />
+        <text x="11" y="21" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">?</text>
+        <text class="word" x="30" y="22" font-size="17" font-weight="700">QuizDock</text>
+      </svg>
       <nav class="footer-links">
         <a href="https://github.com/quizdock/quiz-dock">GitHub</a>
         <a href="https://github.com/quizdock/quiz-dock/issues">Issues</a>
         <a href="#top">Back to top</a>
       </nav>
-      <p class="copyright">Open-source live quiz · self-hosted · built with care.</p>
+      <p class="copyright">Open-source live quiz · self-hosted · MIT licensed.</p>
     </footer>
   </body>
 </html>
