@@ -28,6 +28,7 @@
         <a href="#features">Features</a>
         <a href="#selfhost">Self-host</a>
         <a href="#how">How it works</a>
+        <a href="#screenshots">Screenshots</a>
         <a href="https://hub.docker.com/r/fchaussin/quizdock">Docker Hub ↗</a>
         <a class="btn btn-ghost" href="https://github.com/quizdock/quiz-dock">GitHub ↗</a>
       </nav>
@@ -202,6 +203,28 @@ open http://localhost:18080</code></pre>
         </ol>
       </section>
 
+      <section id="screenshots" class="section section-soft">
+        <h2>See it in action</h2>
+        <p class="sub">From the quiz builder to the projector, the player and the podium.</p>
+        <div class="carousel" aria-roledescription="carousel" aria-label="QuizDock screenshots">
+          <button class="carousel-btn prev" type="button" aria-label="Previous screenshot">‹</button>
+          <div class="carousel-track" id="shots">
+            <figure class="slide"><img src="screenshots/live-projector.png" alt="Projector — live question" loading="lazy" /><figcaption>Projector — live question (Kahoot-style)</figcaption></figure>
+            <figure class="slide"><img src="screenshots/live-player.png" alt="Player view" loading="lazy" /><figcaption>Player — answer from any device</figcaption></figure>
+            <figure class="slide"><img src="screenshots/host-control.png" alt="Host control" loading="lazy" /><figcaption>Host control during a question</figcaption></figure>
+            <figure class="slide"><img src="screenshots/leaderboard.png" alt="Leaderboard" loading="lazy" /><figcaption>Live leaderboard between questions</figcaption></figure>
+            <figure class="slide"><img src="screenshots/join-avatar.png" alt="Join with avatar" loading="lazy" /><figcaption>Join — nickname &amp; Multiavatar avatar</figcaption></figure>
+            <figure class="slide"><img src="screenshots/player-review.png" alt="Player feedback" loading="lazy" /><figcaption>Player feedback — rate the quiz</figcaption></figure>
+            <figure class="slide"><img src="screenshots/podium.png" alt="Podium" loading="lazy" /><figcaption>Podium — final results</figcaption></figure>
+            <figure class="slide"><img src="screenshots/editor.png" alt="Quiz builder" loading="lazy" /><figcaption>Quiz builder — 7 question types</figcaption></figure>
+            <figure class="slide"><img src="screenshots/dashboard.png" alt="Dashboard" loading="lazy" /><figcaption>Dashboard — your quizzes</figcaption></figure>
+            <figure class="slide"><img src="screenshots/present-lobby.png" alt="Lobby" loading="lazy" /><figcaption>Lobby — join by PIN / QR code</figcaption></figure>
+          </div>
+          <button class="carousel-btn next" type="button" aria-label="Next screenshot">›</button>
+        </div>
+        <div class="carousel-dots" id="dots"></div>
+      </section>
+
       <section class="section section-cta">
         <h2>Own your next quiz.</h2>
         <p class="sub">Pull the image or clone the repo, star it, and run it where your data belongs.</p>
@@ -221,5 +244,59 @@ open http://localhost:18080</code></pre>
       </nav>
       <p class="copyright">Open-source live quiz · self-hosted · MIT licensed.</p>
     </footer>
+
+    <script>
+      (function () {
+        var track = document.getElementById('shots');
+        var dotsWrap = document.getElementById('dots');
+        if (!track || !dotsWrap) return;
+        var slides = Array.prototype.slice.call(track.children);
+        function go(i) {
+          slides[i].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+        function current() {
+          var mid = track.scrollLeft + track.clientWidth / 2,
+            idx = 0,
+            best = Infinity;
+          slides.forEach(function (s, i) {
+            var c = s.offsetLeft - track.offsetLeft + s.clientWidth / 2;
+            var d = Math.abs(c - mid);
+            if (d < best) {
+              best = d;
+              idx = i;
+            }
+          });
+          return idx;
+        }
+        slides.forEach(function (_, i) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.setAttribute('aria-label', 'Go to screenshot ' + (i + 1));
+          if (i === 0) b.className = 'active';
+          b.addEventListener('click', function () {
+            go(i);
+          });
+          dotsWrap.appendChild(b);
+        });
+        var dots = Array.prototype.slice.call(dotsWrap.children);
+        function sync() {
+          var i = current();
+          dots.forEach(function (d, j) {
+            d.className = j === i ? 'active' : '';
+          });
+        }
+        var raf;
+        track.addEventListener('scroll', function () {
+          cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(sync);
+        });
+        document.querySelector('.carousel-btn.prev').addEventListener('click', function () {
+          go(Math.max(0, current() - 1));
+        });
+        document.querySelector('.carousel-btn.next').addEventListener('click', function () {
+          go(Math.min(slides.length - 1, current() + 1));
+        });
+      })();
+    </script>
   </body>
 </html>
