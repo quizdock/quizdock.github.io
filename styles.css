@@ -68,16 +68,28 @@ h3 {
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
 }
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
 .brand-mark {
-  height: 28px;
+  height: 30px;
   width: auto;
   display: block;
+  border-radius: 7px;
 }
-.brand-mark .box {
-  fill: var(--primary);
+.brand-name {
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
+  color: var(--fg);
 }
-.brand-mark .word {
-  fill: var(--fg);
+.hero-logo {
+  display: block;
+  width: clamp(150px, 30vw, 230px);
+  height: auto;
+  margin: 0 auto 1.6rem;
 }
 .nav-links {
   display: flex;

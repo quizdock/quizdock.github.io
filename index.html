@@ -8,7 +8,7 @@
       name="description"
       content="QuizDock is an open-source, self-hosted live quiz platform. Real-time multiplayer, projector-ready screens, answer capture, session history & CSV export — players join by PIN or QR, your data stays on your servers."
     />
-    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="styles.css" />
     <meta property="og:title" content="QuizDock — Open-source self-hosted live quiz" />
     <meta
@@ -19,18 +19,10 @@
     <meta property="og:url" content="https://quizdock.github.io" />
   </head>
   <body>
-    <!--
-      Logo : placeholder vectoriel thémé (boîte indigo « ? » + mot QuizDock).
-      À remplacer par l'asset fourni — déposer le fichier (ex. assets/logo-site.svg)
-      et remplacer les deux blocs <svg class="brand-mark"> par <img src="…">.
-    -->
     <header class="nav">
       <a class="brand" href="#top" aria-label="QuizDock home">
-        <svg class="brand-mark" viewBox="0 0 170 32" role="img" aria-label="QuizDock">
-          <rect class="box" x="1" y="6" width="20" height="20" rx="5" />
-          <text x="11" y="21" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">?</text>
-          <text class="word" x="30" y="22" font-size="17" font-weight="700">QuizDock</text>
-        </svg>
+        <img class="brand-mark" src="icon.svg" alt="" width="32" height="32" />
+        <span class="brand-name">QuizDock</span>
       </a>
       <nav class="nav-links">
         <a href="#features">Features</a>
@@ -42,6 +34,7 @@
 
     <main id="top">
       <section class="hero">
+        <img class="hero-logo" src="logo.svg" alt="QuizDock" />
         <span class="pill">Open source · self-hosted · pre-1.0</span>
         <h1>Live quizzes you actually <span class="accent">own</span>.</h1>
         <p class="lede">
@@ -52,12 +45,6 @@
         <div class="cta">
           <a class="btn btn-primary" href="https://github.com/quizdock/quiz-dock">View on GitHub</a>
           <a class="btn btn-ghost" href="#selfhost">Self-host in 2 minutes</a>
-        </div>
-        <div class="quad" aria-hidden="true">
-          <span class="q1">▲</span>
-          <span class="q2">◆</span>
-          <span class="q3">●</span>
-          <span class="q4">■</span>
         </div>
       </section>
 
@@ -200,11 +187,7 @@ open http://localhost:18081</code></pre>
     </main>
 
     <footer class="footer">
-      <svg class="brand-mark" viewBox="0 0 170 32" role="img" aria-label="QuizDock">
-        <rect class="box" x="1" y="6" width="20" height="20" rx="5" />
-        <text x="11" y="21" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">?</text>
-        <text class="word" x="30" y="22" font-size="17" font-weight="700">QuizDock</text>
-      </svg>
+      <img class="brand-mark" src="icon.svg" alt="QuizDock" width="34" height="34" />
       <nav class="footer-links">
         <a href="https://github.com/quizdock/quiz-dock">GitHub</a>
         <a href="https://github.com/quizdock/quiz-dock/issues">Issues</a>
