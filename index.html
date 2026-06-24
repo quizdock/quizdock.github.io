@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>QuizDock — Open-source self-hosted live quiz</title>
+    <meta
+      name="description"
+      content="QuizDock is an open-source, self-hosted live quiz platform. Real-time multiplayer, join by PIN or QR, no player accounts — your data stays on your servers."
+    />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <meta property="og:title" content="QuizDock — Open-source self-hosted live quiz" />
+    <meta
+      property="og:description"
+      content="Real-time multiplayer quiz you actually own. Self-hosted, no player accounts, white-label."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://quizdock.github.io" />
+  </head>
+  <body>
+    <header class="nav">
+      <a class="brand" href="#top" aria-label="QuizDock home">
+        <svg class="brand-mark" viewBox="0 0 160 32" role="img" aria-label="QuizDock">
+          <rect x="1" y="6" width="20" height="20" rx="5" fill="currentColor" />
+          <text x="11" y="21" text-anchor="middle" font-size="13" font-weight="700" fill="#0b1120">?</text>
+          <text x="30" y="22" font-size="17" font-weight="700" fill="currentColor">QuizDock</text>
+        </svg>
+      </a>
+      <nav class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#selfhost">Self-host</a>
+        <a href="#how">How it works</a>
+        <a class="btn btn-ghost" href="https://github.com/fchaussin/quiz-dock">GitHub ↗</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <span class="pill">Open source · self-hosted · pre-1.0</span>
+        <h1>Live quizzes you actually <span class="grad">own</span>.</h1>
+        <p class="lede">
+          QuizDock is an open-source, self-hosted live quiz platform — real-time multiplayer,
+          players join by <strong>PIN or QR</strong> with no account, and your data never leaves
+          your servers.
+        </p>
+        <div class="cta">
+          <a class="btn btn-primary" href="https://github.com/fchaussin/quiz-dock">View on GitHub</a>
+          <a class="btn btn-ghost" href="#selfhost">Self-host in 2 minutes</a>
+        </div>
+        <ul class="badges">
+          <li>🐳 Docker-native</li>
+          <li>🙈 No tracking, no ads</li>
+          <li>🎨 White-label</li>
+          <li>🔌 Bring your own OIDC</li>
+        </ul>
+      </section>
+
+      <section id="features" class="section">
+        <h2>Everything for a live game, on your infra</h2>
+        <div class="grid">
+          <article class="card">
+            <div class="ic">⚡</div>
+            <h3>Real-time multiplayer</h3>
+            <p>
+              Socket.IO game engine with authoritative server timing. Players join a session by
+              6-digit PIN or QR code — built for groups from a handful to a few hundred.
+            </p>
+          </article>
+          <article class="card">
+            <div class="ic">🏠</div>
+            <h3>Self-hosted &amp; sovereign</h3>
+            <p>
+              Runs entirely on your own infrastructure with Docker. No SaaS, no third party — the
+              questions, the answers and the results stay on your servers.
+            </p>
+          </article>
+          <article class="card">
+            <div class="ic">🧩</div>
+            <h3>Quiz builder</h3>
+            <p>
+              Seven question types — single/multi choice, true-false, text, numeric, reorder and
+              poll — with media support and reusable quizzes.
+            </p>
+          </article>
+          <article class="card">
+            <div class="ic">🏆</div>
+            <h3>Live leaderboard &amp; podium</h3>
+            <p>
+              Time-weighted scoring with streak bonuses, a leaderboard between questions and a
+              final podium projected on the big screen.
+            </p>
+          </article>
+          <article class="card">
+            <div class="ic">🎨</div>
+            <h3>White-label at runtime</h3>
+            <p>
+              Rebrand name, logo and CSS through an env var and a mounted folder — no rebuild. Make
+              every instance look like yours.
+            </p>
+          </article>
+          <article class="card">
+            <div class="ic">🎟️</div>
+            <h3>No player accounts</h3>
+            <p>
+              Players are in with a tap — just a PIN or QR. No signup, no email, no profile to
+              manage. Hosts can plug in OIDC when they need it.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="selfhost" class="section section-alt">
+        <h2>Self-host in 2 minutes</h2>
+        <p class="muted">Everything ships as containers. Clone, bring the stack up, open the app.</p>
+        <pre class="code"><code>git clone https://github.com/fchaussin/quiz-dock.git
+cd quiz-dock
+docker compose up -d
+
+# then open the app in your browser
+open http://localhost:18081</code></pre>
+        <p class="muted small">
+          Rebrand without rebuilding: set <code>APP_NAME</code> and drop a logo + CSS into the
+          <code>branding/</code> volume. See the repository README for production and OIDC setup.
+        </p>
+      </section>
+
+      <section id="how" class="section">
+        <h2>How it works</h2>
+        <ol class="steps">
+          <li>
+            <span class="num">1</span>
+            <h3>Host creates a session</h3>
+            <p>Build a quiz, hit present — QuizDock locks a server-side snapshot and shows a PIN.</p>
+          </li>
+          <li>
+            <span class="num">2</span>
+            <h3>Players join by PIN or QR</h3>
+            <p>No account, no install. They pick a nickname and they are in the lobby instantly.</p>
+          </li>
+          <li>
+            <span class="num">3</span>
+            <h3>Play, score, celebrate</h3>
+            <p>Answer in real time, watch the leaderboard move, and crown the podium at the end.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="section section-cta">
+        <h2>Own your next quiz night.</h2>
+        <p class="muted">Clone the repo, star it, and run it where your data belongs.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="https://github.com/fchaussin/quiz-dock">Get QuizDock on GitHub</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="brand">
+        <svg class="brand-mark" viewBox="0 0 160 32" role="img" aria-label="QuizDock">
+          <rect x="1" y="6" width="20" height="20" rx="5" fill="currentColor" />
+          <text x="11" y="21" text-anchor="middle" font-size="13" font-weight="700" fill="#0b1120">?</text>
+          <text x="30" y="22" font-size="17" font-weight="700" fill="currentColor">QuizDock</text>
+        </svg>
+      </div>
+      <nav class="footer-links">
+        <a href="https://github.com/fchaussin/quiz-dock">GitHub</a>
+        <a href="https://github.com/fchaussin/quiz-dock/issues">Issues</a>
+        <a href="#top">Back to top</a>
+      </nav>
+      <p class="copyright">Open-source live quiz · self-hosted · built with care.</p>
+    </footer>
+  </body>
+</html>
