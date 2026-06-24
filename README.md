@@ -3,7 +3,7 @@
 Landing page for **QuizDock** — an open-source, self-hosted live quiz platform.
 
 🔗 **Live site:** https://quizdock.github.io
-📦 **Code:** https://github.com/fchaussin/quiz-dock
+📦 **Code:** https://github.com/quizdock/quiz-dock
 
 ## What this repo is
 
