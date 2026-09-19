@@ -29,8 +29,8 @@
         <a href="#selfhost">Self-host</a>
         <a href="#how">How it works</a>
         <a href="#screenshots">Screenshots</a>
-        <a href="https://hub.docker.com/r/fchaussin/quizdock">Docker Hub ↗</a>
-        <a class="btn btn-ghost" href="https://github.com/quizdock/quiz-dock">GitHub ↗</a>
+        <a href="https://github.com/quizdock/quiz-dock">GitHub ↗</a>
+        <a class="btn btn-ghost" href="https://hub.docker.com/r/fchaussin/quizdock">Docker Hub ↗</a>
       </nav>
     </header>
 
@@ -45,8 +45,9 @@
           no account, and your data never leaves your servers.
         </p>
         <div class="cta">
-          <a class="btn btn-primary" href="https://github.com/quizdock/quiz-dock">View on GitHub</a>
+          <a class="btn btn-primary" href="https://hub.docker.com/r/fchaussin/quizdock">Get it on Docker Hub ↗</a>
           <a class="btn btn-ghost" href="#selfhost">Self-host in 2 minutes</a>
+          <a class="btn btn-ghost" href="https://github.com/quizdock/quiz-dock">Source on GitHub ↗</a>
         </div>
       </section>
 
@@ -57,98 +58,72 @@
           <article class="card">
             <div class="ic">⚡</div>
             <h3>Real-time multiplayer</h3>
-            <p>
-              Socket.IO game engine with authoritative server timing. Players join a session by
-              6-digit PIN or QR code — from a handful to a few hundred.
-            </p>
+            <p>Socket.IO game engine with authoritative server timing. Players join a session by 6-digit PIN or QR code — from a handful to a few hundred.</p>
           </article>
           <article class="card">
             <div class="ic">🦄</div>
             <h3>Player avatars</h3>
-            <p>
-              Every player gets a unique, generated <a href="https://multiavatar.com">Multiavatar</a>
-              avatar — no upload, no account, instant identity on the leaderboard.
-            </p>
+            <p>Every player gets a unique, generated <a href="https://multiavatar.com">Multiavatar</a> avatar — no upload, no account, and the same face on every screen.</p>
           </article>
           <article class="card">
             <div class="ic">🖥️</div>
             <h3>Projector-ready</h3>
-            <p>
-              Bright, high-contrast light screens designed for the big screen. Separate projection
-              and control windows, full-screen lobby, question, leaderboard and podium.
-            </p>
+            <p>Bright, high-contrast screens built for the big screen, sized in one typographic base so they scale from a phone to a projector. Console, projection and participant views on one session.</p>
           </article>
           <article class="card">
             <div class="ic">🧩</div>
             <h3>Quiz builder</h3>
-            <p>
-              Seven question types — single/multi choice, true-false, text, numeric, reorder and
-              poll — with image &amp; audio media and reusable quizzes.
-            </p>
+            <p>Seven question types, up to 8 answers with colour/shape pairs, image &amp; audio media, Markdown with a visual editor, content slides with backgrounds, drag-and-drop ordering.</p>
           </article>
           <article class="card">
-            <div class="ic">🏆</div>
-            <h3>Live scoring &amp; podium</h3>
-            <p>
-              Time-weighted points with streak bonuses, a leaderboard between questions and a final
-              podium. Manual or automatic pacing, pause &amp; resume.
-            </p>
+            <div class="ic">🎯</div>
+            <h3>Scoring rules</h3>
+            <p>Time-weighted points and streaks — plus, per question: <em>closest answer wins</em>, <em>partial credit</em>, typo-tolerant text, double or fixed points.</p>
+          </article>
+          <article class="card">
+            <div class="ic">🎛️</div>
+            <h3>Host in control</h3>
+            <p>Look back over played questions without replaying anything, pause, pace by hand or automatically, edit layouts while a session runs, survive a server restart.</p>
+          </article>
+          <article class="card">
+            <div class="ic">📡</div>
+            <h3>Invitation address</h3>
+            <p>The QR code and join link point where phones can actually reach the instance — public URL, LAN IP or any address, picked from the console.</p>
           </article>
           <article class="card">
             <div class="ic">⭐</div>
             <h3>Player feedback</h3>
-            <p>
-              Players rate the quiz with stars and an optional comment at the end — and hosts get the
-              aggregated ratings to see what landed.
-            </p>
+            <p>Players rate the quiz with stars and an optional comment at the end; hosts browse the reviews. Off per quiz when unwanted.</p>
           </article>
           <article class="card">
             <div class="ic">💾</div>
             <h3>Answer capture</h3>
-            <p>
-              Optionally record every player's individual answers — for audit, certification or
-              individual follow-up. Players are told when a session is recorded.
-            </p>
+            <p>Optionally keep every player’s individual answers for audit, certification or follow-up — decided knowingly, per session.</p>
           </article>
           <article class="card">
             <div class="ic">🔎</div>
             <h3>History &amp; exploration</h3>
-            <p>
-              Browse archived sessions: per-question success rates, average times, and drill down
-              into each player's score, streak and answer sheet.
-            </p>
+            <p>Archived sessions with per-question success rates, average times and per-player answer sheets; CSV export of everything.</p>
           </article>
           <article class="card">
-            <div class="ic">📤</div>
-            <h3>CSV export</h3>
-            <p>
-              Export overall session results and per-player answer sheets to CSV — ready for your
-              spreadsheets, gradebooks or reporting.
-            </p>
+            <div class="ic">📦</div>
+            <h3>Import / export</h3>
+            <p>A quiz travels as a portable bundle (<code>quiz.json</code> + media, zipped): back it up, move it, share it.</p>
           </article>
           <article class="card">
             <div class="ic">🌍</div>
             <h3>Multilingual</h3>
-            <p>
-              Interface available in English, French, Spanish and Simplified Chinese. One language
-              per instance, set in your configuration.
-            </p>
+            <p>English, French, Spanish, Simplified and Traditional Chinese — one language per instance.</p>
           </article>
           <article class="card">
             <div class="ic">🏠</div>
             <h3>Self-hosted &amp; private</h3>
-            <p>
-              Runs entirely on your own infrastructure with Docker. No SaaS, no third party, no ads.
-              Players need no account; hosts can plug in OIDC when needed.
-            </p>
+            <p>Your infra, one Docker image, no SaaS, no tracking. Players need no account; hosts can plug in any OpenID Connect provider.</p>
           </article>
           <article class="card">
             <div class="ic">🎨</div>
             <h3>White-label</h3>
-            <p>
-              Rebrand the name, logo and CSS through an env var and a mounted folder — no rebuild.
-              Make every instance look like yours.
-            </p>
+            <p>Rebrand the name, logo and CSS with an env variable and a mounted folder — no rebuild.</p>
           </article>
         </div>
       </section>
@@ -177,15 +152,19 @@ open http://localhost:18080</code></pre>
           <a class="btn btn-primary" href="https://hub.docker.com/r/fchaussin/quizdock">View on Docker Hub ↗</a>
         </div>
         <p class="sub">
-          Prefer building from source? <code>git clone</code> the repo and run the same compose with
+          Prefer building from source? <code>git clone</code>
+          <a href="https://github.com/quizdock/quiz-dock">the repo</a> and run the same compose with
           <code>--build</code>. Rebrand and pick a language without rebuilding via
           <code>APP_NAME</code> / <code>APP_LANG</code> and a mounted <code>branding/</code> folder.
+          Playing on a LAN? Set <code>HOST_LAN_IPS</code> (or type the address in the console) so the
+          QR code points where phones can reach.
         </p>
         <div class="langs" aria-label="Available interface languages">
           <span>🇬🇧 English</span>
           <span>🇫🇷 Français</span>
           <span>🇪🇸 Español</span>
           <span>🇨🇳 简体中文</span>
+          <span>🇹🇼 繁體中文</span>
         </div>
       </section>
 
@@ -195,7 +174,7 @@ open http://localhost:18080</code></pre>
           <li>
             <span class="num">1</span>
             <h3>Host creates a session</h3>
-            <p>Build a quiz, hit present — QuizDock locks a server-side snapshot and shows a PIN.</p>
+            <p>Build a quiz, hit present — the console shows a PIN, a QR code and the address participants will reach.</p>
           </li>
           <li>
             <span class="num">2</span>
@@ -205,7 +184,7 @@ open http://localhost:18080</code></pre>
           <li>
             <span class="num">3</span>
             <h3>Play, score, review</h3>
-            <p>Answer in real time, crown the podium, then explore results and export to CSV.</p>
+            <p>Answer in real time, look back at any question, crown the podium, then explore results and export to CSV.</p>
           </li>
         </ol>
       </section>
@@ -216,16 +195,21 @@ open http://localhost:18080</code></pre>
         <div class="carousel" aria-roledescription="carousel" aria-label="QuizDock screenshots">
           <button class="carousel-btn prev" type="button" aria-label="Previous screenshot">‹</button>
           <div class="carousel-track" id="shots">
-            <figure class="slide"><img src="screenshots/live-projector.png" alt="Projector — live question" loading="lazy" /><figcaption>Projector — live question (Kahoot-style)</figcaption></figure>
-            <figure class="slide"><img src="screenshots/live-player.png" alt="Player view" loading="lazy" /><figcaption>Player — answer from any device</figcaption></figure>
-            <figure class="slide"><img src="screenshots/host-control.png" alt="Host control" loading="lazy" /><figcaption>Host control during a question</figcaption></figure>
-            <figure class="slide"><img src="screenshots/leaderboard.png" alt="Leaderboard" loading="lazy" /><figcaption>Live leaderboard between questions</figcaption></figure>
-            <figure class="slide"><img src="screenshots/join-avatar.png" alt="Join with avatar" loading="lazy" /><figcaption>Join — nickname &amp; Multiavatar avatar</figcaption></figure>
-            <figure class="slide"><img src="screenshots/player-review.png" alt="Player feedback" loading="lazy" /><figcaption>Player feedback — rate the quiz</figcaption></figure>
-            <figure class="slide"><img src="screenshots/podium.png" alt="Podium" loading="lazy" /><figcaption>Podium — final results</figcaption></figure>
-            <figure class="slide"><img src="screenshots/editor.png" alt="Quiz builder" loading="lazy" /><figcaption>Quiz builder — 7 question types</figcaption></figure>
-            <figure class="slide"><img src="screenshots/dashboard.png" alt="Dashboard" loading="lazy" /><figcaption>Dashboard — your quizzes</figcaption></figure>
-            <figure class="slide"><img src="screenshots/present-lobby.png" alt="Lobby" loading="lazy" /><figcaption>Lobby — join by PIN / QR code</figcaption></figure>
+            <figure class="slide"><img src="screenshots/my-quizzes.png" alt="My quizzes" loading="lazy" /><figcaption>My quizzes — your bank, import / export, one click to present</figcaption></figure>
+            <figure class="slide"><img src="screenshots/editor.png" alt="Quiz builder" loading="lazy" /><figcaption>Quiz builder — 7 question types, slides, backgrounds, scoring rules</figcaption></figure>
+            <figure class="slide"><img src="screenshots/console-lobby.png" alt="Host console — lobby" loading="lazy" /><figcaption>Host console — PIN, QR code, invitation address, players</figcaption></figure>
+            <figure class="slide"><img src="screenshots/projection-lobby.png" alt="Projection — lobby" loading="lazy" /><figcaption>Projection — the big screen while players join</figcaption></figure>
+            <figure class="slide"><img src="screenshots/join-pin.png" alt="Join by PIN" loading="lazy" /><figcaption>Join — by PIN code or QR, no account</figcaption></figure>
+            <figure class="slide"><img src="screenshots/join-nickname.png" alt="Nickname and avatar" loading="lazy" /><figcaption>Nickname &amp; Multiavatar avatar</figcaption></figure>
+            <figure class="slide"><img src="screenshots/projection-slide.png" alt="Content slide" loading="lazy" /><figcaption>Content slide — headings, text, images, backgrounds</figcaption></figure>
+            <figure class="slide"><img src="screenshots/projection-question.png" alt="Projection — question" loading="lazy" /><figcaption>Projection — live question, Kahoot-style</figcaption></figure>
+            <figure class="slide"><img src="screenshots/player-question.png" alt="Player — question" loading="lazy" /><figcaption>Player — answers listed, colour tiles to tap</figcaption></figure>
+            <figure class="slide"><img src="screenshots/console-question.png" alt="Host console — question" loading="lazy" /><figcaption>Host console — chrono, answers received, reveal now</figcaption></figure>
+            <figure class="slide"><img src="screenshots/projection-reveal.png" alt="Projection — reveal" loading="lazy" /><figcaption>Reveal — distribution, explanation, live leaderboard</figcaption></figure>
+            <figure class="slide"><img src="screenshots/player-reveal.png" alt="Player — reveal" loading="lazy" /><figcaption>Player — own result, answer and ranking</figcaption></figure>
+            <figure class="slide"><img src="screenshots/player-ordering.png" alt="Player — ordering" loading="lazy" /><figcaption>Ordering — drag and drop on the phone</figcaption></figure>
+            <figure class="slide"><img src="screenshots/projection-podium.png" alt="Podium" loading="lazy" /><figcaption>Podium — final results on the big screen</figcaption></figure>
+            <figure class="slide"><img src="screenshots/player-review.png" alt="Player feedback" loading="lazy" /><figcaption>Player feedback — rate the quiz at the end</figcaption></figure>
           </div>
           <button class="carousel-btn next" type="button" aria-label="Next screenshot">›</button>
         </div>
@@ -236,8 +220,8 @@ open http://localhost:18080</code></pre>
         <h2>Own your next quiz.</h2>
         <p class="sub">Pull the image or clone the repo, star it, and run it where your data belongs.</p>
         <div class="cta">
-          <a class="btn btn-primary" href="https://github.com/quizdock/quiz-dock">Get QuizDock on GitHub</a>
-          <a class="btn btn-ghost" href="https://hub.docker.com/r/fchaussin/quizdock">Pull from Docker Hub ↗</a>
+          <a class="btn btn-primary" href="https://hub.docker.com/r/fchaussin/quizdock">Pull from Docker Hub ↗</a>
+          <a class="btn btn-ghost" href="https://github.com/quizdock/quiz-dock">Star it on GitHub ↗</a>
         </div>
       </section>
     </main>
