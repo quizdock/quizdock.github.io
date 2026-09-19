@@ -433,6 +433,8 @@ code {
 }
 .slide img {
   width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
   height: auto;
   display: block;
   background: #fff;
