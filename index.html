@@ -26,9 +26,10 @@
       </a>
       <nav class="nav-links">
         <a href="#features">Features</a>
-        <a href="#selfhost">Self-host</a>
-        <a href="#how">How it works</a>
+        <a href="#modes">Run it</a>
+        <a href="#getit">Get it</a>
         <a href="#screenshots">Screenshots</a>
+        <a href="https://quizdock-standalone.onrender.com">Demo ↗</a>
         <a href="https://github.com/quizdock/quiz-dock">GitHub ↗</a>
         <a class="btn btn-ghost" href="https://hub.docker.com/r/fchaussin/quizdock">Docker Hub ↗</a>
       </nav>
@@ -45,130 +46,58 @@
           no account, and your data never leaves your servers.
         </p>
         <div class="cta">
-          <a class="btn btn-primary" href="https://hub.docker.com/r/fchaussin/quizdock">Get it on Docker Hub ↗</a>
-          <a class="btn btn-ghost" href="#selfhost">Self-host in 2 minutes</a>
+          <a class="btn btn-primary" href="https://quizdock-standalone.onrender.com">Try the live demo ↗</a>
+          <a class="btn btn-ghost" href="#getit">Run it in one command</a>
           <a class="btn btn-ghost" href="https://github.com/quizdock/quiz-dock">Source on GitHub ↗</a>
         </div>
+        <figure class="hero-demo">
+          <img src="demo.gif" alt="A session on the big screen: players join with the PIN, a question with its timer, the reveal with the leaderboard, the podium" width="960" height="478" />
+          <figcaption>A session as the room sees it — lobby, question, reveal, podium.</figcaption>
+        </figure>
+      </section>
+
+      <section class="section section-soft try">
+        <p class="try-line">
+          <strong>Try it now:</strong>
+          <a href="https://quizdock-standalone.onrender.com">quizdock-standalone.onrender.com</a>
+          — enter a name, take the host seat, present a sample quiz, open the join link on your phone.
+          <span class="try-notes">It sleeps when idle (first load ≈ 1 min) · shared with strangers: wiped every hour, host seat 5 min at a time, no uploads.</span>
+        </p>
       </section>
 
       <section id="features" class="section">
         <h2>Everything for a live game, on your infra</h2>
-        <p class="sub">From the quiz builder to the projector, the leaderboard and the data export.</p>
-        <div class="grid">
+        <p class="sub">Five things QuizDock does well. The complete list is <a href="#more">further down</a>.</p>
+        <div class="grid grid-main">
           <article class="card">
             <div class="ic">⚡</div>
-            <h3>Real-time multiplayer</h3>
-            <p>Socket.IO game engine with authoritative server timing. Players join a session by 6-digit PIN or QR code — from a handful to a few hundred.</p>
-          </article>
-          <article class="card">
-            <div class="ic">🦄</div>
-            <h3>Player avatars</h3>
-            <p>Every player gets a unique, generated <a href="https://multiavatar.com">Multiavatar</a> avatar — no upload, no account, and the same face on every screen.</p>
+            <h3>Live, in real time</h3>
+            <p>Players join by 6-digit PIN or QR code from any device, no account, and get a generated avatar. A Socket.IO engine with authoritative server timing keeps everyone in step — a handful or a few hundred.</p>
           </article>
           <article class="card">
             <div class="ic">🖥️</div>
-            <h3>Projector-ready</h3>
-            <p>Bright, high-contrast screens built for the big screen, sized in one typographic base so they scale from a phone to a projector. Console, projection and participant views on one session.</p>
+            <h3>Made for the big screen</h3>
+            <p>Bright, high-contrast projection screens, with separate projection and control windows. Pace by hand or automatically, look back over any played question, survive a server restart.</p>
           </article>
           <article class="card">
             <div class="ic">🧩</div>
-            <h3>Quiz builder</h3>
-            <p>Seven question types, up to 8 answers with colour/shape pairs, image &amp; audio media, Markdown with a visual editor, content slides with backgrounds, drag-and-drop ordering.</p>
+            <h3>A real quiz builder</h3>
+            <p>Seven question types — single / multiple choice, true-false, text, numeric, ordering, poll — with image &amp; audio media, Markdown everywhere, content slides between questions, backgrounds and answer explanations.</p>
           </article>
           <article class="card">
-            <div class="ic">🎯</div>
-            <h3>Scoring rules</h3>
-            <p>Time-weighted points and streaks — plus, per question: <em>closest answer wins</em>, <em>partial credit</em>, typo-tolerant text, double or fixed points.</p>
-          </article>
-          <article class="card">
-            <div class="ic">🎛️</div>
-            <h3>Host in control</h3>
-            <p>Look back over played questions without replaying anything, pause, pace by hand or automatically, edit layouts while a session runs, survive a server restart.</p>
-          </article>
-          <article class="card">
-            <div class="ic">📡</div>
-            <h3>Invitation address</h3>
-            <p>The QR code and join link point where phones can actually reach the instance — public URL, LAN IP or any address, picked from the console.</p>
-          </article>
-          <article class="card">
-            <div class="ic">⭐</div>
-            <h3>Player feedback</h3>
-            <p>Players rate the quiz with stars and an optional comment at the end; hosts browse the reviews. Off per quiz when unwanted.</p>
-          </article>
-          <article class="card">
-            <div class="ic">💾</div>
-            <h3>Answer capture</h3>
-            <p>Optionally keep every player’s individual answers for audit, certification or follow-up — decided knowingly, per session.</p>
-          </article>
-          <article class="card">
-            <div class="ic">🔎</div>
-            <h3>History &amp; exploration</h3>
-            <p>Archived sessions with per-question success rates, average times and per-player answer sheets; CSV export of everything.</p>
-          </article>
-          <article class="card">
-            <div class="ic">📦</div>
-            <h3>Import / export</h3>
-            <p>A quiz travels as a portable bundle (<code>quiz.json</code> + media, zipped): back it up, move it, share it.</p>
-          </article>
-          <article class="card">
-            <div class="ic">🌍</div>
-            <h3>Multilingual</h3>
-            <p>English, French, Spanish, Simplified and Traditional Chinese — one language per instance.</p>
+            <div class="ic">🏆</div>
+            <h3>Scoring that rewards speed</h3>
+            <p>Time-weighted points, streak bonuses, leaderboard between questions, final podium. Per question: <em>closest answer wins</em>, partial credit, typo-tolerant text, double or fixed points.</p>
           </article>
           <article class="card">
             <div class="ic">🏠</div>
-            <h3>Self-hosted &amp; private</h3>
-            <p>Your infra, one Docker image, no SaaS, no tracking. Players need no account; hosts can plug in any OpenID Connect provider.</p>
-          </article>
-          <article class="card">
-            <div class="ic">🎨</div>
-            <h3>White-label</h3>
-            <p>Rebrand the name, logo and CSS with an env variable and a mounted folder — no rebuild.</p>
+            <h3>Self-hosted and private</h3>
+            <p>One Docker image (amd64 / arm64), no SaaS, no tracking, no ads. Five interface languages, rebrand name, logo and CSS without a rebuild. The questions, the answers and the results stay on your servers.</p>
           </article>
         </div>
       </section>
 
-      <section id="selfhost" class="section section-soft">
-        <h2>Self-host in 2 minutes</h2>
-        <p class="sub">
-          Easiest — <strong>one container</strong> (app + database bundled), ideal on Docker Desktop:
-        </p>
-        <pre class="code"><code>docker run -p 18080:3000 -v quizdock:/data fchaussin/quizdock:standalone
-
-# then open the app in your browser
-open http://localhost:18080</code></pre>
-        <p class="sub">
-          Or, for production, the
-          <a href="https://hub.docker.com/r/fchaussin/quizdock"><code>fchaussin/quizdock</code></a>
-          app image with your own Postgres / Redis via compose:
-        </p>
-        <pre class="code"><code>docker pull fchaussin/quizdock:latest
-curl -O https://raw.githubusercontent.com/quizdock/quiz-dock/main/docker-compose.prod.yml
-docker compose -f docker-compose.prod.yml up -d
-
-# then open the app in your browser
-open http://localhost:18080</code></pre>
-        <div class="cta">
-          <a class="btn btn-primary" href="https://hub.docker.com/r/fchaussin/quizdock">View on Docker Hub ↗</a>
-        </div>
-        <p class="sub">
-          Prefer building from source? <code>git clone</code>
-          <a href="https://github.com/quizdock/quiz-dock">the repo</a> and run the same compose with
-          <code>--build</code>. Rebrand and pick a language without rebuilding via
-          <code>APP_NAME</code> / <code>APP_LANG</code> and a mounted <code>branding/</code> folder.
-          Playing on a LAN? Set <code>HOST_LAN_IPS</code> (or type the address in the console) so the
-          QR code points where phones can reach.
-        </p>
-        <div class="langs" aria-label="Available interface languages">
-          <span>🇬🇧 English</span>
-          <span>🇫🇷 Français</span>
-          <span>🇪🇸 Español</span>
-          <span>🇨🇳 简体中文</span>
-          <span>🇹🇼 繁體中文</span>
-        </div>
-      </section>
-
-      <section id="how" class="section">
+      <section id="how" class="section section-soft">
         <h2>How it works</h2>
         <ol class="steps">
           <li>
@@ -187,6 +116,79 @@ open http://localhost:18080</code></pre>
             <p>Answer in real time, look back at any question, crown the podium, then explore results and export to CSV.</p>
           </li>
         </ol>
+      </section>
+
+      <section id="modes" class="section">
+        <h2>Two ways to run it</h2>
+        <p class="sub">Same image, one switch: <code>AUTH_MODE</code> decides who can host. Players never sign in, in either mode.</p>
+        <div class="modes">
+          <article class="mode">
+            <span class="mode-tag">Default</span>
+            <h3>Local mode</h3>
+            <p class="mode-for">A classroom, a meeting room, a trusted network.</p>
+            <ul>
+              <li>Zero configuration — start the container and play.</li>
+              <li>One <strong>host seat</strong>: a host signs in with just a name and takes it, releases it when done.</li>
+              <li>Two sample quizzes included to present right away.</li>
+            </ul>
+          </article>
+          <article class="mode">
+            <span class="mode-tag">For an organisation</span>
+            <h3>OIDC mode</h3>
+            <p class="mode-for">Hosts sign in through your identity provider.</p>
+            <ul>
+              <li>Any OpenID Connect provider: Keycloak, Authentik, Entra ID, Google…</li>
+              <li>As many hosts as you like, each with their own quizzes.</li>
+              <li>The <code>host</code> role is granted from the IdP.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="more" class="section section-soft">
+        <h2>Everything else</h2>
+        <p class="sub">The complete list — what you get once a session runs.</p>
+        <ul class="more">
+          <li><strong>Rich text</strong> — prompts, options and descriptions in Markdown with a visual editor: bold, lists, code, inline images.</li>
+          <li><strong>Content slides</strong> — headings, text, images, 2–3 columns between questions; image or gradient backgrounds, faithful 16:9 preview.</li>
+          <li><strong>Answer explanations</strong> — shown at the reveal, with a per-question reveal delay in automatic mode.</li>
+          <li><strong>Player avatars</strong> — a unique generated <a href="https://multiavatar.com">Multiavatar</a> for every player, no upload, the same face on every screen.</li>
+          <li><strong>Host in control</strong> — Console / Projection / Participant views, layout edits reach a running session at its next step, sessions survive a restart.</li>
+          <li><strong>Invitation address</strong> — the QR code and join link point where phones can actually reach the instance: public URL, LAN IP or any address.</li>
+          <li><strong>Player feedback</strong> — stars and an optional comment at the end; hosts see the distribution and browse the reviews. Off per quiz when unwanted.</li>
+          <li><strong>Answer capture</strong> — optionally keep every player’s individual answers for audit, certification or follow-up, decided per session.</li>
+          <li><strong>History &amp; exploration</strong> — archived sessions with per-question success rates, average times and per-player answer sheets.</li>
+          <li><strong>CSV export</strong> — overall results and per-player answer sheets.</li>
+          <li><strong>Quiz import / export</strong> — a quiz travels as a portable bundle (<code>quiz.json</code> + media, zipped): back it up, move it, share it — from the app or the CLI.</li>
+          <li><strong>Multilingual</strong> — English, French, Spanish, Simplified and Traditional Chinese, one language per instance.</li>
+          <li><strong>White-label</strong> — name, logo and CSS via an env variable and a mounted folder, no rebuild.</li>
+          <li><strong>Operator script</strong> — <code>quizdock init / up / backup / upgrade / doctor</code>: guided setup and day-to-day admin, Docker only.</li>
+          <li><strong>Hardened runtime</strong> — distroless image, non-root, read-only root FS, capabilities dropped; dependencies and image scanned on every push.</li>
+          <li><strong>MIT licensed</strong> — free to use, modify and redistribute, including for internal self-hosting.</li>
+        </ul>
+      </section>
+
+      <section id="getit" class="section">
+        <h2>Run it in one command</h2>
+        <p class="sub">App and database in a single container — nothing else to install. Data persists in the <code>quizdock</code> volume.</p>
+        <pre class="code"><code>docker run -p 18080:3000 -v quizdock:/data fchaussin/quizdock:standalone
+
+# then open http://localhost:18080</code></pre>
+        <div class="cta">
+          <a class="btn btn-primary" href="https://hub.docker.com/r/fchaussin/quizdock">Get it on Docker Hub ↗</a>
+          <a class="btn btn-ghost" href="https://github.com/quizdock/quiz-dock/tree/main/docs/self-hosting">Self-hosting guide ↗</a>
+        </div>
+        <p class="sub">
+          Production with a dedicated database, the <code>quizdock</code> script, OIDC, white-label:
+          it is all in the <a href="https://github.com/quizdock/quiz-dock/tree/main/docs/self-hosting">self-hosting guide</a>.
+        </p>
+        <div class="langs" aria-label="Available interface languages">
+          <span>🇬🇧 English</span>
+          <span>🇫🇷 Français</span>
+          <span>🇪🇸 Español</span>
+          <span>🇨🇳 简体中文</span>
+          <span>🇹🇼 繁體中文</span>
+        </div>
       </section>
 
       <section id="screenshots" class="section section-soft">
@@ -216,9 +218,10 @@ open http://localhost:18080</code></pre>
 
       <section class="section section-cta">
         <h2>Own your next quiz.</h2>
-        <p class="sub">Pull the image or clone the repo, star it, and run it where your data belongs.</p>
+        <p class="sub">Try the demo, pull the image, star the repo — and run it where your data belongs.</p>
         <div class="cta">
-          <a class="btn btn-primary" href="https://hub.docker.com/r/fchaussin/quizdock">Pull from Docker Hub ↗</a>
+          <a class="btn btn-primary" href="https://quizdock-standalone.onrender.com">Try the live demo ↗</a>
+          <a class="btn btn-ghost" href="https://hub.docker.com/r/fchaussin/quizdock">Pull from Docker Hub ↗</a>
           <a class="btn btn-ghost" href="https://github.com/quizdock/quiz-dock">Star it on GitHub ↗</a>
         </div>
       </section>
