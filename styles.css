@@ -383,6 +383,19 @@ h3 {
   border-radius: var(--radius);
   padding: 1.5rem;
 }
+.tag-exp {
+  display: inline-block;
+  font-size: 0.7em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: var(--primary-soft);
+  border: 1px solid color-mix(in oklch, var(--primary) 25%, transparent);
+  padding: 0.05rem 0.45rem;
+  border-radius: 999px;
+  vertical-align: 0.1em;
+}
 .mode-tag {
   display: inline-block;
   font-size: 0.78rem;
