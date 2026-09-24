@@ -107,7 +107,7 @@
         <div class="media-card">
           <p class="media-kicker">New in 0.7 <span class="tag-exp">experimental</span></p>
           <h2>Questions you hear and watch</h2>
-          <p class="sub">An MP4 video or an MP3 sound in any question — for the room on the big screen, and for whoever follows from home.</p>
+          <p class="sub">A video or a sound in any question — for the room on the big screen, and for whoever follows from home. And a media library to keep them in.</p>
           <div class="media-grid">
             <div>
               <h3>🎧 Video &amp; sound</h3>
@@ -124,6 +124,14 @@
             <div>
               <h3>👂 Listen first, then answer</h3>
               <p>A question can keep its answers closed until the media has played: nobody answers during it, everyone gets the full time after.</p>
+            </div>
+            <div>
+              <h3>🗂️ A media library</h3>
+              <p>Drop any image, video or sound your browser reads: converted right there to WebP, MP4 or M4A, stored once, reused from <em>My media</em> — or from the global media the instance provides to every host.</p>
+            </div>
+            <div>
+              <h3>🧾 Credits</h3>
+              <p>Author, licence and source on every media, carried with the quiz when shared; listed with the quiz and in small print under the podium, as a CC-BY licence asks.</p>
             </div>
           </div>
           <p class="media-note">Experimental: tested in Chromium browsers, not yet on iPhone. <a href="https://github.com/quizdock/quiz-dock/blob/main/docs/self-hosting/audio-video.md">The audio &amp; video guide ↗</a></p>
@@ -187,8 +195,11 @@
           <li><strong>Answer explanations</strong> — shown at the reveal, with a per-question reveal delay in automatic mode.</li>
           <li><strong>Player avatars</strong> — a unique generated <a href="https://multiavatar.com">Multiavatar</a> for every player, no upload, the same face on every screen.</li>
           <li><strong>Host in control</strong> — Console / Projection / Participant views, layout edits reach a running session at its next step, sessions survive a restart.</li>
-          <li><strong>Video &amp; sound</strong> <span class="tag-exp">experimental</span> — MP4 videos and MP3 sounds in questions, loudness-matched, drawn as a waveform with a playhead that follows the projection; started on the same instant on every device, fetched ahead from the lobby, and the room waits a moment for a device still loading; <em>listen first</em> questions open the answers once the media has played. Tested in Chromium browsers, not yet on iPhone.</li>
+          <li><strong>Video &amp; sound</strong> <span class="tag-exp">experimental</span> — videos and sounds in questions, converted in the browser from whatever it reads, loudness-matched, drawn as a waveform with a playhead that follows the projection; started on the same instant on every device, fetched ahead from the lobby, and the room waits a moment for a device still loading; <em>listen first</em> questions open the answers once the media has played. Tested in Chromium browsers, not yet on iPhone.</li>
           <li><strong>Remote participants</strong> <span class="tag-exp">experimental</span> — someone following from home says so when joining and gets the whole question on their device; who hears the sound is set per quiz, per question and per session.</li>
+          <li><strong>Media library</strong> — <em>My images / videos / sounds</em> to reuse what you uploaded, global media provided by the instance, credits, links to free libraries (Openverse, Wikimedia Commons, Freesound…).</li>
+          <li><strong>Instance media</strong> — for administrators: disk by kind and owner, the clean-up, every file as a list or a grid with a preview (a sound on its waveform), global media, deletion for moderation once usages are listed.</li>
+          <li><strong>Media housekeeping</strong> — each file stored once, unused media and stray files cleaned up hourly, older formats kept playing.</li>
           <li><strong>Invitation address</strong> — the QR code and join link point where phones can actually reach the instance: public URL, LAN IP or any address.</li>
           <li><strong>Player feedback</strong> — stars and an optional comment at the end; hosts see the distribution and browse the reviews. Off per quiz when unwanted.</li>
           <li><strong>Answer capture</strong> — optionally keep every player’s individual answers for audit, certification or follow-up, decided per session.</li>
@@ -197,6 +208,7 @@
           <li><strong>Quiz import / export</strong> — a quiz travels as a portable bundle (<code>quiz.json</code> + media, zipped): back it up, move it, share it — from the app or the CLI.</li>
           <li><strong>Multilingual</strong> — English, French, Spanish, Simplified and Traditional Chinese, one language per instance.</li>
           <li><strong>White-label</strong> — name, logo and CSS via an env variable and a mounted folder, no rebuild.</li>
+          <li><strong>Feedback links</strong> — report a bug, suggest a feature, fix a translation or ask a question from the home page, pre-filled with the version and the browser; pointed at your own repository or hidden.</li>
           <li><strong>Operator script</strong> — <code>quizdock init / up / backup / upgrade / doctor</code>: guided setup and day-to-day admin, Docker only.</li>
           <li><strong>Hardened runtime</strong> — distroless image, non-root, read-only root FS, capabilities dropped; dependencies and image scanned on every push.</li>
           <li><strong>MIT licensed</strong> — free to use, modify and redistribute, including for internal self-hosting.</li>
@@ -234,18 +246,23 @@
           <div class="carousel-track" id="shots">
             <figure class="slide"><img src="screenshots/my-quizzes.png" alt="My quizzes" loading="lazy" /><figcaption>My quizzes — your bank: search, filter, import / export, one click to present</figcaption></figure>
             <figure class="slide"><img src="screenshots/templates.png" alt="Shared templates" loading="lazy" /><figcaption>Templates — quizzes shared on the instance; take an independent copy</figcaption></figure>
-            <figure class="slide"><img src="screenshots/editor.png" alt="Quiz builder" loading="lazy" /><figcaption>Quiz builder — 7 question types, video &amp; sound, slides, backgrounds, scoring rules</figcaption></figure>
+            <figure class="slide"><img src="screenshots/editor.png" alt="Quiz builder" loading="lazy" /><figcaption>Quiz builder — a question's picture with its alternative text and credit; 7 question types, video &amp; sound, slides</figcaption></figure>
+            <figure class="slide"><img src="screenshots/media-library.png" alt="My media" loading="lazy" /><figcaption>My media — reuse what you uploaded, with sizes and usages; links to free libraries</figcaption></figure>
+            <figure class="slide"><img src="screenshots/media-library-global.png" alt="Global media" loading="lazy" /><figcaption>Global media — what the instance provides to every host, credited</figcaption></figure>
             <figure class="slide"><img src="screenshots/console-lobby.png" alt="Host console — lobby" loading="lazy" /><figcaption>Host console — PIN, QR code, players in the room or remote, who hears the sound</figcaption></figure>
             <figure class="slide"><img src="screenshots/projection-lobby.png" alt="Projection — lobby" loading="lazy" /><figcaption>Projection — the big screen while players join</figcaption></figure>
             <figure class="slide"><img src="screenshots/join.png" alt="Join by PIN, nickname and avatar, in the room or remote" loading="lazy" /><figcaption>Join — PIN or QR code, nickname &amp; Multiavatar avatar, in the room or remote, no account</figcaption></figure>
             <figure class="slide"><img src="screenshots/projection-slide.png" alt="Content slide" loading="lazy" /><figcaption>Content slide — headings, text, images, backgrounds</figcaption></figure>
             <figure class="slide"><img src="screenshots/projection-question.png" alt="Projection — question" loading="lazy" /><figcaption>Projection — live question, Kahoot-style</figcaption></figure>
+            <figure class="slide"><img src="screenshots/projection-media.png" alt="Projection — question with a picture" loading="lazy" /><figcaption>Projection — a question with its picture on the big screen</figcaption></figure>
             <figure class="slide"><img src="screenshots/player-play.png" alt="Player — question and reveal" loading="lazy" /><figcaption>Player — answers listed, colour tiles to tap, then own result</figcaption></figure>
             <figure class="slide"><img src="screenshots/console-question.png" alt="Host console — question" loading="lazy" /><figcaption>Host console — chrono, answers received, reveal now</figcaption></figure>
             <figure class="slide"><img src="screenshots/projection-reveal.png" alt="Projection — reveal" loading="lazy" /><figcaption>Reveal — distribution, explanation, live leaderboard</figcaption></figure>
             <figure class="slide"><img src="screenshots/console-reveal.png" alt="Host console — reveal" loading="lazy" /><figcaption>Host console — look back over played questions, next</figcaption></figure>
             <figure class="slide"><img src="screenshots/player-end.png" alt="Player — ordering and feedback" loading="lazy" /><figcaption>Player — drag-and-drop ordering, rate the quiz at the end</figcaption></figure>
             <figure class="slide"><img src="screenshots/projection-podium.png" alt="Podium" loading="lazy" /><figcaption>Podium — final results on the big screen</figcaption></figure>
+            <figure class="slide"><img src="screenshots/admin-media.png" alt="Instance media" loading="lazy" /><figcaption>Instance media — disk, clean-up, every file as a grid or a list, the global media</figcaption></figure>
+            <figure class="slide"><img src="screenshots/admin-media-preview.png" alt="Preview of a sound" loading="lazy" /><figcaption>Preview — a sound on its waveform, with its format, length, owners and usages</figcaption></figure>
           </div>
           <button class="carousel-btn next" type="button" aria-label="Next screenshot">›</button>
         </div>
