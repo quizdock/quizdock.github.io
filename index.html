@@ -26,6 +26,7 @@
       </a>
       <nav class="nav-links">
         <a href="#features">Features</a>
+          <a href="#media">Video &amp; sound</a>
         <a href="#modes">Run it</a>
         <a href="#getit">Get it</a>
         <a href="#screenshots">Screenshots</a>
@@ -38,7 +39,10 @@
     <main id="top">
       <section class="hero">
         <img class="hero-logo" src="logo.svg" alt="QuizDock" />
-        <span class="pill">Open source · self-hosted · pre-1.0</span>
+        <div class="pills">
+          <span class="pill">Open source · self-hosted · pre-1.0</span>
+          <a class="pill pill-new" href="#media">New in 0.7 · video &amp; sound <span class="tag-exp">experimental</span></a>
+        </div>
         <h1>Live quizzes you actually <span class="accent">own</span>.</h1>
         <p class="lede">
           QuizDock is an open-source, self-hosted live quiz platform with bright,
@@ -96,6 +100,33 @@
             <h3>Self-hosted and private</h3>
             <p>One Docker image (amd64 / arm64), no SaaS, no tracking, no ads. Five interface languages, rebrand name, logo and CSS without a rebuild. The questions, the answers and the results stay on your servers.</p>
           </article>
+        </div>
+      </section>
+
+      <section id="media" class="section">
+        <div class="media-card">
+          <p class="media-kicker">New in 0.7 <span class="tag-exp">experimental</span></p>
+          <h2>Questions you hear and watch</h2>
+          <p class="sub">An MP4 video or an MP3 sound in any question — for the room on the big screen, and for whoever follows from home.</p>
+          <div class="media-grid">
+            <div>
+              <h3>🎧 Video &amp; sound</h3>
+              <p>Brought to the same loudness from one question to the next, the sound drawn as a waveform with a playhead that follows the projection on every screen.</p>
+            </div>
+            <div>
+              <h3>🏠 Remote participants</h3>
+              <p>Someone joining from home says so and gets the whole question on their device, video and sound included. Who hears the sound is set per quiz, per question and per session.</p>
+            </div>
+            <div>
+              <h3>⏱️ Started together</h3>
+              <p>Every device reads the server's clock and starts the media on the same instant; each fetches the next one ahead, and the room waits a moment for a device still loading.</p>
+            </div>
+            <div>
+              <h3>👂 Listen first, then answer</h3>
+              <p>A question can keep its answers closed until the media has played: nobody answers during it, everyone gets the full time after.</p>
+            </div>
+          </div>
+          <p class="media-note">Experimental: tested in Chromium browsers, not yet on iPhone. <a href="https://github.com/quizdock/quiz-dock/blob/main/docs/self-hosting/audio-video.md">The audio &amp; video guide ↗</a></p>
         </div>
       </section>
 
