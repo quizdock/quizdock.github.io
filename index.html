@@ -161,7 +161,7 @@
 
       <section id="modes" class="section">
         <h2>Two ways to run it</h2>
-        <p class="sub">Same image, one switch: <code>AUTH_MODE</code> decides who can host. Players never sign in, in either mode.</p>
+        <p class="sub">Same image, one switch: <code>AUTH_MODE</code> decides who can host.</p>
         <div class="modes">
           <article class="mode">
             <span class="mode-tag">Default</span>
@@ -181,6 +181,7 @@
               <li>Any OpenID Connect provider: Keycloak, Authentik, Entra ID, Google…</li>
               <li>As many hosts as you like, each with their own quizzes.</li>
               <li>The <code>host</code> role is granted from the IdP.</li>
+              <li>Players sign in too — or, if you allow it, join with just the PIN and a nickname.</li>
             </ul>
           </article>
         </div>
@@ -193,6 +194,7 @@
           <li><strong>Rich text</strong> — prompts, options and descriptions in Markdown with a visual editor: bold, lists, code, inline images.</li>
           <li><strong>Content slides</strong> — headings, text, images, 2–3 columns between questions; image or gradient backgrounds, faithful 16:9 preview.</li>
           <li><strong>Answer explanations</strong> — shown at the reveal, with a per-question reveal delay in automatic mode.</li>
+          <li><strong>Preview</strong> — rehearse your quiz exactly as it will look on the big screen, answers shown.</li>
           <li><strong>Player avatars</strong> — a unique generated <a href="https://multiavatar.com">Multiavatar</a> for every player, no upload, the same face on every screen.</li>
           <li><strong>Host in control</strong> — Console / Projection / Participant views, layout edits reach a running session at its next step, sessions survive a restart.</li>
           <li><strong>Video &amp; sound</strong> <span class="tag-exp">experimental</span> — videos and sounds in questions, converted in the browser from whatever it reads, loudness-matched, drawn as a waveform with a playhead that follows the projection; started on the same instant on every device, fetched ahead from the lobby, and the room waits a moment for a device still loading; <em>listen first</em> questions open the answers once the media has played. Tested in Chromium browsers, not yet on iPhone.</li>
@@ -200,6 +202,8 @@
           <li><strong>Media library</strong> — <em>My images / videos / sounds</em> to reuse what you uploaded, global media provided by the instance, credits, links to free libraries (Openverse, Wikimedia Commons, Freesound…).</li>
           <li><strong>Instance media</strong> — for administrators: disk by kind and owner, the clean-up, every file as a list or a grid with a preview (a sound on its waveform), global media, deletion for moderation once usages are listed.</li>
           <li><strong>Media housekeeping</strong> — each file stored once, unused media and stray files cleaned up hourly, older formats kept playing.</li>
+          <li><strong>Players without an account</strong> — where everyone signs in, a host can still open a game to the PIN and a nickname alone, for visitors or trainees who have no account; chosen at each launch, or once and for all in <em>My account</em>.</li>
+          <li><strong>Keep the room to itself</strong> — close the game to newcomers once everyone is in (or during play), remove a player, and guessing PINs is slowed down.</li>
           <li><strong>Invitation address</strong> — the QR code and join link point where phones can actually reach the instance: public URL, LAN IP or any address.</li>
           <li><strong>Player feedback</strong> — stars and an optional comment at the end; hosts see the distribution and browse the reviews. Off per quiz when unwanted.</li>
           <li><strong>Answer capture</strong> — optionally keep every player’s individual answers for audit, certification or follow-up, decided per session.</li>
@@ -210,7 +214,7 @@
           <li><strong>White-label</strong> — name, logo and CSS via an env variable and a mounted folder, no rebuild.</li>
           <li><strong>Feedback links</strong> — report a bug, suggest a feature, fix a translation or ask a question from the home page, pre-filled with the version and the browser; pointed at your own repository or hidden.</li>
           <li><strong>Operator script</strong> — <code>quizdock init / up / backup / upgrade / doctor</code>: guided setup and day-to-day admin, Docker only.</li>
-          <li><strong>Hardened runtime</strong> — distroless image, non-root, read-only root FS, capabilities dropped; dependencies and image scanned on every push.</li>
+          <li><strong>Hardened runtime</strong> — distroless image, non-root, read-only root FS, capabilities dropped, a Content-Security-Policy on every page; dependencies and image scanned on every push.</li>
           <li><strong>MIT licensed</strong> — free to use, modify and redistribute, including for internal self-hosting.</li>
         </ul>
       </section>
@@ -250,6 +254,8 @@
             <figure class="slide"><img src="screenshots/media-library.png" alt="My media" loading="lazy" /><figcaption>My media — reuse what you uploaded, with sizes and usages; links to free libraries</figcaption></figure>
             <figure class="slide"><img src="screenshots/media-library-global.png" alt="Global media" loading="lazy" /><figcaption>Global media — what the instance provides to every host, credited</figcaption></figure>
             <figure class="slide"><img src="screenshots/console-lobby.png" alt="Host console — lobby" loading="lazy" /><figcaption>Host console — PIN, QR code, players in the room or remote, who hears the sound</figcaption></figure>
+            <figure class="slide"><img src="screenshots/participant-access.png" alt="Who can join" loading="lazy" /><figcaption>Who can join — with an account, or with the PIN and a nickname alone; chosen at launch, or remembered</figcaption></figure>
+            <figure class="slide"><img src="screenshots/console-lobby-access.png" alt="Close the game to newcomers" loading="lazy" /><figcaption>Close the game — once everyone is in, nobody else joins, even with the PIN</figcaption></figure>
             <figure class="slide"><img src="screenshots/projection-lobby.png" alt="Projection — lobby" loading="lazy" /><figcaption>Projection — the big screen while players join</figcaption></figure>
             <figure class="slide"><img src="screenshots/join.png" alt="Join by PIN, nickname and avatar, in the room or remote" loading="lazy" /><figcaption>Join — PIN or QR code, nickname &amp; Multiavatar avatar, in the room or remote, no account</figcaption></figure>
             <figure class="slide"><img src="screenshots/projection-slide.png" alt="Content slide" loading="lazy" /><figcaption>Content slide — headings, text, images, backgrounds</figcaption></figure>
@@ -263,6 +269,7 @@
             <figure class="slide"><img src="screenshots/projection-podium.png" alt="Podium" loading="lazy" /><figcaption>Podium — final results on the big screen</figcaption></figure>
             <figure class="slide"><img src="screenshots/admin-media.png" alt="Instance media" loading="lazy" /><figcaption>Instance media — disk, clean-up, every file as a grid or a list, the global media</figcaption></figure>
             <figure class="slide"><img src="screenshots/admin-media-preview.png" alt="Preview of a sound" loading="lazy" /><figcaption>Preview — a sound on its waveform, with its format, length, owners and usages</figcaption></figure>
+            <figure class="slide"><img src="screenshots/preferences.png" alt="My account" loading="lazy" /><figcaption>My account — who you are, what you can do, and the choice made once for every launch</figcaption></figure>
           </div>
           <button class="carousel-btn next" type="button" aria-label="Next screenshot">›</button>
         </div>
