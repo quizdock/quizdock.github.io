@@ -26,7 +26,7 @@
       </a>
       <nav class="nav-links">
         <a href="#features">Features</a>
-          <a href="#media">Video &amp; sound</a>
+        <a href="#media">Video &amp; sound</a>
         <a href="#modes">Run it</a>
         <a href="#getit">Get it</a>
         <a href="#screenshots">Screenshots</a>
@@ -41,6 +41,7 @@
         <img class="hero-logo" src="logo.svg" alt="QuizDock" />
         <div class="pills">
           <span class="pill">Open source · self-hosted · pre-1.0</span>
+          <a class="pill pill-new" href="#library">New in 0.8 · media library</a>
           <a class="pill pill-new" href="#media">New in 0.7 · video &amp; sound <span class="tag-exp">experimental</span></a>
         </div>
         <h1>Live quizzes you actually <span class="accent">own</span>.</h1>
@@ -103,11 +104,45 @@
         </div>
       </section>
 
+      <section id="library" class="section">
+        <div class="media-card">
+          <p class="media-kicker">New in 0.8</p>
+          <h2>A media library, for hosts and for the instance</h2>
+          <p class="sub">Every image, video and sound in one place: yours to reuse, the instance's to share, and an administration page to keep the disk in check.</p>
+          <div class="media-grid">
+            <div>
+              <h3>🗂️ My media</h3>
+              <p>Drop any image, video or sound your browser reads: converted right there to WebP, MP4 or M4A, then reused from one quiz to the next, with its size and where it is used.</p>
+            </div>
+            <div>
+              <h3>🌍 Global media</h3>
+              <p>Media the instance provides to every host — a logo, jingles, backgrounds — offered next to their own in the editor.</p>
+            </div>
+            <div>
+              <h3>🛠️ Instance media</h3>
+              <p>An administration page: disk used by kind and by owner, every file as a grid or a list, a preview with its format, length, owners and usages.</p>
+            </div>
+            <div>
+              <h3>🧹 Stored once, cleaned up</h3>
+              <p>The same file uploaded twice is kept once; what no quiz uses any more is cleared every hour, and the administrator can clean up on demand.</p>
+            </div>
+            <div>
+              <h3>🧾 Credits</h3>
+              <p>Author, licence and source on every media, carried with the quiz when shared; listed with the quiz and in small print under the podium, as a CC-BY licence asks.</p>
+            </div>
+            <div>
+              <h3>🔗 Free libraries</h3>
+              <p>The editor points to free libraries under open licences for every kind of media, to find a picture, a clip or a sound to credit and use.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="media" class="section">
         <div class="media-card">
           <p class="media-kicker">New in 0.7 <span class="tag-exp">experimental</span></p>
           <h2>Questions you hear and watch</h2>
-          <p class="sub">A video or a sound in any question — for the room on the big screen, and for whoever follows from home. And a media library to keep them in.</p>
+          <p class="sub">A video or a sound in any question — for the room on the big screen, and for whoever follows from home.</p>
           <div class="media-grid">
             <div>
               <h3>🎧 Video &amp; sound</h3>
@@ -124,14 +159,6 @@
             <div>
               <h3>👂 Listen first, then answer</h3>
               <p>A question can keep its answers closed until the media has played: nobody answers during it, everyone gets the full time after.</p>
-            </div>
-            <div>
-              <h3>🗂️ A media library</h3>
-              <p>Drop any image, video or sound your browser reads: converted right there to WebP, MP4 or M4A, stored once, reused from <em>My media</em> — or from the global media the instance provides to every host.</p>
-            </div>
-            <div>
-              <h3>🧾 Credits</h3>
-              <p>Author, licence and source on every media, carried with the quiz when shared; listed with the quiz and in small print under the podium, as a CC-BY licence asks.</p>
             </div>
           </div>
           <p class="media-note">Experimental: tested in Chromium browsers, not yet on iPhone. <a href="https://github.com/quizdock/quiz-dock/blob/main/docs/self-hosting/audio-video.md">The audio &amp; video guide ↗</a></p>
