@@ -54,7 +54,7 @@
           <a class="btn btn-ghost" href="https://github.com/quizdock/quiz-dock">Source on GitHub ↗</a>
         </div>
         <figure class="hero-demo">
-          <img src="demo.gif" alt="A session on the big screen: players join with the PIN, a question with its timer, the reveal with the leaderboard, the podium" width="960" height="478" />
+          <img src="demo.gif" alt="A session on the big screen: the intro slide, questions with their timers and answers coming in, the reveals" width="960" height="478" />
           <figcaption>A session as the room sees it — lobby, question, reveal, podium.</figcaption>
         </figure>
       </section>
@@ -97,7 +97,7 @@
           <article class="card">
             <div class="ic">🏠</div>
             <h3>Self-hosted and private</h3>
-            <p>One Docker image (amd64 / arm64), no SaaS, no tracking, no ads. Five interface languages, rebrand name, logo and CSS without a rebuild. The questions, the answers and the results stay on your servers.</p>
+            <p>One Docker image (amd64 / arm64), no SaaS, no tracking, no ads. Six interface languages, rebrand name, logo and CSS without a rebuild. The questions, the answers and the results stay on your servers.</p>
           </article>
         </div>
       </section>
@@ -193,7 +193,7 @@
             <ul>
               <li>Zero configuration — start the container and play.</li>
               <li>One <strong>host seat</strong>: a host signs in with just a name and takes it, releases it when done.</li>
-              <li>Two sample quizzes included to present right away.</li>
+              <li>Three sample quizzes included to present right away: France, Taiwan, and Türkiye in Turkish.</li>
             </ul>
           </article>
           <article class="mode">
@@ -241,7 +241,7 @@
           <li><strong>CSV export</strong> — overall results and per-player answer sheets.</li>
           <li><strong>Licence, tags and language of a quiz</strong> — set in the quiz settings and carried with it, so whoever receives a copy knows what they may do with it and what it is about.</li>
           <li><strong>Quiz import / export</strong> — a quiz travels as a portable bundle (<code>quiz.json</code> + media, zipped): back it up, move it, share it — from the app or the CLI.</li>
-          <li><strong>Multilingual</strong> — English, French, Spanish, Simplified and Traditional Chinese, one language per instance.</li>
+          <li><strong>Multilingual</strong> — English, French, Spanish, Simplified and Traditional Chinese, Turkish, one language per instance.</li>
           <li><strong>White-label</strong> — name, logo and CSS via an env variable and a mounted folder, no rebuild.</li>
           <li><strong>Feedback links</strong> — report a bug, suggest a feature, fix a translation or ask a question from the home page, pre-filled with the version and the browser; pointed at your own repository or hidden.</li>
           <li><strong>Operator script</strong> — <code>quizdock init / up / backup / upgrade / doctor</code>: guided setup and day-to-day admin, Docker only.</li>
@@ -270,6 +270,7 @@
           <span>🇪🇸 Español</span>
           <span>🇨🇳 简体中文</span>
           <span>🇹🇼 繁體中文</span>
+          <span>🇹🇷 Türkçe</span>
         </div>
       </section>
 
@@ -287,12 +288,11 @@
             <figure class="slide"><img src="screenshots/media-library.png" alt="My media" loading="lazy" /><figcaption>My media — reuse what you uploaded, with sizes and usages; links to free libraries</figcaption></figure>
             <figure class="slide"><img src="screenshots/media-library-global.png" alt="Global media" loading="lazy" /><figcaption>Global media — what the instance provides to every host, credited</figcaption></figure>
             <figure class="slide"><img src="screenshots/console-lobby.png" alt="Host console — lobby" loading="lazy" /><figcaption>Host console — the room’s lobby: PIN, QR code, players in the room or remote and who is ready, the game’s sounds</figcaption></figure>
-            <figure class="slide"><img src="screenshots/participant-access.png" alt="Who can join" loading="lazy" /><figcaption>Who can join — with an account, or with the PIN and a nickname alone; chosen at launch, or remembered</figcaption></figure>
             <figure class="slide"><img src="screenshots/console-lobby-access.png" alt="Close the room to newcomers" loading="lazy" /><figcaption>Close the room — once everyone is in, nobody else joins, even with the PIN</figcaption></figure>
             <figure class="slide"><img src="screenshots/projection-lobby.png" alt="Projection — lobby" loading="lazy" /><figcaption>Projection — the big screen while players join and get ready</figcaption></figure>
             <figure class="slide"><img src="screenshots/join.png" alt="Join by PIN, nickname and avatar, in the room or remote" loading="lazy" /><figcaption>Join — PIN or QR code, nickname &amp; Multiavatar avatar, in the room or remote, no account</figcaption></figure>
             <figure class="slide"><img src="screenshots/projection-slide.png" alt="Content slide" loading="lazy" /><figcaption>Content slide — headings, text, images in columns, backgrounds</figcaption></figure>
-            <figure class="slide"><img src="screenshots/types/slide-background-sound.png" alt="Slide with a background and a sound" loading="lazy" /><figcaption>Slide — a full-cover picture and a sound</figcaption></figure>
+            <figure class="slide"><img src="screenshots/types/slide-gradient.png" alt="Slide with a picture" loading="lazy" /><figcaption>Slides — a picture and its text on a gradient, between the questions</figcaption></figure>
             <figure class="slide"><img src="screenshots/console-slide.png" alt="Host console — slide" loading="lazy" /><figcaption>Host console — a slide with its sound: the quiz outline, the transport</figcaption></figure>
             <figure class="slide"><img src="screenshots/projection-question.png" alt="Projection — question" loading="lazy" /><figcaption>Projection — live question, the answers in the grid every phone shares</figcaption></figure>
             <figure class="slide"><img src="screenshots/projection-media.png" alt="Projection — question with a picture" loading="lazy" /><figcaption>Projection — a question with its picture on the big screen</figcaption></figure>
@@ -308,7 +308,6 @@
             <figure class="slide"><img src="screenshots/console-reveal.png" alt="Host console — reveal" loading="lazy" /><figcaption>Host console — the quiz outline to look back over, next question</figcaption></figure>
             <figure class="slide"><img src="screenshots/player-end.png" alt="Player — ordering and feedback" loading="lazy" /><figcaption>Player — drag-and-drop ordering, rate the quiz at the end</figcaption></figure>
             <figure class="slide"><img src="screenshots/projection-podium.png" alt="Podium" loading="lazy" /><figcaption>Podium — final results on the big screen</figcaption></figure>
-            <figure class="slide"><img src="screenshots/console-room-next.png" alt="Host console — the next quiz" loading="lazy" /><figcaption>The next quiz — the same room, the same players, the standings carried over</figcaption></figure>
             <figure class="slide"><img src="screenshots/admin-media.png" alt="Instance media" loading="lazy" /><figcaption>Instance media — disk, clean-up, every file as a grid or a list, the global media</figcaption></figure>
             <figure class="slide"><img src="screenshots/admin-media-preview.png" alt="Preview of a sound" loading="lazy" /><figcaption>Preview — a sound on its waveform, with its format, length, owners and usages</figcaption></figure>
             <figure class="slide"><img src="screenshots/preferences.png" alt="My account" loading="lazy" /><figcaption>My account — who you are, what you can do, and the choice made once for every launch</figcaption></figure>
