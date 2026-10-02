@@ -1,0 +1,168 @@
+---
+import Page from '../../../layouts/Page.astro';
+import { DEMO_URL, DOCKER_HUB_URL } from '../../../site';
+
+const faq = [
+  {
+    q: 'How many players can join one room?',
+    a: '<p>QuizDock sets no cap per room. One room has been measured with 1500 simulated players: answers acknowledged in 61 ms at p95, none lost, with the backend on one 2.1 GHz core and the players simulated on the same machine, without media or real Wi-Fi (2026-09-27). Beyond 1500, nothing was measured. See <a href="/real-time/">Real time</a>.</p>',
+  },
+  {
+    q: 'Do participants need to install an app?',
+    a: '<p>No. Participants open the invitation address in their phone’s browser, or scan the QR code, then type a nickname. Without an identity provider, nobody needs an account. See <a href="/docs/host/invite-players/">Invite players</a>.</p>',
+  },
+  {
+    q: 'Does it work on iPhone?',
+    a: '<p>Video and sound playback has been tested on Chromium-based browsers only; iPhone Safari has not been tested. In the room, by default, phones show the image and play no video: the projection carries the media.</p>',
+  },
+  {
+    q: 'Can several servers share the load of a big event?',
+    a: '<p>No. One QuizDock instance runs on one server; live state and timers are not spread over several processes. See <a href="/docs/operator/sizing/">Sizing</a>.</p>',
+  },
+  {
+    q: 'What happens if the host’s laptop drops off the network?',
+    a: '<p>After 5 seconds the quiz pauses, its clock stopped, and the projection shows “Waiting for the host…”. The host has 2 minutes to come back; the quiz then resumes with the time that was left. After that the game ends and is archived as interrupted.</p>',
+  },
+  {
+    q: 'Can the public join an instance that uses an identity provider?',
+    a: '<p>Yes, if the operator allows open access, for instance by answering “The public, a large event” in the setup wizard. The host then chooses <b>Open access</b> at launch: the PIN and a nickname are enough, and no individual result is kept. See <a href="/docs/admin/presets/">Presets</a>.</p>',
+  },
+];
+---
+
+<Page
+  title="QuizDock for events"
+  description="A live quiz for a full hall: measured capacity with its conditions, the big screen and sound, remote participants, room control, several rounds under one PIN."
+  faq={faq}
+>
+  <section class="page-hero">
+    <h1>A live quiz for a full hall, on the big screen</h1>
+    <p class="lede">
+      Hundreds of phones on one Wi-Fi, a projector, a sound system, perhaps people following from elsewhere.
+      QuizDock’s server sets every start and deadline, the projection carries the sound, and one room has been
+      measured with 1500 simulated players. Here is what holds, under which conditions, and what has not been
+      tested.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>Will one room hold a thousand players?</h2>
+      <p>
+        It has held 1500 simulated players without losing an answer. Measured on 2026-09-27: backend on one
+        2.1 GHz core, players simulated on the same machine over loopback, no media, every player answering a
+        single-choice question within 3 seconds, one run per step.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Players in one room</th><th>Answer acknowledged, p95</th></tr></thead>
+          <tbody>
+            <tr><td class="num">300</td><td class="num">7 ms</td></tr>
+            <tr><td class="num">700</td><td class="num">18 ms</td></tr>
+            <tr><td class="num">1000</td><td class="num">29 ms</td></tr>
+            <tr><td class="num">1500</td><td class="num">61 ms</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        At 1000 to 1500 players, each question reached every player within 60 to 80 ms of the others (p95).
+        Not measured: media, a real Wi-Fi, more than 1500 players. QuizDock runs on one server, with no
+        spreading over several. The sizing guide suggests 2 vCPU and 4 GB up to 1500 players, a figure deduced
+        from these runs. See <a href="/real-time/">Real time</a> and <a href="/docs/operator/sizing/">Sizing</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="prose">
+      <h2>Will the phones reach the server on the venue’s Wi-Fi?</h2>
+      <p>
+        Test it before the doors open. In the setup wizard, the <b>Address</b> step has <b>Test from a phone</b>:
+        scan the code with a phone on the guests’ Wi-Fi or on mobile data, as a participant would; a tested
+        address is offered first. A local address (192.168…, 10…) only answers phones on that same network,
+        and many guest networks keep devices from seeing each other: for a public, a public address with
+        HTTPS is the dependable choice.
+      </p>
+      <p>
+        In the lobby, the <b>Invitation address</b> sets what the QR code and the link open; it is fixed once
+        the quiz starts. Failed PIN entries are limited to 30 a minute per address: phones that leave through
+        one shared address share that limit. See <a href="/docs/operator/networking/">Networking</a> and
+        <a href="/docs/operator/reverse-proxy/">Reverse proxy</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>The big screen and the sound system</h2>
+      <p>
+        <b>Projection window</b> opens the big screen, and <b>Fullscreen</b> fills it. Browsers allow sound
+        only after a click, so the projection asks for one: <b>Turn sound on</b>. The console stays silent.
+        The <b>Room sound</b> panel adds effects, all off in a new room: <b>Answer received</b>,
+        <b>Question start</b>, <b>Time’s up</b>, <b>Countdown</b>, and <b>Music</b> while players answer.
+      </p>
+      <p>
+        Video and sound are fetched one question ahead and started on the server’s clock. If a device is still
+        loading, the console waits (10 seconds by default, 20 with the wizard’s “The public, a large event”)
+        and offers <b>Start anyway</b>. See <a href="/media/">Media</a> and
+        <a href="/docs/host/sound-and-projection/">Sound and projection</a>.
+      </p>
+    </div>
+    <div class="shots">
+      <figure><img src="/screenshots/projection-question.png" alt="The big screen during a question, with the timer and the answers" /><figcaption>The big screen during a question.</figcaption></figure>
+      <figure><img src="/screenshots/projection-podium.png" alt="The big screen showing the podium at the end of a quiz" /><figcaption>The podium.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="prose">
+      <h2>How do I keep control of the room?</h2>
+      <ul>
+        <li><b>Quiz pace</b>: <b>Manual</b>, or <b>Autoplay</b>, which moves to the next question after each result; each question has its own reveal delay, and slides advance after 5 seconds by default.</li>
+        <li><b>Pause</b> (the space bar) stops the clock; the time buttons add or remove 1 or 5 seconds.</li>
+        <li><b>Close the room to new participants</b>, before or during the quiz: nobody else gets in, even with the PIN, and those already in come back after a lost connection.</li>
+        <li><b>Ban</b> a player from the list, for 1 to 1440 minutes (5 by default): removed at once, and kept out under that nickname. Close the room as well to keep them from returning under another.</li>
+      </ul>
+      <p>See <a href="/docs/host/start-a-room/">Start a room</a>.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>Several rounds, one PIN, one podium</h2>
+      <p>
+        After a quiz, <b>Next quiz</b> starts another round in the same room: players stay, nobody types the
+        PIN again. Each round scores from zero; between rounds the projection shows the <b>Room standings</b>,
+        and the evening ends on the <b>Room podium</b>. Afterwards, History keeps the room’s standings and
+        their CSV export only if every round had <b>Personalised tracking</b> on, which open access rules out.
+        See <a href="/docs/host/reports-and-history/">Reports and history</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="prose">
+      <h2>What about people following from elsewhere?</h2>
+      <p>
+        This part is experimental. When a quiz has sound or video, each player is asked “Where are you playing
+        from?”: <b>In the room</b> or <b>Remote</b>. Remote players receive the question, its video and its
+        sound on their own device; the console marks them <b>Participating remotely</b>, and
+        <b>Share the projection</b> opens the big screen on a second device. They need an address they can
+        reach from outside, so a public one.
+      </p>
+      <p>
+        Media has been tested on Chromium-based browsers only, not on iPhone. Answers are timed when they reach
+        the server, with no compensation for a slow connection: a distant player on a slow link loses some
+        speed points. See <a href="/docs/host/remote-participants/">Remote participants</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="next">
+      <a class="btn btn-primary" href={DEMO_URL} target="_blank" rel="noopener">Try the live demo ↗</a>
+      <a class="btn btn-ghost" href={DOCKER_HUB_URL} target="_blank" rel="noopener">Get it on Docker Hub ↗</a>
+      <a class="btn btn-ghost" href="/docs/host/getting-started/">Getting started as a host</a>
+    </div>
+  </section>
+</Page>

@@ -1,37 +1,29 @@
 # quizdock.github.io
 
-Landing page for **QuizDock** — an open-source, self-hosted live quiz platform.
+The website of **QuizDock**, an open-source live quiz platform you run on your
+own infrastructure: the product pages and the Documentation.
 
 🔗 **Live site:** https://quizdock.github.io
-📦 **Code:** https://github.com/quizdock/quiz-dock
 
-## What this repo is
+## How it is built
 
-A single static page (`index.html` + `styles.css`) — no build step, no framework.
-Deployed to GitHub Pages by the workflow in `.github/workflows/pages.yml`
-(`upload-pages-artifact` → `deploy-pages`).
-
-## Enabling Pages (one-time)
-
-In repo **Settings → Pages → Build and deployment**, set **Source: GitHub Actions**.
-Every push to `main` then publishes automatically.
+- [Astro](https://astro.build) for the product pages (`src/pages/`), and
+  [Starlight](https://starlight.astro.build) for the Documentation
+  (`src/content/docs/docs/`, served under `/docs/`).
+- Two pages are generated from QuizDock's code at its **latest release**:
+  `scripts/release-data.mjs` fetches `schema/settings.json` (the environment
+  reference) and `schema/quiz-format-guide.md` from the release tag before each
+  build, into `src/generated/` (not committed).
+- `.github/workflows/deploy.yml` builds and publishes to GitHub Pages on every
+  push to `main` and once a day, so a new release reaches those pages on its own.
 
 ## Local preview
 
-No tooling required — open `index.html`, or serve the folder:
+Only Docker is needed: `bin/npm` runs npm in a `node:24` container.
 
-```bash
-python3 -m http.server 8000   # then open http://localhost:8000
+```sh
+./bin/npm install
+./bin/npm run dev                                # http://localhost:4321, latest release
+QUIZDOCK_DATA_DIR=../quiz-dock ./bin/npm run dev # generated pages from a quiz-dock checkout
+./bin/npm run build                              # dist/
 ```
-
-## Editing
-
-- Copy / sections live in `index.html`.
-- Theme tokens (colors, radius, fonts) are CSS variables at the top of `styles.css`.
-- Brand mark is inline SVG (cyan `#22d3ee`); favicon is `favicon.svg`.
-
-## TODO
-
-- [ ] Add a license badge once the code repo's license is set.
-- [ ] Point links to `quizdock/quiz-dock` if the code repo is transferred to the org.
-- [ ] Optional custom domain (`quizdock.io` / `.fr`) via a `CNAME` file + DNS.

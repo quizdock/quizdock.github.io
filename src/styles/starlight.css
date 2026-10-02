@@ -1,0 +1,11 @@
+/* The Documentation in QuizDock's indigo (the app's --primary, hue 264). */
+:root {
+  --sl-color-accent-low: oklch(0.28 0.1 264);
+  --sl-color-accent: oklch(0.68 0.17 264);
+  --sl-color-accent-high: oklch(0.9 0.05 264);
+}
+:root[data-theme='light'] {
+  --sl-color-accent-low: oklch(0.93 0.04 264);
+  --sl-color-accent: oklch(0.55 0.22 264);
+  --sl-color-accent-high: oklch(0.3 0.12 264);
+}

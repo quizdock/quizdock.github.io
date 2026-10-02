@@ -1,0 +1,160 @@
+---
+import Page from '../../layouts/Page.astro';
+import { DEMO_URL, DOCKER_HUB_URL } from '../../site';
+
+const faq = [
+  {
+    q: 'Is QuizDock GDPR compliant?',
+    a: `<p>Software alone cannot be. QuizDock is designed to support privacy-conscious, data-minimised deployments: data stays in your database, the host chooses at launch what is kept per participant, and participants are told. Compliance depends on how the organisation running it uses it; that organisation is the data controller. Some tools are missing, such as deleting an account.</p>`,
+  },
+  {
+    q: 'Are results kept by default?',
+    a: `<p>Yes. Individual tracking is on and archiving is ticked by default, so each participant's score and rank are kept with their account or nickname. Every single answer is kept only when the host turns on <b>Record all answers</b>. The host can turn tracking off: then only the group's overall results are kept.</p>`,
+  },
+  {
+    q: 'Can participants play without an account?',
+    a: `<p>Yes. In local mode, the PIN and a nickname are enough. With an identity provider, participants sign in, unless the operator allows open games and the host opens one: then the PIN and a nickname are enough, and nothing is kept per person.</p>`,
+  },
+  {
+    q: 'How long are results kept?',
+    a: `<p>An archived session is marked to be kept 365 days after it ended. This is fixed, not a setting, and nothing is deleted automatically: <code>./quizdock sessions:purge</code>, or <b>Purge old sessions</b> in the administration, deletes the expired ones. Schedule it if you need it to run regularly.</p>`,
+  },
+  {
+    q: 'Can a user ask for their account to be deleted?',
+    a: `<p>Not from the application today. QuizDock has no account deletion or anonymisation, and no way to delete a single archived session. Neither the administration nor the command line offers it.</p>`,
+  },
+  {
+    q: 'Does QuizDock use cookies?',
+    a: `<p>Only with an identity provider: two cookies, HttpOnly and SameSite=Lax, for the sign-in. No tracking or advertising cookies, in any mode. Other preferences stay in the browser's own storage.</p>`,
+  },
+];
+---
+
+<Page
+  title="Privacy"
+  description="What QuizDock stores and where, what the host chooses at launch, what participants are told, how long results are kept, and what is not built yet."
+  faq={faq}
+>
+  <section class="page-hero">
+    <h1>What is kept, and who decides.</h1>
+    <p class="lede">
+      QuizDock is designed to support privacy-conscious, data-minimised deployments. Everything stays in your database,
+      the host decides at launch what is kept about each participant, and participants are told.
+      The organisation that runs the instance is the data controller.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>What does QuizDock store, and where?</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Where</th><th>What</th></tr></thead>
+        <tbody>
+          <tr><td>PostgreSQL</td><td><b>Accounts</b>: the identifier from the provider (or a local name), display name, e-mail if the provider gives one, roles, language, preferences.<br /><b>Archived sessions</b>: host, PIN, room, number of players, success rate, a copy of the quiz, the host's privacy choices, the date to keep it until.<br /><b>Results per participant</b>: nickname, score, rank, counts, average time, best streak, linked to the account if there is one.<br /><b>Each answer</b>: only with <b>Record all answers</b>.<br /><b>Feedback</b>: nickname, a 1 to 5 rating, an optional comment.<br /><b>Audit</b>: who did what in the administration, with the client's IP address.</td></tr>
+          <tr><td>Redis</td><td>Live games (4 hours), sign-in sessions (forgotten after 24 hours unused), the sign-in handshake (10 minutes), a count of wrong PINs per address (60 seconds).</td></tr>
+          <tr><td>Disk</td><td>Uploaded media and shared templates.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="prose">
+      <h2>What does the host choose before a game?</h2>
+      <p>In the lobby, under <b>Before starting</b>. The choices are fixed once the game starts.</p>
+      <ul>
+        <li><b>Personalised tracking</b>, on by default. On, results are recorded under each participant's account or nickname. Off, no individual result is kept, only the group's overall results. Unavailable in open access.</li>
+        <li><b>Record all answers</b>, off by default. Keeps every answer of every participant; it needs tracking on. The app warns that this is personal data: inform participants, purge afterwards. An author can also turn it on for the next time a ready quiz is played.</li>
+        <li><b>Let participants pick their display name</b>, with an identity provider. Results stay attached to the account either way: a chosen name is not anonymity.</li>
+        <li><b>Archive this quiz's results</b>, ticked by default when the quiz ends. Unticked, nothing of the session is archived.</li>
+      </ul>
+      <h2>What are participants told?</h2>
+      <p>The player page shows the notice that matches the host's choices, one of five:</p>
+      <ul>
+        <li>“Your individual results are not recorded — only the group’s overall results are.”</li>
+        <li>“Your taking part and your score are recorded under your account.”</li>
+        <li>“Your taking part and your score are recorded under your account — and every one of your answers is kept.”</li>
+        <li>“Your taking part and your score are recorded with each quiz's results, under your nickname.”</li>
+        <li>“Your taking part and your score are recorded with each quiz's results, under your nickname — and every one of your answers is kept.”</li>
+      </ul>
+      <p>The application has no privacy-policy page: the operator publishes their own.</p>
+      <p><a class="more-link" href="/docs/host/start-a-room/">Start a room →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>How long is data kept?</h2>
+      <ul>
+        <li><b>Archived sessions</b>: marked to be kept 365 days after they ended. Fixed, not configurable. Deleted only when someone runs <code>./quizdock sessions:purge</code> (<code>--dry-run</code> to preview) or <b>Purge old sessions</b> in <b>Administration › Quizzes</b>; schedule it with cron if needed. The statistics history goes with them.</li>
+        <li><b>Feedback</b> stays with its quiz. <b>The audit</b> is never deleted.</li>
+        <li><b>Unused media</b> are deleted by the hourly clean-up after 24 hours.</li>
+        <li><b>Live games</b> expire from Redis after 4 hours.</li>
+      </ul>
+      <p><a class="more-link" href="/docs/admin/privacy-and-retention/">Privacy and retention for administrators →</a></p>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="prose">
+      <h2>Do participants need an account?</h2>
+      <p>
+        In local mode, no: the PIN and a nickname of 2 to 20 characters. With an identity provider, every participant signs
+        in, unless the operator sets <code>ALLOW_ANONYMOUS_PARTICIPANTS=true</code> and the host chooses <b>Open access</b>
+        at launch: then the PIN and a nickname are enough, and personal tracking is off.
+      </p>
+      <h2>What does the browser keep?</h2>
+      <p>
+        <b>Cookies</b>: with an identity provider only, two, HttpOnly and SameSite=Lax, for the sign-in. No tracking or
+        advertising cookies in any mode.
+      </p>
+      <p>
+        <b>Browser storage</b>: interface preferences, the name or nickname and avatar, a device identifier, sound levels,
+        the reconnection token, unsaved quiz edits, which quizzes were already rated, the last invitation address. The
+        administration and setup tokens are kept for the open tab only.
+      </p>
+      <p>
+        <b>Content Security Policy</b>: scripts, styles, fonts and connections come from the instance only, and no frame is
+        allowed. So there are no analytics, no CDN, no web fonts, no embeds; text uses the system's fonts. Two exceptions,
+        both images: a picture in a quiz's Markdown may come from any <code>https</code> address, and so may a logo set
+        with <code>APP_LOGO_URL</code>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>Does the server send data anywhere?</h2>
+      <p>
+        One request is on by default: the update check asks <code>api.github.com</code> for the latest release, at most
+        once a day. GitHub sees the server's IP address and version, nothing else; <code>UPDATE_CHECK=false</code> turns it
+        off. The community catalogue is off by default and sends no identity, quiz or result. With an identity provider,
+        the server talks to it. There is no telemetry, no e-mail and no webhook.
+      </p>
+      <p><a class="more-link" href="/self-hosted/">Every outgoing request →</a></p>
+      <h2>What is not built yet?</h2>
+      <ul>
+        <li>Deleting or anonymising an account.</li>
+        <li>Deleting a single archived session.</li>
+        <li>A retention period you can configure, or an automatic purge.</li>
+        <li>A privacy-policy page in the application.</li>
+      </ul>
+      <h2>What is the operator responsible for?</h2>
+      <p>
+        The organisation running the instance is the data controller. It decides the legal basis, informs participants
+        and publishes its privacy notice, tells hosts what they may record, schedules the purge, protects the backups (they
+        contain the same data) and answers requests from the people concerned.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="next">
+      <a class="btn btn-primary" href={DEMO_URL} target="_blank" rel="noopener">Try the live demo ↗</a>
+      <a class="btn btn-ghost" href={DOCKER_HUB_URL} target="_blank" rel="noopener">Get it on Docker Hub ↗</a>
+      <a class="btn btn-ghost" href="/docs/admin/privacy-and-retention/">Privacy and retention</a>
+    </div>
+  </section>
+</Page>

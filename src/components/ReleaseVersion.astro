@@ -1,0 +1,6 @@
+---
+/** The QuizDock release the generated pages were read from. */
+import release from '../generated/release.json';
+---
+
+{release.version === 'local' ? 'a local checkout' : `QuizDock ${release.version}`}

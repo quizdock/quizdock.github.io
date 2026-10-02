@@ -1,0 +1,210 @@
+---
+import Page from '../../layouts/Page.astro';
+import { DEMO_URL, DOCKER_HUB_URL } from '../../site';
+
+const faq = [
+  {
+    q: 'Do I need an account to try QuizDock?',
+    a: `<p>No. The <a href="${DEMO_URL}" target="_blank" rel="noopener">live demo</a> opens on a shared host account, with uploads off and everything wiped every hour. On your own machine, the standalone image starts in local mode: the host types a name to take the host seat, participants join with the PIN and a nickname.</p>`,
+  },
+  {
+    q: 'Do I need an identity provider?',
+    a: `<p>No. Local mode (<code>AUTH_MODE=none</code>) is the default and needs none. It suits trusted networks: a name is not a password, so whoever types the host's name takes the seat back. When each person needs their own account, connect an OpenID Connect provider.</p>`,
+  },
+  {
+    q: 'Can I start locally and configure OIDC later?',
+    a: `<p>Yes, with the same image. Set <code>AUTH_MODE=oidc</code> and your provider's issuer and client in <code>.env</code>, then restart. Quizzes made in local mode stay in the database under their local account: an administrator hands each one over to its author's new account, from <b>Administration › Quizzes</b> (<b>Hand over</b>) or with <code>./quizdock quiz:transfer</code>. Nothing moves them automatically.</p>`,
+  },
+  {
+    q: 'How do upgrades work?',
+    a: `<p>One command on the server, in the instance's folder: <code>./quizdock upgrade X.Y.Z</code>. It backs up, pulls the image, restarts with the database migrations, waits for the health check and runs <code>doctor</code>. There is no rollback: to go back, restore the backup it took.</p>`,
+  },
+  {
+    q: 'Can QuizDock configure itself from the browser?',
+    a: `<p>Mostly. The setup wizard and the <b>Settings</b> page change the settings of levels C2 to C4: access, limits, pace, wording, look. The critical ones (database, Redis, authentication mode, ports) stay in <code>.env</code> and need a restart. Outside the wizard, web changes need <code>ADMIN_WEB_SCOPE=write</code>, and in local mode an <code>ADMIN_TOKEN</code>.</p>`,
+  },
+  {
+    q: 'Is Docker mandatory?',
+    a: `<p>In practice, yes. Every documented install uses Docker: the standalone image, or Compose through the <code>./quizdock</code> script, which needs Docker with its compose plugin and <code>curl</code>. There is no documented install without Docker. Docker Desktop on a laptop works; set <code>HOST_LAN_IPS</code> so that phones are offered the right address.</p>`,
+  },
+];
+---
+
+<Page
+  title="Plug-and-play"
+  description="Start QuizDock without an identity provider, set it up in the browser in three questions, and operate it with one script: status, doctor, backup, upgrade."
+  faq={faq}
+>
+  <section class="page-hero">
+    <h1>Easy to try. Easy to run. Easy to operate.</h1>
+    <p class="lede">
+      QuizDock starts without an identity provider, sets itself up from the browser, comes with sample quizzes,
+      and is kept running with one script. When you need single sign-on, the same image switches to OpenID Connect.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>Can I start without an identity provider?</h2>
+      <p>
+        Yes. Local mode is the default. A host opens the <b>Host area</b>, types <b>Your name</b>, chooses how long to
+        <b>Keep the seat</b> (1, 4 or 24 hours, or <b>Never (until I log out)</b>; 4 hours by default) and clicks
+        <b>Take the host seat</b>. Participants join with the six-digit PIN and a nickname. Nobody creates an account.
+      </p>
+      <p>
+        There is one host seat at a time. The name is the key: typing it again on any device signs back in as that host.
+        Local mode is therefore for trusted networks, such as a classroom, a team or a home. It is not a security boundary.
+      </p>
+      <p><a class="more-link" href="/docs/host/getting-started/">Getting started as a host →</a></p>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="prose">
+      <h2>What does the setup wizard do?</h2>
+      <p>
+        A fresh instance says <b>This instance is not set up yet.</b> and offers <b>Set it up</b>. The wizard asks for a
+        setup token first: whoever reaches a new instance must not own it. The token is written in the instance's logs at
+        start (<code>./quizdock logs</code>). It works once and expires 24 hours after it was created.
+      </p>
+      <p>Then eight steps, each one changeable later:</p>
+      <ul>
+        <li><b>Usage</b>: three questions that set several settings at once (below).</li>
+        <li><b>Health</b>: the database, Redis, the migrations, the folders, the critical variables.</li>
+        <li><b>Identity</b>: the name, the language, the logo, where the feedback links lead.</li>
+        <li><b>Address</b>: the addresses offered to participants, with a test from a phone.</li>
+        <li><b>Access</b>: who may enter, and who administers the instance.</li>
+        <li><b>Limits &amp; pace</b>, <b>Content</b> (the sample quizzes), <b>Summary</b>.</li>
+      </ul>
+      <p>
+        <b>Finish the setup</b> closes the wizard for good. With an identity provider, finishing needs a signed-in
+        administrator. An automated deployment skips the wizard with <code>./quizdock qd setup.complete</code>.
+      </p>
+      <p><a class="more-link" href="/docs/admin/overview/">The administration →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>What do the three setup questions set?</h2>
+      <p>
+        The <b>Usage</b> step shows <b>What these answers set:</b> before you click <b>Apply</b>. A variable locked by the
+        operator (<code>ADMIN_LOCK</code>) is left alone. Each change is written to the audit.
+      </p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Question</th><th>Answer</th><th>What it sets</th></tr></thead>
+        <tbody>
+          <tr><td rowspan="2"><b>Does this instance reach the Internet?</b></td><td><b>Yes</b></td><td>Update check on; the editor links to seven free media libraries.</td></tr>
+          <tr><td><b>No</b></td><td><code>UPDATE_CHECK=false</code>, <code>MEDIA_LIBRARY_LINKS=none</code>.</td></tr>
+          <tr><td rowspan="3"><b>Who plays?</b></td><td><b>Colleagues, friends</b> · <b>A class, a training</b></td><td>The standard values: hosts wait up to 10 s for media to load; with an identity provider, every participant signs in.</td></tr>
+          <tr><td><b>The public, a large event</b></td><td>Waits up to 20 s for media (<code>GAME_MEDIA_WAIT_S</code>). With an identity provider, lets hosts open a game to PIN and nickname (<code>ALLOW_ANONYMOUS_PARTICIPANTS=true</code>).</td></tr>
+          <tr><td><b>A bit of everything, other</b></td><td>Nothing.</td></tr>
+          <tr><td rowspan="2"><b>Do some participants need it easier?</b></td><td><b>No</b></td><td>3 s to read before the timer, 1 s pause once everyone answered, animations on.</td></tr>
+          <tr><td><b>Yes</b></td><td>6 s to read, 2 s pause, animations off (<code>LIVE_MOTION=off</code>).</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prose">
+      <p>
+        The same presets apply from a shell, for instance <code>./quizdock qd presets.apply --internet=offline</code>.
+      </p>
+      <p><a class="more-link" href="/docs/admin/presets/">Presets in detail →</a></p>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="prose">
+      <h2>Is there something to play right away?</h2>
+      <p>
+        Yes: three sample quizzes, about France, Taiwan and Türkiye, with their pictures and sounds, ready to present.
+        Add them to a host's quizzes at the wizard's <b>Content</b> step, from <b>Administration › Quizzes</b>
+        (<b>Add the sample quizzes</b>), from an empty <b>My quizzes</b> page (<b>Load the sample quizzes</b>), or with
+        <code>./quizdock samples:load</code> followed by the account.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>Can I change the configuration from the browser?</h2>
+      <p>
+        Yes, within limits the operator sets. Every setting has a level, shown next to it on <b>Administration › Settings</b>:
+      </p>
+      <ul>
+        <li><b>C1</b>, critical: start-up, data or security. Shown, never changed from the web.</li>
+        <li><b>C2</b>, high: who may enter, how much may be stored. Each change confirmed.</li>
+        <li><b>C3</b>, normal: how the instance behaves.</li>
+        <li><b>C4</b>, cosmetic: look and wording.</li>
+      </ul>
+      <p>
+        By default <code>ADMIN_WEB_SCOPE=read</code>: the page shows every value and where it comes from (default,
+        <code>.env</code>, or changed here) and changes nothing. With <code>write</code>, administrators change C2 to C4.
+        <code>ADMIN_LOCK</code> names variables the web never changes. In local mode, a change also needs the
+        <code>ADMIN_TOKEN</code> set in <code>.env</code>. The wizard is the exception: it sets C2 to C4 whatever the scope,
+        never a locked or critical one.
+ A value changed here outranks <code>.env</code>;
+        <b>Take everything back</b> returns to it.
+      </p>
+    </div>
+    <div class="shots">
+      <figure>
+        <img src="/screenshots/admin-settings.png" alt="The Settings page of the administration: a list of settings by category, and the selected one with its value, level C4, when it applies and its help" />
+        <figcaption>Each setting with its value, its source, its level and when it applies.</figcaption>
+      </figure>
+    </div>
+    <div class="prose"><p><a class="more-link" href="/docs/admin/settings/">Settings in detail →</a></p></div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="prose">
+      <h2>How do I keep it running?</h2>
+      <p>With one script, on the server, in the instance's folder:</p>
+      <pre>./quizdock status    # containers, health, version
+./quizdock doctor    # environment, database, migrations, Redis, media, OIDC
+./quizdock backup    # database, media, shared templates, .env
+./quizdock restore ./backups/quizdock-YYYYMMDD-HHMMSS
+./quizdock upgrade X.Y.Z</pre>
+      <p>
+        <code>backup</code> writes a dated folder under <code>./backups/</code>; it does not schedule itself, and it leaves
+        out an optional <code>branding/</code> folder. <code>upgrade</code> backs up, pulls, restarts with the migrations,
+        waits for the health check and runs <code>doctor</code>. There is no rollback: going back means restoring the
+        database and the media from the same backup.
+      </p>
+      <p>
+        When a newer stable release is out, the administration shows <b>QuizDock X.Y.Z is available.</b> with the command
+        to run and a link to the release notes. It installs nothing; <b>Hide until the next version</b> dismisses it.
+        <code>./quizdock status</code> says it too. The server asks GitHub at most once a day; <code>UPDATE_CHECK=false</code>
+        turns this off.
+      </p>
+      <p><a class="more-link" href="/docs/operator/cli/">The operator script →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>Can I move to single sign-on later?</h2>
+      <p>
+        Yes, without changing image. Set <code>AUTH_MODE=oidc</code>, <code>OIDC_ISSUER</code> and
+        <code>OIDC_CLIENT_ID</code> in <code>.env</code> and restart. Hosts then need the <code>host</code> role, from the
+        provider's token or granted by an administrator. Participants sign in, unless the operator allows open games.
+      </p>
+      <p>
+        Quizzes created in local mode belong to local accounts, which nobody signs in to under OIDC. Nothing moves them
+        automatically. Once the author has signed in with their new account, an administrator hands each quiz over to it:
+        <b>Administration › Quizzes</b>, <b>Hand over</b>, or <code>./quizdock quiz:transfer</code> with the quiz and the
+        account. The media only that quiz uses, and its history, follow it.
+      </p>
+      <p><a class="more-link" href="/docs/operator/oidc/">Connect an identity provider →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="next">
+      <a class="btn btn-primary" href={DEMO_URL} target="_blank" rel="noopener">Try the live demo ↗</a>
+      <a class="btn btn-ghost" href={DOCKER_HUB_URL} target="_blank" rel="noopener">Get it on Docker Hub ↗</a>
+      <a class="btn btn-ghost" href="/docs/operator/install/">Install an instance</a>
+    </div>
+  </section>
+</Page>

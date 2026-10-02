@@ -735,3 +735,69 @@ code {
     display: none;
   }
 }
+
+/* ---------- New site: menus, value cards, proof, audiences, paths, FAQ ---------- */
+.nav-links details { position: relative; }
+.nav-links summary { cursor: pointer; list-style: none; }
+.nav-links summary::-webkit-details-marker { display: none; }
+.menu { position: absolute; top: 2rem; left: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.5rem; min-width: 15rem; display: grid; gap: 0.1rem; box-shadow: 0 8px 24px oklch(0 0 0 / 0.08); z-index: 20; }
+.menu a { padding: 0.4rem 0.6rem; border-radius: 0.5rem; }
+.menu a:hover { background: var(--bg-soft); }
+.menu small { display: block; color: var(--muted); font-size: 0.78rem; }
+.values { display: grid; gap: 1.1rem; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); margin-top: 2rem; }
+.values .card { display: flex; flex-direction: column; gap: 0.5rem; }
+.values .card p { margin: 0; color: var(--muted); }
+.more-link { color: var(--primary); font-weight: 600; margin-top: auto; }
+.fine { font-size: 0.8rem; color: var(--muted); }
+.shots { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-top: 1.5rem; }
+.shots figure { margin: 0; }
+.shots img { width: 100%; border: 1px solid var(--border); border-radius: var(--radius); display: block; }
+.shots figcaption { font-size: 0.85rem; color: var(--muted); margin-top: 0.4rem; }
+.proof { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: 1.5rem; }
+.proof div { border-left: 3px solid var(--primary); padding: 0.2rem 0 0.2rem 0.9rem; }
+.proof b { display: block; }
+.proof span { color: var(--muted); font-size: 0.92rem; }
+.who { display: grid; gap: 0.8rem; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-top: 1.5rem; }
+.who a { border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; display: flex; flex-direction: column; gap: 0.3rem; background: var(--surface); }
+.who a:hover { border-color: var(--primary); }
+.who span { color: var(--muted); font-size: 0.9rem; }
+.caps { display: grid; gap: 1.1rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 1.5rem; }
+.caps h3 { font-size: 1.05rem; margin-bottom: 0.3rem; }
+.caps p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+.paths { display: grid; gap: 1.1rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 1.5rem; }
+.paths .card { display: flex; flex-direction: column; gap: 0.6rem; }
+.paths pre { background: oklch(0.18 0.02 264); color: oklch(0.92 0.01 264); border-radius: 0.6rem; padding: 0.8rem 1rem; overflow-x: auto; font-family: var(--mono); font-size: 0.8rem; margin: 0; }
+.paths p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+.oss { display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: center; justify-content: space-between; }
+.oss p { margin: 0; max-width: 40rem; }
+.faq details { border-bottom: 1px solid var(--border); padding: 0.9rem 0; }
+.faq summary { cursor: pointer; font-weight: 600; }
+.faq details > div { color: var(--muted); margin-top: 0.5rem; max-width: 46rem; }
+.faq details > div p { margin: 0.4rem 0; }
+.footer .source { font-size: 0.8rem; opacity: 0.75; }
+.page-hero { max-width: var(--maxw); margin: 0 auto; padding: 3.5rem 1.25rem 1rem; }
+.page-hero .lede { max-width: 46rem; }
+.prose { max-width: 46rem; }
+.prose h2 { margin-top: 2.2rem; }
+.prose ul { padding-left: 1.2rem; }
+.prose li { margin: 0.3rem 0; }
+.table-wrap { overflow-x: auto; }
+.table-wrap table { border-collapse: collapse; font-size: 0.92rem; min-width: 32rem; }
+.table-wrap th, .table-wrap td { border-bottom: 1px solid var(--border); padding: 0.45rem 0.7rem; text-align: left; vertical-align: top; }
+.table-wrap td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.next { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+/* Running text: a centred column, left-aligned, links that look like links. */
+.prose { margin-inline: auto; }
+.page-hero .lede, .page-hero h1 { margin-inline: 0; }
+.prose h2, .prose h3 { text-align: left; }
+.prose h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+.prose ol { padding-left: 1.3rem; }
+.prose ol li { margin: 0.35rem 0; }
+.prose a, .faq details > div a, .table-wrap a, .fine a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prose a:hover, .faq details > div a:hover, .table-wrap a:hover { color: var(--primary-strong); }
+.faq { max-width: 46rem; }
+.faq h2 { text-align: left; }

@@ -1,0 +1,147 @@
+---
+import Page from '../../layouts/Page.astro';
+import { DEMO_URL, DOCKER_HUB_URL } from '../../site';
+
+const faq = [
+  {
+    q: 'Is QuizDock WCAG compliant?',
+    a: `<p>QuizDock makes no conformance claim. It has not been audited or certified, and it is not tested with accessibility tools. This page lists what is built in and what is missing, so that you can judge for your audience.</p>`,
+  },
+  {
+    q: 'Can colour-blind players tell the answers apart?',
+    a: `<p>Every answer carries a shape as well as a colour, on the big screen and on the phones, so no answer is told by colour alone. There is no colour-blind theme: the colours are fixed.</p>`,
+  },
+  {
+    q: 'Can I give one player more time?',
+    a: `<p>Not one player: the time is the same for the whole room. The host can give everyone more: pause, add seconds during a question, or set a longer reading time for the instance. The setup wizard's accessibility answer doubles the reading time.</p>`,
+  },
+  {
+    q: 'Can animations be turned off?',
+    a: `<p>Yes. The operator sets them off for new rooms (<code>LIVE_MOTION=off</code>), the host switches <b>Animations</b> for their room at any time, and a device that asks for reduced motion keeps simple fades only.</p>`,
+  },
+  {
+    q: 'Can QuizDock be used with a keyboard?',
+    a: `<p>Mostly, for the host. The console moves focus with Tab and pauses with the space bar; Escape closes dialogs and menus; lists, and the answers of an ordering question, can be reordered from the keyboard. Keyboard use has not been checked across every screen.</p>`,
+  },
+  {
+    q: 'Does QuizDock support right-to-left languages?',
+    a: `<p>No. The interface exists in six left-to-right languages: English, French, Spanish, Simplified Chinese, Traditional Chinese and Turkish.</p>`,
+  },
+];
+---
+
+<Page
+  title="Accessibility"
+  description="What QuizDock builds in for accessibility, how it is tested, and what is not done yet: no colour-blind theme, no right-to-left, no per-player time, no audit."
+  faq={faq}
+>
+  <section class="page-hero">
+    <h1>Accessibility: what is built, and what is not yet.</h1>
+    <p class="lede">
+      This page is in three parts: what QuizDock implements, how it is tested, and what it does not do.
+      It makes no claim of conformance: QuizDock has not been audited or certified.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>What is implemented?</h2>
+      <h3>Colour and shape on every answer</h3>
+      <p>
+        Each answer position has a fixed colour and shape: red triangle, blue diamond, yellow circle, green square, purple
+        star, orange hexagon, pink heart, teal cross. The shape appears wherever the answer does: the big screen, the phones,
+        the reveal, ordering and image-choice questions.
+      </p>
+    </div>
+    <div class="shots">
+      <figure>
+        <img src="/screenshots/player-play.png" alt="Two phone screens: during a question, four answer tiles each with its colour and shape; at the reveal, the answers listed with their shapes, the right one checked and marked as the player's pick" />
+        <figcaption>The shape follows the answer from the question to the reveal.</figcaption>
+      </figure>
+    </div>
+    <div class="prose">
+      <h3>States shown by a mark, not by colour only</h3>
+      <p>
+        At the reveal, the right answer gets a mark and the answer a player picked gets a check. Wrong answers turn grey but
+        stay readable.
+      </p>
+      <h3>Names for screen readers</h3>
+      <p>
+        Each answer tile on the phone is named by its text, its picture's alt text or its colour, and says whether it is
+        pressed. Media carry alt text; each picture of an image-choice question needs its own (up to 300 characters). Status
+        messages and alerts are announced, loading is announced, focus is visible, and sortable tables say how they are sorted.
+      </p>
+      <h3>Readable backgrounds</h3>
+      <p>
+        On a background image or gradient, the author picks light or dark text and can add an outline around it. Field
+        outlines are designed for a 3:1 contrast; that is a design choice, not a measurement.
+      </p>
+      <h3>Reduced motion</h3>
+      <p>
+        <code>LIVE_MOTION</code> turns the transitions between steps on or off for new rooms. The host switches
+        <b>Animations</b> for their room from the console at any time. A device that asks its system to reduce motion keeps
+        fades only, and CSS animations stop.
+      </p>
+      <h3>Time to read and answer</h3>
+      <ul>
+        <li>A reading time before each timer: 3 s by default, 0 to 10 s, for the whole instance.</li>
+        <li>A pause once everyone has answered: 1 s by default, 0 to 5 s.</li>
+        <li>A time limit per question, 5 to 240 s (20 by default).</li>
+        <li>The host pauses with the space bar and adds or removes 1 or 5 seconds during a question.</li>
+        <li><b>Start the timer when the media ends</b>: listen first, answer after.</li>
+      </ul>
+      <p>
+        In the setup wizard, answering <b>Yes</b> to <b>Do some participants need it easier?</b> sets a 6 s reading time, a
+        2 s pause and no animations.
+      </p>
+      <h3>Keyboard</h3>
+      <p>
+        In the console, Tab moves focus and the space bar pauses or resumes. Escape closes dialogs, zoomed pictures and menus.
+        The editor's lists and the answers of an ordering question can be reordered from the keyboard, and the waveform and
+        playback controls answer to keys.
+      </p>
+      <h3>Languages</h3>
+      <p>
+        Six interface languages, one per instance (<code>APP_LANG</code>): English, French, Spanish, Simplified Chinese,
+        Traditional Chinese, Turkish. Each quiz has its own content language.
+      </p>
+      <p><a class="more-link" href="/docs/admin/presets/">The accessibility preset →</a></p>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="prose">
+      <h2>How is it tested?</h2>
+      <p>
+        By automated unit and component tests, which check specific behaviours: pictures named by their alt text, the space
+        bar and Tab in the console, the label of the PIN field, loading announced, Escape closing a dialog, the host's
+        animation switch.
+      </p>
+      <p>
+        No accessibility tooling is used: no axe, Lighthouse or pa11y, no end-to-end tests, no automatic contrast check. No
+        testing with assistive technologies is documented.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>What is not done?</h2>
+      <ul>
+        <li><b>No themes.</b> No answer themes, no colour-blind theme, no letters or numbers on the answers, no contrast check of the palette.</li>
+        <li><b>No right-to-left</b> layout or language.</li>
+        <li><b>No extra time per player.</b> The time is the same for the room; the host can only add it for everyone.</li>
+        <li><b>No minimum touch size rule.</b> The phone's answer tiles are large, but no target size is enforced.</li>
+        <li><b>No audit, no certification</b>, and no conformance statement.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="next">
+      <a class="btn btn-primary" href={DEMO_URL} target="_blank" rel="noopener">Try the live demo ↗</a>
+      <a class="btn btn-ghost" href={DOCKER_HUB_URL} target="_blank" rel="noopener">Get it on Docker Hub ↗</a>
+      <a class="btn btn-ghost" href="/docs/host/sound-and-projection/">The console and the projection</a>
+    </div>
+  </section>
+</Page>
