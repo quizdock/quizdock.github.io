@@ -54,8 +54,8 @@
           <a class="btn btn-ghost" href="https://github.com/quizdock/quiz-dock">Source on GitHub ↗</a>
         </div>
         <figure class="hero-demo">
-          <img src="demo.gif" alt="A session on the big screen: the intro slide, questions with their timers and answers coming in, the reveals" width="960" height="478" />
-          <figcaption>A session as the room sees it — lobby, question, reveal, podium.</figcaption>
+          <img src="demo.gif" alt="A session on the big screen: the intro slide, questions with their timers and answers coming in, the reveals" width="800" height="450" />
+          <figcaption>A session as the room sees it — intro slide, questions, answers coming in, reveals.</figcaption>
         </figure>
       </section>
 
@@ -63,8 +63,8 @@
         <div class="try-card">
           <div class="try-text">
             <h2>Try it now, nothing to install</h2>
-            <p>Enter a name, take the host seat, present a sample quiz — and open the join link on your phone.</p>
-            <p class="try-notes">Public instance: it sleeps when idle (first load ≈ 1 min), everything is wiped every hour, the host seat lasts 5 minutes at a time, uploads are off.</p>
+            <p>Enter the demo, take a copy of a sample quiz and present it — then open the join link on your phone.</p>
+            <p class="try-notes">Public instance: it sleeps when idle (first load ≈ 1 min), every visitor shares the same host account, everything is wiped every hour, uploads are off.</p>
           </div>
           <a class="btn btn-primary btn-lg" href="https://quizdock-standalone.onrender.com">Open the live demo ↗</a>
         </div>
@@ -117,7 +117,7 @@
             </div>
             <div>
               <h3>🛠️ Instance media</h3>
-              <p>An administration page: disk used by kind and by owner, every file as a grid or a list, a preview with its format, length, owners and usages.</p>
+              <p>An administration page: disk used by kind and by owner, every file as a grid or a list, the chosen one beside it with its format, length, owners and usages.</p>
             </div>
             <div>
               <h3>🧹 Stored once, cleaned up</h3>
@@ -230,7 +230,8 @@
           <li><strong>Video &amp; sound</strong> — videos and sounds in questions and slides, converted in the browser from whatever it reads, loudness-matched, drawn as a waveform with a playhead that follows the projection; started on the same instant on every device, fetched ahead from the lobby, and the room waits a moment for a device still loading; <em>listen first</em> questions open the answers once the media has played. Tested in Chromium browsers, not yet on iPhone.</li>
           <li><strong>Remote participants</strong> <span class="tag-exp">experimental</span> — someone following from home says so when joining and gets the whole question on their device; who hears the sound is set per quiz, per question and per session.</li>
           <li><strong>Media library</strong> — <em>My images / videos / sounds</em> to reuse what you uploaded, global media provided by the instance, credits, links to free libraries (Openverse, Wikimedia Commons, Freesound…).</li>
-          <li><strong>Instance media</strong> — for administrators: disk by kind and owner, the clean-up, every file as a list or a grid with a preview (a sound on its waveform), global media, deletion for moderation once usages are listed.</li>
+          <li><strong>Instance media</strong> — for administrators: disk by kind and owner, the clean-up, every file as a list or a grid, the chosen one beside it (a sound on its waveform), global media, deletion for moderation once usages are listed.</li>
+          <li><strong>Community quizzes</strong> — opt-in: the templates link to community catalogues; filter by language and tags, preview, check the source and licence, take an independent copy. Off by default, no outgoing request.</li>
           <li><strong>Media housekeeping</strong> — each file stored once, unused media and stray files cleaned up hourly, older formats kept playing.</li>
           <li><strong>Players without an account</strong> — where everyone signs in, a host can still open a game to the PIN and a nickname alone, for visitors or trainees who have no account; chosen at each launch, or once and for all in <em>My account</em>.</li>
           <li><strong>Keep the room to itself</strong> — close the room to newcomers once everyone is in (or during play), remove a player, and guessing PINs is slowed down.</li>
@@ -244,6 +245,8 @@
           <li><strong>Multilingual</strong> — English, French, Spanish, Simplified and Traditional Chinese, Turkish, one language per instance.</li>
           <li><strong>White-label</strong> — name, logo and CSS via an env variable and a mounted folder, no rebuild.</li>
           <li><strong>Feedback links</strong> — report a bug, suggest a feature, fix a translation or ask a question from the home page, pre-filled with the version and the browser; pointed at your own repository or hidden.</li>
+          <li><strong>An administration in the browser</strong> — what is played right now and the last twelve months; every setting with its value, where it comes from and its help, changed from the page once the operator allows it; health checks, accounts and roles, every quiz of the instance (hand one over, export, archive), an audit of every action. A fresh instance opens on a setup wizard.</li>
+          <li><strong>On the home screen</strong> — an icon and a manifest: QuizDock can be added to a phone's or a tablet's home screen, and the screen stays on during a game.</li>
           <li><strong>Operator script</strong> — <code>quizdock init / up / backup / upgrade / doctor</code>: guided setup and day-to-day admin, Docker only.</li>
           <li><strong>Hardened runtime</strong> — distroless image, non-root, read-only root FS, capabilities dropped, a Content-Security-Policy on every page; dependencies and image scanned on every push.</li>
           <li><strong>MIT licensed</strong> — free to use, modify and redistribute, including for internal self-hosting.</li>
@@ -309,7 +312,9 @@
             <figure class="slide"><img src="screenshots/player-end.png" alt="Player — ordering and feedback" loading="lazy" /><figcaption>Player — drag-and-drop ordering, rate the quiz at the end</figcaption></figure>
             <figure class="slide"><img src="screenshots/projection-podium.png" alt="Podium" loading="lazy" /><figcaption>Podium — final results on the big screen</figcaption></figure>
             <figure class="slide"><img src="screenshots/admin-media.png" alt="Instance media" loading="lazy" /><figcaption>Instance media — disk, clean-up, every file as a grid or a list, the global media</figcaption></figure>
-            <figure class="slide"><img src="screenshots/admin-media-preview.png" alt="Preview of a sound" loading="lazy" /><figcaption>Preview — a sound on its waveform, with its format, length, owners and usages</figcaption></figure>
+            <figure class="slide"><img src="screenshots/admin-media-preview.png" alt="Preview of a sound" loading="lazy" /><figcaption>A media file — beside the list: a sound on its waveform, its format, length, owners and usages</figcaption></figure>
+            <figure class="slide"><img src="screenshots/admin-statistics.png" alt="Administration — statistics" loading="lazy" /><figcaption>Administration — what is played right now, the instance at a glance</figcaption></figure>
+            <figure class="slide"><img src="screenshots/admin-settings.png" alt="Administration — settings" loading="lazy" /><figcaption>Settings — every variable with its value, where it comes from, its help and its control</figcaption></figure>
             <figure class="slide"><img src="screenshots/preferences.png" alt="My account" loading="lazy" /><figcaption>My account — who you are, what you can do, and the choice made once for every launch</figcaption></figure>
           </div>
           <button class="carousel-btn next" type="button" aria-label="Next screenshot">›</button>
