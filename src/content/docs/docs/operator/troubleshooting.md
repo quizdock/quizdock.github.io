@@ -14,7 +14,7 @@ Start with `./quizdock status` and `./quizdock doctor`, on the server, in the in
 | `./quizdock up` ends with `the app is not healthy yet` | The application did not answer `/health` within 120 seconds | `./quizdock logs`: look for the first `ERROR`, or a failed `migrate` (`./quizdock logs migrate`). |
 | `no .env here — run ./quizdock init first` | The script runs from another folder | `cd` to the instance's folder. |
 | `cannot talk to the Docker daemon` | Docker is stopped, or the user is not allowed to use it | Start Docker; add the user to the `docker` group, or use root. |
-| The instance is down after a reboot | The Compose file sets no restart policy | `./quizdock up`. |
+| The instance is down after a reboot | It was stopped with `./quizdock down`, or its `docker-compose.prod.yml` predates 0.13.1 (no restart policy) | `./quizdock up`; take the current `docker-compose.prod.yml` from the release. |
 | `doctor`: `… pending … run the migrate step` | The migrations did not run, or failed | `./quizdock logs migrate`, then `./quizdock up`. |
 | `doctor`: `PostgreSQL: …` or `Redis: …` | The database or the cache is down or unreachable | `./quizdock status`; `./quizdock logs postgres` or `redis`. |
 | `doctor`: `/data/media: …` (not writable) | The volume's permissions are wrong | The folder must belong to uid `65532`. A fresh named volume gets it by itself; a folder mounted from the server needs `chown 65532:65532`. |

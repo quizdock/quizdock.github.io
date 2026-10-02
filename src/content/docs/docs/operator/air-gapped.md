@@ -69,7 +69,7 @@ Then, on the server, in the instance's folder:
 1. Pin the release you loaded: run `./quizdock init` (it finds the files and downloads nothing), then set `QUIZDOCK_TAG=0.13.0` in `.env`.
 2. Start it: `./quizdock up`. Docker uses the loaded images and pulls nothing.
 
-For the standalone setup, `./quizdock up` runs the image tagged `standalone`: tag the loaded image so (`docker tag fchaussin/quizdock:standalone-0.13.0 fchaussin/quizdock:standalone`), or start it with `docker run` as in [Install](/docs/operator/install/#with-docker-run-standalone).
+For the standalone setup, `./quizdock up` runs `standalone-<QUIZDOCK_TAG>` (here `standalone-0.13.0`; `standalone` when the tag is `latest`): the loaded image is used as it is.
 
 ## Upgrade offline
 
@@ -78,7 +78,7 @@ For the standalone setup, `./quizdock up` runs the image tagged `standalone`: ta
 1. Load the new release's images, as above.
 2. `./quizdock backup`
 3. Set the new `QUIZDOCK_TAG` in `.env`.
-4. `./quizdock up` (the migrations run at start).
+4. `./quizdock up` (the migrations run at start). Standalone: remove the old container first (`docker rm -f quizdock`; the data stays in the `quizdock` volume), or `up` starts it again on the old image.
 5. `./quizdock doctor`
 
 Read the release's notes first: see [Upgrade](/docs/operator/upgrade/).

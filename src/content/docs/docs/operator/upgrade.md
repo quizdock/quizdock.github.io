@@ -42,7 +42,7 @@ It:
 
 Without a tag, `upgrade` pulls the tag already in `.env` again: with `latest`, that is the latest release.
 
-**Standalone:** the script pulls the latest standalone image, then recreates the container; the data stays in the `quizdock` volume.
+**Standalone:** the script pulls the standalone image of that release (`standalone-0.13.1`, or `standalone` when the tag is `latest`), then recreates the container; the data stays in the `quizdock` volume.
 
 Check the result with `./quizdock status`, and the migrations with `./quizdock migrate:status`.
 

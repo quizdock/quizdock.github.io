@@ -130,13 +130,7 @@ HTTPS in the full setup: see [Reverse proxy](/docs/operator/reverse-proxy/#the-f
 
 ## After a reboot
 
-The Compose file sets no restart policy for the application, PostgreSQL and Redis: after the server or Docker restarts, start the instance again, on the server, in the instance's folder:
-
-```sh
-./quizdock up
-```
-
-A standalone container created by the script (or with `--restart unless-stopped`, as above) comes back by itself.
+The application, PostgreSQL and Redis come back by themselves after the server or Docker restarts (the Compose file gives them `restart: unless-stopped`). An instance stopped with `./quizdock down` stays stopped until `./quizdock up`. A standalone container created by the script (or with `--restart unless-stopped`, as above) comes back by itself too.
 
 ## Next
 

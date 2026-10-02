@@ -144,8 +144,9 @@ chmod +x quizdock
     <div class="prose">
       <p>
         One release, one version: images are published only from a release tag, and the standalone image of a release is
-        built on that release's application image. Compose runs the tag set in <code>.env</code> (<code>QUIZDOCK_TAG</code>,
-        <code>latest</code> by default).
+        built on that release's application image. The script runs the tag set in <code>.env</code> (<code>QUIZDOCK_TAG</code>,
+        <code>latest</code> by default) in every setup: <code>X.Y.Z</code> for Compose, <code>standalone-X.Y.Z</code> for the
+        standalone image.
       </p>
       <p><a class="more-link" href={DOCKER_HUB_URL} target="_blank" rel="noopener">Tags on Docker Hub ↗</a></p>
     </div>
@@ -158,7 +159,7 @@ chmod +x quizdock
       <p>
         One line, on the server, in the instance's folder. It backs up, records the tag in <code>.env</code>, pulls the
         image, restarts with the database migrations and shows their log, waits for the health check, and runs
-        <code>doctor</code>. The standalone image upgrades to the latest standalone release.
+        <code>doctor</code>. A standalone instance moves to that release's standalone image.
       </p>
       <p>
         Migrations cannot be rolled back: going back means restoring the database and the media from the same backup. Read
