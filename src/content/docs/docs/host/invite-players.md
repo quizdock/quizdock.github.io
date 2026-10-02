@@ -22,12 +22,12 @@ The direct link has the form `https://your-instance/join/123456`: it opens the r
 
 The QR code, the link and the "Join at" line all point at the **Invitation address**. It must be an address the players' phones can reach. Choose it in the lobby, before the quiz starts (it is fixed once the game begins):
 
-- **public address**: the instance's public address, when it has one. Use it whenever it is offered: players can reach it from anywhere.
+- **the instance's address**: the invitation address set for the whole instance, by whoever runs it or by an administrator from the phone test of **Health**. Every lobby starts from it; use it whenever it is offered.
 - **this page**: the address in your browser's address bar.
 - the network addresses detected for the computer running QuizDock, on a local instance: pick the one of the network the players are on.
 - **Other address…**: type one, such as `http://192.168.1.20:8080`, then **Apply**.
 
-**Why this address?** explains the choice in the console. The usual trap is `localhost` or `127.0.0.1`: they only work on the computer itself, so a phone scanning that QR code gets nowhere. On a local instance, players must be on the same Wi-Fi or network as the computer, and its firewall must let the port through.
+**Why this address?** explains the choice in the console. It ends with a link to **Test the addresses from a phone, and set the instance's** for administrators, and says who sets it for everyone else. The usual trap is `localhost` or `127.0.0.1`: they only work on the computer itself, so a phone scanning that QR code gets nowhere. On a local instance, players must be on the same Wi-Fi or network as the computer, and its firewall must let the port through.
 
 If the console finds no local address (common when QuizDock runs in Docker Desktop), type it yourself. Whoever runs your instance can make it appear in the list; see [Networking](/docs/operator/networking/).
 

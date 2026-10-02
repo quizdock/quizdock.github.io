@@ -38,6 +38,23 @@ In short:
 | Quizzes | Any administrator | Any administrator, and the token in local mode. |
 | Media | Any administrator | Any administrator. |
 
+## Allow changes from the web
+
+A new instance's administration is **read-only** in the Instance domain: `ADMIN_WEB_SCOPE` is `read` by default, and the settings page says "The web shows every setting and changes none". This is on purpose. Nothing changes the instance from a browser until whoever runs the server decides who administers it, so a shared or forgotten administrator session cannot change it first. The setup wizard of a new instance is not concerned: it sets its answers whatever the scope.
+
+`./quizdock init` asks it: "Let administrators change settings from the browser? (y/N)". Answered yes, it writes `ADMIN_WEB_SCOPE=write` and, in local mode, a generated `ADMIN_TOKEN` in `.env`, and says where to find it.
+
+For an instance already installed, or set up by hand, on the server, in the instance's folder:
+
+1. In `.env`, set `ADMIN_WEB_SCOPE=write`.
+2. Local mode only (`AUTH_MODE=none`): also set `ADMIN_TOKEN`, 32 characters or more, and give it to the administrators. For example: `openssl rand -hex 32`.
+3. Apply the new values:
+   - Compose: `./quizdock up` (the application is recreated with them).
+   - Standalone: `docker rm -f quizdock`, then `./quizdock up`. The data stays in the `quizdock` volume; a plain `./quizdock up` would restart the old container with the old values.
+4. Reload the administration. The settings page now says "The web may change the settings of levels C2 to C4 (ADMIN_WEB_SCOPE=write); C1 never." In local mode, it asks for the token once per tab.
+
+Level C1 settings and the variables listed in `ADMIN_LOCK` stay `.env` only, whatever the scope. To go back, set `ADMIN_WEB_SCOPE=read` and apply it the same way. The values already changed from the web stay applied, and a read-only administration can no longer take them back: use **Back to .env** or **Take everything back** before ([Settings](/docs/admin/settings/)), or, on the server, `./quizdock qd settings.reset --all`.
+
 In local mode, the page asks for the token: "Local mode: enter the administration token (ADMIN_TOKEN) to change anything. It is kept in this tab only." When no token is set in `.env`, it says so instead. Ten wrong tokens from one address, or fifty from all addresses together, make the administration wait a quarter of an hour.
 
 An operation that destroys something (deleting a quiz or a file, purging sessions) asks for a confirmation, valid five minutes. So does a change to a level C2 setting, and a change of administrator rights. Some operations first show what they would do (**Preview**).

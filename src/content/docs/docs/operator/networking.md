@@ -34,7 +34,7 @@ Both variables can also be set from **Administration → Settings** (level C3, a
 
 ## Test it from a phone
 
-The setup wizard and **Administration → Health** offer a phone test for each invitation address: a QR code to scan with a phone on the participants' network. The page records which addresses a phone actually reached. See [Health](/docs/admin/health/).
+The setup wizard and **Administration → Health** offer a phone test for each invitation address: a QR code to scan with a phone on the participants' network. The page records which addresses a phone actually reached, and from Health an administrator makes a reached one the instance's invitation address (`APP_PUBLIC_URL`). See [Health](/docs/admin/health/#phone-test).
 
 ## When phones cannot reach it
 

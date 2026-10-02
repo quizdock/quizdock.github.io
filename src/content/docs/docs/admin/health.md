@@ -64,7 +64,11 @@ The server cannot tell whether a phone reaches it: only a phone can. The **Test 
 
 A test lasts ten minutes; past that, "This test expired: start it again." Run it again for a new network or a new venue.
 
-From the administration, the test checks and leaves nothing behind. The setup wizard runs the same test and remembers a reached address, which the host console then offers first.
+**Another address** adds one to test, typed by hand (only its `http(s)://host:port` part is kept).
+
+Once a phone reached an address, **Use for invitations** makes it the instance's invitation address: it is saved as `APP_PUBLIC_URL`, and every lobby, for every host and on every computer, starts from it. The card of that address then says "The instance's invitation address". A host can still choose another address for one game, in the lobby ([Invite players](/docs/host/invite-players/)). The button shows only where the administration may change settings (`ADMIN_WEB_SCOPE=write`, the administration token in local mode); otherwise the page says the address stays as the operator set it.
+
+The setup wizard runs the same test and remembers a reached address, which the host console then offers first.
 
 When the phone does not get through, "Not reached? The usual causes" lists them:
 

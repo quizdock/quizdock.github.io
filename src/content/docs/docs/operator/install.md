@@ -41,7 +41,7 @@ Memory and CPU: see [Sizing](/docs/operator/sizing/).
    ./quizdock init --full         # Compose with the bundled Keycloak
    ```
 
-   `init` with no option is the same as `init --compose`. It asks for the application name, the language, the HTTP port and the sign-in mode; with `oidc`, your provider's issuer and client id; with `--full`, the host name browsers will use and the Keycloak port. It then:
+   `init` with no option is the same as `init --compose`. It asks for the application name, the language, the HTTP port and the sign-in mode; with `oidc`, your provider's issuer and client id; with `--full`, the host name browsers will use and the Keycloak port; and whether administrators may change settings from the browser (`ADMIN_WEB_SCOPE`, see [Allow changes from the web](/docs/admin/overview/#allow-changes-from-the-web)): answered yes in local mode, it also generates the administration token (`ADMIN_TOKEN`) and says where it is. It then:
 
    - writes `.env` with permissions `600`, with a random PostgreSQL password (and, in the full setup, random passwords for Keycloak's administrator and the two sample accounts);
    - remembers the setup in `.env` as `QUIZDOCK_MODE`;
