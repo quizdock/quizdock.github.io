@@ -5,7 +5,7 @@ sidebar:
   order: 9
 ---
 
-**Administration → Health** answers one question first: is the instance working as it should? Then it shows each part checked, so that the administrator can tell the operator what to fix. Any administrator can read it; nothing on it changes the instance.
+**Administration → Health** answers one question first: is the instance working as it should? Then it shows each part checked, so that the administrator can tell the operator what to fix. Any administrator can read it. Only **Use for invitations**, in the [phone test](#phone-test), changes the instance.
 
 ## The verdict
 

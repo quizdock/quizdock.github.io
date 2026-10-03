@@ -114,4 +114,4 @@ A QuizDock server makes these requests, and no other:
 
 The browser may also load an image a quiz's text links to on the web, and a logo set by `APP_LOGO_URL`. The feedback links and the media library links are plain links the user follows.
 
-With the "No" answer to the Internet question of the [quick setup](/docs/admin/presets/), local mode or an identity provider on your network, and no image from the web in the quizzes, the server makes no outgoing request. See [Privacy](/privacy/) and [Air-gapped](/docs/operator/air-gapped/).
+With the "No" answer to the Internet question of the [quick setup](/docs/admin/presets/), `QUIZ_STORE_URL` left empty, and local mode or an identity provider on your network, the server makes no outgoing request. Images from the web are loaded by the browser, not the server. See [Privacy](/privacy/) and [Air-gapped](/docs/operator/air-gapped/).

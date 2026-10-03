@@ -39,7 +39,7 @@ For an account that left, or a colleague who takes over.
 
 1. In the quiz's actions, choose **Hand over**.
 2. Search the new owner by name, subject or e-mail. The account must have signed in at least once; give it the host role so they can work on the quiz.
-3. Confirm.
+3. **Hand over**.
 
 The media only this quiz uses follow it. A media the previous owner also uses in another quiz stays with them. The quiz's archived sessions follow too, so the new owner can read their results.
 

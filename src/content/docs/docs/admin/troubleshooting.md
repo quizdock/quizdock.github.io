@@ -49,7 +49,7 @@ The top of **Administration → Settings** says why the page is read-only, and e
 
 **Cause.** It is outside what the setting accepts ("Accepts …"), or it contradicts another setting. A value changed here is checked strictly against the setting's range, where a value in `.env` out of range is only reported.
 
-**Fix.** Use a value within the range shown in the setting's help. An empty value is refused: use **Back to .env** instead.
+**Fix.** Use a value within the range shown in the setting's help. An empty value is refused, except for `QUIZ_STORE_HOSTS` (the catalogue's own hosts only): use **Back to .env** instead.
 
 ### Saved, but nothing changed
 

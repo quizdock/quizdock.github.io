@@ -57,7 +57,7 @@ Level C1 settings and the variables listed in `ADMIN_LOCK` stay `.env` only, wha
 
 In local mode, the page asks for the token: "Local mode: enter the administration token (ADMIN_TOKEN) to change anything. It is kept in this tab only." When no token is set in `.env`, it says so instead. Ten wrong tokens from one address, or fifty from all addresses together, make the administration wait a quarter of an hour.
 
-An operation that destroys something (deleting a quiz or a file, purging sessions) asks for a confirmation, valid five minutes. So does a change to a level C2 setting, and a change of administrator rights. Some operations first show what they would do (**Preview**).
+An operation that destroys something (deleting a quiz or a file, purging sessions) asks for a confirmation, valid five minutes. So does a change to a level C2 setting, and a role change that keeps or grants the administrator role, or withdraws every role. Some operations first show what they would do (**Preview**).
 
 ## The sections
 
@@ -70,7 +70,7 @@ An operation that destroys something (deleting a quiz or a file, purging session
 
 ## The update notice
 
-When a newer stable release of QuizDock is out, a notice appears above every page of the administration: "QuizDock X is available." It gives the version running and its date, **What's new** and **Before upgrading** (from the release notes), and the command to run on the server, in the instance's folder:
+When a newer stable release of QuizDock is out, a notice appears above every page of the administration: "QuizDock X is available." It gives the version running, the new release's date, **What's new** and **Before upgrading** (from the release notes), and the command to run on the server, in the instance's folder:
 
 ```sh
 ./quizdock upgrade <version>
@@ -82,7 +82,7 @@ The notice depends on `UPDATE_CHECK`, on by default. The server then asks GitHub
 
 ## The command line
 
-Every operation of the web administration is also a `qd` operation, run in the container. The command line is never limited by `ADMIN_WEB_SCOPE`, `ADMIN_LOCK` or `ADMIN_TOKEN`: a shell in the container already holds every right. Every change made this way is kept in the [audit](/docs/admin/audit/) too, marked "Command line".
+Every operation of the web administration is also a `qd` operation, run in the container. The media library's lists are the exception: they are read from the web only. The command line is never limited by `ADMIN_WEB_SCOPE`, `ADMIN_LOCK` or `ADMIN_TOKEN`: a shell in the container already holds every right. Every change made this way is kept in the [audit](/docs/admin/audit/) too, marked "Command line".
 
 On the server, in the instance's folder:
 
@@ -94,7 +94,7 @@ On the server, in the instance's folder:
 
 | Option | Effect |
 |---|---|
-| `--yes` | Confirms a destructive operation, or one that changes administrator rights. Without it, `qd` asks on a terminal and refuses elsewhere. |
+| `--yes` | Confirms a destructive operation, a change of administrator rights, a change to a C2 setting, `settings.reset --all`, and `presets.apply` when it changes a C2 setting. Without it, `qd` asks on a terminal and refuses elsewhere. |
 | `--dry-run` | Says what the operation would do, for those that can (`sessions.purge`, `presets.apply`). |
 | `--json` | The outcome as JSON, for scripts. |
 | `--as=<name>` | The name the audit records. |
@@ -113,7 +113,8 @@ Whoever reaches a new instance must not become its owner. So the wizard asks for
 
 - The instance writes it in its logs when it starts: "This instance is not set up yet. Open it in a browser and give the setup token …".
 - It works only once and expires 24 hours after it was created.
-- `qd setup.token` gives a new one at any time; the previous one stops working.
+- Each start, while the setup is open, writes a new one; the previous one stops working.
+- `qd setup.token` gives a new one while the setup is open; the previous one stops working. Once it is completed, `qd setup.reopen` opens it again.
 
 To get a fresh token, on the server, in the instance's folder:
 

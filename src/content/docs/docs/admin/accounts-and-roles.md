@@ -48,7 +48,7 @@ From the web, this needs `ADMIN_WEB_SCOPE=write` (and the administration token i
 
 1. Open the account's actions, then **Grant or revoke a role…**.
 2. Tick or untick **Host** ("Creates quizzes and hosts games.") and **Administrator** ("Reaches the administration.").
-3. **Save**. A change to the administrator role asks for a confirmation.
+3. **Save**. A confirmation is asked when **Administrator** stays ticked, or when both are unticked. Unticking **Administrator** while **Host** stays ticked is not confirmed.
 
 The dialog changes only what the administration grants. A role the identity provider gives stays, whatever is ticked: remove it in the provider.
 

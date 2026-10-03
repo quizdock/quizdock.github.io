@@ -36,7 +36,7 @@ Read from the games' history:
 
 - games, players and success rate, by month;
 - the **Most played quizzes** and the **Most active hosts**;
-- **Players with an account**: the share of players who took part with an account, against guests.
+- **Players with an account**: among the players of games with personalised tracking, the share who took part with an account, against guests.
 
 From the command line: `./quizdock qd stats.history`.
 

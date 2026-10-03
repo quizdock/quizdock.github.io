@@ -61,10 +61,10 @@ Every setting the web may change applies live, except `LIVE_MOTION`, which appli
 ## Change a setting
 
 1. Find the setting. Its row has a control where the web may change it: a switch, a list, a number in its unit with its range, or an editable list.
-2. Type the value. It is checked as it is typed, against what the setting accepts and against the other settings.
+2. Type the value. It is checked as it is typed against what the setting accepts, and on **Save** against the other settings.
 3. **Save**. A level C2 change asks for a confirmation.
 
-The page then says when it applies: "Saved: it applies now.", "Saved: it applies to the rooms opened from now on." The change is recorded in the [audit](/docs/admin/audit/), with the value it replaced.
+The page then says when it applies: "Saved: it applies now.", "Saved: it applies to the rooms opened from now on." The change is recorded in the [audit](/docs/admin/audit/), with the override it replaced: none (`null`) when the value came from `.env`.
 
 A value changed here is checked more strictly than a value in `.env`: it must be within the setting's range, where an `.env` value out of range is only reported.
 
