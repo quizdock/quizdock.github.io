@@ -83,13 +83,13 @@ What changes for an operator, by release. Read every note between your version a
 
 ### From v1: a broken C1 variable refuses to start
 
-Since 0.12, the application logs every variable it cannot read (it uses the default instead) or that is out of range (it uses it as is), and `doctor` lists them. A critical one (level C1, for example `AUTH_MODE=OIDC` instead of `oidc`) is only a warning for now. **From v1, the instance will refuse to start** with it. Fix what the log names before then. See [Configuration](/docs/operator/configuration/#warnings-at-start).
+Since 0.13, the application logs every variable it cannot read (it uses the default instead) or that is out of range (it uses it as is), and `doctor` lists them. A critical one (level C1, for example `AUTH_MODE=OIDC` instead of `oidc`) is only a warning for now. **From v1, the instance will refuse to start** with it. Fix what the log names before then. See [Configuration](/docs/operator/configuration/#warnings-at-start).
 
-### 0.12: the setup wizard
+### 0.13: the setup wizard
 
 A fresh instance offers a setup wizard in the browser, behind a setup token written in the log at start. An instance already in use when it is upgraded is considered set up: nothing to do. An automated deployment of a fresh one skips the wizard with `./quizdock qd setup.complete`.
 
-### 0.12: the pages and the API on one origin
+### 0.13: the pages and the API on one origin
 
 The API and the game socket answer the application's own pages only, served from the same origin. Every setup described here does so. A setup of your own that serves the pages from another origin must put them behind the same one. See [Reverse proxy](/docs/operator/reverse-proxy/#the-same-origin-rule).
 
@@ -101,15 +101,15 @@ The tick, the gong, the countdown and the ding start off in a room opened after 
 
 The live state of a game moved into its room (several quizzes under one PIN): a game in progress during the upgrade is lost. Players join again.
 
-### 0.8: OIDC_ISSUER taken as written
+### 0.9: OIDC_ISSUER taken as written
 
 OIDC mode only. Earlier releases dropped a trailing slash from `OIDC_ISSUER`; it is now compared with the tokens' `iss` exactly, as the standard requires. If yours ends with `/` and your provider's issuer does not (or the reverse), sign-in fails with `unexpected "iss" claim value`: set it to the `issuer` of your provider's discovery document. The log and `doctor` point out a difference of a trailing slash.
 
-### 0.7: media files renamed
+### 0.8: media files renamed
 
 From this release each file is stored once, named after its SHA-256. On its first clean-up pass the backend renames the existing files (`older files moved to shared storage` in the log); the media are served throughout. Going back to an older release then means restoring the database **and** the media volume from the same backup.
 
-### 0.7: the OIDC session held by the backend
+### 0.8: the OIDC session held by the backend
 
 OIDC mode only. Local mode and the standalone image without OIDC: nothing to do.
 
