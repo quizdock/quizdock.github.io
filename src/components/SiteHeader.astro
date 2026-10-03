@@ -23,4 +23,17 @@ import { DEMO_URL, DOCKER_HUB_URL, USE_CASES, WHY } from '../site';
     <a href={DEMO_URL} target="_blank" rel="noopener">Demo ↗</a>
     <a class="btn btn-ghost" href={DOCKER_HUB_URL} target="_blank" rel="noopener">Docker Hub ↗</a>
   </nav>
+  <details class="nav-mobile">
+    <summary>Menu</summary>
+    <nav class="menu menu-mobile" aria-label="Main">
+      <small>Why QuizDock</small>
+      {WHY.map((p) => <a href={p.href}>{p.title}</a>)}
+      <small>Use cases</small>
+      {USE_CASES.map((p) => <a href={p.href}>{p.title}</a>)}
+      <small>QuizDock</small>
+      <a href="/docs/">Documentation</a>
+      <a href="/deploy/">Deploy</a>
+      <a href={DEMO_URL} target="_blank" rel="noopener">Live demo ↗</a>
+    </nav>
+  </details>
 </header>

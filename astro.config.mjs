@@ -6,6 +6,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
   site: 'https://quizdock.github.io',
   trailingSlash: 'always',
+  compressHTML: false,
   integrations: [
     starlight({
       title: 'QuizDock',
