@@ -1,0 +1,214 @@
+---
+import Page from '../../layouts/Page.astro';
+import { DEMO_URL, DOCKER_HUB_URL } from '../../site';
+
+const RAW = 'https://raw.githubusercontent.com/quizdock/quiz-dock/main';
+
+const faq = [
+  {
+    q: 'How many players can QuizDock support?',
+    a: `<p>QuizDock sets no limit per room. Measured: up to 1500 players in one room, and 60 rooms of 30 (1800 players) at once, with no answer lost. Beyond that, nothing was measured. Conditions: 2026-09-27, backend on one 2.1 GHz core, players simulated on the same machine over the loopback, no media, one run per step. <a href="#benchmarks">The figures</a>.</p>`,
+  },
+  {
+    q: 'How is latency measured?',
+    a: `<p>As the time from a simulated player sending its answer to the server's acknowledgement, reported at the 95th and 99th percentiles. The players ran on the same machine over the loopback, so the figures leave out the latency of a real network.</p>`,
+  },
+  {
+    q: 'What happens if a player disconnects?',
+    a: `<p>They come back to where the game is, with their score. The browser keeps a reconnection token for 4 hours, renewed at each question. An answer already sent stays; a question missed scores 0.</p>`,
+  },
+  {
+    q: 'Can multiple quizzes run simultaneously?',
+    a: `<p>Yes. One instance runs many rooms at once, each with its own PIN, and the same quiz can run in several rooms. A room can also play several quizzes one after the other under one PIN, with standings across them.</p>`,
+  },
+  {
+    q: 'Can remote participants join?',
+    a: `<p>Yes, as an experimental feature. A participant who says they play remotely gets the question and its media on their own device. It is tested on Chromium-based browsers only; iPhones are untested.</p>`,
+  },
+  {
+    q: 'How are audio and video synchronized?',
+    a: `<p>The server sets a common start 1.6 s ahead on its own clock. Each device converts it with its measured clock offset, accounts for its audio output delay, and corrects any drift every 500 ms. How closely devices actually play together has not been measured.</p>`,
+  },
+  {
+    q: 'Is the scoring fair for players on a slow connection?',
+    a: `<p>Every answer is timed when the server receives it, the same rule for everyone. QuizDock does not compensate for network latency: on a slow connection, an answer arrives, and is timed, later.</p>`,
+  },
+];
+---
+
+<Page
+  title="Real time"
+  description="How QuizDock times questions on the server, keeps devices and media in step, handles reconnection, and what its load tests measured, with their conditions."
+  faq={faq}
+>
+  <section class="page-hero">
+    <h1>The server keeps time.</h1>
+    <p class="lede">
+      Every question opens and closes on the server's clock, and every answer is timed when the server receives it.
+      Devices correct for their own clock to show the timer and start media together. The figures below were measured,
+      and come with their conditions.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>Who decides when a question opens and closes?</h2>
+      <p>
+        The server. It sets the start, after a reading time (3 s by default, 0 to 10 s) or after the media when the author
+        chose <b>Start the timer when the media ends</b>, and the deadline, start plus the time limit. It keeps both in
+        Redis and sends them to every device.
+      </p>
+      <p>
+        An answer is timed on arrival. One sent too early, after the deadline (with a 300 ms grace) or twice is refused.
+        Points follow that time: full at once, half at the limit, plus a streak bonus. A pause, a lost host or a resume keeps
+        the time left.
+      </p>
+      <p>
+        There is no latency compensation: a player on a slow connection has their answer timed when it arrives.
+      </p>
+      <p><a class="more-link" href="/docs/host/scoring/">How scoring works →</a></p>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="prose">
+      <h2>How do devices stay in step?</h2>
+      <p>
+        Each device measures how far its clock is from the server's: a burst of eight pings when it connects, again after
+        2 and 8 seconds, then every 30 seconds. The offset serves to display the timer and to start media. It never changes
+        a score.
+      </p>
+      <p>
+        For media, the server sets a common start 1.6 s ahead. Each device schedules it on its corrected clock, allowing for
+        its audio output delay, then checks every 500 ms: a drift under 30 ms is left alone, up to 600 ms it plays up to 5 %
+        faster or slower, beyond it jumps. Media are fetched one question ahead, and the server waits for the devices that
+        play them, 10 s by default, before the host can <b>Start anyway</b>.
+      </p>
+      <p><a class="more-link" href="/media/">Media in a room →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>What happens when someone disconnects?</h2>
+      <ul>
+        <li><b>A player</b> comes back to the current step and their own result. Their browser keeps a reconnection token for 4 hours, renewed at each question; it is refused once the game has ended.</li>
+        <li><b>During a question</b>, a player who drops is marked disconnected. An answer already sent counts; no answer scores 0. If everyone still connected has answered, the answer is revealed early.</li>
+        <li><b>The host</b> has 5 s to come back unnoticed. Then the room is told and the timer pauses. Within 2 minutes the host resumes with the time left; after that the game ends and is archived as <b>Interrupted</b>.</li>
+        <li><b>The server</b> re-arms the timers from Redis when it starts again, and Compose keeps Redis's data on disk. This is implemented, not tested end to end. The standalone image's Redis keeps nothing on disk.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="prose">
+      <h2>Can several rooms and quizzes run at once?</h2>
+      <p>
+        Yes. Each room has its own six-digit PIN and its own events: a room's messages go to its devices only. A quiz can
+        run in several rooms at the same time. Within one room, the host can play several quizzes under the same PIN with
+        <b>Next quiz</b>: participants stay, each quiz scores from zero, and <b>Room standings</b> add them up.
+      </p>
+      <h2>Can participants play from elsewhere?</h2>
+      <p>
+        Yes, experimentally. When a quiz has sound or video, joining asks <b>Where are you playing from?</b>:
+        <b>In the room</b> or <b>Remote</b>. A remote participant gets the question and its media on their own device. Who
+        hears the sound is set per quiz, per question or per session: <b>Projection only</b>, <b>Projection and remote
+        participants</b> (the default), or <b>Every device</b>. Tested on Chromium-based browsers only; iPhones are untested.
+      </p>
+      <p><a class="more-link" href="/docs/host/remote-participants/">Remote participants →</a></p>
+    </div>
+  </section>
+
+  <section class="section" id="benchmarks">
+    <div class="prose">
+      <h2>What was measured?</h2>
+      <p>The load test, run on 2026-09-27, under these conditions:</p>
+      <ul>
+        <li>A Firecracker micro-VM on a shared host: Intel Xeon at 2.1 GHz, 4 vCPU, 16 GB.</li>
+        <li>The backend built from source, on Node 22, pinned to <b>one core</b>; PostgreSQL 16 and Redis 7 on the same machine, not pinned.</li>
+        <li>Simulated players on the other cores, over WebSocket on the loopback: no network latency.</li>
+        <li>Single-choice questions with four options, no media; every player answers at a random moment within 3 s.</li>
+        <li>One run per step.</li>
+      </ul>
+      <p>
+        <b>Ack</b> is the time from a player sending an answer to the server acknowledging it, in milliseconds.
+        <b>Start spread</b> is how far apart the devices of a room received the same question.
+      </p>
+      <h3>Rooms of 30, all started together</h3>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Rooms</th><th>Players</th><th>Ack p95</th><th>Ack p99</th><th>Start spread p95</th><th>Answers lost</th></tr></thead>
+        <tbody>
+          <tr><td class="num">10</td><td class="num">300</td><td class="num">7 ms</td><td class="num">11 ms</td><td class="num">1 ms</td><td class="num">0</td></tr>
+          <tr><td class="num">20</td><td class="num">600</td><td class="num">6 ms</td><td class="num">10 ms</td><td class="num">1 ms</td><td class="num">0</td></tr>
+          <tr><td class="num">30</td><td class="num">900</td><td class="num">7 ms</td><td class="num">12 ms</td><td class="num">2 ms</td><td class="num">0</td></tr>
+          <tr><td class="num">40</td><td class="num">1200</td><td class="num">8 ms</td><td class="num">12 ms</td><td class="num">2 ms</td><td class="num">0</td></tr>
+          <tr><td class="num">50</td><td class="num">1500</td><td class="num">9 ms</td><td class="num">14 ms</td><td class="num">2 ms</td><td class="num">0</td></tr>
+          <tr><td class="num">60</td><td class="num">1800</td><td class="num">25 ms</td><td class="num">105 ms</td><td class="num">2 ms</td><td class="num">0</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prose"><h3>One room</h3></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Players</th><th>Ack p95</th><th>Ack p99</th><th>Start spread p95</th><th>Answers lost</th></tr></thead>
+        <tbody>
+          <tr><td class="num">300</td><td class="num">7 ms</td><td class="num">11 ms</td><td class="num">12 ms</td><td class="num">0</td></tr>
+          <tr><td class="num">500</td><td class="num">12 ms</td><td class="num">16 ms</td><td class="num">18 ms</td><td class="num">0</td></tr>
+          <tr><td class="num">700</td><td class="num">18 ms</td><td class="num">25 ms</td><td class="num">39 ms</td><td class="num">0</td></tr>
+          <tr><td class="num">1000</td><td class="num">29 ms</td><td class="num">38 ms</td><td class="num">81 ms</td><td class="num">0</td></tr>
+          <tr><td class="num">1500</td><td class="num">61 ms</td><td class="num">431 ms</td><td class="num">60 ms</td><td class="num">0</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prose">
+      <p>
+        A second run of the same series gave 41 ms at p95 and 52 ms at p99 for 1500 players: at that size the slowest 1 %
+        varies between runs. Several small rooms cost less than one large room of the same total: 1500 players as 50 rooms,
+        9 ms at p95; as one room, 41 to 61 ms.
+      </p>
+      <h3>What was not measured</h3>
+      <ul>
+        <li>Questions with sound or video, and how closely devices play media together.</li>
+        <li>Real phones on a real Wi-Fi network.</li>
+        <li>PostgreSQL archiving a very large session.</li>
+        <li>Rooms starting at different moments; more than 60 rooms; more than 1500 players in one room.</li>
+        <li>The Docker image itself, and a VM of the sizes below.</li>
+      </ul>
+      <h3>What size of machine?</h3>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Load</th><th>vCPU</th><th>RAM</th></tr></thead>
+        <tbody>
+          <tr><td>Up to 700 players in one room, or 20 rooms of 30</td><td class="num">2</td><td class="num">2 GB</td></tr>
+          <tr><td>Up to 1500 in one room, or 60 rooms of 30</td><td class="num">2</td><td class="num">4 GB</td></tr>
+          <tr><td>Beyond</td><td colspan="2">Not measured</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prose">
+      <p>
+        These sizes are deduced from the measurements, not measured on VMs of that size: one core for the backend, one for
+        PostgreSQL, Redis and the system. The live engine runs on one Node.js thread, so a faster core helps and more vCPU
+        do not. One instance is one process: there is no horizontal scaling. The backend held about 250 MB at rest and 0.9
+        to 1 GB at 1500 to 1800 players.
+      </p>
+      <p>
+        Raw results: <a href={`${RAW}/docs/dev/load-results/2026-09-27-cold.json`}>one room</a> ·
+        <a href={`${RAW}/docs/dev/load-results/2026-09-27-rooms.json`}>rooms of 30</a> ·
+        <a href={`${RAW}/apps/backend/scripts/load-test.mjs`}>the load-test script</a>, to measure again on your own hardware.
+      </p>
+      <p><a class="more-link" href="/docs/operator/sizing/">Sizing an instance →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="next">
+      <a class="btn btn-primary" href={DEMO_URL} target="_blank" rel="noopener">Try the live demo ↗</a>
+      <a class="btn btn-ghost" href={DOCKER_HUB_URL} target="_blank" rel="noopener">Get it on Docker Hub ↗</a>
+      <a class="btn btn-ghost" href="/docs/operator/sizing/">Size your instance</a>
+    </div>
+  </section>
+</Page>

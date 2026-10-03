@@ -1,0 +1,162 @@
+---
+title: Configuration
+description: How QuizDock reads its configuration — .env, levels, administration overrides, start-up warnings — and every environment variable, ports and volumes.
+sidebar:
+  order: 3
+---
+
+import EnvTable from '../../../../components/EnvTable.astro';
+import ReleaseVersion from '../../../../components/ReleaseVersion.astro';
+
+QuizDock is configured with environment variables, without rebuilding anything. This page explains where they are read, who may change them, and lists every one of them.
+
+## Where the variables go
+
+| How it runs | Where to set the variables |
+|---|---|
+| `./quizdock` script | `.env` in the instance's folder (written by `./quizdock init`) |
+| Docker Compose by hand | `.env` next to `docker-compose.prod.yml` |
+| `docker run` (standalone) | `--env-file .env`, or `-e NAME=value` flags |
+| Docker Desktop | the container's environment variables, set when it is created |
+
+In Compose, `docker-compose.prod.yml` passes each application variable of the reference below to the container by name. A variable the Compose file does not list never reaches the application.
+
+### Apply a change made in .env
+
+Most variables are read at start. On the server, in the instance's folder:
+
+- **Compose and full:** run `./quizdock up`. Compose recreates the containers whose configuration changed.
+- **Standalone:** the container keeps the environment it was created with. Recreate it; the data stays in the `quizdock` volume:
+
+  ```sh
+  docker rm -f quizdock
+  ./quizdock up
+  ```
+
+## Levels
+
+Every variable has a level, shown in the reference:
+
+| Level | What it covers | Changed from the administration |
+|---|---|---|
+| **C1** | Critical: start-up, data, security | Never: `.env` only |
+| **C2** | Access and resources | Yes, each change confirmed |
+| **C3** | Behaviour | Yes |
+| **C4** | Look and wording | Yes |
+
+Each variable also says when a change applies: **at once**, at the **next room** a host opens, or **at restart**.
+
+## Changes made in the administration
+
+An administrator can change C2 to C4 variables from **Administration → Settings**, or with `qd settings.set`. Such a change is an **override**:
+
+- **Precedence:** the default, then `.env`, then the administration. An override wins over `.env`, and `.env` keeps its value underneath.
+- **Storage:** overrides are kept in the database, so they travel with a database backup and survive an upgrade.
+- **Way back:** **Back to .env** for one variable, **Take everything back** for all, or `qd settings.reset --key=NAME` (`--all`). **Export as .env** (or `qd settings.export`) gives the overrides as `.env` lines, to make them permanent.
+- **Audit:** every change, and every refusal, is recorded. See [Audit](/docs/admin/audit/).
+
+You decide how much the web administration may change:
+
+- `ADMIN_WEB_SCOPE=read` (the default) shows the settings and changes none of them. `write` lets administrators change C2 to C4 values and run the instance operations.
+- `ADMIN_LOCK` names variables the web administration never changes, whatever the scope.
+- In local mode, the web administration changes nothing until `ADMIN_TOKEN` is set (32 characters or more), and asks for it before any change.
+- `ADMIN_OVERRIDES=ignore` starts the instance on `.env` alone, every override ignored but kept: the way out when an override went wrong.
+
+These limits apply to the web. `qd`, run by whoever has access to the container, is not gated by `ADMIN_WEB_SCOPE` or `ADMIN_LOCK`, and never changes a C1 variable either. The quick setup in the wizard sets its answers as overrides too. See [Settings](/docs/admin/settings/) and [Presets](/docs/admin/presets/).
+
+## Warnings at start
+
+At start, the application logs a warning (context `Settings`) for every value it cannot use as written, and `./quizdock doctor` lists the same ones:
+
+- **A value it cannot read** (a typo, a wrong format): the default is used instead.
+- **A value outside its range:** it is used as it is for now; a later release will enforce the range.
+- **Variables that contradict each other**, for example `ALLOW_ANONYMOUS_PARTICIPANTS=true` outside OIDC mode.
+
+A problem on a C1 variable makes `doctor` fail. It is only a warning at start for now: **from v1, an instance with an unreadable C1 variable will refuse to start.** Fix what the log names before then. The **Settings** and **Health** pages of the administration show the same problems.
+
+## Environment reference
+
+The reference below is generated from the settings of <ReleaseVersion />.
+
+## Identity & branding
+
+<EnvTable group="identity" />
+
+The logo, the icon and the stylesheet: see [Branding](/docs/admin/branding/).
+
+## Access & authentication
+
+<EnvTable group="access" />
+
+How to connect a provider, and what open access means: see [Sign-in with OpenID Connect](/docs/operator/oidc/). `DEMO_MODE` is described in [Public demo instance](#public-demo-instance).
+
+## Network & invitation
+
+<EnvTable group="network" />
+
+Which address the QR code carries in each setup, and what reaches the Internet: see [Networking](/docs/operator/networking/).
+
+## Storage
+
+<EnvTable group="storage" />
+
+`MEDIA_DIR` and `STORE_DIR` are not in PostgreSQL: back them up with the database, at the same moment. See [Back up an instance](/docs/operator/backup/).
+
+## Limits
+
+<EnvTable group="limits" />
+
+Behind a reverse proxy, raise its request body limit above the largest of these sizes. See [Reverse proxy](/docs/operator/reverse-proxy/).
+
+## Game pace
+
+<EnvTable group="pace" />
+
+## Administration
+
+<EnvTable group="admin" />
+
+What the web administration does with these: see the [administration overview](/docs/admin/overview/).
+
+## Deployment (Compose)
+
+Read by `docker-compose.prod.yml` and the `./quizdock` script, never by the application.
+
+<EnvTable deployment="compose" />
+
+## Bundled Keycloak (full)
+
+`./quizdock init --full` downloads `docker-compose.full.yml`, used on top of the Compose file. Only this overlay derives the application and OIDC addresses from `PUBLIC_HOST`; the other setups ignore it.
+
+<EnvTable deployment="keycloak" />
+
+- An explicit `APP_PUBLIC_URL`, `OIDC_ISSUER` or `OIDC_INTERNAL_URL` in `.env` overrides what the full setup derives.
+- Keycloak imports the realm only into an empty database: changing the initial passwords later does not reset existing accounts. Use the Keycloak administration console for that.
+- Keycloak's database, `keycloak`, lives in the same PostgreSQL server. `./quizdock backup` dumps it as `keycloak.sql`.
+
+## Ports and volumes
+
+| | Compose and full | Standalone |
+|---|---|---|
+| Application, in the container | port `3000` | port `3000` |
+| Published on the server | `HTTP_PORT` (`18080`) | the `-p` you give (`18080` with the script) |
+| Keycloak (full) | `KEYCLOAK_PORT` (`18081`) | — |
+| PostgreSQL and Redis | on an internal Docker network, not published | inside the container, on `127.0.0.1` only |
+| Database | volume `pgdata` | volume `quizdock`, at `/data/postgres` |
+| Live state (Redis) | volume `redisdata`, append-only file on | in memory only |
+| Media (`MEDIA_DIR`) | volume `mediadata`, at `/data/media` | volume `quizdock`, at `/data/media` |
+| Shared templates (`STORE_DIR`) | volume `storedata`, at `/data/store` | volume `quizdock`, at `/data/store` |
+| Branding folder | `./branding` mounted at `/app/client/branding` (commented out in the Compose file) | `-v "$PWD/branding:/app/client/branding:ro"` |
+
+Compose prefixes its volume names with the project name: `quizdock_pgdata`, `quizdock_mediadata`, and so on.
+
+## Public demo instance
+
+`DEMO_MODE` is not local mode. `AUTH_MODE` says who may host: anyone with a name, or an OIDC account. `DEMO_MODE=true` says the instance is open to strangers, and adds guards on top. It is meant for the standalone image in local mode, without a volume, as on the [live demo](https://quizdock-standalone.onrender.com). The guards:
+
+- **One shared host account, `demo_user`.** Whatever name a visitor gives, the server serves that account, which holds the host seat without expiry. Everyone sees and changes the same quiz bank; visitors may step on each other's quizzes and games. The sign-in page is a single **Enter the demo** button.
+- **Read-only template catalogue.** The sample templates can be previewed and copied, but sharing and withdrawing templates are refused.
+- **No media uploads,** including imported quizzes that carry media.
+- **Hourly reset** to a blank instance: accounts, quizzes, media, archived games, the host seat and the live state. Then `demo_user` is created again, with the sample quizzes in its bank. A reset waits while a game is being played, for at most 3 hours. The template catalogue is never reset.
+
+The pages show a banner, and the home page lists these guards, ending with the fact that a self-hosted instance has none of them. On the standalone image, the list adds that image's own limits.

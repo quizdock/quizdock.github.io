@@ -1,0 +1,26 @@
+---
+import { DEMO_URL, DOCKER_HUB_URL, USE_CASES, WHY } from '../site';
+---
+
+<header class="nav">
+  <a class="brand" href="/" aria-label="QuizDock home">
+    <img class="brand-mark" src="/icon.svg" alt="" width="32" height="32" />
+    <span class="brand-name">QuizDock</span>
+  </a>
+  <nav class="nav-links" aria-label="Main">
+    <details>
+      <summary>Why QuizDock ▾</summary>
+      <div class="menu">
+        {WHY.map((p) => <a href={p.href}>{p.title}<small>{p.line}</small></a>)}
+      </div>
+    </details>
+    <details>
+      <summary>Use cases ▾</summary>
+      <div class="menu">{USE_CASES.map((p) => <a href={p.href}>{p.title}</a>)}</div>
+    </details>
+    <a href="/docs/">Documentation</a>
+    <a href="/deploy/">Deploy</a>
+    <a href={DEMO_URL} target="_blank" rel="noopener">Demo ↗</a>
+    <a class="btn btn-ghost" href={DOCKER_HUB_URL} target="_blank" rel="noopener">Docker Hub ↗</a>
+  </nav>
+</header>

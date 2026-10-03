@@ -1,0 +1,194 @@
+---
+import Page from '../../layouts/Page.astro';
+import { DEMO_URL, DOCKER_HUB_URL } from '../../site';
+
+const faq = [
+  {
+    q: 'Can I embed a YouTube or Vimeo video?',
+    a: `<p>No. Videos are uploaded files, converted in the browser and served by your instance. Embeds from video sites are not supported.</p>`,
+  },
+  {
+    q: 'Which browsers work for media?',
+    a: `<p>Media are built and tested on Chromium-based browsers, such as Chrome and Edge. Firefox cannot re-encode a video to H.264, so convert videos from Chrome or Edge. Media on iPhones are untested.</p>`,
+  },
+  {
+    q: 'Does the server convert my files?',
+    a: `<p>No. The host's browser converts each file before upload: images to WebP, videos to MP4 (H.264 and AAC), sounds to M4A. The server only checks that the bytes are one of the formats it accepts, and never transcodes.</p>`,
+  },
+  {
+    q: 'Do players hear the sound on their phones?',
+    a: `<p>Not by default. The default, <b>Projection and remote participants</b>, plays the sound on the big screen and on the devices of remote participants; phones in the room stay silent. <b>Every device</b> includes them, per quiz, per question or for a session.</p>`,
+  },
+  {
+    q: 'How large can a file be?',
+    a: `<p>By default 10 MiB for an image, 50 MB for a video and 10 MB for a sound, after conversion. The operator can set images from 1 to 50 MB, videos from 1 to 500 MB and sounds from 1 to 100 MB.</p>`,
+  },
+  {
+    q: 'Do unused files pile up on the server?',
+    a: `<p>No. A clean-up runs at start, then every hour, and deletes files nobody uses that are older than 24 hours. A file still used by a quiz, a live game or an archived result is kept. A file uploaded twice is stored once.</p>`,
+  },
+];
+---
+
+<Page
+  title="Media"
+  description="Images, video and sound in QuizDock: what a question can show, browser conversion, limits, a common start, who hears the sound, levelling and the media library."
+  faq={faq}
+>
+  <section class="page-hero">
+    <h1>Video and sound, started together.</h1>
+    <p class="lede">
+      A question can show an image or a video and play a sound. Files are converted in the host's browser, fetched one
+      question ahead, and started on the server's clock on every device that plays them.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>What can a question or a slide show?</h2>
+      <ul>
+        <li><b>A question</b>: one visual, an image or an uploaded video, and one sound. A video brings its own sound. On the big screen the picture sits below, above, left or right of the text.</li>
+        <li><b>Image choice</b>: 2 or 4 pictures as the answers, each with its colour, shape and required alt text, cropped to 4:3; one or several right answers; a sound if you like.</li>
+        <li><b>A slide</b>: headings, Markdown text, images and two or three columns (up to 30 blocks), on a background image or gradient, with a full-screen looping video or a sound.</li>
+      </ul>
+      <p>Embedded videos from YouTube or Vimeo are not supported: upload the file.</p>
+    </div>
+    <div class="shots">
+      <figure>
+        <img src="/screenshots/projection-media.png" alt="The big screen during a question: the question, a photo of Paris above four coloured answers with their shapes, the timer, the count of answers and the PIN" />
+        <figcaption>A question with a picture, as the room sees it.</figcaption>
+      </figure>
+    </div>
+    <div class="prose"><p><a class="more-link" href="/docs/host/media/">Add media to a quiz →</a></p></div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="prose">
+      <h2>Which files can I upload?</h2>
+      <p>The host's browser converts each file before it is sent. The server never transcodes.</p>
+      <ul>
+        <li><b>Images</b> become WebP, at most 1920 pixels wide or high. A GIF keeps its first frame; SVG is refused.</li>
+        <li><b>Videos</b> become MP4 with H.264 and AAC, at most 1080p on the short side and 30 frames per second, compressed to fit the limit.</li>
+        <li><b>Sounds</b> become M4A (AAC at 128 kb/s, lowered to 64 if needed).</li>
+      </ul>
+      <p>
+        The server then checks the bytes and accepts MP4 (H.264, AAC), M4A, MP3, PNG, JPEG, GIF, WebP and AVIF. Limits, by
+        default: 10 MiB per image, 50 MB per video, 10 MB per sound; the operator can raise or lower each. A quiz bundle
+        imports up to 50 MiB.
+      </p>
+      <p>
+        Browser support: media are built and tested on Chromium-based browsers (Chrome, Edge). Firefox cannot re-encode
+        video to H.264. iPhones are untested.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>How does the room start a media together?</h2>
+      <p>
+        Each device fetches the next question's media while the current one plays, and only what it will play. Before a
+        question with sound or video, the server waits for the devices that play it, up to 10 s by default (20 s with the
+        large-event preset); the host can <b>Start anyway</b>. Images are not waited for.
+      </p>
+      <p>
+        The server then sets a common start 1.6 s ahead on its clock. Every device starts on its corrected clock and checks
+        its position every 500 ms. With <b>Start the timer when the media ends</b>, players listen first and answer after. How
+        closely devices actually play together has not been measured.
+      </p>
+      <p><a class="more-link" href="/real-time/">Timing and synchronisation →</a></p>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="prose">
+      <h2>Who hears the sound?</h2>
+      <p>
+        <b>Projection only</b>, <b>Projection and remote participants</b> (the default) or <b>Every device</b>. The author
+        sets it for the quiz and for each question (<b>Who hears this sound</b>), and the host can set it for the session.
+        Phones in the room show the picture and play no video.
+      </p>
+      <p>
+        Browsers block sound until someone clicks: the projection asks for one click, <b>Turn sound on</b>. The host's
+        console stays silent.
+      </p>
+      <p><a class="more-link" href="/docs/host/sound-and-projection/">Sound and projection →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>How are the levels kept even?</h2>
+      <p>
+        <b>Sound levelling.</b> The editor measures each sound's loudness (EBU R128, ITU BS.1770-4) and its peak. At playback,
+        every sound and video of a quiz is brought to the quiz's target, <b>Loud</b> (−14 LUFS), <b>Balanced</b> (−16 LUFS,
+        the default) or <b>Calm</b> (−23 LUFS), without clipping. The files are not changed.
+      </p>
+      <p>
+        <b>The mixer.</b> Quiz media, music, effects and interface sounds each have their own channel, then a master with a
+        limiter; music steps aside while a question plays its own media. Every device keeps its own volume and mute. The
+        <b>Room sound</b> panel, all off in a new room, offers <b>Answer received</b>, <b>Question start</b>,
+        <b>Time's up</b>, <b>Countdown</b> and <b>Music</b>, built in or from the library, with levels for media, music and
+        effects, <b>Projection sound</b> and <b>Room muted</b>.
+      </p>
+      <h2>Can the host control playback live?</h2>
+      <p>
+        Yes. The console plays, pauses and restarts the sound, seeks on its waveform, and plays, pauses or restarts a video.
+        Seeking never moves the timer. The waveform has three sizes, or is hidden, per question (<b>Waveform size</b>).
+      </p>
+    </div>
+    <div class="shots">
+      <figure>
+        <img src="/screenshots/console-slide.png" alt="The host console on an intro slide: Autoplay, Pause, Room sound, Animations and Projection window in the toolbar, the quiz outline on the right" />
+        <figcaption>The console: room sound, animations and the outline of the quiz.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="prose">
+      <h2>Where do media live?</h2>
+      <ul>
+        <li><b>My media</b>: each host's images, videos and sounds, searchable by name, alt text or credit, with <b>Used in N quizzes</b>. Reusing a file copies its alt text and credit; an unused file can be deleted.</li>
+        <li><b>Global media</b>: files an administrator offers to every host. Using one gives the host a copy, credit included. Never cleaned up.</li>
+        <li><b>Administration › Media</b>: disk use by owner and kind, usages, deleting any file, uploading or promoting to global, running the clean-up.</li>
+      </ul>
+      <p>
+        The clean-up runs at start, then hourly, and deletes files unused and older than 24 hours. A file still used by a
+        quiz, a live game or an archived result is kept (<b>Kept for past results</b>). Each file is stored once, named by its
+        SHA-256; a file uploaded again is recognised before conversion.
+      </p>
+    </div>
+    <div class="shots">
+      <figure>
+        <img src="/screenshots/media-library.png" alt="The media library in the editor: My media and Global media tabs, a search field, image thumbnails with their size and how many quizzes use them, and links to free libraries" />
+        <figcaption>The library: your files, the instance's, and free libraries to look elsewhere.</figcaption>
+      </figure>
+    </div>
+    <div class="prose"><p><a class="more-link" href="/docs/admin/media/">Media for administrators →</a></p></div>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>How are credits handled?</h2>
+      <p>
+        Each media has a free-text credit (author, licence, source), with a reminder for CC BY. Credits appear on the
+        preview page, in small print under the podium, and on a credits page per quiz. There is no structured licence field
+        per media. To share a quiz as a template, its author picks a licence for the quiz: CC0, CC BY 4.0 or CC BY-SA 4.0.
+      </p>
+      <p>
+        Under <b>Find elsewhere:</b>, the editor links to free libraries: OpenSoundLibrary, Freesound, ccMixter, Openverse,
+        Wikimedia Commons, NASA Image and Video Library, Internet Archive. They are links only; the operator can change the
+        list or hide it.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="next">
+      <a class="btn btn-primary" href={DEMO_URL} target="_blank" rel="noopener">Try the live demo ↗</a>
+      <a class="btn btn-ghost" href={DOCKER_HUB_URL} target="_blank" rel="noopener">Get it on Docker Hub ↗</a>
+      <a class="btn btn-ghost" href="/docs/host/media/">Media in the Documentation</a>
+    </div>
+  </section>
+</Page>

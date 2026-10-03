@@ -1,0 +1,180 @@
+---
+import Page from '../../layouts/Page.astro';
+import { DEMO_URL, DOCKER_HUB_URL } from '../../site';
+
+const faq = [
+  {
+    q: 'Can QuizDock run without Internet?',
+    a: `<p>Yes, on an isolated local network. Answer <b>No</b> to <b>Does this instance reach the Internet?</b> in the setup wizard: the update check is turned off and the links to online media libraries are hidden. Leave the community catalogue unset (the default), use local mode or an identity provider on your network, and keep quizzes free of images from the web. The server then makes no outgoing request.</p>`,
+  },
+  {
+    q: 'Where is QuizDock data stored?',
+    a: `<p>On the machine you run it on. Accounts, quizzes, results, feedback, settings and the audit are in PostgreSQL; live games in Redis; uploaded media and shared templates on two volumes; the configuration in <code>.env</code>. The standalone image keeps all of it in one Docker volume.</p>`,
+  },
+  {
+    q: 'Does QuizDock send data to a cloud service?',
+    a: `<p>No telemetry, no analytics, no e-mail. One request is on by default: the update check, which asks <code>api.github.com</code> for the latest release at most once a day. GitHub sees the server's IP address and its version, nothing else. Set <code>UPDATE_CHECK=false</code>, or answer <b>No</b> to the wizard's Internet question, to turn it off.</p>`,
+  },
+  {
+    q: 'Can QuizDock run on a local network?',
+    a: `<p>Yes. Phones on the same network open the address on the QR code. When the container uses the host's network (Linux), QuizDock detects the machine's local addresses; with Docker Desktop or a bridge network, set <code>HOST_LAN_IPS</code>. The setup wizard tests each address from a phone.</p>`,
+  },
+  {
+    q: 'Can it run in an air-gapped environment?',
+    a: `<p>The application can: with the offline preset it needs nothing from outside. Bringing it in is not documented: the images come from Docker Hub and <code>./quizdock init</code> downloads its Compose files from GitHub, so on a network with no Internet at all you carry them in yourself, without a tested procedure.</p>`,
+  },
+  {
+    q: 'Can I use my own database?',
+    a: `<p>Possible, not documented. The application reads <code>DATABASE_URL</code> and <code>REDIS_URL</code>, but the Compose file runs its own PostgreSQL 16 and Redis 7, and no guide covers an external server. The schema needs the <code>citext</code> extension.</p>`,
+  },
+];
+---
+
+<Page
+  title="Self-hosted"
+  description="What a QuizDock instance runs and stores, every outgoing request it can make, and how it works offline, on a local network and under your own brand."
+  faq={faq}
+>
+  <section class="page-hero">
+    <h1>Your servers, your network, your data.</h1>
+    <p class="lede">
+      A QuizDock instance is the application, PostgreSQL, Redis and a media volume, on a machine you choose.
+      It needs no cloud service, and you decide whether it talks to anything outside.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>What runs on my server?</h2>
+      <p>
+        With Compose, four services: the QuizDock application, which serves the pages, the API and the game's WebSocket
+        itself; PostgreSQL 16; Redis 7, with its append-only file on a volume; and a one-shot service that applies the
+        database migrations at each start. The full setup adds Keycloak with its own database. The standalone image puts
+        the application, PostgreSQL and Redis in one container, for trying QuizDock; it is not hardened for serious production.
+      </p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Where</th><th>What</th></tr></thead>
+        <tbody>
+          <tr><td>PostgreSQL</td><td>Accounts, quizzes, archived results, feedback, settings changed from the administration, the audit.</td></tr>
+          <tr><td>Redis</td><td>Live games (expire after 4 hours), sign-in sessions with an identity provider.</td></tr>
+          <tr><td>Media volume</td><td>Uploaded images, videos and sounds (<code>/data/media</code>).</td></tr>
+          <tr><td>Store volume</td><td>Quizzes shared as templates (<code>/data/store</code>).</td></tr>
+          <tr><td><code>.env</code></td><td>The configuration and its secrets, in the instance's folder.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prose"><p><a class="more-link" href="/docs/operator/configuration/">Configuration reference →</a></p></div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="prose">
+      <h2>Which outgoing requests can the server make?</h2>
+      <p>Three, and only three. This is the complete list.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Request</th><th>To</th><th>Default</th><th>What is sent</th></tr></thead>
+        <tbody>
+          <tr><td>Update check</td><td><code>api.github.com</code></td><td>On (<code>UPDATE_CHECK=true</code>), at most once a day, when an administration page, <code>./quizdock status</code> or <code>version</code> asks</td><td>Nothing but the request: GitHub sees the server's IP and its version in the user agent.</td></tr>
+          <tr><td>Community catalogue</td><td>The registries in <code>QUIZ_STORE_URL</code>, files only from allowed hosts (<code>QUIZ_STORE_HOSTS</code>)</td><td>Off (<code>QUIZ_STORE_URL</code> empty)</td><td>No identity, no quiz, no result.</td></tr>
+          <tr><td>Identity provider</td><td>Your provider's discovery, token and key endpoints</td><td>Only with <code>AUTH_MODE=oidc</code></td><td>The standard OpenID Connect exchanges. The provider can be on your internal network.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prose">
+      <p>
+        Nothing else: no telemetry, no analytics, no e-mail, no webhooks. The free media libraries offered in the editor
+        are plain links the host's browser opens; the server fetches nothing from them.
+      </p>
+      <p>
+        Outside the application itself: images are pulled from Docker Hub, and <code>./quizdock init</code> downloads its
+        Compose files from <code>raw.githubusercontent.com</code>. In the browser, the pages load scripts, styles, fonts and
+        connections from the instance only. Two exceptions: a picture in a quiz's Markdown may come from any
+        <code>https</code> address, and so may a logo set with <code>APP_LOGO_URL</code>.
+      </p>
+      <p><a class="more-link" href="/privacy/">What is stored, and who decides →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>Can it work without Internet?</h2>
+      <p>
+        Yes, on an isolated local network. Answer <b>No</b> to <b>Does this instance reach the Internet?</b> in the setup
+        wizard, or run <code>./quizdock qd presets.apply --internet=offline</code>: the update check is turned off and the
+        media library links are hidden. With the community catalogue left unset (the default), local mode or an identity
+        provider on your network, and no images from the web in quizzes, the server makes no outgoing request.
+      </p>
+      <h2>And on an air-gapped network?</h2>
+      <p>
+        The running instance needs nothing from outside, as above. What is not documented is getting it there: the images
+        (for instance with <code>docker save</code> and <code>docker load</code>) and the files <code>./quizdock init</code>
+        downloads (the Compose file, and for the full setup its overlay and the Keycloak realm). You can carry them in
+        yourself, but there is no tested procedure.
+      </p>
+      <p><a class="more-link" href="/docs/operator/air-gapped/">Isolated and air-gapped networks →</a></p>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="prose">
+      <h2>Do I need Docker?</h2>
+      <p>
+        In practice, yes. Docker is how QuizDock is distributed: images on Docker Hub for amd64 and arm64, run alone
+        (standalone) or with Compose. Every documented install uses it; none covers bare metal, Kubernetes or Podman.
+      </p>
+      <p>
+        The application image is distroless and runs as a non-root user. The Compose file runs it with a read-only file
+        system, every Linux capability dropped and no privilege escalation.
+      </p>
+      <p><a class="more-link" href="/deploy/">Choose a deployment →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>Can it carry our name and logo?</h2>
+      <p>
+        Yes, without rebuilding the image. <code>APP_NAME</code> sets the name in the header, the tab and the share
+        messages; <code>APP_LANG</code> the interface language (English, French, Spanish, Simplified and Traditional
+        Chinese, Turkish). A <code>branding/</code> folder mounted into the application holds a logo, a square
+        <code>favicon.png</code> and an <code>override.css</code> loaded last, to change any CSS variable or rule; or point
+        <code>APP_LOGO_URL</code> at a logo elsewhere. <code>APP_FEEDBACK_URL</code> says where the feedback links lead, and
+        <code>none</code> hides them. There is no colour setting: the palette changes through <code>override.css</code>.
+      </p>
+      <p><a class="more-link" href="/docs/admin/branding/">Branding →</a></p>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="prose">
+      <h2>Will phones on the local network find it?</h2>
+      <p>
+        Phones open the address on the QR code and the join link. In the lobby, the host picks it: the public address
+        (<code>APP_PUBLIC_URL</code>), the page they are on, a detected local address, or <b>Other address…</b>. It is fixed
+        once the game starts.
+      </p>
+      <ul>
+        <li>A container on the host's network (Linux, <code>--network host</code>) sees the machine's local addresses.</li>
+        <li>Docker Desktop and bridge networks, the default, hide them: set <code>HOST_LAN_IPS</code>, or type the address.</li>
+        <li>Phones must be on the same network, and the firewall must let the port through. Many guest Wi-Fi networks keep devices from seeing each other.</li>
+        <li>Over <code>https</code>, an <code>http://</code> local address makes phones warn.</li>
+      </ul>
+      <p>
+        The setup wizard's <b>Address</b> step shows a QR code per address: scan it with a phone, and the page says whether
+        it got through.
+      </p>
+      <p><a class="more-link" href="/docs/operator/networking/">Networking and the invitation address →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="next">
+      <a class="btn btn-primary" href={DEMO_URL} target="_blank" rel="noopener">Try the live demo ↗</a>
+      <a class="btn btn-ghost" href={DOCKER_HUB_URL} target="_blank" rel="noopener">Get it on Docker Hub ↗</a>
+      <a class="btn btn-ghost" href="/docs/operator/air-gapped/">Run it offline</a>
+    </div>
+  </section>
+</Page>

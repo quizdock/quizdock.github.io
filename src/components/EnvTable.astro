@@ -1,0 +1,96 @@
+---
+/**
+ * One table of the environment reference, rendered from the latest release's
+ * schema/settings.json (generated from QuizDock's settings registry).
+ */
+import data from '../generated/settings.json';
+
+interface Props {
+  /** A section of the application's settings (`identity`, `access`…)… */
+  group?: string;
+  /** …or the variables read around the application. */
+  deployment?: 'compose' | 'keycloak';
+}
+interface Entry {
+  key: string;
+  default: string;
+  level: string;
+  description: string;
+  accepts?: string;
+  applies?: 'live' | 'next-room' | 'restart';
+  administration?: boolean;
+  preset?: string;
+}
+const { group, deployment } = Astro.props;
+const entries: Entry[] = deployment
+  ? (data as { compose: Entry[]; keycloak: Entry[] })[deployment]
+  : ((data.groups as { id: string; settings: Entry[] }[]).find((g) => g.id === group)?.settings ?? []);
+if (!entries.length) throw new Error(`EnvTable: nothing for ${group ?? deployment}`);
+
+/** The registry's inline Markdown: code, bold, italics. */
+const md = (text: string) =>
+  text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/(^|[\s(])[_*]([^_*]+)[_*](?=[\s).,;:]|$)/g, '$1<em>$2</em>');
+const APPLIES = { live: 'at once', 'next-room': 'next room', restart: 'at restart' };
+const settings = !deployment;
+---
+
+<div class="env-table">
+  <table>
+    <thead>
+      <tr>
+        <th>Variable</th>
+        <th>Default</th>
+        {settings && <th>Accepts</th>}
+        <th>Level</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        entries.map((e) => (
+          <tr id={e.key.toLowerCase()}>
+            <td>
+              <code>{e.key}</code>
+            </td>
+            <td set:html={md(e.default)} />
+            {settings && <td set:html={md(e.accepts ?? '')} />}
+            <td>{e.level}</td>
+            <td>
+              <span set:html={md(e.description)} />
+              {settings && (
+                <small class="env-meta">
+                  Applies {APPLIES[e.applies ?? 'restart']}
+                  {e.administration ? ' · changeable from the administration' : ' · .env only'}
+                  {e.preset ? ` · set by the quick setup (${e.preset})` : ''}
+                </small>
+              )}
+            </td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .env-table {
+    overflow-x: auto;
+  }
+  .env-table table {
+    font-size: var(--sl-text-sm);
+  }
+  .env-table td:first-child {
+    white-space: nowrap;
+  }
+  .env-meta {
+    display: block;
+    margin-top: 0.3rem;
+    color: var(--sl-color-gray-3);
+  }
+</style>

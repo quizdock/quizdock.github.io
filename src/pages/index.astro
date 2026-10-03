@@ -1,0 +1,129 @@
+---
+import Page from '../layouts/Page.astro';
+import { DEMO_URL, DOCKER_HUB_URL } from '../site';
+---
+
+<Page
+  title="QuizDock — open-source live quizzes on your own infrastructure"
+  description="QuizDock is an open-source live quiz platform you run on your own infrastructure: a big screen for the room, a phone for each player, every result in your own database. MIT, Docker images for amd64 and arm64."
+>
+  <section class="hero">
+    <img class="hero-logo" src="/logo.svg" alt="QuizDock" />
+    <div class="pills"><span class="pill">Open source · MIT · self-hosted</span></div>
+    <h1>Live quizzes you actually <span class="accent">own</span>.</h1>
+    <p class="lede">
+      QuizDock is an open-source live quiz platform you run on your own infrastructure:
+      a big screen for the room, a phone for each player, and every result in your own database.
+    </p>
+    <div class="cta">
+      <a class="btn btn-primary" href={DEMO_URL} target="_blank" rel="noopener">Try the live demo ↗</a>
+      <a class="btn btn-ghost" href={DOCKER_HUB_URL} target="_blank" rel="noopener">Get it on Docker Hub ↗</a>
+      <a class="btn btn-ghost" href="/docs/">Read the documentation</a>
+    </div>
+    <figure class="hero-demo">
+      <img src="/demo.gif" alt="A session on the big screen: the intro slide, questions with their timers and answers coming in, the reveals" width="800" height="450" />
+      <figcaption>A session as the room sees it: intro slide, questions, answers coming in, reveals.</figcaption>
+    </figure>
+  </section>
+
+  <section class="section">
+    <h2>Why QuizDock</h2>
+    <div class="values">
+      <article class="card">
+        <h3>Plug-and-play</h3>
+        <p>No identity provider to start: a host takes the seat by name, players join with a PIN and a nickname. A setup wizard in the browser, three sample quizzes, a script that backs up, upgrades and checks the instance.</p>
+        <a class="more-link" href="/plug-and-play/">Easy to try, run and operate →</a>
+      </article>
+      <article class="card">
+        <h3>Your infrastructure, your data</h3>
+        <p>The application, PostgreSQL, Redis and a media volume: nothing else. No telemetry, no third-party scripts in the pages. With the offline preset and local accounts, the server makes no outgoing request.</p>
+        <a class="more-link" href="/self-hosted/">Self-hosted, offline included →</a>
+      </article>
+      <article class="card">
+        <h3>Real time, measured</h3>
+        <p>The server sets every start and deadline and stamps every answer on arrival. 50 rooms of 30 players: answers acknowledged in 9 ms at p95.</p>
+        <p class="fine">Measured 2026-09-27: backend on one 2.1 GHz core, players simulated on the same machine, no media.</p>
+        <a class="more-link" href="/real-time/">Timing, sync and benchmarks →</a>
+      </article>
+      <article class="card">
+        <h3>From one classroom to an organisation</h3>
+        <p>Start in local mode, move to your OpenID Connect provider with the same image: host and admin roles, a web administration, settings the operator can lock, an audit trail of every change.</p>
+        <a class="more-link" href="/enterprise/">QuizDock for organisations →</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <h2>Ready to use, not a prototype</h2>
+    <div class="shots">
+      <figure><img src="/screenshots/editor.png" alt="The quiz editor" /><figcaption>The editor: eight question types, slides, media.</figcaption></figure>
+      <figure><img src="/screenshots/console-question.png" alt="The host console during a question" /><figcaption>The host console: pace, timer, who answered.</figcaption></figure>
+      <figure><img src="/screenshots/player-play.png" alt="A player's phone during a question" /><figcaption>A player's phone: colour and shape on every answer.</figcaption></figure>
+      <figure><img src="/screenshots/projection-reveal.png" alt="The big screen at the reveal" /><figcaption>The big screen at the reveal.</figcaption></figure>
+    </div>
+    <div class="proof">
+      <div><b><a href={DEMO_URL} target="_blank" rel="noopener">A live demo ↗</a></b><span>Open it, present a sample quiz, join from your phone.</span></div>
+      <div><b><a href="/real-time/#benchmarks">Published benchmarks →</a></b><span>Scenario, machine and raw results, with what was not measured.</span></div>
+      <div><b>A web administration</b><span>Settings, accounts, quizzes, media, health, audit, and a setup wizard for a new instance.</span></div>
+      <div><b>An operator script</b><span><code>status</code>, <code>doctor</code>, <code>backup</code>, <code>restore</code>, <code>upgrade</code>.</span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Made for the way you run quizzes</h2>
+    <div class="who">
+      <a href="/use-cases/education/"><b>Teaching</b><span>A quiz in class on the projector, no student accounts, on the school network.</span></a>
+      <a href="/use-cases/enterprise-training/"><b>Training</b><span>Check what stuck, keep the results per trainee, export them.</span></a>
+      <a href="/enterprise/"><b>Organisations</b><span>Single sign-on, roles, administration, audit, your own servers.</span></a>
+      <a href="/use-cases/events/"><b>Events</b><span>Hundreds of players in one room, remote participants, sound on the big screen.</span></a>
+      <a href="/self-hosted/"><b>At home, on a local network</b><span>One container on a laptop, phones on the same Wi-Fi.</span></a>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <h2>What a game looks like</h2>
+    <div class="caps">
+      <div><h3>Eight question types, and slides</h3><p>Single and multiple choice, true/false, text, numeric, ordering, poll, image choice. Slides between questions, Markdown, backgrounds, explanations after the reveal.</p></div>
+      <div><h3>Video and sound, started together</h3><p>Media fetched one question ahead and started on the server's clock. Remote participants get the question and its media on their own device (experimental).</p></div>
+      <div><h3>Accessible by design</h3><p>Colour and shape on every answer, reduced motion, a longer reading time in one choice of the setup wizard.</p></div>
+      <div><h3>Privacy chosen at launch</h3><p>The host decides whether results are kept per player and whether every answer is recorded; players are told which.</p></div>
+      <div><h3>Bring your quizzes</h3><p>Import Kahoot spreadsheets and QuizDock bundles, share templates on the instance, browse a community catalogue if the operator enables it.</p></div>
+      <div><h3>Results you keep</h3><p>History per quiz, results per question and per player, standings across several quizzes in one room, CSV exports.</p></div>
+    </div>
+  </section>
+
+  <section class="section" id="run">
+    <h2>Try it, run it, deploy it</h2>
+    <div class="paths">
+      <article class="card">
+        <h3>Try</h3>
+        <p>The public demo: shared host account, wiped every hour, uploads off. It may take a minute to wake up.</p>
+        <a class="btn btn-primary" href={DEMO_URL} target="_blank" rel="noopener">Open the live demo ↗</a>
+      </article>
+      <article class="card">
+        <h3>Run</h3>
+        <p>One container with its database, on Docker Desktop or any machine:</p>
+        <pre>docker run -p 18080:3000 -v quizdock:/data \
+  fchaussin/quizdock:standalone</pre>
+        <p>Then open <code>http://localhost:18080</code>.</p>
+        <a class="more-link" href={DOCKER_HUB_URL} target="_blank" rel="noopener">Images and tags on Docker Hub ↗</a>
+      </article>
+      <article class="card">
+        <h3>Deploy</h3>
+        <p>A guided install with PostgreSQL and Redis, with or without your identity provider:</p>
+        <pre>curl -fsSLO https://raw.githubusercontent.com/quizdock/quiz-dock/main/quizdock
+chmod +x quizdock
+./quizdock init
+./quizdock up</pre>
+        <a class="more-link" href="/deploy/">Choose a deployment →</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="oss">
+      <p><b>Open source, MIT.</b> Six interface languages, translations welcome. Released as Docker images for amd64 and arm64, a new version announced in the administration.</p>
+      <a class="btn btn-primary" href={DOCKER_HUB_URL} target="_blank" rel="noopener">fchaussin/quizdock on Docker Hub ↗</a>
+    </div>
+  </section>
+</Page>

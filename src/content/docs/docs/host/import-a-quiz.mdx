@@ -1,0 +1,147 @@
+---
+title: Import a quiz
+description: Import a QuizDock bundle, a quiz.json file or a Kahoot spreadsheet, move quizzes between instances, and convert a quiz from another tool with a chatbot.
+sidebar:
+  order: 6
+---
+import Guide from '../../../../generated/quiz-format-guide.md';
+
+QuizDock imports three kinds of file from the dashboard: its own bundle (`.zip`), its own quiz file (`quiz.json`) and a Kahoot spreadsheet (`.xlsx`). For anything else (a PDF, screenshots, another tool's export) a chatbot can write the `quiz.json` for you. Every import creates a new draft in your bank; nothing you already have is changed.
+
+## Import from the dashboard
+
+1. In **My quizzes**, choose **Import**.
+2. Pick a `.zip`, `.json` or `.xlsx` file.
+3. The quiz opens in the editor as a new **Draft**. Check it, then **Publish (ready)**.
+
+| File | What it holds |
+|---|---|
+| `.zip`, a QuizDock bundle | The whole quiz, with its media, as **Export** writes it. |
+| `.json`, a `quiz.json` | The quiz's text only: questions, answers, slides, no media. |
+| `.xlsx`, a Kahoot spreadsheet | Questions written in Kahoot's official template. |
+
+A file is limited to 50 MB by default; whoever runs your instance can change it. An invalid file is refused as a whole, and the message names the item and the field at fault.
+
+## Kahoot spreadsheet
+
+Use Kahoot's [official spreadsheet template](https://support.kahoot.com/hc/en-us/articles/115002812547-How-to-import-questions-from-a-spreadsheet-to-your-kahoot): one sheet, headers on row 8, questions from row 9. Delete the template's example question if you do not want it. The file name becomes the draft's title.
+
+What comes across:
+
+- the wording, the order of the answers and the correct answers;
+- the time limits, from 5 to 240 seconds (an empty cell gives the default 20);
+- one correct answer becomes **Multiple choice (single answer)**, several become **Multiple choice (multiple answers)**.
+
+What does not:
+
+- pictures, sounds and links: they are not read or fetched;
+- the language and the licence: the draft takes the instance's language and has no licence. Check both in **Settings** before publishing or sharing.
+
+The editor shows a report on top, such as "12 questions imported from Kahoot." and "Pictures and sounds are not brought over." A row missing its question, answers or correct answer still comes in, as a question marked **Unfinished**: the quiz cannot be published until it is complete. A row is left out, and reported as "Row 14 left out: …", only when QuizDock cannot hold it: a time limit outside 5–240 seconds, a formula cell, or a text too long for QuizDock. When no row can be converted, no draft is created.
+
+A Kahoot quiz's web address is not an import source: the spreadsheet template is. To bring an existing kahoot, use the chatbot conversion below.
+
+## Move a quiz with a bundle
+
+A bundle carries a whole quiz from one bank or one instance to another.
+
+1. In the editor, open **More** and choose **Export**. The browser downloads a file named after the quiz, such as `discover-france.quizdock.zip`: the quiz file and its media.
+2. On the other side, choose **Import** in **My quizzes** and pick that file.
+
+The import is always a new draft with its own copy of the media; the original quiz is not linked to it. Past sessions and results do not travel with a bundle.
+
+**Export for publication** is a different file, checked for the community store; see [Templates and community](/docs/host/templates-and-community/).
+
+## Convert from another tool with a chatbot
+
+For a PDF, screenshots, another spreadsheet or plain text, a chatbot can do the conversion: give it what you have, the prompt below and the quiz format guide, and it writes a `quiz.json` that QuizDock imports. It works from almost anything:
+
+- **a PDF**: on Kahoot, print the kahoot's page from the browser and choose *Save as PDF*; it holds the questions and the answers, with the right one marked;
+- **screenshots** of each question with its answers, when nothing can be printed or exported; a phone photo of a quiz on paper works too (the chatbot has to read images: most current ones do);
+- **a spreadsheet** with one question per row;
+- **text**: a Word document, notes, a list pasted as is.
+
+:::caution[What you send leaves your instance]
+The chatbot's provider receives the content of the quiz. Use one you trust with it.
+:::
+
+### Step by step
+
+1. Open a chatbot and paste the prompt below. Attach the [format guide](https://raw.githubusercontent.com/quizdock/quiz-dock/main/schema/quiz-format-guide.md) (download it, or paste it below the prompt), then your quiz. Several screenshots in one message are fine.
+2. The chatbot answers with a JSON block and a short *To check* list. Save the block as a file ending in `.json`: copy it into a text editor, or download it when the chatbot offers a file.
+3. In QuizDock, choose **Import** in **My quizzes** and pick the file. The quiz opens as a new draft.
+4. Read the *To check* list, then go through the quiz before playing it:
+   - the correct answers: a chatbot can misread a mark, or guess one the source did not show;
+   - the pictures: none are imported; add your own from the [media library](/docs/host/media/);
+   - the time limits: one over QuizDock's maximum is shortened.
+
+If the import is refused, the message names the item and the field at fault: paste it back to the chatbot and ask for a corrected file.
+
+### The prompt
+
+Copy it whole. It is in English, the language chatbots follow best; the quiz keeps its own language. The format itself is in the guide: the prompt only says how to convert.
+
+```text
+Convert the quiz I give you (PDF, screenshots, spreadsheet or text) into a QuizDock quiz file, following the "QuizDock quiz file — format guide" I attach or paste below, exactly.
+
+Answer with ONE JSON code block, then a short "To check" list. Nothing else.
+
+Pick each question's type from what the source asks the players to do:
+- one correct answer: single_choice; several: multiple_choice; true or false: true_false;
+- a typed answer: text_input, with every spelling the source accepts;
+- a number or a slider: numeric, with the source's margin as the tolerance;
+- answers to put in order (a puzzle): ordering;
+- a survey with no correct answer: poll;
+- word clouds, open-ended or brainstorm questions have no equivalent: leave them out.
+A page of information between questions becomes a slide.
+
+Rules:
+- Keep the source's wording, order and language. Do not translate, shorten or improve anything.
+- Keep the source's time limits and double or no points.
+- No images, sounds or videos. When a question needs its picture to make sense, keep the question.
+- Never invent a correct answer. For each question, look at whether the source marks the right answer (a tick, a colour, bold, a key). When it does not, choose the one you are sure of, or make it a poll if you are not; either way, list the question under "To check", even when the answer seems obvious.
+- Before answering, go through the guide's checklist and fix what fails. Every change made to fit a limit (a shorter time, a shortened text, answers dropped) goes under "To check".
+
+"To check" lists, by question number in the source: questions left out and why, answers you chose yourself, pictures that were lost, limits you had to change (time, length, number of answers). Write "Nothing" when the list is empty.
+```
+
+### What comes across
+
+| In the source | In QuizDock |
+|---|---|
+| Quiz, one correct answer | **Multiple choice (single answer)** |
+| Quiz, several correct answers | **Multiple choice (multiple answers)** |
+| True or false | **True / False** |
+| Type answer | **Text input**, with the accepted spellings |
+| Slider | **Numeric**, with its margin as the tolerance |
+| Puzzle | **Reorder** |
+| Poll | **Poll** (no points) |
+| Slide | A slide with a heading and a text |
+| Double points / no points | The same, per question |
+| Time limit | The same, within 5 to 240 seconds |
+
+Word clouds, open-ended and brainstorm questions have no equivalent: they are left out and listed under *To check*. **Image choice** questions are not part of a text-only conversion: add them in the editor.
+
+Images and sounds stay behind on purpose. A `quiz.json` carries no media, and the pictures of a Kahoot quiz often come from licensed image banks: they are not yours to copy. The chatbot notes which questions had one, and you add your own; the media library links to free libraries when the instance offers them.
+
+Whoever runs your instance can also check a file before it is imported, with the command-line tool or a local connector for AI assistants; see [CLI](/docs/operator/cli/).
+
+## The quiz format guide
+
+This guide is generated from the importer of the current release, so it always describes the file QuizDock accepts today.
+
+<Guide />
+
+## Questions
+
+### Can I import a CSV file?
+
+No. QuizDock imports its own bundle and `quiz.json`, and Kahoot's `.xlsx` template. For a CSV or any other spreadsheet, use the chatbot conversion above.
+
+### Does importing a quiz bring its results?
+
+No. A bundle carries the quiz and its media. Sessions, results and player feedback stay on the instance where the quiz was played.
+
+### Can I update an existing quiz by importing it again?
+
+No. Every import creates a new draft. Delete or archive the old quiz once the new one is checked.

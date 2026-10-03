@@ -1,0 +1,184 @@
+---
+import Page from '../../layouts/Page.astro';
+import { DEMO_URL, DOCKER_HUB_URL } from '../../site';
+
+const faq = [
+  {
+    q: 'Is there a paid edition or a support contract?',
+    a: `<p>No. QuizDock is open source under the MIT licence, and everyone runs the same software. There is no paid edition, no licence key and no contractual support. Security issues are reported privately, as the project's security policy describes; fixes go to the latest release.</p>`,
+  },
+  {
+    q: 'Does QuizDock support SSO?',
+    a: `<p>Yes, through OpenID Connect: authorization code with PKCE, discovery, token refresh, signing keys, and logout at the provider. The backend keeps the tokens; the browser only holds an HttpOnly session cookie. QuizDock speaks OpenID Connect only, not SAML or LDAP.</p>`,
+  },
+  {
+    q: 'Which identity providers are supported?',
+    a: `<p>Any provider that follows the OpenID Connect standards should work. Keycloak is the one tested and shipped: the full setup includes it, with a ready realm. Other providers have not been tested by the project; test yours before relying on it.</p>`,
+  },
+  {
+    q: 'Can administrators manage roles?',
+    a: `<p>Yes. Roles come from a claim of the provider's token, and an administrator can also grant or revoke <code>host</code> and <code>admin</code> on <b>Administration › Accounts</b> (with <code>ADMIN_WEB_SCOPE=write</code>), or with <code>./quizdock user:set-role</code> at any time. A grant outranks the token's claims.</p>`,
+  },
+  {
+    q: 'Can settings be locked by the operator?',
+    a: `<p>Yes. <code>ADMIN_WEB_SCOPE=read</code>, the default, keeps the web administration from changing any instance setting; <code>ADMIN_LOCK</code> names variables it never changes even with <code>write</code>; critical settings (level C1) are never changed from the web. The command line is not limited by either.</p>`,
+  },
+  {
+    q: 'Is there an audit trail?',
+    a: `<p>Yes. Every administrative operation, from the web or the command line, is recorded with its time, actor, client address, parameters (secrets masked), outcome and what it replaced. Refusals are recorded too. Entries are never edited or deleted.</p>`,
+  },
+  {
+    q: 'Can QuizDock run behind a corporate reverse proxy?',
+    a: `<p>Yes. Serve the pages, the API and the WebSocket from one origin, forward WebSocket upgrades, accept request bodies of at least 50 MB for media and imports, and set <code>TRUST_PROXY</code> so that QuizDock reads the client's address and marks cookies secure.</p>`,
+  },
+];
+---
+
+<Page
+  title="Enterprise"
+  description="QuizDock in an organisation: OpenID Connect sign-in, roles, a web administration, an audit trail, operator-locked settings, backup and upgrade. Open source, MIT."
+  faq={faq}
+>
+  <section class="page-hero">
+    <h1>QuizDock in an organisation</h1>
+    <p class="lede">
+      Single sign-on with your OpenID Connect provider, host and administrator roles, a web administration,
+      an audit trail of every change, and settings the operator keeps under control.
+    </p>
+    <p>
+      <b>QuizDock is open source under the MIT licence. There is no paid edition and no contractual support.</b>
+      Everything on this page is in the image anyone downloads.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>From a first test to production</h2>
+      <ol>
+        <li><b>Evaluation</b>: the <a href={DEMO_URL} target="_blank" rel="noopener">live demo</a>, then <code>./quizdock init --full</code> on a test machine, with Keycloak and two sample accounts.</li>
+        <li><b>Validation</b>: Compose on your infrastructure, behind your reverse proxy, sized from the published measurements.</li>
+        <li><b>OIDC</b>: connect your identity provider.</li>
+        <li><b>Roles</b>: decide who hosts and who administers.</li>
+        <li><b>Administration</b>: accounts, quizzes, media, statistics from the browser.</li>
+        <li><b>Audit</b>: every change recorded, from the web and the command line.</li>
+        <li><b>Governance</b>: what the web may change, and what it never may.</li>
+        <li><b>Operations</b>: backup, upgrade, health, sizing.</li>
+      </ol>
+      <p>
+        The full setup creates a <code>host</code> account (roles host and admin) and a <code>player</code> account, with
+        temporary passwords written in <code>.env</code> (mode 600) and changed at first sign-in.
+      </p>
+      <p><a class="more-link" href="/docs/operator/choose-a-deployment/">Choose a deployment →</a></p>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="prose">
+      <h2>How does sign-in work?</h2>
+      <p>
+        With <code>AUTH_MODE=oidc</code>, QuizDock signs people in through your OpenID Connect provider: discovery,
+        authorization code with PKCE, refresh, signing keys, logout at the provider. A public client (PKCE) or a
+        confidential one (with a secret) both work. The backend holds the tokens in Redis; the browser gets an HttpOnly
+        cookie, and a session unused for 24 hours is forgotten.
+      </p>
+      <p>
+        The protocol is standard; the testing is not universal. Keycloak is the provider the project tests and ships, with
+        a ready realm in the full setup. Other providers have not been tested by the project.
+      </p>
+      <p><a class="more-link" href="/docs/operator/oidc/">Connect an identity provider →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>Who can do what?</h2>
+      <ul>
+        <li><b>Participant</b>: joins rooms. Every account is at least a participant.</li>
+        <li><b>Host</b>: creates, edits and presents their own quizzes.</li>
+        <li><b>Manager</b> (<code>admin</code>): reads the whole instance and administers it. Managing is not hosting: an administrator without the host role presents nothing.</li>
+      </ul>
+      <p>
+        Roles are read from a claim of the token (<code>OIDC_ROLES_CLAIM</code>: <code>roles</code>, <code>groups</code>, or a
+        path such as <code>realm_access.roles</code>), or granted on <b>Administration › Accounts</b> or with
+        <code>./quizdock user:set-role</code>. A grant is never lowered by the token.
+      </p>
+      <p>
+        Under OIDC every participant signs in. If the operator sets <code>ALLOW_ANONYMOUS_PARTICIPANTS=true</code>, a host
+        may open a game to the PIN and a nickname instead; nothing is then kept per person.
+      </p>
+      <p><a class="more-link" href="/docs/admin/accounts-and-roles/">Accounts and roles →</a></p>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="prose">
+      <h2>What can administrators see and do?</h2>
+      <ul>
+        <li><b>Statistics</b>: games under way (refreshed every 5 seconds), the instance at a glance, twelve months of history.</li>
+        <li><b>Quizzes</b>: every quiz, by owner and status, quizzes nobody can reach; open, export, hand over, archive, restore, delete; import for an account; purge old sessions.</li>
+        <li><b>Media</b>: disk use by owner and kind, usages, clean-up, media offered to every host.</li>
+        <li><b>Accounts</b>: search, roles, quizzes and games per account, the local host seat.</li>
+        <li><b>Settings</b>, <b>Health</b> and <b>Audit</b>.</li>
+      </ul>
+      <p>Destructive operations ask for confirmation; several offer a preview first.</p>
+    </div>
+    <div class="shots">
+      <figure>
+        <img src="/screenshots/admin-statistics.png" alt="The Statistics page of the administration: games under way, the instance at a glance and the history by month" />
+        <figcaption>Statistics: what is played now, and over twelve months.</figcaption>
+      </figure>
+    </div>
+    <div class="prose"><p><a class="more-link" href="/docs/admin/overview/">The administration →</a></p></div>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>Is every change recorded?</h2>
+      <p>
+        Yes. The audit records each operation: when, who and how (<b>Web</b> or <b>Command line</b>), the client address,
+        the operation, its parameters with secrets masked, the outcome (<b>Done</b>, <b>Nothing to do</b>, <b>Partly</b>,
+        <b>Refused</b>, <b>Failed</b>) and what it replaced. Refused attempts are recorded. Entries are never edited or
+        deleted. From a shell, <code>./quizdock qd audit.list</code> lists them, also per setting.
+      </p>
+      <p><a class="more-link" href="/docs/admin/audit/">The audit →</a></p>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="prose">
+      <h2>What does the operator keep control of?</h2>
+      <ul>
+        <li><b>Levels.</b> Every setting is C1 (critical: start-up, data, security), C2 (access, resources), C3 (behaviour) or C4 (look, wording). C1 is never changed from the web; C2 changes are confirmed.</li>
+        <li><b><code>ADMIN_WEB_SCOPE</code></b>: <code>read</code> by default, so the web shows the instance settings, accounts and host seat but changes none of them. <code>write</code> allows C2 to C4. Quizzes and media are not concerned.</li>
+        <li><b><code>ADMIN_LOCK</code></b>: variables the web never changes, whatever the scope.</li>
+        <li><b><code>ADMIN_OVERRIDES=ignore</code></b>: start on <code>.env</code> alone, ignoring web changes without deleting them.</li>
+      </ul>
+      <p>These are set in <code>.env</code> and read at start. The command line on the server is never limited by them.</p>
+      <p><a class="more-link" href="/docs/admin/settings/">Settings and their levels →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>How is it operated?</h2>
+      <ul>
+        <li><b>Backup and restore</b>: <code>./quizdock backup</code> dumps the database (and Keycloak's in the full setup) while the instance runs, and copies media, shared templates and <code>.env</code>. <code>./quizdock restore</code> puts a backup back. Scheduling is yours.</li>
+        <li><b>Upgrade</b>: <code>./quizdock upgrade X.Y.Z</code> backs up, pulls, migrates, waits for health and runs <code>doctor</code>. No rollback but the backup.</li>
+        <li><b>Health</b>: a public <code>/health</code> endpoint (status, version, authentication mode) for your monitoring; the <b>Health</b> page and <code>./quizdock doctor</code> for the checks behind it.</li>
+        <li><b>Logs</b>: plain text on the container's standard output, <code>./quizdock logs</code>.</li>
+        <li><b>Sizing</b>: one process on one core runs the live games. Measured: 700 players in one room fluid on 2 vCPU and 2 GB, 1500 at the edge on 2 vCPU and 4 GB. No horizontal scaling.</li>
+        <li><b>Security</b>: a distroless image running as non-root; in Compose, a read-only file system and no Linux capabilities; dependencies and images scanned for known vulnerabilities.</li>
+      </ul>
+      <p class="fine">Sizing measured on 2026-09-27: backend on one 2.1 GHz core, players simulated on the same machine, no media. <a href="/real-time/#benchmarks">Conditions and figures</a>.</p>
+      <p><a class="more-link" href="/docs/operator/backup/">Back up an instance →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="next">
+      <a class="btn btn-primary" href={DEMO_URL} target="_blank" rel="noopener">Try the live demo ↗</a>
+      <a class="btn btn-ghost" href={DOCKER_HUB_URL} target="_blank" rel="noopener">Get it on Docker Hub ↗</a>
+      <a class="btn btn-ghost" href="/docs/operator/oidc/">Connect your identity provider</a>
+    </div>
+  </section>
+</Page>

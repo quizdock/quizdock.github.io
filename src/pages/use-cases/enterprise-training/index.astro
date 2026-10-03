@@ -1,0 +1,151 @@
+---
+import Page from '../../../layouts/Page.astro';
+import { DEMO_URL, DOCKER_HUB_URL } from '../../../site';
+
+const faq = [
+  {
+    q: 'Which identity providers work with QuizDock?',
+    a: '<p>Any OpenID Connect provider, in principle: QuizDock uses Discovery, the authorization code flow with PKCE and the provider’s signing keys, nothing provider-specific. Keycloak is the one tested and shipped, in the full setup; others have not been tested. See <a href="/docs/operator/oidc/">OIDC</a>.</p>',
+  },
+  {
+    q: 'Can I see all the results of one trainee across several trainings?',
+    a: '<p>Not on one page. Results are recorded under the trainee’s account in each session, and the history is kept per quiz. A room’s standings add up the quizzes played in it. To follow a trainee across sessions, combine the CSV exports. See <a href="/docs/host/reports-and-history/">Reports and history</a>.</p>',
+  },
+  {
+    q: 'Does QuizDock connect to an LMS?',
+    a: '<p>No. QuizDock has no LMS connector; results leave as CSV files (semicolon-separated, UTF-8) per session, per room and per player. See <a href="/docs/host/export-results/">Export results</a>.</p>',
+  },
+  {
+    q: 'Can external guests join a session without an account?',
+    a: '<p>Yes, if the operator allows open access. The trainer then chooses <b>Open access</b> at launch: the PIN and a nickname are enough, and no individual result is kept for that session. See <a href="/docs/host/start-a-room/">Start a room</a>.</p>',
+  },
+  {
+    q: 'How long are training results kept?',
+    a: '<p>Archived sessions are kept 365 days, then deleted when the operator runs the purge command; nothing deletes them automatically, and the period is not a setting. See <a href="/docs/admin/privacy-and-retention/">Privacy and retention</a>.</p>',
+  },
+];
+---
+
+<Page
+  title="QuizDock for enterprise training"
+  description="Training quizzes with single sign-on: results kept per trainee and per session, CSV exports, standings across a training day, templates shared between trainers."
+  faq={faq}
+>
+  <section class="page-hero">
+    <h1>Training quizzes whose results you keep, per trainee</h1>
+    <p class="lede">
+      After a module you want to know what stuck, for the group and for each trainee, and to keep a record of
+      it. With QuizDock connected to your identity provider, trainees sign in with their work account, results
+      are archived under that account, and every session exports to CSV.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>How do I know who is who without a sign-up sheet?</h2>
+      <p>
+        In OIDC mode, trainees sign in with the account they already have, through your OpenID Connect
+        provider; the tokens stay on the server, never in the browser. Each phone tells its trainee “Your taking
+        part and your score are recorded under your account.”
+      </p>
+      <p>
+        <b>Let participants pick their display name</b> decides what the room sees: off, the name comes from
+        the account; on, trainees choose one, and their results stay attached to the account all the same. See
+        <a href="/docs/operator/oidc/">OIDC</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="prose">
+      <h2>Can I decide, session by session, what is recorded?</h2>
+      <p>
+        Yes. When the operator allows open access, <b>Present</b> asks for the <b>Participant access</b>:
+        <b>Accounts required</b> or <b>Open access</b>, with <b>Remember my choice</b> to stop asking. In the
+        lobby, <b>Before starting</b> holds the rest, fixed once the quiz starts:
+      </p>
+      <ul>
+        <li><b>Personalised tracking</b>, on by default: results under each trainee’s account; off, only the group’s overall results.</li>
+        <li><b>Record all answers</b>, off by default: every answer of every trainee, after a confirmation that warns it is personal data.</li>
+        <li><b>Who hears the sound in this quiz</b>, when the quiz has sound or video.</li>
+      </ul>
+      <p>
+        Trainees see a notice that matches these choices. See <a href="/docs/host/start-a-room/">Start a room</a>
+        and <a href="/privacy/">Privacy</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>Where are a session’s results afterwards?</h2>
+      <p>
+        In the quiz’s <b>History</b>: each archived session with its date, status, participants and success
+        rate. A session shows <b>Results by question</b> (answers, success rate, average time) and the
+        <b>Players</b> table (rank, nickname, score, correct answers, streak). <b>Export (CSV)</b> downloads
+        that table.
+      </p>
+      <p>
+        A trainee’s page lists their answers question by question, with its own <b>Export (CSV)</b>, when
+        <b>Record all answers</b> was on. There is no page that gathers one trainee across quizzes, and no LMS
+        connector: the CSV files are the way out. See <a href="/docs/host/reports-and-history/">Reports and
+        history</a> and <a href="/docs/host/export-results/">Export results</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="prose">
+      <h2>A training day: several quizzes, one ranking</h2>
+      <p>
+        One room can hold the whole day. After a quiz, <b>Next quiz</b> picks the following one: trainees stay
+        in the room and nobody types the PIN again. The picker marks what was <b>Already played</b> and
+        <b>Not played yet</b>. <b>End quiz…</b> stops one midway, with <b>Keep what was played so far</b>.
+      </p>
+      <p>
+        Each quiz scores from zero; between quizzes the projection shows the <b>Room standings</b>, and the day
+        ends on the <b>Room podium</b>. In History, the room’s standings add up its archived quizzes and leave
+        with <b>Export standings (CSV)</b>, provided every quiz of the room had <b>Personalised tracking</b> on.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>How do trainers share their material?</h2>
+      <p>
+        Two ways. <b>Share with the instance’s other hosts</b> puts a quiz in their list, read-only, and they
+        create their own copy from it. <b>Share as a template</b> puts a copy of a ready quiz, with its licence,
+        in <b>Shared templates</b>, where any trainer chooses <b>Create a quiz from this</b>; sharing again
+        replaces the entry, and <b>Withdraw</b> removes it without touching the copies taken.
+      </p>
+      <p>
+        Between instances, <b>Export</b> writes a <code>.quizdock.zip</code> with the media, which
+        <b>Import</b> turns into a new draft. See <a href="/docs/host/templates-and-community/">Templates and
+        community</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="prose">
+      <h2>And the administration?</h2>
+      <p>
+        Roles are Participant, Host and Manager, read from your provider’s roles claim or granted in the
+        administration’s <b>Accounts</b> page; a manager administers without presenting. When a trainer leaves,
+        an administrator transfers their quizzes to another account, media and history included. The operator
+        can lock settings, and every administrative change, from the web or the command line, is written to an
+        audit trail that is never edited. See <a href="/enterprise/">QuizDock for organisations</a>,
+        <a href="/docs/admin/accounts-and-roles/">Accounts and roles</a> and <a href="/docs/admin/audit/">Audit</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="next">
+      <a class="btn btn-primary" href={DEMO_URL} target="_blank" rel="noopener">Try the live demo ↗</a>
+      <a class="btn btn-ghost" href={DOCKER_HUB_URL} target="_blank" rel="noopener">Get it on Docker Hub ↗</a>
+      <a class="btn btn-ghost" href="/docs/host/getting-started/">Getting started as a host</a>
+    </div>
+  </section>
+</Page>

@@ -1,0 +1,195 @@
+---
+import Page from '../../layouts/Page.astro';
+import { DEMO_URL, DOCKER_HUB_URL } from '../../site';
+
+const faq = [
+  {
+    q: 'Which setup should I choose?',
+    a: `<p>To try QuizDock on your machine, standalone. For an instance you keep, Compose through <code>./quizdock init</code>: in local mode on a trusted network, or with your identity provider. To evaluate accounts and roles without a provider of your own, the full setup with Keycloak.</p>`,
+  },
+  {
+    q: 'Does QuizDock run on ARM?',
+    a: `<p>Yes. Every image is published for amd64 and arm64.</p>`,
+  },
+  {
+    q: 'Do I need a domain name and HTTPS?',
+    a: `<p>Not on a local network: phones open the machine's local address. For players outside your network, you need a public address, and HTTPS through a reverse proxy, which phones also need to install the app on their home screen. Set <code>APP_PUBLIC_URL</code> to that address.</p>`,
+  },
+  {
+    q: 'Which ports does QuizDock use?',
+    a: `<p>The application listens on port 3000 in its container, published on <code>HTTP_PORT</code>, 18080 by default. The full setup also publishes Keycloak, on 18081 by default.</p>`,
+  },
+  {
+    q: 'Can I run QuizDock without Docker?',
+    a: `<p>No install without Docker is documented. The standalone image and the Compose setups are the supported paths.</p>`,
+  },
+  {
+    q: 'How do I back up an instance?',
+    a: `<p>On the server, in the instance's folder: <code>./quizdock backup</code>. It dumps the database while the instance runs and copies the media, the shared templates and <code>.env</code> into <code>./backups/</code>. Schedule it yourself; <code>./quizdock restore</code> puts a backup back.</p>`,
+  },
+];
+---
+
+<Page
+  title="Deploy"
+  description="Choose a QuizDock setup (standalone, Compose, Compose with your identity provider, or full with Keycloak), then install, persist and upgrade it."
+  faq={faq}
+>
+  <section class="page-hero">
+    <h1>Deploy QuizDock</h1>
+    <p class="lede">
+      Four setups run the same application from the same release. Choose by how hosts sign in and how many services you
+      want to operate.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>Which setup for which need?</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Need</th><th>Setup</th><th>Start with</th><th>Hosts</th><th>Participants</th></tr></thead>
+        <tbody>
+          <tr><td>Try it on your machine</td><td><b>Standalone</b>: one container with PostgreSQL and Redis inside</td><td><code>docker run</code>, or <code>./quizdock init --standalone</code></td><td>One host seat, by name</td><td>PIN and nickname</td></tr>
+          <tr><td>An instance you keep, on a trusted network</td><td><b>Compose</b>: application, PostgreSQL, Redis</td><td><code>./quizdock init</code>, local mode</td><td>One host seat, by name</td><td>PIN and nickname</td></tr>
+          <tr><td>Your organisation's sign-in</td><td><b>Compose with your identity provider</b></td><td><code>./quizdock init</code>, OIDC, your issuer</td><td>Accounts with the host role</td><td>Accounts, or PIN and nickname when open games are allowed</td></tr>
+          <tr><td>A full evaluation, accounts included</td><td><b>Full</b>: Compose with a bundled Keycloak</td><td><code>./quizdock init --full</code></td><td>A sample host account, then your own</td><td>A sample player account, or PIN and nickname in an open game</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prose">
+      <p>
+        Standalone is for trying QuizDock: everything shares one container, which is not hardened for serious production.
+        Local mode trusts names, so keep it to trusted networks. The full setup adds Keycloak and a second database to
+        maintain.
+      </p>
+      <p><a class="more-link" href="/docs/operator/choose-a-deployment/">Choose a deployment →</a></p>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="prose"><h2>How do I start?</h2></div>
+    <div class="paths">
+      <article class="card">
+        <h3>Standalone, in one command</h3>
+        <pre>docker run -p 18080:3000 -v quizdock:/data \
+  fchaussin/quizdock:standalone</pre>
+        <p>Then open <code>http://localhost:18080</code>.</p>
+      </article>
+      <article class="card">
+        <h3>Compose, with the script</h3>
+        <pre>curl -fsSLO https://raw.githubusercontent.com/quizdock/quiz-dock/main/quizdock
+chmod +x quizdock
+./quizdock init
+./quizdock up</pre>
+        <p>Use <code>init --full</code> for Keycloak, <code>init --standalone</code> for one container.</p>
+      </article>
+    </div>
+    <div class="prose">
+      <p>
+        The script is a POSIX shell script that needs Docker with its compose plugin, and <code>curl</code>. <code>init</code>
+        asks for the name, the language, the port (18080 by default) and the authentication mode; it writes
+        <code>.env</code> with random passwords and permissions 600, and downloads the Compose files. <code>up</code> starts
+        the instance and waits until it is healthy.
+      </p>
+      <p>
+        On first visit, the setup wizard asks for the token written in the logs: <code>./quizdock logs</code>. Run every
+        command on the server, in the instance's folder.
+      </p>
+      <p><a class="more-link" href="/docs/operator/install/">Install an instance →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>Where does the data live?</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Setup</th><th>Database</th><th>Media and templates</th><th>Live games</th><th>Configuration</th></tr></thead>
+        <tbody>
+          <tr><td>Standalone</td><td>Volume <code>quizdock</code>, <code>/data/postgres</code></td><td>Same volume, <code>/data/media</code> and <code>/data/store</code></td><td>Redis in memory only</td><td>Environment of the container (<code>.env</code> with the script)</td></tr>
+          <tr><td>Compose and full</td><td>Volume <code>pgdata</code> (Keycloak's database too, in full)</td><td>Volumes <code>mediadata</code> and <code>storedata</code></td><td>Volume <code>redisdata</code>, append-only file</td><td><code>.env</code> in the instance's folder</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prose">
+      <p>
+        Media and shared templates are not in the database: back them up together, at the same moment. That is what
+        <code>./quizdock backup</code> does. An optional <code>branding/</code> folder, mounted for a logo and styles, is not
+        part of the backup.
+      </p>
+      <p><a class="more-link" href="/docs/operator/backup/">Back up an instance →</a></p>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="prose">
+      <h2>Which image tag should I use?</h2>
+      <p>The image is <code>fchaussin/quizdock</code> on Docker Hub, for amd64 and arm64.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Tag</th><th>What it points to</th></tr></thead>
+        <tbody>
+          <tr><td><code>X.Y.Z</code></td><td>That exact release.</td></tr>
+          <tr><td><code>X.Y</code></td><td>The latest patch release of that minor version.</td></tr>
+          <tr><td><code>latest</code></td><td>The current stable release.</td></tr>
+          <tr><td><code>standalone</code></td><td>The current stable release, as one container with PostgreSQL and Redis.</td></tr>
+          <tr><td><code>standalone-X.Y.Z</code></td><td>That exact release, as one container.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prose">
+      <p>
+        One release, one version: images are published only from a release tag, and the standalone image of a release is
+        built on that release's application image. The script runs the tag set in <code>.env</code> (<code>QUIZDOCK_TAG</code>,
+        <code>latest</code> by default) in every setup: <code>X.Y.Z</code> for Compose, <code>standalone-X.Y.Z</code> for the
+        standalone image.
+      </p>
+      <p><a class="more-link" href={DOCKER_HUB_URL} target="_blank" rel="noopener">Tags on Docker Hub ↗</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>How do I upgrade?</h2>
+      <pre>./quizdock upgrade X.Y.Z</pre>
+      <p>
+        One line, on the server, in the instance's folder. It backs up, records the tag in <code>.env</code>, pulls the
+        image, restarts with the database migrations and shows their log, waits for the health check, and runs
+        <code>doctor</code>. A standalone instance moves to that release's standalone image.
+      </p>
+      <p>
+        Migrations cannot be rolled back: going back means restoring the database and the media from the same backup. Read
+        the <b>Upgrading</b> section of the release notes first. A newer release is announced in the administration and by
+        <code>./quizdock status</code>, with the command to run.
+      </p>
+      <p><a class="more-link" href="/docs/operator/upgrade/">Upgrade an instance →</a></p>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="prose">
+      <h2>What else before going live?</h2>
+      <ul>
+        <li><a href="/docs/operator/configuration/">Configuration</a>: every variable, its default and its level.</li>
+        <li><a href="/docs/operator/networking/">Networking</a>: the address phones are offered.</li>
+        <li><a href="/docs/operator/reverse-proxy/">Reverse proxy</a>: one origin, WebSocket, request size, HTTPS.</li>
+        <li><a href="/docs/operator/oidc/">OIDC</a>: connect your identity provider.</li>
+        <li><a href="/docs/operator/sizing/">Sizing</a>: what the measurements say about the machine.</li>
+        <li><a href="/docs/operator/security/">Security</a>: the image, the secrets, reporting a vulnerability.</li>
+        <li><a href="/docs/operator/status-and-doctor/">Status and doctor</a>: checking an instance.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="next">
+      <a class="btn btn-primary" href={DOCKER_HUB_URL} target="_blank" rel="noopener">Get it on Docker Hub ↗</a>
+      <a class="btn btn-ghost" href={DEMO_URL} target="_blank" rel="noopener">Try the live demo ↗</a>
+      <a class="btn btn-ghost" href="/docs/operator/choose-a-deployment/">Choose a deployment</a>
+    </div>
+  </section>
+</Page>
