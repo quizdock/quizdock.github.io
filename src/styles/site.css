@@ -857,3 +857,12 @@ code {
 }
 /* The first section follows the intro closely. */
 .page-hero + .section { padding-top: 1.5rem; }
+/* Table text starts on the column's edge, like the paragraphs: columns are kept
+   apart by a right padding only (rows with a merged cell stay aligned too). */
+.table-wrap th,
+.table-wrap td,
+.prose th,
+.prose td {
+  padding: 0.45rem 1.2rem 0.45rem 0;
+}
+.table-wrap th.num, .prose th.num { text-align: right; }
