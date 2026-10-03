@@ -30,7 +30,7 @@ What the editor makes of your file:
 | A video | MP4 (H.264 video, AAC sound), at most 1080p and 30 frames per second, compressed to fit the size limit. |
 | A sound | M4A (AAC). |
 
-SVG pictures and QuickTime `.mov` files are refused. When a browser cannot read or convert a file, convert it first with a dedicated tool: HandBrake for videos (MP4 H.264), Audacity for sounds. A video shot on an iPhone is often HEVC: convert it, or set the camera to "Most Compatible".
+SVG pictures are refused. A QuickTime `.mov` is converted to MP4 like any other video. When a browser cannot read or convert a file, convert it first with a dedicated tool: HandBrake for videos (MP4 H.264), Audacity for sounds. A video shot on an iPhone is often HEVC: convert it, or set the camera to "Most Compatible".
 
 The same file uploaded twice is recognised and stored once.
 
@@ -73,7 +73,7 @@ Every sound and video is levelled at playback to the quiz's **Sound levelling**,
 
 ## In the room
 
-Phones in the room show a question's picture but play no video: the big screen does. A participant playing remotely gets the whole question, video and sound included. To avoid waits, devices receive the next question's media a few seconds before it appears, never its text or answers. See [Sound and projection](/docs/host/sound-and-projection/).
+Phones in the room show a question's picture; they play its video only when its sound reaches **Every device**, otherwise the big screen does. A participant playing remotely gets the whole question, video and sound included. To avoid waits, devices receive the next question's media a few seconds before it appears, never its text or answers. See [Sound and projection](/docs/host/sound-and-projection/).
 
 ## Questions
 
@@ -83,4 +83,4 @@ No. QuizDock plays videos you upload. Download the video (when its licence allow
 
 ### Why was my video refused?
 
-Most often it is a QuickTime `.mov`, an HEVC video from an iPhone, or a sound track that is not AAC. Upload it from Chrome or Edge, which convert it, or convert it first to MP4 H.264 + AAC with HandBrake. See [Troubleshooting](/docs/host/troubleshooting/).
+Most often it is an HEVC video from an iPhone, or a sound track that is not AAC, in a browser that cannot convert it. Upload it from Chrome or Edge, which convert it, or convert it first to MP4 H.264 + AAC with HandBrake. See [Troubleshooting](/docs/host/troubleshooting/).

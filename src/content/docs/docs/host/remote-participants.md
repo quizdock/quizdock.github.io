@@ -15,7 +15,7 @@ Remote participation works, but it is the least tested part of QuizDock. It is b
 
 The join form asks every player **Where are you playing from?**:
 
-- **In the room**: "I can see the big screen". The phone shows the answer tiles; the question, its media and its sound are on the projection.
+- **In the room**: "I can see the big screen". The phone shows the question's text, a small picture and the answer tiles; the video and the sound are on the projection, unless they reach **Every device**.
 - **Remote**: "The question, its video and its sound come to this device".
 
 **In the room** is preselected. In the console, a remote player is marked **Participating remotely**.
@@ -24,11 +24,11 @@ A remote participant answers on the same clock as everyone else. The question's 
 
 ## Who hears what
 
-Three settings decide which devices play the sounds and videos, each one overriding the previous:
+Three settings decide which devices play the sounds and videos. The first one set applies:
 
-1. The quiz's **Who hears the sound**, in the editor's settings.
-2. A question's or slide's **Who hears this sound**, in the editor.
-3. **Who hears the sound in this quiz**, in the lobby, for this room only. Questions with their own setting keep it.
+1. A question's or slide's **Who hears this sound**, in the editor.
+2. **Who hears the sound in this quiz**, in the lobby, for this room only. Questions with their own setting keep it.
+3. The quiz's **Who hears the sound**, in the editor's settings.
 
 | Choice | Big screen | Remote devices | Phones in the room |
 |---|---|---|---|
@@ -38,7 +38,7 @@ Three settings decide which devices play the sounds and videos, each one overrid
 
 "Every device" makes phones in the room echo if they share it: keep it for players who are each in a different place.
 
-The room's music and effects (see [Sound and projection](/docs/host/sound-and-projection/)) also reach remote participants, unless the room's sound is set to the projection only. Phones in the room stay silent.
+The room's music and effects (see [Sound and projection](/docs/host/sound-and-projection/)) also reach remote participants, unless **Who hears the sound in this quiz** (or, when the lobby leaves it, the quiz's **Who hears the sound**) is set to the projection only. Phones in the room stay silent.
 
 A browser plays sound only after a tap on the page. Remote players get a sound button on their device to turn it on, and can mute their own device at any time.
 
@@ -52,7 +52,7 @@ Any player can also switch their phone between **Back to my answers** and **Show
 
 - Answers are timed by the server when they arrive. QuizDock does not compensate for a slow connection: a player on a poor network loses a little time on each answer.
 - Each device downloads the question's media itself. Before each question, the console waits for the devices to load it (10 seconds at most by default) and shows **Start anyway**.
-- Phones in the room show a question's picture, not its video; remote devices play the video.
+- Phones in the room show a question's picture, and play its video only with **Every device**; remote devices play the video.
 
 ## Questions
 

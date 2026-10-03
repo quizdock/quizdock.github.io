@@ -20,7 +20,7 @@ QuizDock imports three kinds of file from the dashboard: its own bundle (`.zip`)
 | `.json`, a `quiz.json` | The quiz's text only: questions, answers, slides, no media. |
 | `.xlsx`, a Kahoot spreadsheet | Questions written in Kahoot's official template. |
 
-A file is limited to 50 MB by default; whoever runs your instance can change it. An invalid file is refused as a whole, and the message names the item and the field at fault.
+A file is limited to 50 MB by default; whoever runs your instance can change it. An invalid file is refused as a whole. An error in a question or a slide names the item and the field at fault: "Item 3 of the bundle is invalid (…)." A file that cannot be read, or whose structure is not QuizDock's, gets "Not a QuizDock bundle (quiz.json + media/, zipped)."
 
 ## Kahoot spreadsheet
 
@@ -75,7 +75,7 @@ The chatbot's provider receives the content of the quiz. Use one you trust with 
    - the pictures: none are imported; add your own from the [media library](/docs/host/media/);
    - the time limits: one over QuizDock's maximum is shortened.
 
-If the import is refused, the message names the item and the field at fault: paste it back to the chatbot and ask for a corrected file.
+If the import is refused, paste the message back to the chatbot and ask for a corrected file. An error in a question names the item and the field at fault; "Not a QuizDock bundle (…)" means the file is not JSON or its structure is wrong.
 
 ### The prompt
 

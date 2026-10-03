@@ -54,7 +54,7 @@ Players type their answer. List the spellings you accept under **Accepted answer
 Scoring:
 
 - **Exact match** (the default): the answer must match one of the accepted answers, once case and accents are set aside.
-- **Tolerate typos**: one edit (a letter added, removed or changed) is forgiven for an answer of up to 5 letters, two beyond.
+- **Tolerate typos**: one edit (a letter added, removed or changed) is forgiven when the accepted answer has up to 5 characters, two beyond.
 
 List the real alternatives (for example "Lisbon" and "Lisboa"); typo tolerance is not a synonym list.
 
@@ -98,4 +98,4 @@ No. Text input compares the answer with the accepted answers; there is no free-t
 
 ### Do players see the question on their phone?
 
-In the room, the question and its media are on the big screen and phones show the answer tiles. A participant who joins as **Remote** gets the whole question on their device. See [Remote participants](/docs/host/remote-participants/).
+In the room, the question and its media are on the big screen; phones show the question's text, a small picture and the answer tiles. A participant who joins as **Remote** gets the whole question on their device. See [Remote participants](/docs/host/remote-participants/).

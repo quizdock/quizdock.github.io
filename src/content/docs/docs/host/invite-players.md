@@ -51,7 +51,7 @@ A player's phone remembers them: if the connection drops or the page reloads, th
 
 ### Do players need to install an app?
 
-No. A current browser is enough. Phones in the room show the answer tiles; the question is on the big screen.
+No. A current browser is enough. Phones in the room show the question's text, a small picture and the answer tiles; the question in full is on the big screen.
 
 ### Can two players use the same nickname?
 

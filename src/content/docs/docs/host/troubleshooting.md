@@ -32,7 +32,7 @@ Most problems in a room come from the network address, the browser's sound polic
 | "Your answer arrived too late: it is not counted." | The answer reached the server after the question closed (end of time plus 0.3 seconds). | Nothing to fix: late answers score 0. |
 | "Too early: the answers were not open yet. Answer again." | The player answered during the reading time. | Answer again once the answers open. |
 | "Quiz paused — host disconnected." | Your console lost the connection. | Reopen the room with **Resume** in **Open rooms** within 2 minutes. |
-| Phones show no video | Phones in the room never play a question's video: the big screen does. | Players who cannot see the big screen choose **Remote** when they join. |
+| Phones show no video | Phones in the room play a question's video only when its sound reaches **Every device**: otherwise the big screen does. | Players who cannot see the big screen choose **Remote** when they join. |
 
 ## Editing and presenting
 
@@ -50,7 +50,7 @@ Most problems in a room come from the network address, the browser's sound polic
 
 | Message | Cause | Fix |
 |---|---|---|
-| "Not a QuizDock bundle (quiz.json + media/, zipped)." | The `.zip` was not made by QuizDock's **Export**. | Export the quiz again from QuizDock. |
+| "Not a QuizDock bundle (quiz.json + media/, zipped)." | The file cannot be read, or its structure is not QuizDock's: a `.zip` not made by QuizDock's **Export**, a `quiz.json` that is not JSON or misses a part. | Export the quiz again from QuizDock, or check the `quiz.json` against the format. |
 | "Use the original Kahoot spreadsheet template (.xlsx), with one sheet." | The spreadsheet is not Kahoot's template. | Copy the questions into the official template, or use the chatbot conversion. |
 | "No valid questions found. Check row 9 and the Kahoot template." | No row could be converted. | Check the rows from row 9 down. |
 | "File too large to import (at most 50 MB)." | The file is over the instance's import limit. | Lighten the media, or ask whoever runs your instance. |
@@ -60,7 +60,7 @@ See [Import a quiz](/docs/host/import-a-quiz/).
 ## Phones cannot reach the room
 
 1. Look at the invitation address in the console. `localhost` or `127.0.0.1` only works on the computer itself: choose another address under **Invitation address**.
-2. On a local instance, pick the computer's address on the network the players use (an IP such as `192.168.x.x`, with the port of the page). **Why this address?** shows where to find it on Mac, Windows and Linux.
+2. On a local instance, pick the computer's address on the network the players use (an IP such as `192.168.x.x`, with the port of the page). When no local address was detected, **Why this address?** shows where to find it on Mac, Windows and Linux.
 3. Check that the phones are on the same Wi-Fi as the computer. Guest Wi-Fi networks often keep devices apart.
 4. Check that the computer's firewall lets the port through.
 5. Test with your own phone: scan the QR code before players arrive.
@@ -79,7 +79,7 @@ The invitation address cannot change once the quiz has started. If no local addr
 
 | Message | Fix |
 |---|---|
-| "QuickTime files (.mov) are not accepted." | Export the video as MP4 (H.264), for instance with HandBrake. |
+| "QuickTime files (.mov) are not accepted." | A `.mov` reached the server without being converted. Upload it from the editor in Chrome or Edge, which converts it to MP4, or export it as MP4 (H.264) with HandBrake. |
 | "Unsupported video codec (…)." | Often a video shot on an iPhone. Convert it to MP4 H.264 with HandBrake, or set the camera to "Most Compatible". |
 | "This browser cannot convert this video to MP4 H.264." | Use Chrome or Edge, or convert it first with HandBrake. |
 | "This browser cannot convert this sound to AAC." | Try Chrome or Edge, or convert it first with Audacity. |

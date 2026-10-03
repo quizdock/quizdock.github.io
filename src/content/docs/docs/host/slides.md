@@ -40,7 +40,7 @@ A slide plays one sound at a time: either the video's sound or a separate sound,
 
 - **Default duration (5 s)**;
 - **Manual: the host clicks**;
-- **Custom duration…**, from 0 to 600 seconds.
+- **Custom duration…**, from 1 to 600 seconds.
 
 In manual mode the host always moves on by hand, whatever is set here.
 

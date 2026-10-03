@@ -13,7 +13,7 @@ What a session keeps depends on choices you make before it starts (see [Start a 
 
 | Choice | Default | What it keeps |
 |---|---|---|
-| **Archive this quiz's results**, when you close the room | ticked | The session in **History**. Unticked, nothing is kept. |
+| **Archive this quiz's results**, when you close the room or choose **Next quiz** | ticked | The session in **History**. Unticked, nothing is kept. |
 | **Personalised tracking**, in the lobby | on | Each player's rank, score, right answers and streak. Off, only the group's overall results. |
 | **Record all answers**, in the lobby | off | Every answer of every player, question by question. |
 
@@ -63,7 +63,7 @@ Archived sessions are kept for 365 days. After that, whoever runs your instance 
 
 ### I closed the room but the session is not in History. Why?
 
-**Archive this quiz's results** was unticked when the room closed, or the quiz was deleted while it was played. Neither can be undone.
+**Archive this quiz's results** was unticked when the room closed or when you chose **Next quiz**, or the quiz was deleted while it was played. Neither can be undone.
 
 ### Can I see each player's answers after the game?
 

@@ -45,7 +45,7 @@ The lobby counts the players and who is ready ("Ready: 18 / 20 participants"). *
 
 Each question opens on every device at the same time, after a short reading time (3 seconds by default, an instance setting). The server keeps the clock: it opens and closes the answers, and the question closes as soon as every connected player has answered.
 
-- **Quiz pace**: **Manual** (you move on yourself) or **Autoplay** (the next question comes after each result, with the reveal delay set per question).
+- **Autoplay**, a switch: off, you move on yourself; on, the next question comes after each result, with the reveal delay set per question.
 - **Pause** and **Resume**, also with the Space key. The clock stands still while paused.
 - **Reveal answer** closes the question early; **Next question** moves on from the reveal.
 - **−5**, **−1**, **+1**, **+5** seconds adjust the time left during a question.

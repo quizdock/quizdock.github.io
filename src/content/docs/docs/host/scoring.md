@@ -40,7 +40,7 @@ Time counts from the moment the answers open (after the reading time) to the mom
 
 Right answers in a row add a bonus: +100 for the second, +200 for the third, and so on, up to +500 from the sixth onwards. The first right answer has no bonus.
 
-- A wrong answer, no answer or a late answer resets the streak.
+- A wrong answer resets the streak. No answer, or an answer that arrives too late, leaves it as it was.
 - A poll, or a question with no points, leaves the streak as it was.
 - A partly right answer (partial credit) neither grows nor breaks it.
 
@@ -48,7 +48,7 @@ Example: a player answers five Standard questions right in a row, each after 5 s
 
 ## Late and early answers
 
-An answer that arrives after the question closed (the end of the time, plus a grace of 0.3 seconds) earns nothing and resets the streak. The player sees "Your answer arrived too late: it is not counted." An answer sent before the answers open is refused, and the player can answer again.
+An answer that arrives after the question closed (the end of the time, plus a grace of 0.3 seconds) is refused before it is scored: it earns nothing and leaves the streak as it was. The player sees "Your answer arrived too late: it is not counted." An answer sent before the answers open is refused, and the player can answer again.
 
 ## Scoring variants
 
@@ -88,7 +88,7 @@ Each quiz scores from zero. When a room plays several quizzes, **Room standings*
 
 ### Does a slow connection cost points?
 
-A little. The server times an answer when it receives it, and QuizDock does not compensate for network delay. On a local network the difference is small; on a poor mobile connection it can cost some of the speed bonus, never the answer itself.
+A little. The server times an answer when it receives it, and QuizDock does not compensate for network delay. On a local network the difference is small; on a poor mobile connection it can cost some of the speed bonus, or the answer itself when it arrives after the question closed.
 
 ### How do I remove the speed factor?
 
