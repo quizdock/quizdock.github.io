@@ -34,16 +34,16 @@ The database migrations run offline too: the image carries everything they need.
 This is standard Docker, not a QuizDock tool: `docker save` writes images to a file, `docker load` reads them back. Any other way your organisation moves images into an isolated network (a private registry, for example) works the same.
 :::
 
-1. On a machine with Internet access, pull the images for the release you install, and save them to one file. For the Compose setup (replace `0.13.0` with your release):
+1. On a machine with Internet access, pull the images for the release you install, and save them to one file. For the Compose setup (replace `0.13.1` with your release):
 
    ```sh
-   docker pull fchaussin/quizdock:0.13.0
+   docker pull fchaussin/quizdock:0.13.1
    docker pull postgres:16-alpine
    docker pull redis:7-alpine
-   docker save -o quizdock-images.tar fchaussin/quizdock:0.13.0 postgres:16-alpine redis:7-alpine
+   docker save -o quizdock-images.tar fchaussin/quizdock:0.13.1 postgres:16-alpine redis:7-alpine
    ```
 
-   For the full setup, add `quay.io/keycloak/keycloak:26.0.8`. For the standalone setup, the one image `fchaussin/quizdock:standalone-0.13.0` is enough. Check the exact image names and tags in the `docker-compose.prod.yml` of the release you install.
+   For the full setup, add `quay.io/keycloak/keycloak:26.0.8`. For the standalone setup, the one image `fchaussin/quizdock:standalone-0.13.1` is enough. Check the exact image names and tags in the `docker-compose.prod.yml` of the release you install.
 2. Copy `quizdock-images.tar` to the server.
 3. On the server, load them:
 
@@ -66,10 +66,10 @@ All of them are at `https://raw.githubusercontent.com/quizdock/quiz-dock/main/<f
 
 Then, on the server, in the instance's folder:
 
-1. Pin the release you loaded: run `./quizdock init` (it finds the files and downloads nothing), then set `QUIZDOCK_TAG=0.13.0` in `.env`.
+1. Pin the release you loaded: run `./quizdock init` (it finds the files and downloads nothing), then set `QUIZDOCK_TAG=0.13.1` in `.env`.
 2. Start it: `./quizdock up`. Docker uses the loaded images and pulls nothing.
 
-For the standalone setup, `./quizdock up` runs `standalone-<QUIZDOCK_TAG>` (here `standalone-0.13.0`; `standalone` when the tag is `latest`): the loaded image is used as it is.
+For the standalone setup, `./quizdock up` runs `standalone-<QUIZDOCK_TAG>` (here `standalone-0.13.1`; `standalone` when the tag is `latest`): the loaded image is used as it is.
 
 ## Upgrade offline
 

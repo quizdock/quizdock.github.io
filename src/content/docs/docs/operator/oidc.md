@@ -126,7 +126,7 @@ First sign-in, accounts and HTTPS: see [Install](/docs/operator/install/#the-ful
 
 The same image and the same data: set `AUTH_MODE=oidc` and the provider's variables in `.env`, then restart. `AUTH_MODE` is a C1 variable: it is never changed from the administration.
 
-Local-mode accounts are named `local:<name>`; an OIDC account is a different account, even with the same name. To hand a quiz from one to the other, use `./quizdock quiz:transfer <quiz-id> <sub|email>` once the new account has signed in. See [Command line](/docs/operator/cli/).
+Local-mode accounts are named `local:<slug>`, the name in lower case without accents; an OIDC account is a different account, even with the same name. To hand a quiz from one to the other, use `./quizdock quiz:transfer <quiz-id> <sub|email>` once the new account has signed in. See [Command line](/docs/operator/cli/).
 
 ## When it fails
 

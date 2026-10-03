@@ -150,4 +150,4 @@ OIDC mode only. Local mode and the standalone image without OIDC: nothing to do.
 | Session kept after closing the browser | The session ends with the browser; signing in again is usually one click (the provider's session). |
 | Name in the header from the ID token's `name` | The same name as in the lobby: `OIDC_NAME_CLAIM`, then `preferred_username`, `name`, `email`. |
 | The provider allowed in the Content-Security-Policy | Removed: requests to the instance only, no frames. |
-| A write from another origin of the same site went through | `403 auth.cross_origin`; a socket from another origin stays a guest. |
+| A write from another origin of the same site went through | `403 auth.cross_origin`; a socket from another origin stays a guest (refused since [0.13](#013-the-pages-and-the-api-on-one-origin)). |

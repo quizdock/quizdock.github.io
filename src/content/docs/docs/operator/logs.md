@@ -44,7 +44,8 @@ The Compose file sets no logging options: Docker's own defaults apply, including
 | `This instance is not set up yet. … give the setup token …` | A fresh instance: the token for the setup wizard. See [Install](/docs/operator/install/#finish-the-setup-in-the-browser). |
 | `Instance already in use: the setup wizard is not offered.` | An instance upgraded from before the wizard: nothing to do. |
 | `Overrides not loaded (…): the environment applies alone.` | The settings changed in the administration could not be read; `.env` applies alone. |
-| `OIDC discovery failed: …` | The backend cannot reach your provider. See [Troubleshooting](/docs/operator/troubleshooting/#sign-in-with-openid-connect). |
+| `fetch failed`, at sign-in | The backend cannot reach your provider. See [Troubleshooting](/docs/operator/troubleshooting/#sign-in-with-openid-connect). |
+| `OIDC discovery failed: … → HTTP …` | Your provider answered the discovery request with an error. |
 | `discovery issuer "…" differs from OIDC_ISSUER "…"` | `OIDC_ISSUER` does not match the provider's issuer. |
 | `Sign-in failed: …` | A sign-in refused by the provider or by the token checks. |
 | `Media without their file (database older than …?): stored files kept` | The database is older than the media folder (a restore of one without the other). |

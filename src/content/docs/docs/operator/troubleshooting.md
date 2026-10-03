@@ -57,7 +57,7 @@ Start with `./quizdock status` and `./quizdock doctor`, on the server, in the in
 | The administration shows the settings but changes nothing | `ADMIN_WEB_SCOPE=read`, the default | `ADMIN_WEB_SCOPE=write` in `.env`, then restart. |
 | Local mode: the administration changes nothing | `ADMIN_TOKEN` is unset, or shorter than 32 characters and so ignored | Set a token of 32 characters or more, restart, and give it in the administration when asked. |
 | A setting cannot be changed from the administration | It is C1, or named in `ADMIN_LOCK` | Change it in `.env`. |
-| The setup token is lost or expired | It works once, for 24 hours | `./quizdock qd setup.token`. |
+| The setup token is lost, expired or refused | It works once, for 24 hours, and each start replaces it | The last one in the log, or `./quizdock qd setup.token`. |
 | The wizard is closed and is needed again | — | `./quizdock qd setup.reopen`. |
 | Nobody can take the host seat (local mode) | Someone holds it without expiry | `./quizdock seat:release`. |
 | An account cannot host | No `host` role | `./quizdock user:set-role <sub\|email> host`, or give the role in the provider. |
@@ -73,9 +73,10 @@ Start with `./quizdock status` and `./quizdock doctor`, on the server, in the in
 
 | Symptom (in the application's log) | Fix |
 |---|---|
-| `unexpected "iss" claim value` | `OIDC_ISSUER` differs from the tokens' `iss`. Match it exactly, scheme, host, port and trailing slash: copy the `issuer` of the discovery document. The log warns at start when they differ, and says when only a trailing slash does. |
+| `unexpected "iss" claim value` | `OIDC_ISSUER` differs from the tokens' `iss`. Match it exactly, scheme, host, port and trailing slash: copy the `issuer` of the discovery document. The log warns at the first discovery after a start (the first sign-in or token check) when they differ, and says when only a trailing slash does. |
 | `signature verification failed` | The keys are wrong or unreachable: check that the backend reaches `<OIDC_ISSUER>/.well-known/openid-configuration`, or `OIDC_INTERNAL_URL`. |
-| `OIDC discovery failed` | The backend cannot reach the issuer's host (Docker networking): set `OIDC_INTERNAL_URL` to the internal address. |
+| `fetch failed`, at sign-in | The backend cannot reach the issuer's host (Docker networking): set `OIDC_INTERNAL_URL` to the internal address. |
+| `OIDC discovery failed: … → HTTP …` | The provider answered the discovery request with an error: check the address in the line. |
 | `Sign-in failed: invalid_client` or `unauthorized_client` | The client is confidential on the provider: set `OIDC_CLIENT_SECRET`, or make the client public with PKCE. |
 | `Sign-in failed: … "iss" claim` after the redirect | The provider names itself after the address that asked (the internal one): give it a fixed public host name (Keycloak: `KC_HOSTNAME`). |
 | The session cookie has no `Secure` flag behind HTTPS | The proxy's `X-Forwarded-Proto` is not believed: name the proxy in `TRUST_PROXY`. |

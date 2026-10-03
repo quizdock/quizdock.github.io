@@ -19,7 +19,7 @@ QuizDock is configured with environment variables, without rebuilding anything. 
 | `docker run` (standalone) | `--env-file .env`, or `-e NAME=value` flags |
 | Docker Desktop | the container's environment variables, set when it is created |
 
-In Compose, `docker-compose.prod.yml` passes each application variable of the reference below to the container by name. A variable the Compose file does not list never reaches the application.
+In Compose, `docker-compose.prod.yml` passes each application variable of the reference below to the container by name, except `SAMPLES_DIR`, and `PORT`, `DATABASE_URL`, `REDIS_URL`, `MEDIA_DIR` and `STORE_DIR`, which it sets to fixed values. A variable the Compose file does not list never reaches the application.
 
 ### Apply a change made in .env
 
@@ -52,14 +52,14 @@ An administrator can change C2 to C4 variables from **Administration → Setting
 
 - **Precedence:** the default, then `.env`, then the administration. An override wins over `.env`, and `.env` keeps its value underneath.
 - **Storage:** overrides are kept in the database, so they travel with a database backup and survive an upgrade.
-- **Way back:** **Back to .env** for one variable, **Take everything back** for all, or `qd settings.reset --key=NAME` (`--all`). **Export as .env** (or `qd settings.export`) gives the overrides as `.env` lines, to make them permanent.
+- **Way back:** **Back to .env** for one variable, **Take everything back** for all, or `qd settings.reset --key=NAME` (`--all`). **Export as .env** gives the overrides as `.env` lines, secrets left out, to make them permanent. `qd settings.export` prints them as JSON, the lines in `env`.
 - **Audit:** every change, and every refusal, is recorded. See [Audit](/docs/admin/audit/).
 
 You decide how much the web administration may change:
 
 - `ADMIN_WEB_SCOPE=read` (the default) shows the settings and changes none of them. `write` lets administrators change C2 to C4 values and run the instance operations.
 - `ADMIN_LOCK` names variables the web administration never changes, whatever the scope.
-- In local mode, the web administration changes nothing until `ADMIN_TOKEN` is set (32 characters or more), and asks for it before any change.
+- In local mode, the web administration changes nothing, the media library aside, until `ADMIN_TOKEN` is set (32 characters or more), and asks for it before any change.
 - `ADMIN_OVERRIDES=ignore` starts the instance on `.env` alone, every override ignored but kept: the way out when an override went wrong.
 
 These limits apply to the web. `qd`, run by whoever has access to the container, is not gated by `ADMIN_WEB_SCOPE` or `ADMIN_LOCK`, and never changes a C1 variable either. The quick setup in the wizard sets its answers as overrides too. See [Settings](/docs/admin/settings/) and [Presets](/docs/admin/presets/).

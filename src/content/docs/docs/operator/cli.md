@@ -64,20 +64,22 @@ It reads the setup (`QUIZDOCK_MODE`: `compose`, `full` or `standalone`) and ever
 | `qd <operation> [--param=value…]` | Any administration operation (below). |
 | `admin <command…>` | Any other `qd` command, as is. |
 
-Subjects are the OIDC `sub`, or `local:<name>` in local mode: `user:list` shows them.
+Subjects are the OIDC `sub`, or `local:<slug>` in local mode (the name in lower case, without accents, other characters as dashes): `user:list` shows them.
 
 ### Script settings
 
-Environment variables read by the script itself:
+Variables of the shell environment read by the script itself, not from `.env`:
 
 | Variable | Default | What it changes |
 |---|---|---|
-| `QUIZDOCK_IMAGE` | `fchaussin/quizdock` | The image name |
+| `QUIZDOCK_IMAGE` | `fchaussin/quizdock` | The standalone's image name |
 | `QUIZDOCK_RAW` | the `main` branch on `raw.githubusercontent.com` | Where `init` downloads its files from |
 | `QUIZDOCK_COMPOSE_FILE` | `docker-compose.prod.yml` | The Compose file |
 | `QUIZDOCK_ENV_FILE` | `.env` | The environment file |
 | `QUIZDOCK_CONTAINER` | `quizdock` | The standalone container's name |
 | `QUIZDOCK_BACKUP_DIR` | `./backups` | Where `backup` writes |
+
+From `.env`, the script reads only `QUIZDOCK_MODE`, `QUIZDOCK_TAG`, `HTTP_PORT`, `KEYCLOAK_PORT`, `POSTGRES_USER` and `POSTGRES_DB`.
 
 ## qd, inside the container
 
@@ -97,7 +99,7 @@ Every command above is an operation of the administration, also reachable by its
 ./quizdock qd settings.list --key=APP_NAME          # value, source, default, problems
 ./quizdock qd settings.set --key=GAME_READ_DELAY_MS --value=4000
 ./quizdock qd settings.reset --key=GAME_READ_DELAY_MS   # back to .env; --all for every one
-./quizdock qd settings.export                       # the overrides, as .env lines
+./quizdock qd settings.export                       # the overrides as JSON: .env lines in "env"
 ./quizdock qd audit.list --limit=20                 # the last administrative actions
 ./quizdock qd audit.list --setting=APP_NAME         # the history of one setting
 ./quizdock qd presets.list                          # the quick setup's questions and answers
@@ -111,7 +113,7 @@ The quick setup's questions and answers: `--internet=connected|offline`, `--audi
 
 | Option | Effect |
 |---|---|
-| `--yes` | Confirms a destructive operation, or one that changes administrator rights. Without it, `qd` asks on a terminal and refuses elsewhere. The commands of the tables above never ask. |
+| `--yes` | Confirms a destructive operation, a change of administrator rights, a change to a C2 setting, `settings.reset --all`, and `presets.apply` when it changes a C2 setting. Without it, `qd` asks on a terminal and refuses elsewhere. The commands of the tables above never ask. |
 | `--dry-run` | Says what the operation would do, for those that can (`sessions.purge`, `presets.apply`). |
 | `--json` | The outcome as JSON, for scripts. |
 | `--as=<name>` | The name the audit records (default: the container's user). |

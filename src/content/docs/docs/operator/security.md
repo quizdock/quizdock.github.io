@@ -77,7 +77,7 @@ Wrong administration tokens are limited to 10 per address and 50 in total per 15
 - **Content-Security-Policy on every page:** scripts, styles, fonts and requests from the instance only; no inline script, no `eval` (WebAssembly is allowed for the in-browser media converter); no frames; the pages cannot be embedded by another site. Images may come from `https:` addresses, for the images a quiz's text points to.
 - **Wrong PINs:** 30 a minute per client address. Behind a proxy, set `TRUST_PROXY` so the address is the client's. See [Reverse proxy](/docs/operator/reverse-proxy/#trust_proxy-who-may-speak-for-the-client).
 - **Uploads** are checked by their content, not their name; SVG is refused.
-- **The setup token** works once and expires 24 hours after it was created.
+- **The setup token** works once and expires 24 hours after it was created. Each start while the setup is open, and each `qd setup.token`, replaces it.
 
 ## Projection computers: allow sound for your instance only
 

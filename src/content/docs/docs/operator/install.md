@@ -41,9 +41,9 @@ Memory and CPU: see [Sizing](/docs/operator/sizing/).
    ./quizdock init --full         # Compose with the bundled Keycloak
    ```
 
-   `init` with no option is the same as `init --compose`. It asks for the application name, the language, the HTTP port and the sign-in mode; with `oidc`, your provider's issuer and client id; with `--full`, the host name browsers will use and the Keycloak port; and whether administrators may change settings from the browser (`ADMIN_WEB_SCOPE`, see [Allow changes from the web](/docs/admin/overview/#allow-changes-from-the-web)): answered yes in local mode, it also generates the administration token (`ADMIN_TOKEN`) and says where it is. It then:
+   `init` with no option is the same as `init --compose`. It asks for the application name, the language and the HTTP port; then the sign-in mode, except with `--full`, which signs in with its Keycloak; with `oidc`, your provider's issuer and client id; with `--full`, the host name browsers will use and the Keycloak port; and whether administrators may change settings from the browser (`ADMIN_WEB_SCOPE`, see [Allow changes from the web](/docs/admin/overview/#allow-changes-from-the-web)): answered yes in local mode, it also generates the administration token (`ADMIN_TOKEN`) and says where it is. It then:
 
-   - writes `.env` with permissions `600`, with a random PostgreSQL password (and, in the full setup, random passwords for Keycloak's administrator and the two sample accounts);
+   - writes `.env` with permissions `600`; for Compose and the full setup, with a random PostgreSQL password (and, in the full setup, random passwords for Keycloak's administrator and the two sample accounts);
    - remembers the setup in `.env` as `QUIZDOCK_MODE`;
    - downloads `docker-compose.prod.yml` for Compose, plus `docker-compose.full.yml` and `keycloak/realm-export.json` for the full setup, when they are not already in the folder.
 
@@ -111,7 +111,7 @@ A fresh instance offers a setup wizard: usage, health, identity, address, access
 ./quizdock logs quizdock    # Compose; for standalone: ./quizdock logs
 ```
 
-Look for the line `This instance is not set up yet. Open it in a browser and give the setup token …`, then stop following the log with Ctrl+C. The token works once and expires 24 hours after it was created. A new one, on the server, in the instance's folder:
+Look for the line `This instance is not set up yet. Open it in a browser and give the setup token …`, then stop following the log with Ctrl+C. The token works once and expires 24 hours after it was created. Each start, while the setup is open, writes a new one and the previous one stops working. A new one, on the server, in the instance's folder:
 
 ```sh
 ./quizdock qd setup.token

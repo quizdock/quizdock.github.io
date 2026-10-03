@@ -13,7 +13,7 @@ QuizDock runs the same application in four setups. Pick one by how hosts sign in
 |---|---|---|---|---|---|
 | **Standalone** | One container: the application, PostgreSQL and Redis | One local host seat, taken with a name | PIN and nickname | A first try, a laptop, a one-off event | Not hardened, not for serious production |
 | **Compose** | The application, PostgreSQL, Redis, and a one-shot migration service | One local host seat, taken with a name | PIN and nickname | A classroom or a team on a trusted network | A name is not a security boundary |
-| **Compose with your identity provider** | The same, signing in against your OpenID Connect provider | Every account with the `host` role, as many as you like | Accounts, or PIN and nickname when a host opens the game | An organisation that already has single sign-on | You run and configure the provider yourself |
+| **Compose with your identity provider** | The same, signing in against your OpenID Connect provider | Every account with the `host` role, as many as you like | Accounts, or PIN and nickname when a host opens the game (with `ALLOW_ANONYMOUS_PARTICIPANTS=true`) | An organisation that already has single sign-on | You run and configure the provider yourself |
 | **Full** | Compose plus a bundled Keycloak, with its own database in the same PostgreSQL | The sample `host` account, then the accounts you create in Keycloak | The sample `player` account, or PIN and nickname in an open game | Real accounts without an existing provider | One more service and one more database to maintain and back up |
 
 The first two run in **local mode** (`AUTH_MODE=none`), the last two in **OIDC mode** (`AUTH_MODE=oidc`). The mode is one variable and a restart; see [Sign-in with OpenID Connect](/docs/operator/oidc/).
