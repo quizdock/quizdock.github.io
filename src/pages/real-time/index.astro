@@ -27,7 +27,7 @@ const faq = [
   },
   {
     q: 'How are audio and video synchronized?',
-    a: `<p>The server sets a common start 1.6 s ahead on its own clock. Each device converts it with its measured clock offset, accounts for its audio output delay, and corrects any drift every 500 ms. How closely devices actually play together has not been measured.</p>`,
+    a: `<p>So that everyone hears the same instant. The server sets a common start 1.6 s ahead on its own clock; each device starts at that instant of the server's clock, earlier by its own audio output delay, and corrects any drift every 500 ms (5 % faster or slower, or a jump beyond 600 ms). The work is done by the devices. How closely they actually play together has not been measured, and only Chromium-based browsers are tested.</p>`,
   },
   {
     q: 'Is the scoring fair for players on a slow connection?',
@@ -72,17 +72,37 @@ const faq = [
 
   <section class="section section-soft">
     <div class="prose">
-      <h2>How do devices stay in step?</h2>
+      <h2>Does everyone see and hear the same instant?</h2>
       <p>
-        Each device measures how far its clock is from the server's: a burst of eight pings when it connects, again after
-        2 and 8 seconds, then every 30 seconds. The offset serves to display the timer and to start media. It never changes
-        a score.
+        That is the aim, whatever each device's latency. QuizDock does not trust the clock of a phone, nor assume every
+        device plays sound as fast as the next. Three mechanisms line the room up:
+      </p>
+      <ul>
+        <li>
+          <b>The server's clock, on every device.</b> Each device measures how far its clock is from the server's: a burst
+          of eight pings when it connects, again after 2 and 8 seconds, then every 30 seconds. Countdowns are computed from
+          the server's deadline on that corrected clock, so a phone set wrong still shows the right time.
+        </li>
+        <li>
+          <b>A common start for media, minus each device's own delay.</b> The server sets the start of a question's video
+          or sound 1.6 s ahead. Each device starts it at that instant of the server's clock, earlier by its own audio output
+          delay (what the browser reports between the mixer and the speaker), so that every device is heard at the same
+          moment.
+        </li>
+        <li>
+          <b>Drift corrected while it plays.</b> Every 500 ms, each device compares where it is with where it should be: a
+          gap under 30 ms is left alone, up to 600 ms it plays 5 % faster or slower until it catches up, beyond that it
+          jumps.
+        </li>
+      </ul>
+      <p>
+        Media are fetched one question ahead, and the room waits for the devices that play them, 10 s by default, before
+        the host can <b>Start anyway</b>. What this costs is borne by the devices: the server only answers the pings.
       </p>
       <p>
-        For media, the server sets a common start 1.6 s ahead. Each device schedules it on its corrected clock, allowing for
-        its audio output delay, then checks every 500 ms: a drift under 30 ms is left alone, up to 600 ms it plays up to 5 %
-        faster or slower, beyond it jumps. Media are fetched one question ahead, and the server waits for the devices that
-        play them, 10 s by default, before the host can <b>Start anyway</b>.
+        Its limits: how closely devices actually play together has not been measured; it is built and tested on
+        Chromium-based browsers (iPhone Safari untested); remote participants are experimental. And it is about what people
+        see and hear: scores are not adjusted for network latency (see above).
       </p>
       <p><a class="more-link" href="/media/">Media in a room →</a></p>
     </div>
@@ -133,6 +153,13 @@ const faq = [
       <p>
         <b>Ack</b> is the time from a player sending an answer to the server acknowledging it, in milliseconds.
         <b>Start spread</b> is how far apart the devices of a room received the same question.
+      </p>
+      <h3>Waits on purpose are not latency</h3>
+      <p>
+        So that everyone starts together, QuizDock waits on purpose: a reading time before answers open (3 s by default),
+        a media start 1.6 s ahead, and, when a question has media, the time every device takes to load them (10 s at most, by default).
+        These waits are the same for every player and are not in the figures below: they measure
+        how fast the server does its own work, with no media.
       </p>
       <h3>Rooms of 30, all started together</h3>
     </div>
