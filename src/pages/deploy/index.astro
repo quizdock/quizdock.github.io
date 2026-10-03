@@ -89,8 +89,9 @@ chmod +x quizdock
     <div class="prose">
       <p>
         The script is a POSIX shell script that needs Docker with its compose plugin, and <code>curl</code>. <code>init</code>
-        asks for the name, the language, the port (18080 by default) and the authentication mode; it writes
-        <code>.env</code> with random passwords and permissions 600, and downloads the Compose files. <code>up</code> starts
+        asks for the name, the language, the port (18080 by default), the authentication mode (not with
+        <code>--full</code>) and whether administrators may change settings from the browser; it writes
+        <code>.env</code> with permissions 600 and, for Compose, random passwords, and downloads the Compose files. <code>up</code> starts
         the instance and waits until it is healthy.
       </p>
       <p>

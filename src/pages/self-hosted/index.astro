@@ -5,7 +5,7 @@ import { DEMO_URL, DOCKER_HUB_URL } from '../../site';
 const faq = [
   {
     q: 'Can QuizDock run without Internet?',
-    a: `<p>Yes, on an isolated local network. Answer <b>No</b> to <b>Does this instance reach the Internet?</b> in the setup wizard: the update check is turned off and the links to online media libraries are hidden. Leave the community catalogue unset (the default), use local mode or an identity provider on your network, and keep quizzes free of images from the web. The server then makes no outgoing request.</p>`,
+    a: `<p>Yes, on an isolated local network. Answer <b>No</b> to <b>Does this instance reach the Internet?</b> in the setup wizard: the update check is turned off and the links to online media libraries are hidden. Leave the community catalogue unset (the default), and use local mode or an identity provider on your network. The server then makes no outgoing request. Images from the web in a quiz are loaded by the browser, not the server.</p>`,
   },
   {
     q: 'Where is QuizDock data stored?',
@@ -104,8 +104,9 @@ const faq = [
       <p>
         Yes, on an isolated local network. Answer <b>No</b> to <b>Does this instance reach the Internet?</b> in the setup
         wizard, or run <code>./quizdock qd presets.apply --internet=offline</code>: the update check is turned off and the
-        media library links are hidden. With the community catalogue left unset (the default), local mode or an identity
-        provider on your network, and no images from the web in quizzes, the server makes no outgoing request.
+        media library links are hidden. With the community catalogue left unset (the default), and local mode or an identity
+        provider on your network, the server makes no outgoing request. Images from the web in a quiz are loaded by the
+        browser, not the server.
       </p>
       <h2>And on an air-gapped network?</h2>
       <p>
