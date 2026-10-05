@@ -10,7 +10,8 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid>
   <Card title="I host quizzes" icon="rocket">
-    Create a quiz, present it on the big screen, invite players, read the results.
+    The host is the person presenting the quiz to an audience, not a server. Create a
+    quiz, present it on the big screen, invite players, read the results.
     [Start hosting →](/docs/host/getting-started/)
   </Card>
   <Card title="I administer QuizDock" icon="setting">
@@ -22,3 +23,24 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
     [Operation →](/docs/operator/choose-a-deployment/)
   </Card>
 </CardGrid>
+
+## Quick start
+
+QuizDock on your own machine, in five steps. Only Docker is needed.
+
+1. Start the all-in-one image:
+
+   ```sh
+   docker run -d --name quizdock --restart unless-stopped \
+     -p 18080:3000 -v quizdock:/data fchaussin/quizdock:standalone
+   ```
+
+2. Read the setup token in its log: `docker logs quizdock`, on the line that starts with
+   `This instance is not set up yet`.
+3. Open `http://<machine>:18080`, give the token and follow the setup wizard.
+4. Choose **Host area**, type your name and choose **Take the host seat**.
+5. In **Templates**, choose **Create a quiz from this** on a sample quiz, then **Present**:
+   players join from their phone with the PIN on the big screen.
+
+Other deployments (Compose, your organisation's sign-in, HTTPS): see
+[Choose a deployment](/docs/operator/choose-a-deployment/).
