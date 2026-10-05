@@ -18,7 +18,7 @@ export default defineConfig({
         { label: 'Documentation', link: '/docs/' },
         { label: 'Host', items: [{ autogenerate: { directory: 'docs/host' } }] },
         { label: 'Admin', items: [{ autogenerate: { directory: 'docs/admin' } }] },
-        { label: 'Operator', items: [{ autogenerate: { directory: 'docs/operator' } }] },
+        { label: 'Operator (DevOps)', items: [{ autogenerate: { directory: 'docs/operator' } }] },
       ],
     }),
   ],

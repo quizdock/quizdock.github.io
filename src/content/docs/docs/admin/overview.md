@@ -5,7 +5,7 @@ sidebar:
   order: 1
 ---
 
-This part of the Documentation is for people with the **admin** role: they administer a QuizDock instance from the web administration, or with the `qd` command line. Installing the server, its `.env` file and its restarts belong to whoever runs the instance: see the [operator documentation](/docs/operator/choose-a-deployment/). Quiz hosts, the people who present quizzes to a room, have [their own pages](/docs/host/getting-started/).
+This part of the Documentation is for people with the **admin** role: they administer a QuizDock instance from the web administration, or with the `qd` command line. Installing the server, its `.env` file and its restarts belong to whoever runs the instance: see the [operator (DevOps) documentation](/docs/operator/choose-a-deployment/). Quiz hosts, the people who present quizzes to a room, have [their own pages](/docs/host/getting-started/).
 
 ## Three domains
 

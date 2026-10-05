@@ -5,7 +5,7 @@ sidebar:
   order: 1
 ---
 
-QuizDock runs the same application in four setups. Pick one by how hosts sign in and how many services you are ready to operate. Every setup runs in Docker.
+This part is for the operator (DevOps): whoever installs and runs QuizDock. QuizDock runs the same application in four setups. Pick one by how hosts sign in and how many services you are ready to operate. Every setup runs in Docker.
 
 ## The four setups
 
