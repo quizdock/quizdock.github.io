@@ -20,7 +20,7 @@ Slides have their own media (a full-slide video, a sound); see [Slides](/docs/ho
 
 ## Use Chrome or Edge to upload
 
-The browser converts every file before sending it; the server never converts anything. Conversion and playback are built and tested on Chromium browsers (Chrome, Edge). Firefox cannot convert video to H.264: upload videos from Chrome or Edge. In other browsers, the editor, the console and the projection show **This page is built for Chrome, Edge or another Chromium browser.** iPhone Safari has not been tested.
+The browser converts every file before sending it; the server never converts anything. Conversion and playback are built and tested on Chromium browsers (Chrome, Edge). Firefox cannot convert video to H.264: upload videos from Chrome or Edge. In other browsers, the editor, the console and the projection show **This page is built for Chrome, Edge or another Chromium browser.**
 
 What the editor makes of your file:
 

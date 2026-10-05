@@ -8,7 +8,7 @@ sidebar:
 Players who cannot see the big screen can still play. A remote participant gets the whole question on their own device: its text, its answers, its picture, and its video and sound. This page covers how players choose, who hears what, and the limits.
 
 :::caution[Experimental]
-Remote participation works, but it is the least tested part of QuizDock. It is built and tested on Chromium browsers (Chrome, Edge); iPhone Safari has not been tested. Try it with your audience's devices before a session that matters.
+Remote participation works, but it is the least tested part of QuizDock. It is built and tested on Chromium browsers (Chrome, Edge). Try it with your audience's devices before a session that matters.
 :::
 
 ## How a player becomes remote
