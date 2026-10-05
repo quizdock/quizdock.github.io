@@ -18,7 +18,7 @@ The join form asks every player **Where are you playing from?**:
 - **In the room**: "I can see the big screen". The phone shows the question's text, a small picture and the answer tiles; the video and the sound are on the projection, unless they reach **Every device**.
 - **Remote**: "The question, its video and its sound come to this device".
 
-**In the room** is preselected. In the console, a remote player is marked **Participating remotely**.
+**In the room** is preselected. In the console's **Players** tab, a remote player is marked with a wifi icon, "Participating remotely". Their avatar carries a wifi badge, on the console and on the projection's lobby, standings and podium.
 
 A remote participant answers on the same clock as everyone else. The question's media is scheduled to start at the same moment on every device that plays it.
 

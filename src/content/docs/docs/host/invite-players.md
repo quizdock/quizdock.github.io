@@ -9,12 +9,14 @@ Players join a room with its 6-digit PIN. They need no app and, in local mode, n
 
 ## Hand out the invitation
 
-In the console, **Invite players** shows:
+In the lobby, the invitation fills the centre of the console. Once the quiz has started, choose the PIN at the top of the console to open it again. It shows:
 
-- the **PIN code**, 6 digits;
 - the **QR code to join**, which opens the room directly;
-- **Share**: sends the invitation (PIN and direct link) through the device's share sheet, or copies it to the clipboard ("Invitation copied (PIN + link) to the clipboard.");
-- **Projection window**: opens the big screen. In the lobby it shows the QR code, the PIN and "Join at" followed by the address to type.
+- under **Invite players**, the address to type and the 6-digit PIN;
+- **Share**: sends the invitation (PIN and direct link) through the device's share sheet, or copies it to the clipboard ("Invitation copied (PIN + link) to the clipboard."). Over plain `http` on a local network, where the browser offers neither, it shows the address to copy: "Copy this address and send it: …";
+- the **Invitation address** (below).
+
+**Projection window**, at the end of the console's second row, opens the big screen. In the lobby it shows the QR code, the PIN and "Join at" followed by the address to type.
 
 The direct link has the form `https://your-instance/join/123456`: it opens the room with the PIN already filled in.
 
@@ -41,7 +43,7 @@ When the instance is served over HTTPS and you pick an `http://` local address, 
 4. Under **Where are you playing from?**, keep **In the room**, or choose **Remote** when they cannot see the big screen. See [Remote participants](/docs/host/remote-participants/).
 5. Choose **Join the room**, then **I'm ready** in the lobby.
 
-The console lists the players as they arrive, and the lobby counts who is ready.
+The console lists the players as they arrive, in its **Players** tab, and the lobby counts who is ready. A ready player's avatar is ringed green, on the console and on the projection; a remote player's carries a wifi badge.
 
 In OIDC mode with **Accounts required**, players sign in with the identity provider first ("Sign in to take part"); the PIN then opens the room. With **Open access**, the PIN and a nickname are enough.
 

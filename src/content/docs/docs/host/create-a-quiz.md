@@ -20,8 +20,8 @@ The editor header holds the title (edit it in place), the status, **Preview** an
   - **Pause after a media**: when a question's sound or video lasts longer than its timer, the question is stretched to the end of the media plus this pause, so nothing is cut mid-play. 1 second by default.
   - **Sound levelling**: the level every sound and video is brought to at playback: **Loud (−14 LUFS, streaming)**, **Balanced (−16 LUFS)** (the default) or **Calm (−23 LUFS, broadcast)**. The files are not changed.
   - **Who hears the sound**: **Projection only**, **Projection and remote participants** (the default) or **Every device**. See [Sound and projection](/docs/host/sound-and-projection/).
-- **Sharing**:
-  - **Language**: the language the quiz is written in.
+- **Language & sharing**:
+  - **Language**: the language the quiz is written in. The participants' screens follow it, unless the room picks another; a new true or false question starts with **True** and **False** in it.
   - **Licence**: **CC0 — no conditions**, **CC BY 4.0 — credit the author** or **CC BY-SA 4.0 — credit, share alike**. Required to share the quiz as a template.
   - **Tags**: up to 5 keywords. Press Enter to add one.
   - **Share with the instance’s other hosts**: they see the quiz in their list, read-only, and can **Create a quiz from this** to get their own copy.
@@ -37,17 +37,21 @@ Every question has:
 
 - **Type**: one of the eight [question types](/docs/host/question-types/). Changing the type clears the right answers: tick them again under the new rules.
 - **Prompt**: up to 1000 characters, in Markdown. Switch between **Visual editor** and **Markdown**.
-- The answers, as the type asks for them (options up to 500 characters each, at most 8).
-- **Answer explanation (shown after the reveal)**: optional, up to 2000 characters.
-- **Timing**: **Time (s)**, 5 to 240 seconds, 20 by default. **Reveal delay (s)**, 1 to 300 seconds, applies in automatic mode only: how long the answer stays on screen before the next question. Empty means the instance's default.
+- The answers, as the type asks for them: **Answer choices**, up to 500 characters each, at most 8.
+- **Answer explanation (shown with the right answer)**: optional, up to 2000 characters.
+- **Timing**: **Time (s)**, 5 to 240 seconds, 20 by default. **Answer shown for (s)**, 1 to 300 seconds, applies in auto mode only: how long the right answer stays on screen before moving on. Empty means the instance's setting, shown in the field, for example "auto (5 s)".
 - **Points**: **Standard**, **Double** or **Fixed (no speed bonus)**. **Scoring** appears for the types that offer a variant. See [Scoring](/docs/host/scoring/).
 - **Background**: **White**, **Image** or **Gradient**.
 - **Picture on the big screen**: **Below the text**, **Above the text**, **Left of the text** or **Right of the text**.
 - **Question media**: a picture or a video, and a sound. See [Media](/docs/host/media/).
 
+Save a question with **Save** (**Add** for a new one), or with Cmd+S (macOS) or Ctrl+S from any of its fields: the form stays open. Leaving a question with unsaved changes asks first, and offers to save it on the way (**Save and continue**, **Save and close**).
+
+At the top of the question form, a folded **Preview** shows the question as it is being written, on the **Projection** or a **Phone**, with **Show the answer**. It stays open or folded from one question to the next. **Pin** keeps it at the top while the form scrolls; **Unpin** releases it.
+
 ## Preview
 
-**Preview** opens the quiz in a new tab, as players and the big screen will see it. Choose the **Device** (**Projection** or **Phone**), step with **Previous** and **Next**, use **Show the answer** and **Fullscreen**. **Credits** lists the credits of the quiz's media.
+**Preview** in the header opens the quiz in a new tab, as players and the big screen will see it. Choose the **Device** (**Projection** or **Phone**), step with **Previous** and **Next**, use **Show the answer** and **Fullscreen**. **Credits** lists the credits of the quiz's media.
 
 ## Draft, ready, archived
 

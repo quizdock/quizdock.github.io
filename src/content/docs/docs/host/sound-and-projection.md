@@ -9,14 +9,14 @@ In a room you work with two screens: the console, for you, and the projection, f
 
 ## The console and the projection
 
-The console has three tabs: **Console** (your controls), **Projection** (what the big screen shows) and **Participant** (a read-only preview of what a phone shows). **Open in a window** opens a tab in its own window.
+The console has three views: **Console** (your controls), **Projection** (what the big screen shows) and **Participant** (a read-only preview of what a phone shows).
 
 To put the projection on the big screen:
 
-1. In the console, choose **Projection window**. It opens the projection in a new window.
-2. Drag that window to the projector or the second screen.
+1. In the console, choose **Projection window**, at the end of the second row. It opens the projection in a new tab.
+2. Drag that tab out of the browser window, onto the projector or the second screen.
 3. Choose **Fullscreen** in it.
-4. Click once anywhere in the projection window and choose **Turn sound on**.
+4. Click once anywhere in the projection and choose **Turn sound on**.
 
 The browser allows sound only after a click in the window that plays it, not in the console. Once is enough for the whole room.
 
@@ -24,7 +24,7 @@ The console never plays the quiz's sound, so you can keep it on a laptop facing 
 
 ## Room sound
 
-**Room sound** sets the effects and the music the projection plays around the questions. Everything is off in a new room. Open it in the lobby, or from the console's control bar at any moment of the game.
+**Room sound** sets the effects and the music the projection plays around the questions. Everything is off in a new room. Open it from the console's second row, in the lobby or at any moment of the game.
 
 | Effect | When it plays |
 |---|---|

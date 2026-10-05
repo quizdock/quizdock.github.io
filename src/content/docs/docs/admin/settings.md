@@ -21,9 +21,11 @@ A row also says why it cannot be changed here, and the problems found when the i
 
 - "Cannot be read (accepts …): the default is used."
 - "Outside what it accepts (…): used as is for now; a later release will enforce it."
-- "Settings that contradict each other:" lists the rules two variables break together.
+- "Settings to review:" lists the rules the configuration breaks: two variables that contradict each other, or a value to change, such as a default database password or Compose files older than the release.
 
 Each setting has its help: what it does, what it accepts, its default, how it is written in `.env`, the variables that go with it, a link to the Documentation, and its **Last changes** (from the [audit](/docs/admin/audit/)).
+
+The rows are grouped by category, **Game pace** first, then **Identity & branding**, **Access & authentication**, **Network & invitation**, **Storage**, **Limits**, **Administration** and **Internal**.
 
 **Layout** offers the same rows as **Cards**, **List and detail** or **Table**. **Search a setting** and **Show only** ("Changed from the default", "Changed here", "With a problem", "Editable") narrow them down.
 

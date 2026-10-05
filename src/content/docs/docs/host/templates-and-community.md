@@ -28,7 +28,7 @@ You get an independent copy in **My quizzes**, as a new draft with its own media
 ## Share a quiz as a template
 
 1. Mark the quiz ready (**Publish (ready)**).
-2. In its settings, under **Sharing**, choose a **Licence** (CC0, CC BY 4.0 or CC BY-SA 4.0). A template is meant to be reused, so the licence is required: it travels with every copy. Set the **Language** and a few **Tags** too, so that other hosts find it.
+2. In its settings, under **Language & sharing**, choose a **Licence** (CC0, CC BY 4.0 or CC BY-SA 4.0). A template is meant to be reused, so the licence is required: it travels with every copy. Set the **Language** and a few **Tags** too, so that other hosts find it.
 3. In **More**, choose **Share as a template**, then confirm.
 
 The editor confirms with "Shared as a template (revision 1)." Other hosts take their own copies and change them as they please; your quiz is never modified by what they do. Sharing again later replaces the catalogue entry with the new version and raises its revision.

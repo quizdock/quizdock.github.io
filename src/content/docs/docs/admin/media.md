@@ -5,7 +5,7 @@ sidebar:
   order: 4
 ---
 
-**Administration → Media** ("Instance media") shows what the media volume holds and lets an administrator clean it up, remove a file, and offer media to every host.
+**Administration → Media** shows what the media volume holds and lets an administrator clean it up, remove a file, and offer media to every host.
 
 These operations need the admin role. `ADMIN_WEB_SCOPE` does not concern them, and in local mode they work without the administration token. Every change is recorded in the [audit](/docs/admin/audit/).
 
@@ -51,7 +51,16 @@ Both usually mean that the database and the media were not restored from the sam
 
 ## Files
 
-The **Files** list shows every file with its owners, size, dimensions and where it is used. Filters: kind, owner, older formats only, a search by file name. Sort by size, usage or date. **Which files** switches between **All** and **Global**; **Display** between a list and a grid.
+The **Files** list shows every file with its owners, size, dimensions and where it is used. **Which files** switches between **All** and **Global**; **Display** between a list and a grid.
+
+The filter bar stays at the top of the page while the files scroll:
+
+- **Kind**: images, videos or sounds.
+- **Show**: **All**, **Unused** (the files no quiz and no past result uses) or **Older formats**.
+- **Owner**, in the **All** view: one account, or **All but Global** for the hosts' files, leaving out those only the global media hold.
+- **Sort**: **Largest first**, **Most used first** or **Newest first**.
+- **Search by file name**: the server searches every file, not only the page shown.
+- **Per page**: any number from 1 to 100, 24 by default.
 
 Choosing a file shows it in full, with its format, dimensions, duration, size, owners, usages, credit and date, and every quiz that uses it.
 
@@ -59,17 +68,27 @@ Choosing a file shows it in full, with its format, dimensions, duration, size, o
 
 An administrator can delete a file even when it is used, for moderation.
 
-1. Choose the file, then delete it.
+1. Choose the file, then **Delete**.
 2. The confirmation lists what breaks: the quizzes that use it ("The questions lose this media.") and the archived sessions ("Past results no longer show it."). "Every copy of this file goes, whoever owns it."
 3. Confirm.
 
 A file cannot be deleted while a room is playing it: "A room is playing it: it cannot be deleted until the room closes."
 
+### Act on several files
+
+Tick files in the list, or tick **Select all** for the page shown. Then:
+
+- in the **All** view, **Add to global media** adds every ticked file that is not global yet;
+- in the **All** view, **Delete** deletes them, after one confirmation that lists what breaks, as for one file. The files a room is playing are left out and named ("Left out, a room is playing it: …");
+- in the **Global** view, **Withdraw from global media** withdraws them, after one confirmation.
+
+Each file is handled in turn and recorded in the audit on its own line. The files that fail are named once the others are done.
+
 ## Global media
 
 Global media are images, videos and sounds an administrator offers to every host. Hosts find them under **Global media** in their media library. Picking one gives the host a media of their own on the same file, with its credit; nothing is copied on disk.
 
-- Add one from the **Global** view: **Add an image**, **Add a video**, **Add a sound**. The file is converted in the browser, as in the editor.
+- In the **Global** view, drop images, videos and sounds on the drop zone, several at once, or use **Choose files**. Each file's kind comes from its type, and it is converted in the browser, as in the editor.
 - Or take an existing file from the **All** view: **Add to the global media**.
 - Give it a **Credit (author, licence, source)**. A CC-BY or CC-BY-SA licence asks for one.
 - **Withdraw** stops offering it. "Hosts no longer find it in their library. The quizzes that use it keep their copy."

@@ -5,7 +5,7 @@ sidebar:
   order: 1
 ---
 
-This part of the Documentation is for people with the **admin** role: they administer a QuizDock instance from the web administration, or with the `qd` command line. Installing the server, its `.env` file and its restarts belong to whoever runs the instance: see the [operator documentation](/docs/operator/choose-a-deployment/).
+This part of the Documentation is for people with the **admin** role: they administer a QuizDock instance from the web administration, or with the `qd` command line. Installing the server, its `.env` file and its restarts belong to whoever runs the instance: see the [operator documentation](/docs/operator/choose-a-deployment/). Hosts, the people who present quizzes to a room (not servers), have [their own pages](/docs/host/getting-started/).
 
 ## Three domains
 
@@ -61,12 +61,12 @@ An operation that destroys something (deleting a quiz or a file, purging session
 
 ## The sections
 
-**Administration** in the top bar opens on the statistics. The sections follow the domains:
+**Administration** in the top bar opens on the statistics. Its tabs follow the domains, in this order:
 
 - [Statistics](/docs/admin/statistics/): what is played right now, the instance at a glance, the last twelve months.
-- **Quizzes**: [every quiz of the instance](/docs/admin/quizzes/).
-- **Media**: [the instance's media](/docs/admin/media/).
-- **Instance**: [Accounts](/docs/admin/accounts-and-roles/), [Settings](/docs/admin/settings/), [Health](/docs/admin/health/), [Audit](/docs/admin/audit/).
+- [Quizzes](/docs/admin/quizzes/): every quiz of the instance.
+- [Media](/docs/admin/media/): the instance's media.
+- [Accounts](/docs/admin/accounts-and-roles/), [Settings](/docs/admin/settings/), [Health](/docs/admin/health/), [Audit](/docs/admin/audit/): the instance.
 
 ## The update notice
 
@@ -103,7 +103,7 @@ The full list of commands is in [Command line](/docs/operator/cli/).
 
 ## The setup of a new instance
 
-A new instance, with no account yet, offers a **setup wizard** in the browser. The home page says "This instance is not set up yet." with a **Set it up** link (`/setup`).
+A new instance, with no account yet, offers a **setup wizard** in the browser. The home page says "This instance is not fully set up yet." with a **Set it up** link (`/setup`).
 
 What the container needs before it starts (database, Redis, `AUTH_MODE`, ports, volumes) is set before, by `./quizdock init` or in `.env`. The wizard shows these values; it does not change them.
 

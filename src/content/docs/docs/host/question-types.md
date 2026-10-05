@@ -11,13 +11,13 @@ QuizDock has eight question types. Pick one in the question form's **Type** fiel
 
 | Type | Players | Answers you set | Scoring options |
 |---|---|---|---|
-| **Multiple choice (single answer)** | pick one | 2 to 8 options, one correct | right or wrong |
-| **Multiple choice (multiple answers)** | tick several, then submit | 2 to 8 options, at least one correct | **All or nothing**, **Partial credit** |
-| **True / False** | pick one | two fixed options, one correct | right or wrong |
+| **Multiple choice (single answer)** | pick one | 2 to 8 choices, one correct | right or wrong |
+| **Multiple choice (multiple answers)** | tick several, then submit | 2 to 8 choices, at least one correct | **All or nothing**, **Partial credit** |
+| **True / False** | pick one | two fixed choices, one correct | right or wrong |
 | **Text input** | type an answer | up to 20 accepted answers | **Exact match**, **Tolerate typos** |
 | **Numeric** | enter a number | **Target value** and **Tolerance ±** | **Within tolerance**, **Closest answer wins** |
-| **Reorder** | put the options in order, then submit | 2 to 8 options, each with its place | **All or nothing**, **Partial credit** |
-| **Poll** | give an opinion | 2 to 8 options, none correct | no points |
+| **Reorder** | put the choices in order, then submit | 2 to 8 choices, each with its place | **All or nothing**, **Partial credit** |
+| **Poll** | give an opinion | 2 to 8 choices, none correct | no points |
 | **Image choice** | pick one picture, or tick several | 2 or 4 pictures, each with alternative text | right or wrong; with several right pictures, **All or nothing** or **Partial credit** |
 
 Every type except **Poll** takes **Points**: **Standard**, **Double** or **Fixed (no speed bonus)**.
@@ -30,13 +30,13 @@ Each answer has a colour and a shape, fixed by its position: red triangle, blue 
 
 ## Multiple choice (single answer)
 
-One correct answer among 2 to 8 options, each up to 500 characters. Tick **Correct** on the right one. **Add an option** adds one, up to 8.
+One correct answer among 2 to 8 choices, each up to 500 characters. Tick **Correct** on the right one. **Add a choice** adds one, up to 8.
 
-Scoring: the right option earns the points, faster answers earn more, and a streak of right answers adds a bonus.
+Scoring: the right choice earns the points, faster answers earn more, and a streak of right answers adds a bonus.
 
 ## Multiple choice (multiple answers)
 
-Several correct answers. Players tick every answer they think is right, then choose **Submit my answer**. Tick at least one option as **Correct**.
+Several correct answers. Players tick every answer they think is right, then choose **Submit my answer**. Tick at least one choice as **Correct**.
 
 Scoring:
 
@@ -45,7 +45,7 @@ Scoring:
 
 ## True / False
 
-Two fixed options, **True** and **False**. Tick the right one. The fastest type to play.
+Two fixed choices, **True** and **False**, written in the quiz's language when the app speaks it. Tick the right one. The fastest type to play.
 
 ## Text input
 
@@ -69,7 +69,7 @@ Scoring:
 
 ## Reorder
 
-Players put the options in the right order, by dragging or with **Move up** and **Move down**, then submit. Give each option its place in the right order; the order in which you list them is the order players first see.
+Players put the choices in the right order, by dragging or with **Move up** and **Move down**, then submit. Give each choice its place in the right order; the order in which you list them is the order players first see.
 
 Scoring:
 
@@ -78,7 +78,7 @@ Scoring:
 
 ## Poll
 
-Opinion only: no correct answer and no points. Set 2 to 8 options. At the reveal, the distribution of the answers is shown. A poll leaves the players' streaks untouched.
+Opinion only: no correct answer and no points. Set 2 to 8 choices. At the reveal, the distribution of the answers is shown. A poll leaves the players' streaks untouched.
 
 ## Image choice
 

@@ -5,7 +5,7 @@ sidebar:
   order: 1
 ---
 
-This page takes you from the sign-in screen to your first game. It assumes someone has already installed QuizDock and given you its address. To try QuizDock without installing anything, open the [live demo](https://quizdock-standalone.onrender.com): it shares one host account between every visitor, has media uploads turned off and is wiped every hour.
+A host is the person who presents the quiz to the room, the quizmaster: not a server. This page takes you from the sign-in screen to your first game. It assumes someone has already installed QuizDock and given you its address. To try QuizDock without installing anything, open the [live demo](https://quizdock-standalone.onrender.com): it shares one host account between every visitor, has media uploads turned off and is wiped every hour.
 
 ## Sign in
 
@@ -42,6 +42,8 @@ The role comes from your identity provider, or an administrator of the instance 
 | **Manager** | Read the whole instance and administer it. |
 
 Managing is not hosting: a manager without the **Host** role cannot create, edit or present quizzes. A role cannot be changed from **My account**; see [Accounts and roles](/docs/admin/accounts-and-roles/) for how administrators grant them.
+
+Under **Preferences**, **My account** also sets your **Interface language**: the language of your own screens. See [Start a room](/docs/host/start-a-room/#interface-language).
 
 The navigation shows **My quizzes**, **Templates**, **My account**, **Administration** (for managers only) and **Log out**.
 

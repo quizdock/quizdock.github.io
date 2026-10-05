@@ -27,22 +27,23 @@ GitHub sees the server's IP address; nothing else is sent. To turn it off, set `
 On the server, in the instance's folder:
 
 ```sh
-./quizdock upgrade 0.13.0
+./quizdock upgrade 0.14.0
 ```
 
 It:
 
 1. takes a backup into `./backups/` (see [Back up an instance](/docs/operator/backup/));
 2. writes the new tag in `.env` as `QUIZDOCK_TAG`, so that later `up` runs it;
-3. pulls the images;
-4. restarts the instance: the `migrate` service applies the migrations, then the application starts;
-5. prints the last 20 lines of the migration's output;
-6. waits for `/health`;
-7. runs `doctor`.
+3. Compose and full: fetches the release's Compose files (and, for full, the Keycloak realm). A file you edited is kept, and the release's version is written next to it as `<file>.new`: compare, then keep yours or adopt it (`mv docker-compose.prod.yml.new docker-compose.prod.yml`);
+4. pulls the images;
+5. restarts the instance: the `migrate` service applies the migrations, then the application starts;
+6. prints the last 20 lines of the migration's output;
+7. waits for `/health`;
+8. runs `doctor`.
 
 Without a tag, `upgrade` pulls the tag already in `.env` again: with `latest`, that is the latest release.
 
-**Standalone:** the script pulls the standalone image of that release (`standalone-0.13.1`, or `standalone` when the tag is `latest`), then recreates the container; the data stays in the `quizdock` volume.
+**Standalone:** the script pulls the standalone image of that release (`standalone-0.14.0`, or `standalone` when the tag is `latest`), then recreates the container; the data stays in the `quizdock` volume.
 
 Check the result with `./quizdock status`, and the migrations with `./quizdock migrate:status`.
 
@@ -68,7 +69,7 @@ On the server, in the instance's folder:
 
 ```sh
 ./quizdock backup
-# set QUIZDOCK_TAG=0.13.0 in .env, then:
+# set QUIZDOCK_TAG=0.14.0 in .env, then:
 docker compose -f docker-compose.prod.yml pull
 docker compose -f docker-compose.prod.yml up -d
 docker compose -f docker-compose.prod.yml logs migrate
@@ -84,6 +85,21 @@ What changes for an operator, by release. Read every note between your version a
 ### From v1: a broken C1 variable refuses to start
 
 Since 0.13, the application logs every variable it cannot read (it uses the default instead) or that is out of range (it uses it as is), and `doctor` lists them. A critical one (level C1, for example `AUTH_MODE=OIDC` instead of `oidc`) is only a warning for now. **From v1, the instance will refuse to start** with it. Fix what the log names before then. See [Configuration](/docs/operator/configuration/#warnings-at-start).
+
+### 0.14: the host's interface language
+
+One migration, applied on start: `user.locale` becomes the host's interface language, chosen under **My account**. Its old default (`fr`) was never chosen by anyone, so every account starts with none and follows the instance's language (`APP_LANG`). No setting, `.env` or Compose file changes.
+
+### 0.13.2: download the quizdock script again
+
+The `quizdock` script of earlier releases does not fetch a release's Compose files. Download it again before upgrading, in the instance's folder:
+
+```sh
+curl -fsSLO https://raw.githubusercontent.com/quizdock/quiz-dock/main/quizdock
+./quizdock upgrade
+```
+
+On this first run, your Compose files are kept and the release's are written next to them as `<file>.new`: compare, then adopt them. Until you do, the release's Keycloak (full preset) and its container hardening stay out, and Health says your Compose files are older than the image. The single image (`standalone`) has no Compose files: nothing to do.
 
 ### 0.13: the setup wizard
 
