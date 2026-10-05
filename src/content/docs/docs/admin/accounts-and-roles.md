@@ -5,7 +5,7 @@ sidebar:
   order: 2
 ---
 
-This page explains who may host (present quizzes to a room, as its quizmaster: a host is a person, not a server), who may administer, and who may take part, and how an administrator changes it from **Administration → Accounts** or from the command line.
+This page explains who may host (the **quiz host**, who presents quizzes to a room), who may administer, and who may take part, and how an administrator changes it from **Administration → Accounts** or from the command line.
 
 ## The roles
 

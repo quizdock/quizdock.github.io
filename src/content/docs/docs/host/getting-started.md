@@ -5,7 +5,7 @@ sidebar:
   order: 1
 ---
 
-A host is the person who presents the quiz to the room, the quizmaster: not a server. This page takes you from the sign-in screen to your first game. It assumes someone has already installed QuizDock and given you its address. To try QuizDock without installing anything, open the [live demo](https://quizdock-standalone.onrender.com): it shares one host account between every visitor, has media uploads turned off and is wiped every hour.
+Here, the host is the **quiz host**: the person who presents the quiz to the room. This page takes you from the sign-in screen to your first game. It assumes someone has already installed QuizDock and given you its address. To try QuizDock without installing anything, open the [live demo](https://quizdock-standalone.onrender.com): it shares one host account between every visitor, has media uploads turned off and is wiped every hour.
 
 ## Sign in
 
