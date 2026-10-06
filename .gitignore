@@ -7,3 +7,5 @@ dist/
 .astro/
 # Data read from the latest QuizDock release at build time
 src/generated/
+public/screenshots/
+public/demo.gif
