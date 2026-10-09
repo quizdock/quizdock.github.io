@@ -1,6 +1,6 @@
 ---
 import Page from '../layouts/Page.astro';
-import { DEMO_URL, DOCKER_HUB_URL } from '../site';
+import { DEMO_URL, DOCKER_HUB_URL, TRANSLATE_URL } from '../site';
 ---
 
 <Page
@@ -122,7 +122,7 @@ chmod +x quizdock
 
   <section class="section section-soft">
     <div class="oss">
-      <p><b>Open source, MIT.</b> Six interface languages, translations welcome. Released as Docker images for amd64 and arm64, a new version announced in the administration.</p>
+      <p><b>Open source, MIT.</b> Six interface languages, <a href={TRANSLATE_URL} target="_blank" rel="noopener">translations welcome on Weblate ↗</a>. Released as Docker images for amd64 and arm64, a new version announced in the administration.</p>
       <a class="btn btn-primary" href={DOCKER_HUB_URL} target="_blank" rel="noopener">fchaussin/quizdock on Docker Hub ↗</a>
     </div>
   </section>
