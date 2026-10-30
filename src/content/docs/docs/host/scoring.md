@@ -80,9 +80,19 @@ Example: "In which year did the Eiffel Tower open?", target 1889, tolerance 0, S
 
 An exact answer counts as right for the streak; a near miss neither grows nor breaks it.
 
+## When scores tie
+
+In a quiz, equal scores are ranked by the lowest total answer time, then by who joined the room first. The leaderboard, podium and archived results use the same order.
+
+Every question reached counts: an accepted answer contributes its time, up to the question's full time limit. A question without an accepted answer contributes the full limit, including questions before a player joined. Revealing early does not shorten that limit. Slides and questions the quiz never reached do not count.
+
+For example, over two 20-second questions, a player who answers in 3 and 4 seconds has a total of 7 seconds. A player who answers one in 2 seconds and leaves the other unanswered has a total of 22 seconds. If their scores tie, the 7-second total ranks first.
+
 ## Scores in a room with several quizzes
 
 Each quiz scores from zero. When a room plays several quizzes, **Room standings** and the **Room podium** add up the archived quizzes. See [Start a room](/docs/host/start-a-room/).
+
+Equal room totals are ranked by who joined the room first; the quiz's answer-time tie-break does not apply to room standings.
 
 ## Questions
 
