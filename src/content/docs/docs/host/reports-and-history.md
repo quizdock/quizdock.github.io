@@ -72,6 +72,8 @@ Archived sessions are kept for 365 days. After that, whoever runs your instance 
 
 **Archive this quiz's results** was unticked when the room closed or when you went **Back to the lobby**, **Keep what was played so far** was unticked when you stopped the quiz, the quiz was deleted while it was played, or it was another host's quiz, presented without keeping results. None of these can be undone.
 
+If nobody answered a question, no session is kept either, even with archiving ticked. This includes a quiz with no players, or one stopped or closed before anyone answered: there is nothing to report.
+
 ### Can I see each player's answers after the game?
 
 Only if **Record all answers** was on before the quiz started. It cannot be turned on afterwards.
