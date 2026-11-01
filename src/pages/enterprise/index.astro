@@ -13,7 +13,7 @@ const faq = [
   },
   {
     q: 'Which identity providers are supported?',
-    a: `<p>Any provider that follows the OpenID Connect standards should work. Keycloak is the one tested and shipped: the full setup includes it, with a ready realm. Other providers have not been tested by the project; test yours before relying on it.</p>`,
+    a: `<p>Any provider that follows the OpenID Connect standards should work. Keycloak and Authentik are the ones tested and shipped: the full setup includes either, ready to sign in. Other providers have not been tested by the project; test yours before relying on it.</p>`,
   },
   {
     q: 'Can administrators manage roles?',
@@ -55,7 +55,7 @@ const faq = [
     <div class="prose">
       <h2>From a first test to production</h2>
       <ol>
-        <li><b>Evaluation</b>: the <a href={DEMO_URL} target="_blank" rel="noopener">live demo</a>, then <code>./quizdock init --full</code> on a test machine, with Keycloak and two sample accounts.</li>
+        <li><b>Evaluation</b>: the <a href={DEMO_URL} target="_blank" rel="noopener">live demo</a>, then <code>./quizdock init --full</code> on a test machine, with Keycloak or Authentik and two sample accounts.</li>
         <li><b>Validation</b>: Compose on your infrastructure, behind your reverse proxy, sized from the published measurements.</li>
         <li><b>OIDC</b>: connect your identity provider.</li>
         <li><b>Roles</b>: decide who hosts and who administers.</li>
@@ -82,8 +82,8 @@ const faq = [
         cookie, and a session unused for 24 hours is forgotten.
       </p>
       <p>
-        The protocol is standard; the testing is not universal. Keycloak is the provider the project tests and ships, with
-        a ready realm in the full setup. Other providers have not been tested by the project.
+        The protocol is standard; the testing is not universal. Keycloak and Authentik are the providers the project
+        tests and ships, ready to sign in in the full setup. Other providers have not been tested by the project.
       </p>
       <p><a class="more-link" href="/docs/operator/oidc/">Connect an identity provider →</a></p>
     </div>
@@ -98,8 +98,8 @@ const faq = [
         <li><b>Manager</b> (<code>admin</code>): reads the whole instance and administers it. Managing is not hosting: an administrator without the host role presents nothing.</li>
       </ul>
       <p>
-        Roles are read from a claim of the token (<code>OIDC_ROLES_CLAIM</code>: <code>roles</code>, <code>groups</code>, or a
-        path such as <code>realm_access.roles</code>), or granted on <b>Administration › Accounts</b> or with
+        Roles are read from a claim of the ID token (<code>OIDC_ROLES_CLAIM</code>: <code>roles</code>, <code>groups</code>, or a
+        path such as <code>resource_access.quizdock.roles</code>), or granted on <b>Administration › Accounts</b> or with
         <code>./quizdock user:set-role</code>. A grant is never lowered by the token.
       </p>
       <p>
@@ -162,7 +162,7 @@ const faq = [
     <div class="prose">
       <h2>How is it operated?</h2>
       <ul>
-        <li><b>Backup and restore</b>: <code>./quizdock backup</code> dumps the database (and Keycloak's in the full setup) while the instance runs, and copies media, the templates folder and <code>.env</code>. <code>./quizdock restore</code> puts a backup back. Scheduling is yours.</li>
+        <li><b>Backup and restore</b>: <code>./quizdock backup</code> dumps the database (and the provider's in the full setup) while the instance runs, and copies media, the templates folder and <code>.env</code>. <code>./quizdock restore</code> puts a backup back. Scheduling is yours.</li>
         <li><b>Upgrade</b>: <code>./quizdock upgrade X.Y.Z</code> backs up, pulls, migrates, waits for health and runs <code>doctor</code>. No rollback but the backup.</li>
         <li><b>Health</b>: a public <code>/health</code> endpoint (status, version, authentication mode) for your monitoring; the <b>Health</b> page and <code>./quizdock doctor</code> for the checks behind it.</li>
         <li><b>Logs</b>: plain text on the container's standard output, <code>./quizdock logs</code>.</li>

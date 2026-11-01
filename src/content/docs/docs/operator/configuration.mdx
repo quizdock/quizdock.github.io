@@ -126,7 +126,7 @@ Read by `docker-compose.prod.yml` and the `./quizdock` script, never by the appl
 
 ## Bundled Keycloak (full)
 
-`./quizdock init --full` downloads `docker-compose.full.yml`, used on top of the Compose file. Only this overlay derives the application and OIDC addresses from `PUBLIC_HOST`; the other setups ignore it.
+`./quizdock init --full --iam=keycloak` downloads `docker-compose.full.yml`, used on top of the Compose file. Only this overlay derives the application and OIDC addresses from `PUBLIC_HOST`; the other setups ignore it.
 
 <EnvTable deployment="keycloak" />
 
@@ -134,13 +134,24 @@ Read by `docker-compose.prod.yml` and the `./quizdock` script, never by the appl
 - Keycloak imports the realm only into an empty database: changing the initial passwords later does not reset existing accounts. Use the Keycloak administration console for that.
 - Keycloak's database, `keycloak`, lives in the same PostgreSQL server. `./quizdock backup` dumps it as `keycloak.sql`.
 
+## Bundled Authentik (full)
+
+`./quizdock init --full --iam=authentik` downloads `docker-compose.authentik.yml`, used on top of the Compose file instead of `docker-compose.full.yml`, and `authentik/quizdock.yaml`, the blueprint Authentik loads on its first start. `QUIZDOCK_IAM=authentik` in `.env` tells the script.
+
+<EnvTable deployment="authentik" />
+
+- An explicit `APP_PUBLIC_URL`, `OIDC_ISSUER`, `OIDC_INTERNAL_URL` or `OIDC_SCOPE` in `.env` overrides what the full setup derives.
+- `OIDC_CLIENT_SECRET` is shared: the blueprint gives it to QuizDock's client in Authentik.
+- Authentik creates the blueprint's entries once and never overwrites them: changing the initial passwords later does not reset existing accounts. Use Authentik's administration for that.
+- Authentik's database, `authentik`, lives in the same PostgreSQL server under its own role. `./quizdock backup` dumps it as `authentik.sql`. Its uploaded files (icons, backgrounds) are on the volume `authentikdata`.
+
 ## Ports and volumes
 
 | | Compose and full | Standalone |
 |---|---|---|
 | Application, in the container | port `3000` | port `3000` |
 | Published on the server | `HTTP_PORT` (`18080`) | the `-p` you give (`18080` with the script) |
-| Keycloak (full) | `KEYCLOAK_PORT` (`18081`) | — |
+| Keycloak or Authentik (full) | `KEYCLOAK_PORT` or `AUTHENTIK_PORT` (`18081`) | — |
 | PostgreSQL and Redis | on an internal Docker network, not published | inside the container, on `127.0.0.1` only |
 | Database | volume `pgdata` | volume `quizdock`, at `/data/postgres` |
 | Live state (Redis) | volume `redisdata`, append-only file on | in memory only |

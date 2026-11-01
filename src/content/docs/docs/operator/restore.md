@@ -8,7 +8,7 @@ sidebar:
 This page puts a backup taken with `./quizdock backup` back in place, on the same server or on a new one.
 
 :::danger
-A restore **replaces** the current database, and in the full setup the Keycloak database, with the backup's. Everything changed since the backup is lost. Take a backup of the current state first if you might need it.
+A restore **replaces** the current database, and in the full setup the provider's database (Keycloak or Authentik), with the backup's. Everything changed since the backup is lost. Take a backup of the current state first if you might need it.
 :::
 
 ## Restore a backup
@@ -20,7 +20,7 @@ A restore **replaces** the current database, and in the full setup the Keycloak 
    ./quizdock restore ./backups/quizdock-20261003-030000
    ```
 
-   The folder must contain `database.sql`, and in the full setup `keycloak.sql`. The script asks for confirmation.
+   The folder must contain `database.sql`, and in the full setup `keycloak.sql` or `authentik.sql`, after the provider. The script asks for confirmation.
 3. Check the result:
 
    ```sh
@@ -33,7 +33,7 @@ A restore **replaces** the current database, and in the full setup the Keycloak 
 
 1. Stops the application container.
 2. Loads `database.sql` into the QuizDock database. The dump starts by dropping the objects it recreates.
-3. Full setup: stops Keycloak, loads `keycloak.sql`, starts Keycloak again.
+3. Full setup: stops the provider (Keycloak, or Authentik's server and worker), loads its dump, starts it again.
 4. Copies `media/` and `store/` into their volumes.
 5. Starts the application.
 
@@ -50,7 +50,7 @@ Keep the database and the media from the **same** backup. A database older than 
 ## Move to another server
 
 1. On the old server, in the instance's folder: `./quizdock backup ./move`.
-2. Copy `./move`, the `quizdock` script and the Compose files (`docker-compose.prod.yml`, and for the full setup `docker-compose.full.yml` and `keycloak/`) to the new server's instance folder.
+2. Copy `./move`, the `quizdock` script and the Compose files (`docker-compose.prod.yml`, and for the full setup `docker-compose.full.yml` and `keycloak/`, or `docker-compose.authentik.yml` and `authentik/`) to the new server's instance folder.
 3. On the new server, in that folder, reuse the old configuration:
 
    ```sh

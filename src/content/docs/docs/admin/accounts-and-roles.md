@@ -26,7 +26,7 @@ A role is either **derived** from the context, on every request, or **granted** 
 | Mode | Derived | Granted |
 |---|---|---|
 | Local mode (`AUTH_MODE=none`) | `host` by taking the host seat: one host at a time. | `host`, `admin` or both, from the administration or `qd user:set-role`. No seat needed. |
-| OIDC mode | The roles in the token, under the claim `OIDC_ROLES_CLAIM` points at (`roles` by default; for example `realm_access.roles` with Keycloak). Any number of hosts. | The same. |
+| OIDC mode | The roles in the ID token, under the claim `OIDC_ROLES_CLAIM` points at (`roles` by default): roles of QuizDock's client with Keycloak, application entitlements with Authentik. Any number of hosts. | The same. |
 
 A grant stays: an expired seat or a token that no longer carries the role does not lower it. Revoking the grant lets the derived roles apply again on the next request.
 

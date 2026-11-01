@@ -29,7 +29,7 @@ The rows are grouped by category, **Game pace** first, then **Identity & brandin
 
 **Layout** offers the same rows as **Cards**, **List and detail** or **Table**. **Search a setting** and **Show only** ("Changed from the default", "Changed here", "With a problem", "Editable") narrow them down.
 
-Below, **Outside the application** lists the variables read by Docker Compose, the `quizdock` script, the image build or Keycloak, never by the application. They are changed where they are read, never here.
+Below, **Outside the application** lists the variables read by Docker Compose, the `quizdock` script, the image build, Keycloak or Authentik, never by the application. They are changed where they are read, never here.
 
 ## Levels
 

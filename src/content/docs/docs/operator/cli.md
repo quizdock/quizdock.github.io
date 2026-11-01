@@ -29,11 +29,11 @@ It reads the setup (`QUIZDOCK_MODE`: `compose`, `full` or `standalone`) and ever
 
 | Command | What it does |
 |---|---|
-| `init [--compose\|--full\|--standalone]` | Asks a few questions, writes `.env` (permissions `600`, random passwords), downloads the Compose files and the Keycloak realm when needed. Default: `--compose`. |
-| `up` (or `start`) | Starts the containers, waits up to 120 s for `/health` (180 s more for Keycloak in the full setup). In standalone, creates the `quizdock` container on first use. |
+| `init [--compose\|--full [--iam=keycloak\|authentik]\|--standalone]` | Asks a few questions, writes `.env` (permissions `600`, random passwords), downloads the Compose files and, for the full setup, the Keycloak realm or the Authentik blueprint. `--full` asks which provider; `--iam` says it. Default: `--compose`. |
+| `up` (or `start`) | Starts the containers, waits up to 120 s for `/health` (in the full setup, 180 s more for Keycloak, 300 s for Authentik). In standalone, creates the `quizdock` container on first use. |
 | `down` (or `stop`) | Stops the instance. Compose: `docker compose down` (volumes kept). Standalone: stops the container. |
 | `status` (or `ps`) | The containers, whether `/health` answers, the version running and the latest stable release. |
-| `logs [service]` | Follows the last 200 lines of the log. Compose services: `quizdock`, `postgres`, `redis`, `migrate`, and `keycloak` in the full setup. |
+| `logs [service]` | Follows the last 200 lines of the log. Compose services: `quizdock`, `postgres`, `redis`, `migrate`, and in the full setup `keycloak`, or `authentik-server` and `authentik-worker`. |
 
 ### Maintenance
 
@@ -42,7 +42,7 @@ It reads the setup (`QUIZDOCK_MODE`: `compose`, `full` or `standalone`) and ever
 | `backup [dir]` | Database dump, media, templates and `.env`, into `./backups/quizdock-YYYYMMDD-HHMMSS/` or `dir`. See [Back up an instance](/docs/operator/backup/). |
 | `restore <dir>` | Replaces the database, media and templates with a backup, after confirmation. See [Restore an instance](/docs/operator/restore/). |
 | `upgrade [tag]` | Backup, pull, restart with migrations, doctor. See [Upgrade](/docs/operator/upgrade/). |
-| `db:roles` | Gives QuizDock, and Keycloak in the full setup, a PostgreSQL role of its own, on an install made before 0.13.2. Backup first. See [Upgrade](/docs/operator/upgrade/#give-quizdock-its-own-database-role). |
+| `db:roles` | Gives QuizDock, and Keycloak in the full setup, a PostgreSQL role of its own, on an install made before 0.13.2 (Authentik always had its own). Backup first. See [Upgrade](/docs/operator/upgrade/#give-quizdock-its-own-database-role). |
 
 ### Administration, relayed to qd
 
@@ -80,7 +80,7 @@ Variables of the shell environment read by the script itself, not from `.env`:
 | `QUIZDOCK_CONTAINER` | `quizdock` | The standalone container's name |
 | `QUIZDOCK_BACKUP_DIR` | `./backups` | Where `backup` writes |
 
-From `.env`, the script reads only `QUIZDOCK_MODE`, `QUIZDOCK_TAG`, `HTTP_PORT`, `KEYCLOAK_PORT`, `POSTGRES_USER`, `POSTGRES_DB`, `QUIZDOCK_DB_USER` and `KEYCLOAK_DB_USER`.
+From `.env`, the script reads only `QUIZDOCK_MODE`, `QUIZDOCK_IAM`, `QUIZDOCK_TAG`, `HTTP_PORT`, `KEYCLOAK_PORT`, `AUTHENTIK_PORT`, `POSTGRES_USER`, `POSTGRES_DB`, `QUIZDOCK_DB_USER` and `KEYCLOAK_DB_USER`, and checks the passwords it finds there.
 
 ## qd, inside the container
 

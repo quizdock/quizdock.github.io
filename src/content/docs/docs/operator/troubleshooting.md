@@ -78,7 +78,11 @@ Start with `./quizdock status` and `./quizdock doctor`, on the server, in the in
 | `fetch failed`, at sign-in | The backend cannot reach the issuer's host (Docker networking): set `OIDC_INTERNAL_URL` to the internal address. |
 | `OIDC discovery failed: … → HTTP …` | The provider answered the discovery request with an error: check the address in the line. |
 | `Sign-in failed: invalid_client` or `unauthorized_client` | The client is confidential on the provider: set `OIDC_CLIENT_SECRET`, or make the client public with PKCE. |
-| `Sign-in failed: … "iss" claim` after the redirect | The provider names itself after the address that asked (the internal one): give it a fixed public host name (Keycloak: `KC_HOSTNAME`). |
+| `Sign-in failed: … "iss" claim` after the redirect | The provider names itself after the address that asked: check that `OIDC_ISSUER` is its public issuer exactly, and give it a fixed public host name (Keycloak: `KC_HOSTNAME`). |
+| `Sign-in failed: An ID token is not an access token` | An earlier release judged the access token on its claims, and Authentik's copy the ID token's: upgrade QuizDock. |
+| Signed in, but no role | The ID token lacks the claim `OIDC_ROLES_CLAIM` points at: add the roles to the ID token (Keycloak: *Add to ID token* on the mapper; Authentik: the scope `entitlements` or your mapping's in `OIDC_SCOPE`). |
+| The session ends a few minutes after sign-in | No refresh token: allow the refresh grant on the client, and with Authentik add `offline_access` to `OIDC_SCOPE`. |
+| `doctor`: *Roles read from the access token* or *A Bearer token accepted on its claims alone* | A way of reading tokens that ends in 1.0: see [Deprecated until 1.0](/docs/operator/oidc/#deprecated-until-10). |
 | The session cookie has no `Secure` flag behind HTTPS | The proxy's `X-Forwarded-Proto` is not believed: name the proxy in `TRUST_PROXY`. |
 | `403 auth.host_required` | The user is signed in but has no `host` role in the claim `OIDC_ROLES_CLAIM` points at. |
 | `unexpected "aud" claim value` | The tokens' `aud` differs from `OIDC_AUDIENCE`: fix it, or leave `OIDC_AUDIENCE` empty. |

@@ -25,6 +25,7 @@ On the server, in the instance's folder:
 | `postgres` | PostgreSQL |
 | `redis` | Redis |
 | `keycloak` | Keycloak (full setup) |
+| `authentik-server`, `authentik-worker` | Authentik (full setup) |
 
 In the standalone container, one log carries the start-up steps (lines starting with `[standalone]`: database creation, migrations) and the application. Redis writes to `/tmp/redis.log` inside the container.
 

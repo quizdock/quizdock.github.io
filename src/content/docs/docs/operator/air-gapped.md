@@ -43,7 +43,7 @@ This is standard Docker, not a QuizDock tool: `docker save` writes images to a f
    docker save -o quizdock-images.tar fchaussin/quizdock:0.13.1 postgres:16-alpine redis:7-alpine
    ```
 
-   For the full setup, add `quay.io/keycloak/keycloak:26.0.8`. For the standalone setup, the one image `fchaussin/quizdock:standalone-0.13.1` is enough. Check the exact image names and tags in the `docker-compose.prod.yml` of the release you install.
+   For the full setup, add the provider's image: `quay.io/keycloak/keycloak:26.7.5`, or `ghcr.io/goauthentik/server:2026.8.5`. For the standalone setup, the one image `fchaussin/quizdock:standalone-0.13.1` is enough. Check the exact image names and tags in the `docker-compose.prod.yml` of the release you install.
 2. Copy `quizdock-images.tar` to the server.
 3. On the server, load them:
 
@@ -59,8 +59,9 @@ This is standard Docker, not a QuizDock tool: `docker save` writes images to a f
 |---|---|
 | `quizdock` | Every setup |
 | `docker-compose.prod.yml` | Compose and full |
-| `docker-compose.full.yml` and `keycloak/realm-export.json` | Full |
-| `env/local.env.example`, `env/oidc.env.example`, `env/full.env.example` or `env/standalone.env.example` | A commented `.env` to start from, if you do not use `init` |
+| `docker-compose.full.yml` and `keycloak/realm-export.json` | Full, with Keycloak |
+| `docker-compose.authentik.yml` and `authentik/quizdock.yaml` | Full, with Authentik |
+| `env/local.env.example`, `env/oidc.env.example`, `env/full.env.example`, `env/authentik.env.example` or `env/standalone.env.example` | A commented `.env` to start from, if you do not use `init` |
 
 All of them are at `https://raw.githubusercontent.com/quizdock/quizdock/main/<file>`. Take them from the release tag you install rather than `main` when the two differ.
 

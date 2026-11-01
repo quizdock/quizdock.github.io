@@ -106,11 +106,11 @@ Over plain HTTP on a trusted network, QuizDock works. Use HTTPS as soon as the i
 
 ## The full setup behind HTTPS
 
-The full setup has two browser-facing services, QuizDock and Keycloak, on two ports of the same host name. Behind TLS:
+The full setup has two browser-facing services, QuizDock and its provider (Keycloak or Authentik), on two ports of the same host name. Behind TLS:
 
-1. Proxy **both** ports (the application's and `KEYCLOAK_PORT`), each with its certificate.
+1. Proxy **both** ports (the application's and `KEYCLOAK_PORT` or `AUTHENTIK_PORT`), each with its certificate.
 2. In `.env`, set `PUBLIC_SCHEME=https`.
-3. If the proxy changes the ports or gives Keycloak its own host name or path, set the three addresses explicitly:
+3. If the proxy changes the ports or gives the provider its own host name or path, set the addresses explicitly. With Keycloak:
 
    ```dotenv
    APP_PUBLIC_URL=https://quiz.example.org
@@ -119,9 +119,18 @@ The full setup has two browser-facing services, QuizDock and Keycloak, on two po
    ```
 
    `KEYCLOAK_PUBLIC_URL` becomes Keycloak's public host name (`KC_HOSTNAME`) and the base of `OIDC_ISSUER`; `KEYCLOAK_APP_URL` is the redirect address Keycloak allows.
+
+   With Authentik:
+
+   ```dotenv
+   APP_PUBLIC_URL=https://quiz.example.org
+   AUTHENTIK_PUBLIC_URL=https://sso.example.org
+   ```
+
+   `AUTHENTIK_PUBLIC_URL` is the base of `OIDC_ISSUER`; `APP_PUBLIC_URL` gives the blueprint its redirect addresses, on Authentik's first start only (later, change them in Authentik's interface).
 4. Apply it: `./quizdock up`.
 
-`KC_HOSTNAME_BACKCHANNEL_DYNAMIC=true` is already set, so tokens obtained by the backend over the Docker network still carry the public issuer.
+Tokens obtained by the backend over the Docker network still carry the public issuer: the backend names the provider by the issuer's host there, and Keycloak has `KC_HOSTNAME_BACKCHANNEL_DYNAMIC=true`.
 
 ## Caching
 

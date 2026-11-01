@@ -28,9 +28,9 @@ Do not open a public issue. Open a [private security advisory](https://github.co
 - every Linux capability dropped;
 - `no-new-privileges`.
 
-PostgreSQL and Redis sit on an internal Docker network and are not published on the server. Only the application's port is, plus Keycloak's in the full setup.
+PostgreSQL and Redis sit on an internal Docker network and are not published on the server. Only the application's port is, plus the provider's (Keycloak or Authentik) in the full setup.
 
-QuizDock connects to PostgreSQL with a role of its own, which owns its database and reaches nothing else; so does Keycloak in the full setup. The superuser is kept for administering PostgreSQL (backups). An install made before 0.13.2 still connects as the superuser: `./quizdock db:roles` gives it its roles (see [Upgrade](/docs/operator/upgrade/#give-quizdock-its-own-database-role)).
+QuizDock connects to PostgreSQL with a role of its own, which owns its database and reaches nothing else; so does the full setup's provider, Keycloak or Authentik. The superuser is kept for administering PostgreSQL (backups). An install made before 0.13.2 still connects as the superuser: `./quizdock db:roles` gives it its roles (see [Upgrade](/docs/operator/upgrade/#give-quizdock-its-own-database-role)).
 
 **Standalone image** (`fchaussin/quizdock:standalone`): Debian with Node.js, PostgreSQL and Redis in one container, running as a non-root user. It is **not hardened** like the Compose setup: no read-only filesystem, no dropped capabilities. Its PostgreSQL trusts local connections and listens on `127.0.0.1` inside the container only. Use it for trying and small events, not for serious production. A plain `docker run` of the application image does not get the Compose file's restrictions either; add them yourself.
 
@@ -44,7 +44,7 @@ On every push to the development and main branches, every pull request, and ever
 
 ## What you are responsible for
 
-- **Secrets.** `.env` holds the database passwords and, in the full setup, Keycloak's passwords. `./quizdock init` generates them at random and writes `.env` readable by its owner only. A Compose file started without `.env` falls back to the password `live`: never do that on a reachable server.
+- **Secrets.** `.env` holds the database passwords and, in the full setup, the provider's passwords and secrets. `./quizdock init` generates them at random and writes `.env` readable by its owner only. A Compose file started without `.env` falls back to the password `live`: never do that on a reachable server.
 - **Backups.** They hold `.env` and personal data. See [Back up an instance](/docs/operator/backup/).
 - **HTTPS.** Put a reverse proxy with a certificate in front of any instance reachable from outside. See [Reverse proxy](/docs/operator/reverse-proxy/).
 - **Updates.** The images do not update themselves.

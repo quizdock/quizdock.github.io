@@ -14,7 +14,7 @@ This part is for the operator (DevOps): whoever installs and runs QuizDock. Quiz
 | **Standalone** | One container: the application, PostgreSQL and Redis | One local host seat, taken with a name | PIN and nickname | A first try, a laptop, a one-off event | Not hardened, not for serious production |
 | **Compose** | The application, PostgreSQL, Redis, and a one-shot migration service | One local host seat, taken with a name | PIN and nickname | A classroom or a team on a trusted network | A name is not a security boundary |
 | **Compose with your identity provider** | The same, signing in against your OpenID Connect provider | Every account with the `host` role, as many as you like | Accounts, or PIN and nickname when a host opens the game (with `ALLOW_ANONYMOUS_PARTICIPANTS=true`) | An organisation that already has single sign-on | You run and configure the provider yourself |
-| **Full** | Compose plus a bundled Keycloak, with its own database in the same PostgreSQL | The sample `host` account, then the accounts you create in Keycloak | The sample `player` account, or PIN and nickname in an open game | Real accounts without an existing provider | One more service and one more database to maintain and back up |
+| **Full** | Compose plus a bundled identity provider, Keycloak or Authentik, with its own database in the same PostgreSQL | The sample `host` account, then the accounts you create in the provider | The sample `player` account, or PIN and nickname in an open game | Real accounts without an existing provider | One more service and one more database to maintain and back up |
 
 The first two run in **local mode** (`AUTH_MODE=none`), the last two in **OIDC mode** (`AUTH_MODE=oidc`). The mode is one variable and a restart; see [Sign-in with OpenID Connect](/docs/operator/oidc/).
 
@@ -22,7 +22,7 @@ The first two run in **local mode** (`AUTH_MODE=none`), the last two in **OIDC m
 
 - **You want to see it work in five minutes:** standalone. Or try the [live demo](https://quizdock-standalone.onrender.com) first, without installing anything.
 - **One person presents at a time, on a network you trust:** Compose in local mode. The host seat is taken by typing a name, and anyone who types the same name gets it back: keep it to trusted networks.
-- **Several hosts, each with their own quiz bank, or an instance reachable from the Internet:** OIDC mode, with your provider or the bundled Keycloak.
+- **Several hosts, each with their own quiz bank, or an instance reachable from the Internet:** OIDC mode, with your provider or the bundled Keycloak or Authentik.
 - **Hundreds of players at once:** a Compose setup. The measured figures and their conditions are in [Sizing](/docs/operator/sizing/).
 
 ## What every setup shares

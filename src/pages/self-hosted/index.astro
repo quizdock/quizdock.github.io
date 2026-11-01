@@ -49,7 +49,7 @@ const faq = [
       <p>
         With Compose, four services: the QuizDock application, which serves the pages, the API and the game's WebSocket
         itself; PostgreSQL 16; Redis 7, with its append-only file on a volume; and a one-shot service that applies the
-        database migrations at each start. The full setup adds Keycloak with its own database. The standalone image puts
+        database migrations at each start. The full setup adds Keycloak or Authentik with its own database. The standalone image puts
         the application, PostgreSQL and Redis in one container, for trying QuizDock; it is not hardened for serious production.
       </p>
     </div>
@@ -112,7 +112,7 @@ const faq = [
       <p>
         The running instance needs nothing from outside, as above. What is not documented is getting it there: the images
         (for instance with <code>docker save</code> and <code>docker load</code>) and the files <code>./quizdock init</code>
-        downloads (the Compose file, and for the full setup its overlay and the Keycloak realm). You can carry them in
+        downloads (the Compose file, and for the full setup its overlay and the Keycloak realm or Authentik blueprint). You can carry them in
         yourself, but there is no tested procedure.
       </p>
       <p><a class="more-link" href="/docs/operator/air-gapped/">Isolated and air-gapped networks →</a></p>

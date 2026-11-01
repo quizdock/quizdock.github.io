@@ -9,7 +9,7 @@ interface Props {
   /** A section of the application's settings (`identity`, `access`…)… */
   group?: string;
   /** …or the variables read around the application. */
-  deployment?: 'compose' | 'keycloak';
+  deployment?: 'compose' | 'keycloak' | 'authentik';
 }
 interface Entry {
   key: string;
@@ -23,7 +23,7 @@ interface Entry {
 }
 const { group, deployment } = Astro.props;
 const entries: Entry[] = deployment
-  ? (data as { compose: Entry[]; keycloak: Entry[] })[deployment]
+  ? (data as { compose: Entry[]; keycloak: Entry[]; authentik: Entry[] })[deployment]
   : ((data.groups as { id: string; settings: Entry[] }[]).find((g) => g.id === group)?.settings ?? []);
 if (!entries.length) throw new Error(`EnvTable: nothing for ${group ?? deployment}`);
 

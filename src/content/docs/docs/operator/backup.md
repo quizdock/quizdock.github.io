@@ -13,6 +13,7 @@ A QuizDock instance keeps its data in three places: the PostgreSQL database, the
 |---|---|---|
 | Accounts, quizzes, settings changed in the administration, archived results, audit | PostgreSQL | Yes, `database.sql` |
 | Keycloak accounts and configuration (full setup) | PostgreSQL, database `keycloak` | Yes, `keycloak.sql` |
+| Authentik accounts and configuration (full setup) | PostgreSQL, database `authentik` | Yes, `authentik.sql` |
 | Uploaded images, videos, audio | `MEDIA_DIR` (`/data/media`) | Yes, `media/` |
 | Templates folder | `STORE_DIR` (`/data/store`) | Yes, `store/` |
 | Configuration | `.env` | Yes, `env` |
@@ -37,7 +38,7 @@ Or into a folder of your choice:
 
 What it does:
 
-1. Dumps the QuizDock database with `pg_dump --clean --if-exists` into `database.sql`, and in the full setup the Keycloak database into `keycloak.sql`. The instance keeps running: the dump is consistent on its own.
+1. Dumps the QuizDock database with `pg_dump --clean --if-exists` into `database.sql`, and in the full setup the provider's database into `keycloak.sql` or `authentik.sql`. The instance keeps running: the dump is consistent on its own.
 2. Copies the media and the templates out of the application container (`media/`, `store/`).
 3. Copies `.env` as `env`.
 4. Prints the size of the backup.
@@ -45,7 +46,7 @@ What it does:
 The default folder is `./backups/quizdock-YYYYMMDD-HHMMSS/`, or under `QUIZDOCK_BACKUP_DIR` when it is set. Files are created readable by their owner only.
 
 :::caution
-The backup holds `.env`, with the database password and, in the full setup, Keycloak's passwords. It also holds personal data: accounts, nicknames, results. Store it where only operators can read it.
+The backup holds `.env`, with the database password and, in the full setup, the provider's passwords and secrets. It also holds personal data: accounts, nicknames, results. Store it where only operators can read it.
 :::
 
 Media uploaded while the backup runs may be missing from it. Take backups when no one is editing, for example at night.

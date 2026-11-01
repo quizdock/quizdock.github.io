@@ -5,7 +5,7 @@ import { DEMO_URL, DOCKER_HUB_URL } from '../../site';
 const faq = [
   {
     q: 'Which setup should I choose?',
-    a: `<p>To try QuizDock on your machine, standalone. For an instance you keep, Compose through <code>./quizdock init</code>: in local mode on a trusted network, or with your identity provider. To evaluate accounts and roles without a provider of your own, the full setup with Keycloak.</p>`,
+    a: `<p>To try QuizDock on your machine, standalone. For an instance you keep, Compose through <code>./quizdock init</code>: in local mode on a trusted network, or with your identity provider. To evaluate accounts and roles without a provider of your own, the full setup with Keycloak or Authentik.</p>`,
   },
   {
     q: 'Does QuizDock run on ARM?',
@@ -17,7 +17,7 @@ const faq = [
   },
   {
     q: 'Which ports does QuizDock use?',
-    a: `<p>The application listens on port 3000 in its container, published on <code>HTTP_PORT</code>, 18080 by default. The full setup also publishes Keycloak, on 18081 by default.</p>`,
+    a: `<p>The application listens on port 3000 in its container, published on <code>HTTP_PORT</code>, 18080 by default. The full setup also publishes its provider, Keycloak or Authentik, on 18081 by default.</p>`,
   },
   {
     q: 'Can I run QuizDock without Docker?',
@@ -32,7 +32,7 @@ const faq = [
 
 <Page
   title="Deploy"
-  description="Choose a QuizDock setup (standalone, Compose, Compose with your identity provider, or full with Keycloak), then install, persist and upgrade it."
+  description="Choose a QuizDock setup (standalone, Compose, Compose with your identity provider, or full with Keycloak or Authentik), then install, persist and upgrade it."
   faq={faq}
 >
   <section class="page-hero">
@@ -54,14 +54,14 @@ const faq = [
           <tr><td>Try it on your machine</td><td><b>Standalone</b>: one container with PostgreSQL and Redis inside</td><td><code>docker run</code>, or <code>./quizdock init --standalone</code></td><td>One host seat, by name</td><td>PIN and nickname</td></tr>
           <tr><td>An instance you keep, on a trusted network</td><td><b>Compose</b>: application, PostgreSQL, Redis</td><td><code>./quizdock init</code>, local mode</td><td>One host seat, by name</td><td>PIN and nickname</td></tr>
           <tr><td>Your organisation's sign-in</td><td><b>Compose with your identity provider</b></td><td><code>./quizdock init</code>, OIDC, your issuer</td><td>Accounts with the host role</td><td>Accounts, or PIN and nickname when open games are allowed</td></tr>
-          <tr><td>A full evaluation, accounts included</td><td><b>Full</b>: Compose with a bundled Keycloak</td><td><code>./quizdock init --full</code></td><td>A sample host account, then your own</td><td>A sample player account, or PIN and nickname in an open game</td></tr>
+          <tr><td>A full evaluation, accounts included</td><td><b>Full</b>: Compose with a bundled Keycloak or Authentik</td><td><code>./quizdock init --full</code></td><td>A sample host account, then your own</td><td>A sample player account, or PIN and nickname in an open game</td></tr>
         </tbody>
       </table>
     </div>
     <div class="prose">
       <p>
         Standalone is for trying QuizDock: everything shares one container, which is not hardened for serious production.
-        Local mode trusts names, so keep it to trusted networks. The full setup adds Keycloak and a second database to
+        Local mode trusts names, so keep it to trusted networks. The full setup adds an identity provider and a second database to
         maintain.
       </p>
       <p><a class="more-link" href="/docs/operator/choose-a-deployment/">Choose a deployment →</a></p>
@@ -83,7 +83,7 @@ const faq = [
 chmod +x quizdock
 ./quizdock init
 ./quizdock up</pre>
-        <p>Use <code>init --full</code> for Keycloak, <code>init --standalone</code> for one container.</p>
+        <p>Use <code>init --full</code> for Keycloak or Authentik, <code>init --standalone</code> for one container.</p>
       </article>
     </div>
     <div class="prose">
@@ -111,7 +111,7 @@ chmod +x quizdock
         <thead><tr><th>Setup</th><th>Database</th><th>Media and templates</th><th>Live games</th><th>Configuration</th></tr></thead>
         <tbody>
           <tr><td>Standalone</td><td>Volume <code>quizdock</code>, <code>/data/postgres</code></td><td>Same volume, <code>/data/media</code> and <code>/data/store</code></td><td>Redis in memory only</td><td>Environment of the container (<code>.env</code> with the script)</td></tr>
-          <tr><td>Compose and full</td><td>Volume <code>pgdata</code> (Keycloak's database too, in full)</td><td>Volumes <code>mediadata</code> and <code>storedata</code></td><td>Volume <code>redisdata</code>, append-only file</td><td><code>.env</code> in the instance's folder</td></tr>
+          <tr><td>Compose and full</td><td>Volume <code>pgdata</code> (the provider's database too, in full)</td><td>Volumes <code>mediadata</code> and <code>storedata</code></td><td>Volume <code>redisdata</code>, append-only file</td><td><code>.env</code> in the instance's folder</td></tr>
         </tbody>
       </table>
     </div>

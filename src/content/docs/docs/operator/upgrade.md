@@ -34,7 +34,7 @@ It:
 
 1. takes a backup into `./backups/` (see [Back up an instance](/docs/operator/backup/));
 2. writes the new tag in `.env` as `QUIZDOCK_TAG`, so that later `up` runs it;
-3. Compose and full: fetches the release's Compose files (and, for full, the Keycloak realm). A file you edited is kept, and the release's version is written next to it as `<file>.new`: compare, then keep yours or adopt it (`mv docker-compose.prod.yml.new docker-compose.prod.yml`);
+3. Compose and full: fetches the release's Compose files (and, for full, the Keycloak realm or the Authentik blueprint). A file you edited is kept, and the release's version is written next to it as `<file>.new`: compare, then keep yours or adopt it (`mv docker-compose.prod.yml.new docker-compose.prod.yml`);
 4. pulls the images;
 5. restarts the instance: the `migrate` service applies the migrations, then the application starts;
 6. prints the last 20 lines of the migration's output;
@@ -182,7 +182,7 @@ OIDC mode only. Local mode and the standalone image without OIDC: nothing to do.
 | Post-logout redirect URI `https://<instance>` | Unchanged. |
 | Web origins (CORS) | No longer needed. |
 | Refresh tokens | Must be issued, or the session ends with the first access token. |
-| Issuer seen from the backend | Must equal `OIDC_ISSUER`, even when reached through `OIDC_INTERNAL_URL`. Keycloak: `KC_HOSTNAME=<public URL>` and `KC_HOSTNAME_BACKCHANNEL_DYNAMIC=true`. |
+| Issuer seen from the backend | Must equal `OIDC_ISSUER`, even when reached through `OIDC_INTERNAL_URL`: the backend names the provider by the issuer's host there. Keycloak: `KC_HOSTNAME=<public URL>` and `KC_HOSTNAME_BACKCHANNEL_DYNAMIC=true`. |
 | Network | The backend must reach the token endpoint, not only the keys. |
 
 **After the upgrade**
