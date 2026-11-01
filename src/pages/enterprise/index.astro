@@ -93,7 +93,7 @@ const faq = [
     <div class="prose">
       <h2>Who can do what?</h2>
       <ul>
-        <li><b>Participant</b>: joins rooms. Every account is at least a participant.</li>
+        <li><b>Participant</b>: joins lobbies. Every account is at least a participant.</li>
         <li><b>Host</b>: creates, edits and presents their own quizzes.</li>
         <li><b>Manager</b> (<code>admin</code>): reads the whole instance and administers it. Managing is not hosting: an administrator without the host role presents nothing.</li>
       </ul>
@@ -166,7 +166,7 @@ const faq = [
         <li><b>Upgrade</b>: <code>./quizdock upgrade X.Y.Z</code> backs up, pulls, migrates, waits for health and runs <code>doctor</code>. No rollback but the backup.</li>
         <li><b>Health</b>: a public <code>/health</code> endpoint (status, version, authentication mode) for your monitoring; the <b>Health</b> page and <code>./quizdock doctor</code> for the checks behind it.</li>
         <li><b>Logs</b>: plain text on the container's standard output, <code>./quizdock logs</code>.</li>
-        <li><b>Sizing</b>: one process on one core runs the live games. Measured with the backend on one core: 700 players in one room fluid, 1500 at the edge. Deduced from it: 2 vCPU and 2 GB up to 700, 2 vCPU and 4 GB up to 1500. No horizontal scaling.</li>
+        <li><b>Sizing</b>: one process on one core runs the live games. Measured with the backend on one core: 700 players in one lobby fluid, 1500 at the edge. Deduced from it: 2 vCPU and 2 GB up to 700, 2 vCPU and 4 GB up to 1500. No horizontal scaling.</li>
         <li><b>Security</b>: a distroless image running as non-root; in Compose, a read-only file system and no Linux capabilities; dependencies and images scanned for known vulnerabilities.</li>
       </ul>
       <p class="fine">Sizing measured on 2026-09-27: backend on one 2.1 GHz core, players simulated on the same machine, no media. <a href="/real-time/#benchmarks">Conditions and figures</a>.</p>

@@ -172,7 +172,7 @@ The home page, the participant's phone, the projected screen and the host's cons
 | `qd-rules` | The line under it (one answer, several, double points…). | |
 | `qd-answers` | The answers. | `data-layout`: `list` (a phone's legend), `images` (picture answers) |
 | `qd-answer` | One answer. | `data-color`, `data-correct` (`true`/`false`, once revealed), `data-picked` |
-| `qd-reveal`, `qd-distribution`, `qd-closest` | The answer revealed, how the room answered, the closest numbers. | |
+| `qd-reveal`, `qd-distribution`, `qd-closest` | The answer revealed, how the lobby answered, the closest numbers. | |
 | `qd-explanation` | The explanation shown with the answer. | |
 | `qd-verdict` | Right or wrong, on the phone. | `data-correct` |
 | `qd-leaderboard`, `qd-leaderboard-row` | The ranking and each line. | `data-rank`, `data-you` (the participant's own line) |

@@ -5,7 +5,7 @@ sidebar:
   order: 2
 ---
 
-This page explains who may host (the **quiz host**, who presents quizzes to a room), who may administer, and who may take part, and how an administrator changes it from **Administration → Accounts** or from the command line.
+This page explains who may host (the **quiz host**, who presents quizzes to a lobby), who may administer, and who may take part, and how an administrator changes it from **Administration → Accounts** or from the command line.
 
 ## The roles
 
@@ -13,7 +13,7 @@ An account holds a set of roles. An account with no role is a participant.
 
 | Role | In the app | What it allows |
 |---|---|---|
-| none | "Participant" | Join rooms with a PIN. |
+| none | "Participant" | Join lobbies with a PIN. |
 | `host` | "Host" | Its own bank: create, edit and present quizzes, offer templates. |
 | `admin` | "Administrator" ("Manager" under **My account**) | Read the whole instance and administer it. On its own, it creates, edits and presents nothing, and does not take the host seat. |
 
@@ -66,7 +66,7 @@ The command line is never limited by `ADMIN_WEB_SCOPE`, and it records its chang
 
 ## The host seat (local mode)
 
-Local mode has no identity provider. A host types a name and takes the **host seat**, with an optional expiry (1 h, 4 h, 24 h or none). While the seat is held, everyone else can only join rooms as a participant. It is freed when its holder logs out, or once its expiry is past.
+Local mode has no identity provider. A host types a name and takes the **host seat**, with an optional expiry (1 h, 4 h, 24 h or none). While the seat is held, everyone else can only join lobbies as a participant. It is freed when its holder logs out, or once its expiry is past.
 
 The name is the only key: typing the holder's name again, on any device, resumes the seat. That is why local mode is for trusted networks, and why the web administration needs `ADMIN_TOKEN` there.
 
@@ -85,11 +85,11 @@ An account granted `host` does not need the seat, and others can still take the 
 
 In local mode, the PIN is the only barrier: a participant types it, then a nickname.
 
-In OIDC mode, there are two barriers. The account opens the application; the PIN opens one room. So every participant signs in by default, and their results are attached to their account.
+In OIDC mode, there are two barriers. The account opens the application; the PIN opens one lobby. So every participant signs in by default, and their results are attached to their account.
 
 ### Open access (OIDC mode)
 
-Some rooms have no accounts to give: trainees who change every session, visitors at an event. Set `ALLOW_ANONYMOUS_PARTICIPANTS` to `true` and each launch asks the host how participants get in, for as long as the room is open:
+Some lobbies have no accounts to give: trainees who change every session, visitors at an event. Set `ALLOW_ANONYMOUS_PARTICIPANTS` to `true` and each launch asks the host how participants get in, for as long as the lobby is open:
 
 - **Accounts required**: "Each participant signs in. Personal tracking stays available."
 - **Open access**: "The PIN and a nickname are enough, no account. No personal tracking."
@@ -98,7 +98,7 @@ A host can skip the question from then on; the choice is kept with their account
 
 `ALLOW_ANONYMOUS_PARTICIPANTS` is a level C2 setting: it can be changed from **Administration → Settings** (with `ADMIN_WEB_SCOPE=write`, confirmed), or set by the "The public, a large event" answer of the [quick setup](/docs/admin/presets/). It does nothing in local mode. Until it is on, every game requires accounts.
 
-Whatever the access, the host can close a room to new participants and remove one, and each address may try 30 wrong PINs a minute.
+Whatever the access, the host can close a lobby to new participants and remove one, and each address may try 30 wrong PINs a minute.
 
 ## Questions
 

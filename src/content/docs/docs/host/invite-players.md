@@ -1,24 +1,24 @@
 ---
 title: Invite players
-description: Bring players into a QuizDock room with the PIN, the QR code or a shared link, choose the invitation address, and what players do to join.
+description: Bring players into a QuizDock lobby with the PIN, the QR code or a shared link, choose the invitation address, and what players do to join.
 sidebar:
   order: 11
 ---
 
-Players join a room with its 6-digit PIN. They need no app and, in local mode, no account: a browser, the PIN and a nickname. This page covers how you hand out the PIN and what players see.
+Players join a lobby with its 6-digit PIN. They need no app and, in local mode, no account: a browser, the PIN and a nickname. This page covers how you hand out the PIN and what players see.
 
 ## Hand out the invitation
 
 In the lobby, the invitation fills the centre of the console. Once the quiz has started, choose the PIN at the top of the console to open it again. It shows:
 
-- the **QR code to join**, which opens the room directly;
+- the **QR code to join**, which opens the lobby directly;
 - under **Invite players**, the address to type and the 6-digit PIN;
 - **Share**: sends the direct link alone, its PIN in it, through the device's share sheet, or copies it to the clipboard ("Link copied to the clipboard."). Over plain `http` on a local network, where the browser offers neither, it shows the address to copy: "Copy this address and send it: …";
 - the **Invitation address** (below).
 
 **Projection window**, at the end of the console's second row, opens the big screen. In the lobby it shows the QR code, the PIN and "Join at" followed by the address to type.
 
-The direct link has the form `https://your-instance/join/123456`: it opens the room with the PIN already filled in.
+The direct link has the form `https://your-instance/join/123456`: it opens the lobby with the PIN already filled in.
 
 ## The invitation address
 
@@ -38,31 +38,31 @@ When the instance is served over HTTPS and you pick an `http://` local address, 
 ## What players do
 
 1. Open the address on the big screen, or scan the QR code.
-2. On **Join a room**, type the **PIN, 6 digits** ("Type the PIN shown on the big screen"). It is checked as soon as the 6th digit is in.
+2. On **Join a lobby**, type the **PIN, 6 digits** ("Type the PIN shown on the big screen"). It is checked as soon as the 6th digit is in.
 3. Pick a **Nickname**, 2 to 20 characters, and an avatar (**Random avatar** draws another).
-4. Under **Where are you playing from?**, keep **In the room**, or choose **Remote** when they cannot see the big screen. See [Remote participants](/docs/host/remote-participants/).
-5. Choose **Join the room**, then **I'm ready** in the lobby.
+4. Under **Where are you playing from?**, keep **On site**, or choose **Remote** when they cannot see the big screen. See [Remote participants](/docs/host/remote-participants/).
+5. Choose **Join the lobby**, then **I'm ready** in the lobby.
 
 The console lists the players as they arrive, in its **Players** tab, and the lobby counts who is ready. A ready player's avatar is ringed green, on the console and on the projection; a remote player's carries a wifi badge.
 
-In OIDC mode with **Accounts required**, players sign in with the identity provider first ("Sign in to take part"); the PIN then opens the room. With **Open access**, the PIN and a nickname are enough.
+In OIDC mode with **Accounts required**, players sign in with the identity provider first ("Sign in to take part"); the PIN then opens the lobby. With **Open access**, the PIN and a nickname are enough.
 
-A player's phone remembers them: if the connection drops or the page reloads, they come back to the same seat and score. The nickname is also remembered for the next room.
+A player's phone remembers them: if the connection drops or the page reloads, they come back to the same seat and score. The nickname is also remembered for the next lobby.
 
 ## Questions
 
 ### Do players need to install an app?
 
-No. A current browser is enough. Phones in the room show the question's text, a small picture and the answer tiles; the question in full is on the big screen.
+No. A current browser is enough. Phones on site show the question's text, a small picture and the answer tiles; the question in full is on the big screen.
 
 ### Can two players use the same nickname?
 
-No. "This nickname is already taken in this room." The second player picks another.
+No. "This nickname is already taken in this lobby." The second player picks another.
 
 ### Can I stop new players from joining?
 
-Yes. **Close the room to new participants** in the console. Players already in can still come back after a lost connection.
+Yes. **Close the lobby to new participants** in the console. Players already in can still come back after a lost connection.
 
-### A player cannot reach the room. What should I check?
+### A player cannot reach the lobby. What should I check?
 
-The invitation address first: is it `localhost`, or on another network than the phones? Then the PIN, and whether the room is closed to newcomers. See [Troubleshooting](/docs/host/troubleshooting/).
+The invitation address first: is it `localhost`, or on another network than the phones? Then the PIN, and whether the lobby is closed to newcomers. See [Troubleshooting](/docs/host/troubleshooting/).

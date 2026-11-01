@@ -81,9 +81,9 @@ Wrong administration tokens are limited to 10 per address and 50 in total per 15
 - **Uploads** are checked by their content, not their name; SVG is refused.
 - **The setup token** works once and expires 24 hours after it was created. Each start while the setup is open, and each `qd setup.token`, replaces it.
 
-## Projection computers: allow sound for your instance only
+## Projection computers: allow audio for your instance only
 
-A browser plays sound only after a click in that very window, so the projection asks for one. On a computer dedicated to the projector, the browser can allow QuizDock to play sound without the click.
+A browser plays audio only after a click in that very window, so the projection asks for one. On a computer dedicated to the projector, the browser can allow QuizDock to play audio without the click.
 
 The recommended way allows your instance only: the `AutoplayAllowlist` policy of Chrome and Edge.
 
@@ -104,4 +104,4 @@ The recommended way allows your instance only: the `AutoplayAllowlist` policy of
 
 Use the address the projection opens (your `APP_PUBLIC_URL`, or `http://<LAN address>:<port>`). Restart the browser, then check `chrome://policy` or `edge://policy`. The policy does not exist on Android or iOS.
 
-The launch flag `--autoplay-policy=no-user-gesture-required` does the same for **every** site the browser opens. Keep it to a computer used for nothing else, or to a separate browser profile (`--user-data-dir=…`). See [Sound and projection](/docs/host/sound-and-projection/) for the host's side.
+The launch flag `--autoplay-policy=no-user-gesture-required` does the same for **every** site the browser opens. Keep it to a computer used for nothing else, or to a separate browser profile (`--user-data-dir=…`). See [Audio and projection](/docs/host/sound-and-projection/) for the host's side.

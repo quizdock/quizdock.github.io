@@ -11,13 +11,13 @@ These operations need the admin role. `ADMIN_WEB_SCOPE` does not concern them, a
 
 ## What is stored
 
-Hosts add images, videos and sounds to their questions and slides. The editor converts each file in the author's browser, before it is sent; the server never converts anything.
+Hosts add images, videos and audio to their questions and slides. The editor converts each file in the author's browser, before it is sent; the server never converts anything.
 
 | Kind | Stored as |
 |---|---|
 | Image | WebP, longest edge at most 1920 px |
 | Video | MP4 (H.264 and AAC), short edge at most 1080 px, at most 30 frames per second |
-| Sound | M4A (AAC), 128 kb/s |
+| Audio | M4A (AAC), 128 kb/s |
 
 [Quiz themes](/docs/host/quiz-themes/) add two kinds of their own: **Theme icons** (square, single-colour SVG, rebuilt from a safe subset at upload) and **Theme fonts** (`.woff2`). A file a theme holds is never cleaned up, and cannot be deleted while the theme holds it.
 
@@ -27,13 +27,13 @@ A file is stored once per content: the same image uploaded twice, or brought bac
 
 ## Disk
 
-The **Disk** card gives the number of files and their size, by kind (images, videos, sounds, theme icons and fonts) and by owner, and the files in older formats.
+The **Disk** card gives the number of files and their size, by kind (images, videos, audio, theme icons and fonts) and by owner, and the files in older formats.
 
 ## Clean-up
 
 Every hour, and once when the backend starts, the instance deletes the media nothing uses any more, once they are a day old. For example: an upload whose form was abandoned, a media replaced in a question, an image taken out of a text.
 
-A media stays as long as a quiz, a room being played, or an archived session still refers to it. Archived results show the questions as they were, with their media.
+A media stays as long as a quiz, a lobby being played, or an archived session still refers to it. Archived results show the questions as they were, with their media.
 
 The **Clean-up** card shows:
 
@@ -57,7 +57,7 @@ The **Files** list shows every file with its owners, size, dimensions and where 
 
 The filter bar stays at the top of the page while the files scroll:
 
-- **Kind**: images, videos, sounds, theme icons or theme fonts.
+- **Kind**: images, videos, audio, theme icons or theme fonts.
 - **Show**: **All**, **Unused** (the files no quiz and no past result uses) or **Older formats**.
 - **Owner**, in the **All** view: one account, or **All but Global** for the hosts' files, leaving out those only the global media hold.
 - **Sort**: **Largest first**, **Most used first** or **Newest first**.
@@ -74,23 +74,23 @@ An administrator can delete a file even when it is used, for moderation.
 2. The confirmation lists what breaks: the quizzes that use it ("The questions lose this media.") and the archived sessions ("Past results no longer show it."). "Every copy of this file goes, whoever owns it."
 3. Confirm.
 
-A file cannot be deleted while a room is playing it: "A room is playing it: it cannot be deleted until the room closes."
+A file cannot be deleted while a lobby is playing it: "A lobby is playing it: it cannot be deleted until the lobby closes."
 
 ### Act on several files
 
 Tick files in the list, or tick **Select all** for the page shown. Then:
 
 - in the **All** view, **Add to global media** adds every ticked file that is not global yet;
-- in the **All** view, **Delete** deletes them, after one confirmation that lists what breaks, as for one file. The files a room is playing are left out and named ("Left out, a room is playing it: …");
+- in the **All** view, **Delete** deletes them, after one confirmation that lists what breaks, as for one file. The files a lobby is playing are left out and named ("Left out, a lobby is playing it: …");
 - in the **Global** view, **Withdraw from global media** withdraws them, after one confirmation.
 
 Each file is handled in turn and recorded in the audit on its own line. The files that fail are named once the others are done.
 
 ## Global media
 
-Global media are images, videos and sounds an administrator offers to every host. Hosts find them under **Global media** in their media library. Picking one gives the host a media of their own on the same file, with its credit; nothing is copied on disk.
+Global media are images, videos and audio files an administrator offers to every host. Hosts find them under **Global media** in their media library. Picking one gives the host a media of their own on the same file, with its credit; nothing is copied on disk.
 
-- In the **Global** view, drop images, videos and sounds on the drop zone, several at once, or use **Choose files**. Each file's kind comes from its type, and it is converted in the browser, as in the editor.
+- In the **Global** view, drop images, videos and audio files on the drop zone, several at once, or use **Choose files**. Each file's kind comes from its type, and it is converted in the browser, as in the editor.
 - Or take an existing file from the **All** view: **Add to the global media**.
 - Give it a **Credit (author, licence, source)**. A CC-BY or CC-BY-SA licence asks for one.
 - **Withdraw** stops offering it. "Hosts no longer find it in their library. The quizzes that use it keep their copy."
@@ -107,7 +107,7 @@ These settings bound what hosts upload. They are level C2: changed from [Setting
 |---|---|---|
 | `MEDIA_MAX_BYTES` | 10 MB | an image |
 | `MEDIA_MAX_VIDEO_MB` | 50 MB | a video |
-| `MEDIA_MAX_AUDIO_MB` | 10 MB | a sound |
+| `MEDIA_MAX_AUDIO_MB` | 10 MB | an audio file |
 | `IMPORT_MAX_BYTES` | 50 MB | an imported quiz bundle, media included |
 
 Behind a reverse proxy, its request body limit must be at least the largest of these: raising a limit here is not enough on its own. See [Reverse proxy](/docs/operator/reverse-proxy/).

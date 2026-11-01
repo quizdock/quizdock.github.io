@@ -80,9 +80,15 @@ Example: "In which year did the Eiffel Tower open?", target 1889, tolerance 0, S
 
 An exact answer counts as right for the streak; a near miss neither grows nor breaks it.
 
-## Scores in a room with several quizzes
+## Equal scores
 
-Each quiz scores from zero. When a room plays several quizzes, **Room standings** and the **Room podium** add up the archived quizzes. See [Start a room](/docs/host/start-a-room/).
+In a quiz, players with the same score are ranked by their total answer time, the shortest first: a question left unanswered counts its whole time, including the questions played before a late arrival. Still equal, the one who joined first comes first. The leaderboard, the podium and the archived results follow this order.
+
+## Scores in a lobby with several quizzes
+
+Each quiz scores from zero. When a lobby plays several quizzes, **Lobby standings** and the **Lobby podium** add up the archived quizzes. See [Start a lobby](/docs/host/start-a-room/).
+
+In the lobby standings, equal totals are ranked by arrival in the lobby.
 
 ## Questions
 

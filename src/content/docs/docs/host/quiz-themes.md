@@ -5,7 +5,7 @@ sidebar:
   order: 5
 ---
 
-A theme is the look of a quiz on the live screens: the projection and the players' phones, from the lobby to the podium. It sets the background, the answers' colours and icons, the font, the sounds and the motion. Your own screens (the console, the editor, the lists) keep the instance's look; see [Branding](/docs/admin/branding/).
+A theme is the look of a quiz on the live screens: the projection and the players' phones, from the lobby to the podium. It sets the background, the answers' colours and icons, the font, the effects and the motion. Your own screens (the console, the editor, the lists) keep the instance's look; see [Branding](/docs/admin/branding/).
 
 ## Pick a quiz's theme
 
@@ -53,9 +53,9 @@ A theme stores only what it changes. The rest follows the shipped theme it comes
 | **Answers** | The colour of each of the eight answers, and its icon: **Icon…** picks one from the bank (animals, food, sports, seasons…, with a search), **Choose a set of eight…** gives all eight at once, **Upload an SVG…** takes your own (square, single colour). **Marked by**: **Icons**, **Letters A–H** or **Numbers 1–8**. Text and icons on the answers are always white. |
 | **Accent** | The standings' bars, the "ready" and "you" marks. |
 | **Font** | One of the shipped fonts, or **Import a font (.woff2)…** with its licence (OFL 1.1, CC0, CC BY or CC BY-SA). |
-| **Sounds** | **Answer received**, **Last seconds**, **Countdown** and **Time up**: built-in or a sound of the theme. A sound you pick for the room in **Room sound** still wins. |
-| **Motion** | **Standard**, **Sober**, **Dynamic** or **Festive**, and confetti for the players who found the answer. The room's **Animations** switch and a device's reduced motion always win. |
-| **Licence** | **No licence**, CC0, CC BY or CC BY-SA: the terms others may reuse the theme under. You must hold the rights to its pictures, icons, sounds and font. |
+| **Effects** | **Answer received**, **Last seconds**, **Countdown** and **Time up**: built-in or an effect of the theme. An effect you pick for the lobby in **Lobby audio** still wins. |
+| **Motion** | **Standard**, **Sober**, **Dynamic** or **Festive**, and confetti for the players who found the answer. The lobby's **Animations** switch and a device's reduced motion always win. |
+| **Licence** | **No licence**, CC0, CC BY or CC BY-SA: the terms others may reuse the theme under. You must hold the rights to its pictures, icons, effects and font. |
 
 The preview beside the editor shows the projection and the phone, or one of them, at four moments: **Lobby**, **Question**, **Answer** and **Podium**.
 
@@ -81,7 +81,7 @@ A quiz's own [export](/docs/host/import-a-quiz/#move-a-quiz-with-a-bundle) carri
 
 ## During a game
 
-A game takes the quiz's theme when the room opens it, and keeps it until the end: a change to the theme shows from the next game, never during one.
+A game takes the quiz's theme when the lobby opens it, and keeps it until the end: a change to the theme shows from the next game, never during one.
 
 ## The instance's default
 

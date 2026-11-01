@@ -13,7 +13,7 @@ A QuizDock instance keeps its data in three places: the PostgreSQL database, the
 |---|---|---|
 | Accounts, quizzes, settings changed in the administration, archived results, audit | PostgreSQL | Yes, `database.sql` |
 | Keycloak accounts and configuration (full setup) | PostgreSQL, database `keycloak` | Yes, `keycloak.sql` |
-| Uploaded images, videos, sounds | `MEDIA_DIR` (`/data/media`) | Yes, `media/` |
+| Uploaded images, videos, audio | `MEDIA_DIR` (`/data/media`) | Yes, `media/` |
 | Templates folder | `STORE_DIR` (`/data/store`) | Yes, `store/` |
 | Configuration | `.env` | Yes, `env` |
 | Your logo and stylesheet | The `branding/` folder you mount | **No**: keep a copy yourself |

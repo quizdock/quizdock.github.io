@@ -53,9 +53,9 @@ The top of **Administration → Settings** says why the page is read-only, and e
 
 ### Saved, but nothing changed
 
-**Cause.** Most settings apply on their next use; some apply only to rooms opened after the change ("Next room"), such as `LIVE_MOTION`. A room already open keeps its own.
+**Cause.** Most settings apply on their next use; some apply only to lobbies opened after the change ("Next lobby"), such as `LIVE_MOTION`. A lobby already open keeps its own.
 
-**Fix.** Open a new room. If the row's **Source** is not "Changed here", the change did not go through: look at the [audit](/docs/admin/audit/).
+**Fix.** Open a new lobby. If the row's **Source** is not "Changed here", the change did not go through: look at the [audit](/docs/admin/audit/).
 
 ### A change in `.env` has no effect
 
@@ -143,13 +143,13 @@ The top of **Administration → Settings** says why the page is read-only, and e
 
 **Cause.** The quiz is being played: "Being played (PIN …)".
 
-**Fix.** Wait for the room to close.
+**Fix.** Wait for the lobby to close.
 
 ### A file cannot be deleted
 
-**Cause.** "A room is playing it: it cannot be deleted until the room closes."
+**Cause.** "A lobby is playing it: it cannot be deleted until the lobby closes."
 
-**Fix.** Wait for the room to close.
+**Fix.** Wait for the lobby to close.
 
 ### The clean-up deletes nothing
 

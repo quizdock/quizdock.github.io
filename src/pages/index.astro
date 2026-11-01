@@ -5,7 +5,7 @@ import { DEMO_URL, DOCKER_HUB_URL, TRANSLATE_URL } from '../site';
 
 <Page
   title="QuizDock — open-source live quizzes on your own infrastructure"
-  description="QuizDock is an open-source live quiz platform you run on your own infrastructure: a big screen for the room, a phone for each player, every result in your own database. MIT, Docker images for amd64 and arm64."
+  description="QuizDock is an open-source live quiz platform you run on your own infrastructure: a big screen for the venue, a phone for each player, every result in your own database. MIT, Docker images for amd64 and arm64."
 >
   <section class="hero">
     <img class="hero-logo" src="/logo.svg" alt="QuizDock" />
@@ -13,7 +13,7 @@ import { DEMO_URL, DOCKER_HUB_URL, TRANSLATE_URL } from '../site';
     <h1>Live quizzes you actually <span class="accent">own</span>.</h1>
     <p class="lede">
       QuizDock is an open-source live quiz platform you run on your own infrastructure:
-      a big screen for the room, a phone for each player, and every result in your own database.
+      a big screen for the venue, a phone for each player, and every result in your own database.
     </p>
     <div class="cta">
       <a class="btn btn-primary" href={DEMO_URL} target="_blank" rel="noopener">Try the live demo ↗</a>
@@ -22,7 +22,7 @@ import { DEMO_URL, DOCKER_HUB_URL, TRANSLATE_URL } from '../site';
     </div>
     <figure class="hero-demo">
       <img src="/demo.gif" alt="The host's console, the big screen and a player's phone: players join by PIN, Léa answers first and right, the reveal, the standings, her podium" width="800" height="450" />
-      <figcaption>A session as the room sees it: intro slide, questions, answers coming in, reveals.</figcaption>
+      <figcaption>A session as seen on site: intro slide, questions, answers coming in, reveals.</figcaption>
     </figure>
   </section>
 
@@ -41,7 +41,7 @@ import { DEMO_URL, DOCKER_HUB_URL, TRANSLATE_URL } from '../site';
       </article>
       <article class="card">
         <h3>Real time, measured</h3>
-        <p>The server sets every start and deadline and stamps every answer on arrival. 50 rooms of 30 players: answers acknowledged in 9 ms at p95.</p>
+        <p>The server sets every start and deadline and stamps every answer on arrival. 50 lobbies of 30 players: answers acknowledged in 9 ms at p95.</p>
         <p class="fine">Measured 2026-09-27: backend on one 2.1 GHz core, players simulated on the same machine, no media.</p>
         <a class="more-link" href="/real-time/">Timing, sync and benchmarks →</a>
       </article>
@@ -75,7 +75,7 @@ import { DEMO_URL, DOCKER_HUB_URL, TRANSLATE_URL } from '../site';
       <a href="/use-cases/education/"><b>Teaching</b><span>A quiz in class on the projector, no student accounts, on the school network.</span></a>
       <a href="/use-cases/enterprise-training/"><b>Training</b><span>Check what stuck, keep the results per trainee, export them.</span></a>
       <a href="/enterprise/"><b>Organisations</b><span>Single sign-on, roles, administration, audit, your own servers.</span></a>
-      <a href="/use-cases/events/"><b>Events</b><span>Hundreds of players in one room, remote participants, sound on the big screen.</span></a>
+      <a href="/use-cases/events/"><b>Events</b><span>Hundreds of players in one lobby, remote participants, audio on the big screen.</span></a>
       <a href="/self-hosted/"><b>At home, on a local network</b><span>One container on a laptop, phones on the same Wi-Fi.</span></a>
     </div>
   </section>
@@ -84,11 +84,11 @@ import { DEMO_URL, DOCKER_HUB_URL, TRANSLATE_URL } from '../site';
     <h2>What a game looks like</h2>
     <div class="caps">
       <div><h3>Eight question types, and slides</h3><p>Single and multiple choice, true/false, text, numeric, ordering, poll, image choice. Slides between questions, Markdown, backgrounds, explanations after the reveal.</p></div>
-      <div><h3>Video and sound, started together</h3><p>Media fetched one question ahead and started on the server's clock. Remote participants get the question and its media on their own device (experimental).</p></div>
+      <div><h3>Video and audio, started together</h3><p>Media fetched one question ahead and started on the server's clock. Remote participants get the question and its media on their own device (experimental).</p></div>
       <div><h3>Accessible by design</h3><p>Colour and shape on every answer, reduced motion, a longer reading time in one choice of the setup wizard.</p></div>
       <div><h3>Privacy chosen at launch</h3><p>The host decides whether results are kept per player and whether every answer is recorded; players are told which.</p></div>
       <div><h3>Bring your quizzes</h3><p>Import Kahoot spreadsheets and QuizDock bundles, offer templates on the instance, browse a community catalogue if the operator enables it.</p></div>
-      <div><h3>Results you keep</h3><p>History per quiz, results per question and per player, standings across several quizzes in one room, CSV exports.</p></div>
+      <div><h3>Results you keep</h3><p>History per quiz, results per question and per player, standings across several quizzes in one lobby, CSV exports.</p></div>
     </div>
   </section>
 

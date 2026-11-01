@@ -190,7 +190,7 @@ QuizDock ships a local **stdio** MCP server, for chatbot clients that can start 
 | `validate_quiz` | Checks a complete `quiz.json`, given as a string: up to 100 errors and 100 completeness warnings. Writes nothing. |
 | `import_quiz` | Creates a new draft in the configured host's bank. Only with `--user`. Never overwrites a quiz. |
 
-Input is text only: no images, sounds, archives or media URLs. Add the media in the editor afterwards, and check the correct answers before playing.
+Input is text only: no images, audio, archives or media URLs. Add the media in the editor afterwards, and check the correct answers before playing.
 
 ### Configure a client
 

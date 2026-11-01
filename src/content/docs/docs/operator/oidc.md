@@ -97,7 +97,7 @@ In OIDC mode everyone signs in, participants included. Two barriers stay indepen
 
 ### Open access
 
-For rooms without accounts to give (trainees who change every session, visitors at an event), set `ALLOW_ANONYMOUS_PARTICIPANTS=true`. Hosts still sign in, and each launch then asks how participants get in:
+For lobbies without accounts to give (trainees who change every session, visitors at an event), set `ALLOW_ANONYMOUS_PARTICIPANTS=true`. Hosts still sign in, and each launch then asks how participants get in:
 
 - **Accounts required**, as above;
 - **Open access**: the PIN and a nickname are enough, as in local mode. Everyone is a guest, so there is no personal tracking.

@@ -26,10 +26,10 @@ With **No**, the administration no longer asks GitHub for new releases, and the 
 |---|---|---|
 | **Colleagues, friends** (`colleagues`, standard): "The standard settings." | `false` | `10` |
 | **A class, a training** (`class`): "Participants sign in with their account." | `false` | `10` |
-| **The public, a large event** (`public`): "Open to all — with an identity provider — and more time for sounds and videos to load on a busy Wi-Fi." | `true` | `20` |
+| **The public, a large event** (`public`): "Open to all — with an identity provider — and more time for audio and videos to load on a busy Wi-Fi." | `true` | `20` |
 | **A bit of everything, other** (wizard only): "Nothing is changed: set what you need at the next steps." | unchanged | unchanged |
 
-`ALLOW_ANONYMOUS_PARTICIPANTS` applies in OIDC mode only. In local mode the quick setup leaves it alone ("left alone: only with an identity provider (AUTH_MODE=oidc)"), since participants there join with the PIN and a nickname anyway. `GAME_MEDIA_WAIT_S` is how long a room waits, at most, for the devices to load a question's sound or video.
+`ALLOW_ANONYMOUS_PARTICIPANTS` applies in OIDC mode only. In local mode the quick setup leaves it alone ("left alone: only with an identity provider (AUTH_MODE=oidc)"), since participants there join with the PIN and a nickname anyway. `GAME_MEDIA_WAIT_S` is how long a lobby waits, at most, for the devices to load a question's audio or video.
 
 ### Do some participants need it easier?
 
@@ -38,7 +38,7 @@ With **No**, the administration no longer asks GitHub for new releases, and the 
 | **No** (`standard`): "The standard settings." | `3000` | `1000` | `on` |
 | **Yes** (`adapted`): "No transitions, more time to read." | `6000` | `2000` | `off` |
 
-`GAME_READ_DELAY_MS` is the reading time before a question's timer starts. `GAME_ALL_ANSWERED_DELAY_MS` is the pause once everyone answered, before the answer is revealed. `LIVE_MOTION` turns the transitions of the live screens on or off for new rooms; a host can still switch them for their room. See [Accessibility](/accessibility/).
+`GAME_READ_DELAY_MS` is the reading time before a question's timer starts. `GAME_ALL_ANSWERED_DELAY_MS` is the pause once everyone answered, before the answer is revealed. `LIVE_MOTION` turns the transitions of the live screens on or off for new lobbies; a host can still switch them for their lobby. See [Accessibility](/accessibility/).
 
 ## In the setup wizard
 

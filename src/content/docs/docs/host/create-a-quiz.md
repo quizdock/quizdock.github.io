@@ -1,6 +1,6 @@
 ---
 title: Create a quiz
-description: Create a quiz in the QuizDock editor, set its sound and sharing options, add questions and slides, preview it and publish it.
+description: Create a quiz in the QuizDock editor, set its audio and sharing options, add questions and slides, preview it and publish it.
 sidebar:
   order: 2
 ---
@@ -26,12 +26,12 @@ The editor header holds the title (edit it in place), the status, **Preview** an
 ## Settings
 
 - **Title** and **Description**.
-- **Sound**:
-  - **Pause after a media**: when a question's sound or video lasts longer than its timer, the question is stretched to the end of the media plus this pause, so nothing is cut mid-play. 1 second by default.
-  - **Sound levelling**: the level every sound and video is brought to at playback: **Loud (−14 LUFS, streaming)**, **Balanced (−16 LUFS)** (the default) or **Calm (−23 LUFS, broadcast)**. The files are not changed.
-  - **Who hears the sound**: **Projection only**, **Projection and remote participants** (the default) or **Every device**. See [Sound and projection](/docs/host/sound-and-projection/).
+- **Audio**:
+  - **Pause after a media**: when a question's audio or video lasts longer than its timer, the question is stretched to the end of the media plus this pause, so nothing is cut mid-play. 1 second by default.
+  - **Audio levelling**: the level every audio and video is brought to at playback: **Loud (−14 LUFS, streaming)**, **Balanced (−16 LUFS)** (the default) or **Calm (−23 LUFS, broadcast)**. The files are not changed.
+  - **Who hears the audio**: **Projection only**, **Projection and remote participants** (the default) or **Every device**. See [Audio and projection](/docs/host/sound-and-projection/).
 - **Language & sharing**:
-  - **Language**: the language the quiz is written in. The participants' screens follow it, unless the room picks another; a new true or false question starts with **True** and **False** in it.
+  - **Language**: the language the quiz is written in. The participants' screens follow it, unless the lobby picks another; a new true or false question starts with **True** and **False** in it.
   - **Licence**: **CC0 — no conditions**, **CC BY 4.0 — credit the author** or **CC BY-SA 4.0 — credit, share alike**. Required to offer the quiz as a template.
   - **Tags**: up to 5 keywords. Press Enter to add one.
   - **Share with the instance’s other hosts**: they see the quiz in their list, read-only. They can present it without keeping results, or **Create a quiz from this** to get their own copy. Unchecked, it stays yours alone. See [Templates and community](/docs/host/templates-and-community/#present-a-quiz-another-host-shares).
@@ -54,7 +54,7 @@ Every question has:
 - **Points**: **Standard**, **Double** or **Fixed (no speed bonus)**. **Scoring** appears for the types that offer a variant. See [Scoring](/docs/host/scoring/).
 - **Background**: **The theme’s**, an **Image**, a **Gradient** or a **Colour**, as on a [slide](/docs/host/slides/#background-and-contrast).
 - **Picture on the big screen**: **Below the text**, **Above the text**, **Left of the text** or **Right of the text**.
-- **Question media**: a picture or a video, and a sound. See [Media](/docs/host/media/).
+- **Question media**: a picture or a video, and audio. See [Media](/docs/host/media/).
 
 Save a question with **Save** (**Add** for a new one), or with Cmd+S (macOS) or Ctrl+S from any of its fields: the form stays open. Leaving a question with unsaved changes asks first, and offers to save it on the way (**Save and continue**, **Save and close**).
 
@@ -78,9 +78,9 @@ A ready quiz only takes complete questions and slides. To save an unfinished one
 
 ## Editing a quiz while it is played
 
-You can edit a quiz while a room plays it. Layout and presentation edits (backgrounds, contrast, explanations, slides) reach the rooms at their next step. Questions and answers stay as they were when the room was launched.
+You can edit a quiz while a lobby plays it. Layout and presentation edits (backgrounds, contrast, explanations, slides) reach the lobbies at their next step. Questions and answers stay as they were when the lobby was launched.
 
-A quiz cannot be deleted while a room plays it: close the room first.
+A quiz cannot be deleted while a lobby plays it: close the lobby first.
 
 ## Questions
 

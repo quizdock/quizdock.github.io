@@ -143,13 +143,13 @@ A fresh instance offers a setup wizard in the browser, behind a setup token writ
 
 The API and the game socket answer the application's own pages only, served from the same origin. Every setup described here does so. A setup of your own that serves the pages from another origin must put them behind the same one. See [Reverse proxy](/docs/operator/reverse-proxy/#the-same-origin-rule).
 
-### 0.10: game sounds off in a new room
+### 0.10: game effects off in a new lobby
 
-The tick, the gong, the countdown and the ding start off in a room opened after the upgrade: the host turns on the ones they want from the console. No migration.
+The tick, the gong, the countdown and the ding start off in a lobby opened after the upgrade: the host turns on the ones they want from the console. No migration.
 
 ### 0.9: upgrade between two games
 
-The live state of a game moved into its room (several quizzes under one PIN): a game in progress during the upgrade is lost. Players join again.
+The live state of a game moved into its lobby (several quizzes under one PIN): a game in progress during the upgrade is lost. Players join again.
 
 ### 0.9: OIDC_ISSUER taken as written
 

@@ -1,6 +1,6 @@
 ---
 title: Slides
-description: Add slides between QuizDock questions, with headings, text, images, columns, a background, a video or a sound, and variables filled in live.
+description: Add slides between QuizDock questions, with headings, text, images, columns, a background, a video or audio, and variables filled in live.
 sidebar:
   order: 4
 ---
@@ -26,17 +26,17 @@ A slide must show something: a heading, a text, an image, a background or a vide
 
 ## Slide media
 
-Under **Slide media**, a slide can have a video, a sound, or both:
+Under **Slide media**, a slide can have a video, an audio file, or both:
 
 - A video **Fills the slide behind its content (cropped to the screen).**
 - **Loop**: the video runs as long as the slide shows. Off, it plays once and stays on its last frame, and in automatic mode the slide waits for its end.
-- **Sound**: plays the video's own sound. Off, the video is muted and the slide can have a sound of its own.
+- **Audio**: plays the video's own audio. Off, the video is muted and the slide can have an audio file of its own.
 
-A slide plays one sound at a time: either the video's sound or a separate sound, not both. Who hears it follows the quiz's setting; see [Sound and projection](/docs/host/sound-and-projection/). Upload rules are on [Media](/docs/host/media/).
+A slide plays one audio at a time: either the video's audio or a separate audio file, not both. Who hears it follows the quiz's setting; see [Audio and projection](/docs/host/sound-and-projection/). Upload rules are on [Media](/docs/host/media/).
 
 ## Auto-advance
 
-**Auto-advance (automatic mode)** decides how long a slide stays when the room runs in **Autoplay**:
+**Auto-advance (automatic mode)** decides how long a slide stays when the lobby runs in **Autoplay**:
 
 - **Default duration (5 s)**;
 - **Manual: the host clicks**;
@@ -46,7 +46,7 @@ In manual mode the host always moves on by hand, whatever is set here.
 
 ## Variables
 
-Write a variable in a heading or a text; it is replaced wherever the slide shows. The quiz's variables appear filled in the preview, the room's once the quiz is played.
+Write a variable in a heading or a text; it is replaced wherever the slide shows. The quiz's variables appear filled in the preview, the lobby's once the quiz is played.
 
 | Variable | Replaced by |
 |---|---|
@@ -56,9 +56,9 @@ Write a variable in a heading or a text; it is replaced wherever the slide shows
 | `{author}` | Its author |
 | `{tags}` | Its tags |
 | `{license}` | Its licence |
-| `{room}` | The room's name |
+| `{room}` | The lobby's name |
 | `{host}` | The host's name |
-| `{pin}` | The room's PIN |
+| `{pin}` | The lobby's PIN |
 | `{join}` | The address to join (host/join) |
 | `{players}` | How many participants are connected |
 | `{question}` | The number of the question that follows the slide |

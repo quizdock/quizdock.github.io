@@ -16,7 +16,7 @@ export const WHY = [
   { href: '/enterprise/', title: 'Enterprise', line: 'SSO, roles, administration, audit' },
   { href: '/real-time/', title: 'Real time', line: 'Server timing, measured performance' },
   { href: '/privacy/', title: 'Privacy', line: 'What is kept, and who decides' },
-  { href: '/media/', title: 'Media', line: 'Video and sound, started together' },
+  { href: '/media/', title: 'Media', line: 'Video and audio, started together' },
   { href: '/accessibility/', title: 'Accessibility', line: 'What is built in, what is not yet' },
 ];
 

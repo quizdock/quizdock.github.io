@@ -16,7 +16,7 @@ In the database:
 | What | Holds |
 |---|---|
 | **Accounts** | In OIDC mode: the provider's subject, the display name, the e-mail when the provider gives one, the roles, the language and preferences. In local mode: the name typed (`local:<name>`). An account is created when someone signs in. |
-| **Archived sessions** | For each archived game: its host, PIN and room, the number of players, the success rate, and a copy of the quiz as it was played. |
+| **Archived sessions** | For each archived game: its host, PIN and lobby, the number of players, the success rate, and a copy of the quiz as it was played. |
 | **Results** | With personalised tracking on: each participant's nickname, score, rank, number of right answers, average time and streak, linked to their account when they have one. |
 | **Answers** | With full capture on only: every answer of every participant. |
 | **Feedback** | What participants leave on a quiz: their nickname, a rating from 1 to 5, an optional comment. A rating left during another host's game of a shared quiz (below) has no nickname. |

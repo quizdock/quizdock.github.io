@@ -20,9 +20,9 @@ In a game:
 
 | Screen | Speaks |
 |---|---|
-| The console, the editor, the lists | Your language. The console's **Projection** and **Participant** views speak the room's, as the screens they show. |
-| The projection | The room's **Language of the screens**, by default the language of the quiz being played. See [Start a room](/docs/host/start-a-room/#before-starting). |
-| A player's phone | The language the player picked, else the room's. |
+| The console, the editor, the lists | Your language. The console's **Projection** and **Participant** views speak the lobby's, as the screens they show. |
+| The projection | The lobby's **Language of the screens**, by default the language of the quiz being played. See [Start a lobby](/docs/host/start-a-room/#before-starting). |
+| A player's phone | The language the player picked, else the lobby's. |
 
 A quiz's own text is never translated: it is in the language its author wrote it in.
 

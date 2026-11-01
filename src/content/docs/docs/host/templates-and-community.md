@@ -21,9 +21,9 @@ A quiz another host shares shows in your quiz list, read-only, with its owner's 
 
 - on its card in the quiz list;
 - in its read-only view, where it is the main action, next to **Create a quiz from this**;
-- or pick it in a room's quiz picker (**Choose the quiz**, **Change quiz**), where it is marked "by {name}, nothing kept".
+- or pick it in a lobby's quiz picker (**Choose the quiz**, **Change quiz**), where it is marked "by {name}, nothing kept".
 
-Nothing of such a game is kept: no session in **History** or **Sessions**, no results, no answers. In the lobby, **Record all answers** and **Personalised tracking** are greyed: "Another host’s quiz, presented as it is: nothing of it is kept." No **Archive this quiz's results** is offered when it ends. The players' notice says "Nothing of this quiz is recorded: neither your taking part nor your answers." In a room, the quiz counts in the live room standings while the room is open.
+Nothing of such a game is kept: no session in **History** or **Sessions**, no results, no answers. In the lobby, **Record all answers** and **Personalised tracking** are greyed: "Another host’s quiz, presented as it is: nothing of it is kept." No **Archive this quiz's results** is offered when it ends. The players' notice says "Nothing of this quiz is recorded: neither your taking part nor your answers." In a lobby, the quiz counts in the live lobby standings while the lobby is open.
 
 Ratings still reach the quiz: its owner reads them in **Reviews**, as **Anonymous**, with no nickname.
 

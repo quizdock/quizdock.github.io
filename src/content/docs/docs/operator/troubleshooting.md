@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-description: Symptoms, causes and fixes for a QuizDock instance — start-up, configuration, network and phones, reverse proxy, administration, media, sound and OpenID Connect sign-in.
+description: Symptoms, causes and fixes for a QuizDock instance — start-up, configuration, network and phones, reverse proxy, administration, media, audio and OpenID Connect sign-in.
 sidebar:
   order: 16
 ---
@@ -62,12 +62,12 @@ Start with `./quizdock status` and `./quizdock doctor`, on the server, in the in
 | Nobody can take the host seat (local mode) | Someone holds it without expiry | `./quizdock seat:release`. |
 | An account cannot host | No `host` role | `./quizdock user:set-role <sub\|email> host`, or give the role in the provider. |
 
-## Media and sound
+## Media and audio
 
 | Symptom | Cause | Fix |
 |---|---|---|
 | Quizzes show missing images after a restore | The database and the media come from different backups | Restore both from the same backup. |
-| The projection is silent | The browser plays sound only after a click in the projection window | Click **Turn sound on** on the projection, or allow the instance on a dedicated computer: see [Security](/docs/operator/security/#projection-computers-allow-sound-for-your-instance-only). |
+| The projection is silent | The browser plays audio only after a click in the projection window | Click **Turn audio on** on the projection, or allow the instance on a dedicated computer: see [Security](/docs/operator/security/#projection-computers-allow-audio-for-your-instance-only). |
 
 ## Sign-in with OpenID Connect
 

@@ -5,7 +5,7 @@ sidebar:
   order: 1
 ---
 
-Here, the host is the **quiz host**: the person who presents the quiz to the room. This page takes you from the sign-in screen to your first game. It assumes someone has already installed QuizDock and given you its address. To try QuizDock without installing anything, open the [live demo](https://quizdock-standalone.onrender.com): it shares one host account between every visitor, has media uploads turned off and is wiped every hour.
+Here, the host is the **quiz host**: the person who presents the quiz to the lobby. This page takes you from the sign-in screen to your first game. It assumes someone has already installed QuizDock and given you its address. To try QuizDock without installing anything, open the [live demo](https://quizdock-standalone.onrender.com): it shares one host account between every visitor, has media uploads turned off and is wiped every hour.
 
 ## Sign in
 
@@ -13,7 +13,7 @@ How you sign in depends on how the instance was set up. The sign-in page shows w
 
 ### Local mode: the host seat
 
-In local mode there are no accounts. One person at a time holds the **host seat**, and everyone else joins rooms with a PIN.
+In local mode there are no accounts. One person at a time holds the **host seat**, and everyone else joins lobbies with a PIN.
 
 1. Open the instance and choose **Host area**.
 2. The page shows **Seat free** and **One host at a time here**, or **Held by {name}** when someone else holds it.
@@ -23,13 +23,13 @@ In local mode there are no accounts. One person at a time holds the **host seat*
 
 Your name is your key: typing the same name again, on any device, brings you back as host with **Sign back in**. Anyone who types it gets the seat too, so local mode belongs on a network you trust.
 
-While you hold the seat, its remaining time shows next to your name. You can **Extend the seat for** another period, or **Release the seat** to give it back (you stay signed in as a participant, and **Undo** takes it back). The seat is also released when you choose **Log out** or when it expires. When someone else holds the seat, the sign-in page offers **Join a room as a participant** instead.
+While you hold the seat, its remaining time shows next to your name. You can **Extend the seat for** another period, or **Release the seat** to give it back (you stay signed in as a participant, and **Undo** takes it back). The seat is also released when you choose **Log out** or when it expires. When someone else holds the seat, the sign-in page offers **Join a lobby as a participant** instead.
 
 ### OIDC mode: sign in with your organisation
 
 In OIDC mode, choose **Sign in** and sign in with your organisation's identity provider. To create and present quizzes, your account needs the **Host** role. There is no seat: any number of hosts can work at the same time.
 
-The role comes from your identity provider, or an administrator of the instance grants it. If you sign in and cannot create a quiz, ask whoever runs your instance for the host role. Participants also sign in before joining, unless the instance allows open access and you choose it when you launch the room (see [Start a room](/docs/host/start-a-room/)).
+The role comes from your identity provider, or an administrator of the instance grants it. If you sign in and cannot create a quiz, ask whoever runs your instance for the host role. Participants also sign in before joining, unless the instance allows open access and you choose it when you launch the lobby (see [Start a lobby](/docs/host/start-a-room/)).
 
 ## Roles
 
@@ -37,7 +37,7 @@ The role comes from your identity provider, or an administrator of the instance 
 
 | Role | What it lets you do |
 |---|---|
-| **Participant** | Join rooms with a PIN. |
+| **Participant** | Join lobbies with a PIN. |
 | **Host** | Your own bank: create, edit and present quizzes, and offer templates. |
 | **Manager** | Read the whole instance and administer it. |
 
@@ -60,7 +60,7 @@ An administrator can also add the sample quizzes directly to an account's bank f
 1. In **My quizzes**, choose **New quiz → Blank quiz**. A draft opens with an intro slide and a first question.
 2. Write your questions. See [Create a quiz](/docs/host/create-a-quiz/) and [Question types](/docs/host/question-types/).
 3. Choose **Publish (ready)**. A quiz must be ready to be played.
-4. Choose **Present**. A room opens with a 6-digit PIN.
+4. Choose **Present**. A lobby opens with a 6-digit PIN.
 5. Choose **Projection window** and move it to the big screen.
 6. Players open the address shown on the screen, or scan the QR code, type the PIN and a nickname. See [Invite players](/docs/host/invite-players/).
 7. When the players are in, choose **Start the quiz**.
@@ -73,7 +73,7 @@ For a first test on your own, join from your phone, or from a private window of 
 
 ### Can two people host at the same time in local mode?
 
-No. Local mode has one host seat. Others can join rooms as participants. With an identity provider (OIDC mode) there is no seat and no limit on the number of hosts.
+No. Local mode has one host seat. Others can join lobbies as participants. With an identity provider (OIDC mode) there is no seat and no limit on the number of hosts.
 
 ### Is the host seat a security boundary?
 

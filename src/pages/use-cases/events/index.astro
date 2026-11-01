@@ -4,8 +4,8 @@ import { DEMO_URL, DOCKER_HUB_URL } from '../../../site';
 
 const faq = [
   {
-    q: 'How many players can join one room?',
-    a: '<p>QuizDock sets no cap per room. One room has been measured with 1500 simulated players: answers acknowledged in 61 ms at p95, none lost, with the backend on one 2.1 GHz core and the players simulated on the same machine, without media or real Wi-Fi (2026-09-27). Beyond 1500, nothing was measured. See <a href="/real-time/">Real time</a>.</p>',
+    q: 'How many players can join one lobby?',
+    a: '<p>QuizDock sets no cap per lobby. One lobby has been measured with 1500 simulated players: answers acknowledged in 61 ms at p95, none lost, with the backend on one 2.1 GHz core and the players simulated on the same machine, without media or real Wi-Fi (2026-09-27). Beyond 1500, nothing was measured. See <a href="/real-time/">Real time</a>.</p>',
   },
   {
     q: 'Do participants need to install an app?',
@@ -13,7 +13,7 @@ const faq = [
   },
   {
     q: 'Does it work on iPhone?',
-    a: '<p>Video and sound playback is built and tested on Chromium-based browsers. In the room, by default, phones show the image and play no video: the projection carries the media.</p>',
+    a: '<p>Video and audio playback is built and tested on Chromium-based browsers. On site, by default, phones show the image and play no video: the projection carries the media.</p>',
   },
   {
     q: 'Can several servers share the load of a big event?',
@@ -32,14 +32,14 @@ const faq = [
 
 <Page
   title="QuizDock for events"
-  description="A live quiz for a full hall: measured capacity with its conditions, the big screen and sound, remote participants, room control, several rounds under one PIN."
+  description="A live quiz for a full hall: measured capacity with its conditions, the big screen and audio, remote participants, lobby control, several rounds under one PIN."
   faq={faq}
 >
   <section class="page-hero">
     <h1>A live quiz for a full hall, on the big screen</h1>
     <p class="lede">
       Hundreds of phones on one Wi-Fi, a projector, a sound system, perhaps people following from elsewhere.
-      QuizDock’s server sets every start and deadline, the projection carries the sound, and one room has been
+      QuizDock’s server sets every start and deadline, the projection carries the audio, and one lobby has been
       measured with 1500 simulated players. Here is what holds, under which conditions, and what has not been
       tested.
     </p>
@@ -47,7 +47,7 @@ const faq = [
 
   <section class="section">
     <div class="prose">
-      <h2>Will one room hold a thousand players?</h2>
+      <h2>Will one lobby hold a thousand players?</h2>
       <p>
         It has held 1500 simulated players without losing an answer. Measured on 2026-09-27: backend on one
         2.1 GHz core, players simulated on the same machine over loopback, no media, every player answering a
@@ -55,7 +55,7 @@ const faq = [
       </p>
       <div class="table-wrap">
         <table>
-          <thead><tr><th class="num">Players in one room</th><th class="num">Answer acknowledged, p95</th></tr></thead>
+          <thead><tr><th class="num">Players in one lobby</th><th class="num">Answer acknowledged, p95</th></tr></thead>
           <tbody>
             <tr><td class="num">300</td><td class="num">7 ms</td></tr>
             <tr><td class="num">700</td><td class="num">18 ms</td></tr>
@@ -96,16 +96,16 @@ const faq = [
     <div class="prose">
       <h2>The big screen and the sound system</h2>
       <p>
-        <b>Projection window</b> opens the big screen, and <b>Fullscreen</b> fills it. Browsers allow sound
-        only after a click, so the projection asks for one: <b>Turn sound on</b>. The console stays silent.
-        The <b>Room sound</b> panel adds effects, all off in a new room: <b>Answer received</b>,
+        <b>Projection window</b> opens the big screen, and <b>Fullscreen</b> fills it. Browsers allow audio
+        only after a click, so the projection asks for one: <b>Turn audio on</b>. The console stays silent.
+        The <b>Lobby audio</b> panel adds effects, all off in a new lobby: <b>Answer received</b>,
         <b>Question start</b>, <b>Time’s up</b>, <b>Countdown</b>, and <b>Music</b> while players answer.
       </p>
       <p>
-        Video and sound are fetched one question ahead and started on the server’s clock. If a device is still
+        Video and audio are fetched one question ahead and started on the server’s clock. If a device is still
         loading, the console waits (10 seconds by default, 20 with the wizard’s “The public, a large event”)
         and offers <b>Start anyway</b>. See <a href="/media/">Media</a> and
-        <a href="/docs/host/sound-and-projection/">Sound and projection</a>.
+        <a href="/docs/host/sound-and-projection/">Audio and projection</a>.
       </p>
     </div>
     <div class="shots">
@@ -116,14 +116,14 @@ const faq = [
 
   <section class="section section-soft">
     <div class="prose">
-      <h2>How do I keep control of the room?</h2>
+      <h2>How do I keep control of the lobby?</h2>
       <ul>
         <li><b>Quiz pace</b>: <b>Manual</b>, or <b>Autoplay</b>, which moves to the next question after each result; each question has its own reveal delay, and slides advance after 5 seconds by default.</li>
         <li><b>Pause</b> (the space bar) stops the clock; the time buttons add or remove 1 or 5 seconds.</li>
-        <li><b>Close the room to new participants</b>, before or during the quiz: nobody else gets in, even with the PIN, and those already in come back after a lost connection.</li>
-        <li><b>Ban</b> a player from the list, for 1 to 1440 minutes (5 by default): removed at once, and kept out under that nickname. Close the room as well to keep them from returning under another.</li>
+        <li><b>Close the lobby to new participants</b>, before or during the quiz: nobody else gets in, even with the PIN, and those already in come back after a lost connection.</li>
+        <li><b>Ban</b> a player from the list, for 1 to 1440 minutes (5 by default): removed at once, and kept out under that nickname. Close the lobby as well to keep them from returning under another.</li>
       </ul>
-      <p>See <a href="/docs/host/start-a-room/">Start a room</a>.</p>
+      <p>See <a href="/docs/host/start-a-room/">Start a lobby</a>.</p>
     </div>
   </section>
 
@@ -131,9 +131,9 @@ const faq = [
     <div class="prose">
       <h2>Several rounds, one PIN, one podium</h2>
       <p>
-        After a quiz, <b>Next quiz</b> starts another round in the same room: players stay, nobody types the
-        PIN again. Each round scores from zero; between rounds the projection shows the <b>Room standings</b>,
-        and the evening ends on the <b>Room podium</b>. Afterwards, History keeps the room’s standings and
+        After a quiz, <b>Next quiz</b> starts another round in the same lobby: players stay, nobody types the
+        PIN again. Each round scores from zero; between rounds the projection shows the <b>Lobby standings</b>,
+        and the evening ends on the <b>Lobby podium</b>. Afterwards, History keeps the lobby’s standings and
         their CSV export only if every round had <b>Personalised tracking</b> on, which open access rules out.
         See <a href="/docs/host/reports-and-history/">Reports and history</a>.
       </p>
@@ -144,9 +144,9 @@ const faq = [
     <div class="prose">
       <h2>What about people following from elsewhere?</h2>
       <p>
-        This part is experimental. When a quiz has sound or video, each player is asked “Where are you playing
-        from?”: <b>In the room</b> or <b>Remote</b>. Remote players receive the question, its video and its
-        sound on their own device; the console marks them <b>Participating remotely</b>, and
+        This part is experimental. When a quiz has audio or video, each player is asked “Where are you playing
+        from?”: <b>On site</b> or <b>Remote</b>. Remote players receive the question, its video and its
+        audio on their own device; the console marks them <b>Participating remotely</b>, and
         <b>Share the projection</b> opens the big screen on a second device. They need an address they can
         reach from outside, so a public one.
       </p>

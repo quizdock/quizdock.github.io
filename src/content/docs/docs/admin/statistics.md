@@ -42,7 +42,7 @@ From the command line: `./quizdock qd stats.history`.
 
 The history holds what is kept, under two conditions:
 
-- **Only archived games count.** A host chooses at the end of a room whether to archive its results ("Archive this quiz's results", ticked by default). A game not archived leaves no history.
+- **Only archived games count.** A host chooses at the end of a lobby whether to archive its results ("Archive this quiz's results", ticked by default). A game not archived leaves no history.
 - **Purged games no longer count.** Archived sessions are kept 365 days, then deleted when an administrator purges them. The page says where its history starts: "The history starts on …: older games are purged." See [Privacy and retention](/docs/admin/privacy-and-retention/#archived-sessions).
 
 Months are counted in UTC.

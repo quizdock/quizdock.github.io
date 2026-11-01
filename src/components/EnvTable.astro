@@ -36,7 +36,7 @@ const md = (text: string) =>
     .replace(/`([^`]+)`/g, '<code>$1</code>')
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
     .replace(/(^|[\s(])[_*]([^_*]+)[_*](?=[\s).,;:]|$)/g, '$1<em>$2</em>');
-const APPLIES = { live: 'at once', 'next-room': 'next room', restart: 'at restart' };
+const APPLIES = { live: 'at once', 'next-room': 'next lobby', restart: 'at restart' };
 const settings = !deployment;
 ---
 

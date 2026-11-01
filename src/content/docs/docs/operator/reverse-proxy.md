@@ -72,7 +72,7 @@ quiz.example.org {
 
 The backend reads the client's address from `X-Forwarded-For`, and whether the connection is HTTPS from `X-Forwarded-Proto`, only when they come from a proxy it trusts. Two things depend on it:
 
-- **The wrong-PIN limit:** each client address may try 30 wrong PINs a minute. With the wrong address, a whole room shares one limit, or the limit can be dodged with a forged header.
+- **The wrong-PIN limit:** each client address may try 30 wrong PINs a minute. With the wrong address, a whole lobby shares one limit, or the limit can be dodged with a forged header.
 - **The `Secure` flag of the session cookie** in OIDC mode, set when the proxy says the connection is HTTPS.
 
 | `TRUST_PROXY` | Trusted |

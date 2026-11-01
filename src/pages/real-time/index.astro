@@ -7,7 +7,7 @@ const RAW = 'https://raw.githubusercontent.com/quizdock/quizdock/main';
 const faq = [
   {
     q: 'How many players can QuizDock support?',
-    a: `<p>QuizDock sets no limit per room. Measured: up to 1500 players in one room, and 60 rooms of 30 (1800 players) at once, with no answer lost. Beyond that, nothing was measured. Conditions: 2026-09-27, backend on one 2.1 GHz core, players simulated on the same machine over the loopback, no media, one run per step. <a href="#benchmarks">The figures</a>.</p>`,
+    a: `<p>QuizDock sets no limit per lobby. Measured: up to 1500 players in one lobby, and 60 lobbies of 30 (1800 players) at once, with no answer lost. Beyond that, nothing was measured. Conditions: 2026-09-27, backend on one 2.1 GHz core, players simulated on the same machine over the loopback, no media, one run per step. <a href="#benchmarks">The figures</a>.</p>`,
   },
   {
     q: 'How is latency measured?',
@@ -19,7 +19,7 @@ const faq = [
   },
   {
     q: 'Can multiple quizzes run simultaneously?',
-    a: `<p>Yes. One instance runs many rooms at once, each with its own PIN, and the same quiz can run in several rooms. A room can also play several quizzes one after the other under one PIN, with standings across them.</p>`,
+    a: `<p>Yes. One instance runs many lobbies at once, each with its own PIN, and the same quiz can run in several lobbies. A lobby can also play several quizzes one after the other under one PIN, with standings across them.</p>`,
   },
   {
     q: 'Can remote participants join?',
@@ -75,7 +75,7 @@ const faq = [
       <h2>Does everyone see and hear the same instant?</h2>
       <p>
         That is the aim, whatever each device's latency. QuizDock does not trust the clock of a phone, nor assume every
-        device plays sound as fast as the next. Three mechanisms line the room up:
+        device plays audio as fast as the next. Three mechanisms line the lobby up:
       </p>
       <ul>
         <li>
@@ -85,7 +85,7 @@ const faq = [
         </li>
         <li>
           <b>A common start for media, minus each device's own delay.</b> The server sets the start of a question's video
-          or sound 1.6 s ahead. Each device starts it at that instant of the server's clock, earlier by its own audio output
+          or audio 1.6 s ahead. Each device starts it at that instant of the server's clock, earlier by its own audio output
           delay (what the browser reports between the mixer and the speaker), so that every device is heard at the same
           moment.
         </li>
@@ -96,7 +96,7 @@ const faq = [
         </li>
       </ul>
       <p>
-        Media are fetched one question ahead, and the room waits for the devices that play them, 10 s at most by default; the
+        Media are fetched one question ahead, and the lobby waits for the devices that play them, 10 s at most by default; the
         host can <b>Start anyway</b> at any moment of the wait. What this costs is borne by the devices: the server only answers the pings.
       </p>
       <p>
@@ -104,7 +104,7 @@ const faq = [
         Chromium-based browsers; remote participants are experimental. And it is about what people
         see and hear: scores are not adjusted for network latency (see above).
       </p>
-      <p><a class="more-link" href="/media/">Media in a room →</a></p>
+      <p><a class="more-link" href="/media/">Media in a lobby →</a></p>
     </div>
   </section>
 
@@ -114,7 +114,7 @@ const faq = [
       <ul>
         <li><b>A player</b> comes back to the current step and their own result. Their browser keeps a reconnection token for 4 hours, renewed at each question; it is refused once the game has ended.</li>
         <li><b>During a question</b>, a player who drops is marked disconnected. An answer already sent counts; no answer scores 0. If everyone still connected has answered, the answer is revealed early.</li>
-        <li><b>The host</b> has 5 s to come back unnoticed. Then the room is told and the timer pauses. Within 2 minutes the host resumes with the time left; after that the game ends and is archived as <b>Interrupted</b>.</li>
+        <li><b>The host</b> has 5 s to come back unnoticed. Then the lobby is told and the timer pauses. Within 2 minutes the host resumes with the time left; after that the game ends and is archived as <b>Interrupted</b>.</li>
         <li><b>The server</b> re-arms the timers from Redis when it starts again, and Compose keeps Redis's data on disk. This is implemented, not tested end to end. The standalone image's Redis keeps nothing on disk.</li>
       </ul>
     </div>
@@ -122,17 +122,17 @@ const faq = [
 
   <section class="section section-soft">
     <div class="prose">
-      <h2>Can several rooms and quizzes run at once?</h2>
+      <h2>Can several lobbies and quizzes run at once?</h2>
       <p>
-        Yes. Each room has its own six-digit PIN and its own events: a room's messages go to its devices only. A quiz can
-        run in several rooms at the same time. Within one room, the host can play several quizzes under the same PIN with
-        <b>Next quiz</b>: participants stay, each quiz scores from zero, and <b>Room standings</b> add them up.
+        Yes. Each lobby has its own six-digit PIN and its own events: a lobby's messages go to its devices only. A quiz can
+        run in several lobbies at the same time. Within one lobby, the host can play several quizzes under the same PIN with
+        <b>Next quiz</b>: participants stay, each quiz scores from zero, and <b>Lobby standings</b> add them up.
       </p>
       <h2>Can participants play from elsewhere?</h2>
       <p>
-        Yes, experimentally. When a quiz has sound or video, joining asks <b>Where are you playing from?</b>:
-        <b>In the room</b> or <b>Remote</b>. A remote participant gets the question and its media on their own device. Who
-        hears the sound is set per quiz, per question or per session: <b>Projection only</b>, <b>Projection and remote
+        Yes, experimentally. When a quiz has audio or video, joining asks <b>Where are you playing from?</b>:
+        <b>On site</b> or <b>Remote</b>. A remote participant gets the question and its media on their own device. Who
+        hears the audio is set per quiz, per question or per session: <b>Projection only</b>, <b>Projection and remote
         participants</b> (the default), or <b>Every device</b>.
       </p>
       <p><a class="more-link" href="/docs/host/remote-participants/">Remote participants →</a></p>
@@ -152,7 +152,7 @@ const faq = [
       </ul>
       <p>
         <b>Ack</b> is the time from a player sending an answer to the server acknowledging it, in milliseconds.
-        <b>Start spread</b> is how far apart the devices of a room received the same question.
+        <b>Start spread</b> is how far apart the devices of a lobby received the same question.
       </p>
       <h3>Waits on purpose are not latency</h3>
       <p>
@@ -161,11 +161,11 @@ const faq = [
         These waits are the same for every player and are not in the figures below: they measure
         how fast the server does its own work, with no media.
       </p>
-      <h3>Rooms of 30, all started together</h3>
+      <h3>Lobbies of 30, all started together</h3>
     </div>
     <div class="table-wrap">
       <table>
-        <thead><tr><th class="num">Rooms</th><th class="num">Players</th><th class="num">Ack p95</th><th class="num">Ack p99</th><th class="num">Start spread p95</th><th class="num">Answers lost</th></tr></thead>
+        <thead><tr><th class="num">Lobbies</th><th class="num">Players</th><th class="num">Ack p95</th><th class="num">Ack p99</th><th class="num">Start spread p95</th><th class="num">Answers lost</th></tr></thead>
         <tbody>
           <tr><td class="num">10</td><td class="num">300</td><td class="num">7 ms</td><td class="num">11 ms</td><td class="num">1 ms</td><td class="num">0</td></tr>
           <tr><td class="num">20</td><td class="num">600</td><td class="num">6 ms</td><td class="num">10 ms</td><td class="num">1 ms</td><td class="num">0</td></tr>
@@ -176,7 +176,7 @@ const faq = [
         </tbody>
       </table>
     </div>
-    <div class="prose"><h3>One room</h3></div>
+    <div class="prose"><h3>One lobby</h3></div>
     <div class="table-wrap">
       <table>
         <thead><tr><th class="num">Players</th><th class="num">Ack p95</th><th class="num">Ack p99</th><th class="num">Start spread p95</th><th class="num">Answers lost</th></tr></thead>
@@ -192,15 +192,15 @@ const faq = [
     <div class="prose">
       <p>
         A second run of the same series gave 41 ms at p95 and 52 ms at p99 for 1500 players: at that size the slowest 1 %
-        varies between runs. Several small rooms cost less than one large room of the same total: 1500 players as 50 rooms,
-        9 ms at p95; as one room, 41 to 61 ms.
+        varies between runs. Several small lobbies cost less than one large lobby of the same total: 1500 players as 50 lobbies,
+        9 ms at p95; as one lobby, 41 to 61 ms.
       </p>
       <h3>What was not measured</h3>
       <ul>
-        <li>Questions with sound or video, and how closely devices play media together.</li>
+        <li>Questions with audio or video, and how closely devices play media together.</li>
         <li>Real phones on a real Wi-Fi network.</li>
         <li>PostgreSQL archiving a very large session.</li>
-        <li>Rooms starting at different moments; more than 60 rooms; more than 1500 players in one room.</li>
+        <li>Lobbies starting at different moments; more than 60 lobbies; more than 1500 players in one lobby.</li>
         <li>The Docker image itself, and a VM of the sizes below.</li>
       </ul>
       <h3>What size of machine?</h3>
@@ -209,8 +209,8 @@ const faq = [
       <table>
         <thead><tr><th>Load</th><th class="num">vCPU</th><th class="num">RAM</th></tr></thead>
         <tbody>
-          <tr><td>Up to 700 players in one room, or 20 rooms of 30</td><td class="num">2</td><td class="num">2 GB</td></tr>
-          <tr><td>Up to 1500 in one room, or 60 rooms of 30</td><td class="num">2</td><td class="num">4 GB</td></tr>
+          <tr><td>Up to 700 players in one lobby, or 20 lobbies of 30</td><td class="num">2</td><td class="num">2 GB</td></tr>
+          <tr><td>Up to 1500 in one lobby, or 60 lobbies of 30</td><td class="num">2</td><td class="num">4 GB</td></tr>
           <tr><td>Beyond</td><td colspan="2">Not measured</td></tr>
         </tbody>
       </table>
@@ -223,8 +223,8 @@ const faq = [
         to 1 GB at 1500 to 1800 players.
       </p>
       <p>
-        Raw results: <a href={`${RAW}/docs/dev/load-results/2026-09-27-cold.json`}>one room</a> ·
-        <a href={`${RAW}/docs/dev/load-results/2026-09-27-rooms.json`}>rooms of 30</a> ·
+        Raw results: <a href={`${RAW}/docs/dev/load-results/2026-09-27-cold.json`}>one lobby</a> ·
+        <a href={`${RAW}/docs/dev/load-results/2026-09-27-rooms.json`}>lobbies of 30</a> ·
         <a href={`${RAW}/apps/backend/scripts/load-test.mjs`}>the load-test script</a>, to measure again on your own hardware.
       </p>
       <p><a class="more-link" href="/docs/operator/sizing/">Sizing an instance →</a></p>

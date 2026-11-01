@@ -26,7 +26,7 @@ Players see a one-line rule under each question, such as "One correct answer —
 
 ## Colours and shapes
 
-Each answer has a colour and a shape, fixed by its position: red triangle, blue diamond, yellow circle, green square, purple star, orange hexagon, pink heart, teal cross. The shape appears wherever the answer does (big screen, phones, reveal), so nobody depends on colour alone. In the room, phones show the coloured tiles and the big screen shows the text. See [Accessibility](/accessibility/).
+Each answer has a colour and a shape, fixed by its position: red triangle, blue diamond, yellow circle, green square, purple star, orange hexagon, pink heart, teal cross. The shape appears wherever the answer does (big screen, phones, reveal), so nobody depends on colour alone. On site, phones show the coloured tiles and the big screen shows the text. See [Accessibility](/accessibility/).
 
 ## Multiple choice (single answer)
 
@@ -82,7 +82,7 @@ Opinion only: no correct answer and no points. Set 2 to 8 choices. At the reveal
 
 ## Image choice
 
-The answers are pictures: choose **How many** (2 or 4), then a picture for each, with its colour and shape. Each picture needs an **Alternative text**: it is the answer for whoever cannot see it. Pictures are cropped to fill their tile, as the big screen shows them. An image choice has no picture or video of its own (its answers are the pictures), but it can play a sound.
+The answers are pictures: choose **How many** (2 or 4), then a picture for each, with its colour and shape. Each picture needs an **Alternative text**: it is the answer for whoever cannot see it. Pictures are cropped to fill their tile, as the big screen shows them. An image choice has no picture or video of its own (its answers are the pictures), but it can play audio.
 
 Tick the right picture. Turn on **Several right answers** to let players tick every right picture, then submit; it is then scored like a multiple choice, with **All or nothing** or **Partial credit**.
 
@@ -98,4 +98,4 @@ No. Text input compares the answer with the accepted answers; there is no free-t
 
 ### Do players see the question on their phone?
 
-In the room, the question and its media are on the big screen; phones show the question's text, a small picture and the answer tiles. A participant who joins as **Remote** gets the whole question on their device. See [Remote participants](/docs/host/remote-participants/).
+On site, the question and its media are on the big screen; phones show the question's text, a small picture and the answer tiles. A participant who joins as **Remote** gets the whole question on their device. See [Remote participants](/docs/host/remote-participants/).

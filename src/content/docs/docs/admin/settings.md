@@ -55,10 +55,10 @@ The settings an administrator may change from the web:
 | Applies | Meaning |
 |---|---|
 | **Live** | "On its next use: a game in progress follows it." |
-| **Next room** | "In the rooms opened after the change; a room in progress keeps its own." |
+| **Next lobby** | "In the lobbies opened after the change; a lobby in progress keeps its own." |
 | **At restart** | "Read once at start: the instance must restart." |
 
-Every setting the web may change applies live, except `LIVE_MOTION`, which applies to the next room. The settings that apply at restart are the ones set in `.env` only.
+Every setting the web may change applies live, except `LIVE_MOTION`, which applies to the next lobby. The settings that apply at restart are the ones set in `.env` only.
 
 ## Change a setting
 
@@ -66,7 +66,7 @@ Every setting the web may change applies live, except `LIVE_MOTION`, which appli
 2. Type the value. It is checked as it is typed against what the setting accepts, and on **Save** against the other settings.
 3. **Save**. A level C2 change asks for a confirmation.
 
-The page then says when it applies: "Saved: it applies now.", "Saved: it applies to the rooms opened from now on." The change is recorded in the [audit](/docs/admin/audit/), with the override it replaced: none (`null`) when the value came from `.env`.
+The page then says when it applies: "Saved: it applies now.", "Saved: it applies to the lobbies opened from now on." The change is recorded in the [audit](/docs/admin/audit/), with the override it replaced: none (`null`) when the value came from `.env`.
 
 A value changed here is checked more strictly than a value in `.env`: it must be within the setting's range, where an `.env` value out of range is only reported.
 

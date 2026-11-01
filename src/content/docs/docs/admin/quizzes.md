@@ -31,7 +31,7 @@ Each row has its actions menu.
 | **Restore** | Brings an archived quiz back to its owner, as a draft. |
 | **Delete** | Deletes the quiz, the media nothing else uses, and its archived sessions. |
 
-**Hand over** and **Delete** are not available while the quiz is being played: wait for the room to close.
+**Hand over** and **Delete** are not available while the quiz is being played: wait for the lobby to close.
 
 ### Hand a quiz over
 

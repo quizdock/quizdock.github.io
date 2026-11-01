@@ -9,15 +9,15 @@ const faq = [
   },
   {
     q: 'Can I see all the results of one trainee across several trainings?',
-    a: '<p>Not on one page. Results are recorded under the trainee’s account in each session, and the history is kept per quiz. A room’s standings add up the quizzes played in it. To follow a trainee across sessions, combine the CSV exports. See <a href="/docs/host/reports-and-history/">Reports and history</a>.</p>',
+    a: '<p>Not on one page. Results are recorded under the trainee’s account in each session, and the history is kept per quiz. A lobby’s standings add up the quizzes played in it. To follow a trainee across sessions, combine the CSV exports. See <a href="/docs/host/reports-and-history/">Reports and history</a>.</p>',
   },
   {
     q: 'Does QuizDock connect to an LMS?',
-    a: '<p>No. QuizDock has no LMS connector; results leave as CSV files (semicolon-separated, UTF-8) per session, per room and per player. See <a href="/docs/host/export-results/">Export results</a>.</p>',
+    a: '<p>No. QuizDock has no LMS connector; results leave as CSV files (semicolon-separated, UTF-8) per session, per lobby and per player. See <a href="/docs/host/export-results/">Export results</a>.</p>',
   },
   {
     q: 'Can external guests join a session without an account?',
-    a: '<p>Yes, if the operator allows open access. The trainer then chooses <b>Open access</b> at launch: the PIN and a nickname are enough, and no individual result is kept for that session. See <a href="/docs/host/start-a-room/">Start a room</a>.</p>',
+    a: '<p>Yes, if the operator allows open access. The trainer then chooses <b>Open access</b> at launch: the PIN and a nickname are enough, and no individual result is kept for that session. See <a href="/docs/host/start-a-room/">Start a lobby</a>.</p>',
   },
   {
     q: 'How long are training results kept?',
@@ -49,7 +49,7 @@ const faq = [
         part and your score are recorded under your account.”
       </p>
       <p>
-        <b>Let participants pick their display name</b> decides what the room sees: off, the name comes from
+        <b>Let participants pick their display name</b> decides what the lobby sees: off, the name comes from
         the account; on, trainees choose one, and their results stay attached to the account all the same. See
         <a href="/docs/operator/oidc/">OIDC</a>.
       </p>
@@ -67,10 +67,10 @@ const faq = [
       <ul>
         <li><b>Personalised tracking</b>, on by default: results under each trainee’s account; off, only the group’s overall results.</li>
         <li><b>Record all answers</b>, off by default: every answer of every trainee, after a confirmation that warns it is personal data.</li>
-        <li><b>Who hears the sound in this quiz</b>, when the quiz has sound or video.</li>
+        <li><b>Who hears the audio in this quiz</b>, when the quiz has audio or video.</li>
       </ul>
       <p>
-        Trainees see a notice that matches these choices. See <a href="/docs/host/start-a-room/">Start a room</a>
+        Trainees see a notice that matches these choices. See <a href="/docs/host/start-a-room/">Start a lobby</a>
         and <a href="/privacy/">Privacy</a>.
       </p>
     </div>
@@ -98,14 +98,14 @@ const faq = [
     <div class="prose">
       <h2>A training day: several quizzes, one ranking</h2>
       <p>
-        One room can hold the whole day. After a quiz, <b>Next quiz</b> picks the following one: trainees stay
-        in the room and nobody types the PIN again. The picker marks what was <b>Already played</b> and
+        One lobby can hold the whole day. After a quiz, <b>Next quiz</b> picks the following one: trainees stay
+        in the lobby and nobody types the PIN again. The picker marks what was <b>Already played</b> and
         <b>Not played yet</b>. <b>End quiz…</b> stops one midway, with <b>Keep what was played so far</b>.
       </p>
       <p>
-        Each quiz scores from zero; between quizzes the projection shows the <b>Room standings</b>, and the day
-        ends on the <b>Room podium</b>. In History, the room’s standings add up its archived quizzes and leave
-        with <b>Export standings (CSV)</b>, provided every quiz of the room had <b>Personalised tracking</b> on.
+        Each quiz scores from zero; between quizzes the projection shows the <b>Lobby standings</b>, and the day
+        ends on the <b>Lobby podium</b>. In History, the lobby’s standings add up its archived quizzes and leave
+        with <b>Export standings (CSV)</b>, provided every quiz of the lobby had <b>Personalised tracking</b> on.
       </p>
     </div>
   </section>
