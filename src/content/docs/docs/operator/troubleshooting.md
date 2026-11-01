@@ -79,7 +79,7 @@ Start with `./quizdock status` and `./quizdock doctor`, on the server, in the in
 | `OIDC discovery failed: … → HTTP …` | The provider answered the discovery request with an error: check the address in the line. |
 | `Sign-in failed: invalid_client` or `unauthorized_client` | The client is confidential on the provider: set `OIDC_CLIENT_SECRET`, or make the client public with PKCE. |
 | `Sign-in failed: … "iss" claim` after the redirect | The provider names itself after the address that asked: check that `OIDC_ISSUER` is its public issuer exactly, and give it a fixed public host name (Keycloak: `KC_HOSTNAME`). |
-| `Sign-in failed: An ID token is not an access token` | An earlier release judged the access token on its claims, and Authentik's copy the ID token's: upgrade QuizDock. |
+| `Sign-in failed: An ID token is not an access token` | Releases before 0.17.1 judged the access token on its claims, and Authentik's copy the ID token's: upgrade QuizDock. |
 | Signed in, but no role | The ID token lacks the claim `OIDC_ROLES_CLAIM` points at: add the roles to the ID token (Keycloak: *Add to ID token* on the mapper; Authentik: the scope `entitlements` or your mapping's in `OIDC_SCOPE`). |
 | The session ends a few minutes after sign-in | No refresh token: allow the refresh grant on the client, and with Authentik add `offline_access` to `OIDC_SCOPE`. |
 | `doctor`: *Roles read from the access token* or *A Bearer token accepted on its claims alone* | A way of reading tokens that ends in 1.0: see [Deprecated until 1.0](/docs/operator/oidc/#deprecated-until-10). |

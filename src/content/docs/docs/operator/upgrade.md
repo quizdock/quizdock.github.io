@@ -108,6 +108,16 @@ What changes for an operator, by release. Read every note between your version a
 
 Since 0.13, the application logs every variable it cannot read (it uses the default instead) or that is out of range (it uses it as is), and `doctor` lists them. A critical one (level C1, for example `AUTH_MODE=OIDC` instead of `oidc`) is only a warning for now. **From v1, the instance will refuse to start** with it. Fix what the log names before then. See [Configuration](/docs/operator/configuration/#warnings-at-start).
 
+### 0.17.1: roles from the ID token, Authentik
+
+- **Download the Compose files again** (`./quizdock upgrade` does it): they pass on the new `OIDC_SCOPE`, and Health says they are older than the image until then. Adopt any `<file>.new` written next to a file you edited.
+- **Roles are read from the ID token.** A provider that puts them in the access token only, as a Keycloak realm with realm roles (`realm_access.roles`) does, still works until 1.0, with a warning in the log and in `doctor`. The full setup's Keycloak keeps its realm as it was imported: move the roles to QuizDock's client, or add them to the ID token. See [Deprecated until 1.0](/docs/operator/oidc/#deprecated-until-10).
+- **Bearer tokens** are taken when the provider marks them (`typ: at+jwt`) or says they are active (introspection, confidential client). Other ones are judged on their claims, as before, with a warning, until 1.0. See [Bearer tokens](/docs/operator/oidc/#bearer-tokens).
+- **Through `OIDC_INTERNAL_URL`**, the backend names the provider by the issuer's host (the `Host` header), not the internal one.
+- **Authentik** works, as your provider or bundled in the full setup (`./quizdock init --full --iam=authentik`). See [The bundled Authentik](/docs/operator/oidc/#the-bundled-authentik).
+
+No migration.
+
 ### 0.16: selections, and presenting a shared quiz
 
 Two migrations, applied on start: `quiz_feedback.nickname` may be empty, for the ratings of a shared quiz another host presents without keeping results; the `selection` and `selection_item` tables, and `game_session_log.selection_id`, hold the hosts' [selections](/docs/host/selections/). Nothing to do by hand. No setting, `.env` or Compose file changes.
